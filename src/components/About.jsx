@@ -1,6 +1,7 @@
 "use client";
 
-import SectionTitle from './SectionTitle'
+import Image from "next/image";
+import SectionTitle from "./SectionTitle";
 
 function About() {
   return (
@@ -25,15 +26,20 @@ function About() {
             </p>
           </div>
 
-          <img
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
-            alt="Team collaboration"
-            className="h-72 w-full rounded-xl object-cover"
-          />
+          <div className="relative h-72 w-full overflow-hidden rounded-xl">
+            <Image
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+              alt="NF Nexa Tech team collaborating on a software project"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default About
+export default About;

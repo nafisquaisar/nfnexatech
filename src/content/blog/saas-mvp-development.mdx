@@ -1,0 +1,244 @@
+---
+title: "SaaS MVP Development: How to Go From Idea to Paying Customers in 8 Weeks"
+description: "A step-by-step guide to building a SaaS MVP — tech stack selection, must-have features, pricing strategy, and how to attract your first 100 paying customers fast."
+date: "2025-03-15"
+author:
+  name: "Nafis Quaisar"
+  role: "Founder & Lead Developer, NF Nexa Tech"
+category: "SaaS"
+tags: ["SaaS", "MVP", "Startup", "Product Development", "Next.js", "Stripe"]
+featured: false
+draft: false
+image: "/images/blog/saas-mvp-development.png"
+---
+
+Building a SaaS product feels overwhelming. You're thinking about authentication, billing, multi-tenancy, dashboards, onboarding flows, email sequences — and you haven't written a line of code yet.
+
+Here's the truth: **most of that complexity is not needed for an MVP.**
+
+A SaaS MVP needs exactly three things: a way for users to sign up, a core feature that solves a specific problem, and a way to charge money. Everything else is v2.
+
+This guide walks through the exact 8-week process we use at NF Nexa Tech to take SaaS founders from idea to their first paying customers.
+
+## What Makes SaaS Different From Other Software
+
+A SaaS (Software as a Service) product has specific characteristics that shape how you build the MVP:
+
+1. **Subscription billing** — Users pay recurring fees (monthly/annual)
+2. **Multi-tenancy** — Multiple organizations share the same infrastructure
+3. **Self-serve onboarding** — Users sign up and get value without calling you
+4. **Web-based** — Accessed via browser, no installation required
+5. **Continuous delivery** — You ship updates without users doing anything
+
+These constraints simplify some decisions and complicate others. Let's look at each.
+
+## The SaaS MVP Tech Stack
+
+Choosing the right stack matters more for SaaS than for other app types, because you're building infrastructure you'll maintain for years.
+
+### Our Recommended Stack
+
+```
+Frontend:  Next.js 15 (App Router) + Tailwind CSS
+Backend:   Next.js API Routes + Prisma ORM
+Database:  PostgreSQL (via Supabase — managed, free tier)
+Auth:      Clerk or NextAuth.js
+Payments:  Stripe (subscriptions + webhooks)
+Email:     Resend + React Email
+Hosting:   Vercel (zero config, scales automatically)
+Analytics: PostHog (open source, self-hostable)
+```
+
+Why this stack?
+
+- **Next.js** handles frontend and API in one project — fewer moving parts
+- **Supabase** gives you a production-grade PostgreSQL database in 5 minutes
+- **Clerk** handles the hardest part of auth (OAuth, magic links, session management) without you building it
+- **Stripe** is the industry standard — every payment edge case is handled
+- **Vercel** deploys on push and scales to millions of users automatically
+
+### What NOT to Build From Scratch
+
+- Authentication → use Clerk or NextAuth
+- Payments → use Stripe, never build billing logic
+- Email → use Resend, don't run your own SMTP
+- File storage → use Supabase Storage or AWS S3
+- Search → use Algolia or pg_trgm (Postgres full-text search)
+
+## The 8-Week SaaS MVP Build
+
+### Week 1–2: Foundation
+
+```typescript
+// Your database schema on Day 1 shapes everything
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now())
+  users     User[]
+  // Your core data models go here
+}
+
+model User {
+  id             String       @id @default(cuid())
+  email          String       @unique
+  organizationId String
+  role           Role         @default(MEMBER)
+  organization   Organization @relation(fields: [organizationId], references: [id])
+}
+```
+
+**Deliverables:**
+- Next.js project with Tailwind configured
+- Supabase database connected
+- Prisma schema with Organization + User models
+- Clerk auth integrated (signup, login, logout working)
+- Basic dashboard shell (empty state is fine)
+
+### Week 3–4: Core Feature
+
+This is the make-or-break week. Build the **single feature that justifies the subscription** — nothing more.
+
+If your SaaS is:
+- Invoice management → Build invoice creation + PDF export
+- Team scheduling → Build the scheduling grid + conflict detection
+- Code review → Build the diff viewer + comment threads
+- SEO monitoring → Build the rank tracker + alerts
+
+Ship this to 5 beta users by end of Week 4. Their feedback shapes Weeks 5–6.
+
+### Week 5: Stripe Integration
+
+Get paid before you're "ready." Stripe integration for SaaS:
+
+```typescript
+// Create a Stripe customer when user signs up
+export async function createStripeCustomer(email: string, name: string) {
+  const customer = await stripe.customers.create({ email, name });
+  return customer.id;
+}
+
+// Handle subscription webhooks
+export async function POST(req: Request) {
+  const event = stripe.webhooks.constructEvent(
+    await req.text(),
+    req.headers.get('stripe-signature')!,
+    process.env.STRIPE_WEBHOOK_SECRET!
+  );
+
+  switch (event.type) {
+    case 'customer.subscription.created':
+      await updateOrgPlan(event.data.object, 'PRO');
+      break;
+    case 'customer.subscription.deleted':
+      await updateOrgPlan(event.data.object, 'FREE');
+      break;
+  }
+}
+```
+
+Set up two plans: **Free** (limited) and **Pro** (unlimited). Most SaaS MVPs don't need more than two tiers.
+
+### Week 6: Onboarding Flow
+
+Bad onboarding kills SaaS. Users who don't experience value in their first session never come back.
+
+Build a 3-step onboarding:
+1. **Create organization** (name, logo, industry)
+2. **Invite team** (optional but increases stickiness)
+3. **First core action** (create their first invoice, schedule, etc.)
+
+Add a progress indicator. Make step 3 feel like a win.
+
+### Week 7: Polish + Metrics
+
+Before launch, instrument everything:
+
+```typescript
+// Track the events that matter
+posthog.capture('invoice_created', { userId, plan, invoiceCount });
+posthog.capture('subscription_started', { plan, mrr: amount });
+posthog.capture('feature_used', { feature: 'pdf_export', userId });
+```
+
+The metrics you must track from Day 1:
+- **Activation rate:** % of signups who complete onboarding
+- **Trial-to-paid conversion:** % of free users who upgrade
+- **MRR:** Monthly Recurring Revenue
+- **Churn rate:** % of subscribers who cancel monthly
+
+### Week 8: Launch
+
+Don't launch to everyone. Launch to a list:
+
+1. **ProductHunt** launch — prepare 7 days in advance
+2. **Reddit** (r/SaaS, r/startups, niche subreddits)
+3. **LinkedIn** personal post from the founder
+4. **Email list** — everyone you spoke to during validation
+5. **Cold outreach** — 50 targeted emails to ideal customers
+
+Target: **10 paying customers** by end of Week 8.
+
+## The Must-Have SaaS MVP Features
+
+Non-negotiable for launch:
+
+| Feature | Why It's Required |
+|---------|------------------|
+| Email/password + OAuth signup | Users won't create passwords. Google login doubles conversion |
+| Organization/workspace | B2B SaaS is team-based — individual accounts won't scale |
+| Billing portal (Stripe) | Users must self-serve upgrades, downgrades, cancellations |
+| Usage limits on free plan | Forces upgrade conversation — critical for MRR growth |
+| Transactional emails | Welcome, receipt, password reset — non-negotiable |
+| Basic settings page | Name, email, password, billing — users expect it |
+
+Nice-to-have but deferrable:
+
+- Team roles and permissions (build when you have 3+ users per account)
+- Admin dashboard (build when you have 20+ customers)
+- API access (build when enterprise customers ask)
+- Mobile app (almost never needed for B2B SaaS MVP)
+
+## SaaS MVP Pricing Strategy
+
+Pricing is a product decision, not an afterthought.
+
+**The simplest SaaS pricing that works:**
+
+- **Free:** Core feature with a hard limit (e.g., 5 invoices, 3 projects, 10 contacts)
+- **Pro: ₹999/month or $15/month:** Unlimited everything + priority support
+- **No annual plans initially** — until you have 20+ customers and understand churn
+
+Price anchoring: Show the Pro plan first. "Most popular" badge works.
+
+## Common SaaS MVP Mistakes
+
+### 1. Building Too Many Features Before Charging
+If you have 3 months of features and zero paying customers, you've wasted 3 months. Charge from Week 5, even if the product is "not ready."
+
+### 2. Underpricing
+₹199/month feels safe. It's not — it attracts users who don't value software. Charge ₹999+ from the start. You can always discount; you can never raise prices easily.
+
+### 3. Skipping the Onboarding Flow
+The product doesn't sell itself. Every extra step in onboarding costs you 20% of users. Optimize obsessively.
+
+### 4. Not Talking to Users Weekly
+Ship fast. Talk to users weekly. These are the only two things that matter in the first 3 months.
+
+## How Much Does a SaaS MVP Cost?
+
+| Scope | Timeline | Cost |
+|-------|----------|------|
+| Lean MVP (1 core feature) | 6–8 weeks | ₹4L – ₹8L |
+| Standard SaaS MVP | 8–12 weeks | ₹8L – ₹16L |
+| Complex MVP (multi-tenant, integrations) | 12–16 weeks | ₹16L – ₹30L |
+
+These costs include: full-stack development, Stripe integration, auth, deployment, and 30 days post-launch support.
+
+## Build Your SaaS MVP With NF Nexa Tech
+
+We specialize in SaaS MVP development for early-stage founders. Our 8-week program gets you from validated idea to live product with paying customers — using the exact stack and process described in this guide.
+
+[**Start your SaaS MVP — free consultation →**](/contact)

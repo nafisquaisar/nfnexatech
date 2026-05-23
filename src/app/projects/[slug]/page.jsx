@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { projects } from "@/data/data";
 
@@ -123,14 +124,15 @@ export default async function ProjectDetail({ params }) {
       {/* HERO IMAGE */}
       {project.heroImage && (
         <div className="mx-auto mb-20 max-w-5xl px-6">
-          <div className="overflow-hidden rounded-3xl border border-white/10">
-
-            <img
+          <div className="relative overflow-hidden rounded-3xl border border-white/10">
+            <Image
               src={project.heroImage}
-              alt={project.title}
-              className="w-full"
+              alt={`${project.title} — hero screenshot`}
+              width={1200}
+              height={675}
+              className="w-full h-auto"
+              priority
             />
-
           </div>
         </div>
       )}
