@@ -1,4 +1,4 @@
-"use client";
+
 
 function SectionTitle({ eyebrow, title, subtitle }) {
   return (

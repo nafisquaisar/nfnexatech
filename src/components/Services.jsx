@@ -1,4 +1,4 @@
-"use client";
+
 
 import SectionTitle from './SectionTitle'
 import { services } from '../data/data'

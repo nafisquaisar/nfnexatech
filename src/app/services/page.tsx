@@ -1,11 +1,31 @@
 import Link from "next/link";
 import { servicesData } from "@/data/content";
 import { siteConfig } from "@/config/site";
+import { ogImage } from "@/lib/og-image";
+
+const servicesOgImage = ogImage({
+  title: "Our Services",
+  category: "What We Do",
+  type: "service",
+});
 
 export const metadata = {
   title: "Services",
   description: `${siteConfig.name} offers web development, Android apps, Flutter, UI/UX design, backend APIs, and SaaS MVP development for startups and enterprises.`,
   alternates: { canonical: `${siteConfig.url}/services` },
+  openGraph: {
+    title: `Services | ${siteConfig.name}`,
+    description: `${siteConfig.name} offers web development, Android apps, Flutter, UI/UX design, backend APIs, and SaaS MVP development for startups and enterprises.`,
+    url: `${siteConfig.url}/services`,
+    type: "website",
+    images: [servicesOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Services | ${siteConfig.name}`,
+    description: `${siteConfig.name} offers web development, Android apps, Flutter, UI/UX design, backend APIs, and SaaS MVP development for startups and enterprises.`,
+    images: [servicesOgImage.url],
+  },
 };
 
 export default function ServicesIndexPage() {

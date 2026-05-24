@@ -49,3 +49,34 @@ html {
   padding: 0.125rem 0.2rem;
 }
 
+/* ── Animation performance: GPU compositor promotion ──────── */
+/*
+ * Continuously running Tailwind animations (animate-ping on the WhatsApp
+ * pulse ring, animate-pulse on the Calendly button dot, animate-spin on
+ * form loading spinner) can trigger main-thread repaints on every frame.
+ * will-change promotes the element to its own compositor layer so the GPU
+ * handles the animation without involving the main thread.
+ */
+.animate-ping,
+.animate-pulse,
+.animate-spin {
+  will-change: transform, opacity;
+}
+
+/* ── Reduced-motion accessibility ─────────────────────────── */
+/*
+ * Lighthouse Best Practices + WCAG 2.1 AA: respect the user's OS-level
+ * "reduce motion" preference. Pausing decorative animations has no impact
+ * on functionality and prevents vestibular/seizure issues.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ping,
+  .animate-pulse,
+  .animate-spin {
+    animation-play-state: paused;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

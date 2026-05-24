@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 
@@ -7,18 +9,52 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true, // generates size-adjust CSS → prevents CLS on font swap
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 export const viewport: Viewport = {
   themeColor: "#020617",
   colorScheme: "dark",
 };
+
+// Build the dynamic OG image URL for the home page using the same /api/og route
+// used by blog posts, services, and projects — keeps branding consistent.
+const homeOgUrl =
+  `${siteConfig.url}/api/og?` +
+  new URLSearchParams({
+    title: `${siteConfig.name} — Premium Software Agency`,
+    type: "page",
+  }).toString();
+
+// ── Search Console verification ──────────────────────────────────────────────
+// Reads from server-side env vars (no NEXT_PUBLIC_ prefix needed — this value
+// is only embedded in the HTML <head> at build/request time, never sent to JS).
+//
+// HOW TO SET UP GOOGLE SEARCH CONSOLE:
+//   1. Go to https://search.google.com/search-console
+//   2. Click "Add property" → choose "URL prefix" → enter https://nfnexatech.com
+//   3. Select "HTML tag" verification method
+//   4. Copy the content value from the meta tag shown, e.g.:
+//        <meta name="google-site-verification" content="PASTE_THIS_VALUE" />
+//   5. Add to .env.local:  GOOGLE_SITE_VERIFICATION=PASTE_THIS_VALUE
+//   6. Add the same variable to your Vercel / hosting project env settings
+//   7. Redeploy, then click "Verify" in Search Console
+//
+// OPTIONAL — Bing Webmaster Tools (https://www.bing.com/webmasters):
+//   Follow the same HTML-tag flow and set BING_SITE_VERIFICATION=<value>
+//
+// A missing or placeholder value is silently omitted — no broken meta tag.
+const gscToken = process.env.GOOGLE_SITE_VERIFICATION;
+const bingToken = process.env.BING_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -65,7 +101,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: siteConfig.ogImage,
+        url: homeOgUrl,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} — Premium Software Agency`,
@@ -76,7 +112,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} — Premium Software Agency`,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    images: [homeOgUrl],
     creator: "@nfnexatech",
   },
   alternates: {
@@ -84,6 +120,19 @@ export const metadata: Metadata = {
     types: {
       "application/rss+xml": `${siteConfig.url}/rss.xml`,
     },
+  },
+  // ── Search engine verification ───────────────────────────────────────────
+  // Next.js emits <meta name="google-site-verification" content="..." /> and
+  // equivalent tags automatically when these are present. Values are sourced
+  // from env vars so nothing is ever hardcoded or committed to git.
+  // See comment block above for full setup instructions.
+  verification: {
+    ...(gscToken && gscToken !== "REPLACE_WITH_GSC_VERIFICATION_TOKEN"
+      ? { google: gscToken }
+      : {}),
+    ...(bingToken && bingToken !== "REPLACE_WITH_BING_VERIFICATION_TOKEN"
+      ? { other: { "msvalidate.01": [bingToken] } }
+      : {}),
   },
   icons: {
     icon: "/logo.png",
@@ -97,13 +146,41 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      {/* Preconnect to Google Fonts CDN — eliminates DNS round-trip before font fetch */}
+      <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col bg-slate-950 text-slate-100">
         {children}
+        <Analytics />
+
+        {/* Google Analytics 4 — replace G-XXXXXXXXXX in .env.local */}
+        {gaId && gaId !== "G-XXXXXXXXXX" && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{send_page_view:true});`}
+            </Script>
+          </>
+        )}
+
+        {/* Microsoft Clarity — replace XXXXXXXXXX in .env.local */}
+        {clarityId && clarityId !== "XXXXXXXXXX" && (
+          <Script id="ms-clarity" strategy="afterInteractive">
+            {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${clarityId}");`}
+          </Script>
+        )}
       </body>
     </html>
   );

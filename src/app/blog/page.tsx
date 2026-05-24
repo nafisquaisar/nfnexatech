@@ -3,10 +3,17 @@ import { Metadata } from "next";
 import { getAllPosts, getAllCategories } from "@/lib/blog";
 import { formatDate } from "@/lib/blog-utils";
 import { siteConfig } from "@/config/site";
+import { ogImage } from "@/lib/og-image";
 import BlogCard from "@/components/blog/BlogCard";
 import BlogFilters from "@/components/blog/BlogFilters";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const blogOgImage = ogImage({
+  title: "Insights & Guides",
+  category: "Blog",
+  type: "blog",
+});
 
 export const metadata: Metadata = {
   title: "Blog — Insights & Guides",
@@ -21,6 +28,14 @@ export const metadata: Metadata = {
       "Expert insights on web development, mobile apps, Flutter, SaaS, and software engineering from the NF Nexa Tech team.",
     url: `${siteConfig.url}/blog`,
     type: "website",
+    images: [blogOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Blog | ${siteConfig.name}`,
+    description:
+      "Expert insights on web development, mobile apps, Flutter, SaaS, and software engineering from the NF Nexa Tech team.",
+    images: [blogOgImage.url],
   },
 };
 

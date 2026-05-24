@@ -54,5 +54,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...blogRoutes];
+  // Local SEO landing pages
+  const localSeoRoutes: MetadataRoute.Sitemap = [
+    "/software-company-bhopal",
+    "/web-development-company-patna",
+    "/software-company-india",
+  ].map((path) => ({
+    url: `${base}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...blogRoutes, ...localSeoRoutes];
 }

@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { projects } from "@/data/data";
+import { siteConfig } from "@/config/site";
+import { ogImage } from "@/lib/og-image";
 
 /* ── Generate static params for all project slugs ─────── */
 export function generateStaticParams() {
@@ -9,20 +11,43 @@ export function generateStaticParams() {
 }
 
 /* ── Generate metadata per project ────────────────────── */
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
   if (!project) {
     return { title: "Project Not Found | NF Nexa Tech" };
   }
+
+  const image = ogImage({
+    title: project.title,
+    category: `${project.category} · ${project.platform ?? ""}`.replace(/ · $/, ""),
+    type: "project",
+  });
+
   return {
     title: `${project.title} | NF Nexa Tech`,
     description: project.subtitle,
+    alternates: {
+      canonical: `${siteConfig.url}/projects/${project.slug}`,
+    },
+    openGraph: {
+      title: `${project.title} | NF Nexa Tech`,
+      description: project.subtitle,
+      url: `${siteConfig.url}/projects/${project.slug}`,
+      type: "article",
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | NF Nexa Tech`,
+      description: project.subtitle,
+      images: [image.url],
+    },
   };
 }
 
 /* ── Helpers ─────────────────────────────────────────────── */
-function Badge({ label }) {
+function Badge({ label }: { label: string }) {
   return (
     <span className="rounded-md border border-cyan-400/25 bg-cyan-400/10 px-3 py-1.5 text-xs font-semibold text-cyan-300 tracking-wide">
       {label}
@@ -30,7 +55,7 @@ function Badge({ label }) {
   );
 }
 
-function MetaCard({ label, value, icon }) {
+function MetaCard({ label, value, icon }: { label: string; value: string; icon: string }) {
   return (
     <div className="flex flex-col gap-1.5 rounded-2xl border border-white/8 bg-white/[0.03] p-5 backdrop-blur-sm">
       <span className="text-xl">{icon}</span>
@@ -44,7 +69,7 @@ function MetaCard({ label, value, icon }) {
   );
 }
 
-function SectionHeading({ children }) {
+function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="mb-6 text-2xl font-bold text-white sm:text-3xl">
       <span className="border-b-2 border-cyan-400/50 pb-1">
@@ -55,7 +80,7 @@ function SectionHeading({ children }) {
 }
 
 /* ── MAIN PAGE ───────────────────────────────────────────── */
-export default async function ProjectDetail({ params }) {
+export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   // In Next.js 15+, params is a Promise — must be awaited
   const { slug } = await params;
 

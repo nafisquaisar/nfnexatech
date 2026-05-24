@@ -1,6 +1,4 @@
-"use client";
 
-import { useState } from "react";
 import SectionTitle from "./SectionTitle";
 import { testimonials } from "@/data/content";
 
@@ -91,8 +89,6 @@ function TestimonialCard({ testimonial, isActive }) {
 }
 
 export default function Testimonials() {
-  const [active, setActive] = useState(0);
-
   return (
     <section
       id="testimonials"
@@ -114,7 +110,7 @@ export default function Testimonials() {
         {/* Cards grid */}
         <div className="grid gap-5 md:grid-cols-3">
           {testimonials.map((t, i) => (
-            <TestimonialCard key={t.id} testimonial={t} isActive={i === active} />
+            <TestimonialCard key={t.id} testimonial={t} isActive={i === 0} />
           ))}
         </div>
 

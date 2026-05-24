@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { BlogPost } from "@/types/blog";
 import { formatDate } from "@/lib/blog-utils";
 
@@ -79,12 +80,16 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
         }`}
       >
         {post.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={post.image}
             alt={post.title}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes={
+              featured
+                ? "(max-width: 768px) 100vw, 40vw"
+                : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            }
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <ImagePlaceholder category={post.category} />

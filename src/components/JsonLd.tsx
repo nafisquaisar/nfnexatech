@@ -60,6 +60,65 @@ export default function JsonLd() {
     },
   };
 
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${siteConfig.url}/#localbusiness`,
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    telephone: siteConfig.contact.phone,
+    email: siteConfig.contact.email,
+    image: `${siteConfig.url}/logo.png`,
+    priceRange: "₹₹",
+    currenciesAccepted: "INR, USD",
+    paymentAccepted: "Bank Transfer, UPI, International Wire",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "34, Sneh Nagar, Siddharth Enclave, Ayodhya Nagar",
+      addressLocality: "Bhopal",
+      addressRegion: "Madhya Pradesh",
+      postalCode: "462022",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 23.2599,
+      longitude: 77.4126,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "19:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Saturday"],
+        opens: "10:00",
+        closes: "16:00",
+      },
+    ],
+    areaServed: [
+      { "@type": "Country", name: "India" },
+      { "@type": "Country", name: "United States" },
+      { "@type": "Country", name: "United Kingdom" },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Software Development Services",
+      itemListElement: siteConfig.services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: s.name,
+          url: `${siteConfig.url}/services/${s.slug}`,
+        },
+      })),
+    },
+  };
+
   return (
     <>
       <script
@@ -69,6 +128,10 @@ export default function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
     </>
   );

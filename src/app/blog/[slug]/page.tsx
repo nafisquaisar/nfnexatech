@@ -12,6 +12,7 @@ import {
   getRelatedPosts,
 } from "@/lib/blog";
 import { formatDate } from "@/lib/blog-utils";
+import { ogImage } from "@/lib/og-image";
 import { siteConfig } from "@/config/site";
 import { mdxComponents } from "@/components/blog/mdxComponents";
 import ReadingProgress from "@/components/blog/ReadingProgress";
@@ -33,6 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return { title: "Post Not Found" };
 
   const postUrl = `${siteConfig.url}/blog/${slug}`;
+  const image = ogImage({ title: post.title, category: post.category, type: "blog" });
 
   return {
     title: post.title,
@@ -47,11 +49,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       modifiedTime: post.updatedDate ?? post.date,
       authors: [post.author.name],
       tags: post.tags,
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [image.url],
     },
   };
 }

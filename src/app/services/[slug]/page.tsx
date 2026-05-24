@@ -2,15 +2,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { servicesData } from "@/data/content";
 import { siteConfig } from "@/config/site";
+import { ogImage } from "@/lib/og-image";
 
 export function generateStaticParams() {
   return servicesData.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = servicesData.find((s) => s.slug === slug);
   if (!service) return { title: "Service Not Found" };
+
+  const image = ogImage({
+    title: service.title,
+    category: `${service.icon} Service`,
+    type: "service",
+  });
 
   return {
     title: service.title,
@@ -22,11 +29,18 @@ export async function generateMetadata({ params }) {
       title: `${service.title} | ${siteConfig.name}`,
       description: service.metaDescription,
       url: `${siteConfig.url}/services/${service.slug}`,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.title} | ${siteConfig.name}`,
+      description: service.metaDescription,
+      images: [image.url],
     },
   };
 }
 
-export default async function ServicePage({ params }) {
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = servicesData.find((s) => s.slug === slug);
   if (!service) notFound();
@@ -152,7 +166,7 @@ export default async function ServicePage({ params }) {
                 className="group flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] px-5 py-4 transition hover:border-cyan-400/30 hover:bg-white/[0.04]"
               >
                 <span className="text-xl">{s.icon}</span>
-                <span className="text-sm font-medium text-slate-300 group-hover:text-white">{s.name}</span>
+                <span className="text-sm font-medium text-slate-300 group-hover:text-white">{s.title}</span>
               </Link>
             ))}
         </div>
