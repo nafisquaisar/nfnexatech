@@ -56,7 +56,7 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
   return (
     <nav
       aria-label="Table of contents"
-      className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-xl border border-white/10 bg-white/[0.02] p-5"
+      className="overflow-y-auto rounded-xl border border-white/10 bg-white/[0.02] p-5"
     >
       <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
         On this page

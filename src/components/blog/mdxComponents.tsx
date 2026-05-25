@@ -10,21 +10,26 @@ import { CodeBlock } from "./CodeBlock";
 
 /* ─── Heading anchors ──────────────────────────────────────── */
 
-function headingLink(id: string, children: React.ReactNode) {
+/**
+ * Renders heading children alongside a "#" permalink.
+ *
+ * Previously this wrapped children inside an <a>, which caused a React
+ * hydration error ("cannot nest <a> inside <a>") whenever MDX content
+ * placed a link inside a heading. Now we render children as-is and
+ * append a separate <a> for the permalink — no nesting possible.
+ */
+function headingAnchor(id: string, children: React.ReactNode) {
   return (
-    <a
-      href={`#${id}`}
-      className="group/hl no-underline"
-      aria-label={`Link to section`}
-    >
+    <span className="group/hl">
       {children}
-      <span
-        aria-hidden
-        className="ml-2 opacity-0 text-cyan-500 transition-opacity duration-200 group-hover/hl:opacity-100"
+      <a
+        href={`#${id}`}
+        className="ml-2 no-underline opacity-0 text-cyan-500 transition-opacity duration-200 group-hover/hl:opacity-100"
+        aria-label={`Link to section: ${id}`}
       >
         #
-      </span>
-    </a>
+      </a>
+    </span>
   );
 }
 
@@ -37,7 +42,7 @@ export const mdxComponents = {
       id={id}
       className="mb-4 mt-10 scroll-mt-24 text-3xl font-extrabold leading-tight text-white sm:text-4xl"
     >
-      {id ? headingLink(id, children) : children}
+      {id ? headingAnchor(id, children) : children}
     </h1>
   ),
 
@@ -46,7 +51,7 @@ export const mdxComponents = {
       id={id}
       className="mb-4 mt-12 scroll-mt-24 border-b border-white/8 pb-3 text-2xl font-bold text-white"
     >
-      {id ? headingLink(id, children) : children}
+      {id ? headingAnchor(id, children) : children}
     </h2>
   ),
 
@@ -55,7 +60,7 @@ export const mdxComponents = {
       id={id}
       className="mb-3 mt-8 scroll-mt-24 text-xl font-bold text-slate-100"
     >
-      {id ? headingLink(id, children) : children}
+      {id ? headingAnchor(id, children) : children}
     </h3>
   ),
 

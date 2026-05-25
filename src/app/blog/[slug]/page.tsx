@@ -3,7 +3,6 @@ import Link from "next/link";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 
 import {
@@ -78,7 +77,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         remarkPlugins: [remarkGfm],
         rehypePlugins: [
           rehypeSlug,
-          [rehypeAutolinkHeadings, { behavior: "ignore" }],
           [rehypePrettyCode, { theme: "github-dark" }],
         ],
       },
@@ -287,34 +285,36 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           {/* ── Sidebar (desktop only) ── */}
           <aside className="hidden lg:block">
-            <TableOfContents items={post.toc} />
+            <div className="sticky top-28 z-10 flex max-h-[calc(100vh-8rem)] flex-col gap-6 overflow-y-auto">
+              <TableOfContents items={post.toc} />
 
-            {/* Sidebar CTA */}
-            <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-5 text-center">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-cyan-400">
-                NF Nexa Tech
-              </p>
-              <p className="mb-4 text-sm font-semibold text-white">
-                Need a software partner?
-              </p>
-              <p className="mb-5 text-xs leading-5 text-slate-500">
-                We build web apps, mobile apps, and SaaS MVPs for startups
-                and enterprises.
-              </p>
-              <Link
-                href="/#contact"
-                className="block w-full rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 py-2.5 text-xs font-bold text-white transition hover:opacity-90"
-              >
-                Start a Project
-              </Link>
-              <a
-                href={siteConfig.social.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 block w-full rounded-lg border border-white/10 py-2.5 text-xs font-bold text-slate-300 transition hover:border-[#25D366]/30 hover:text-[#25D366]"
-              >
-                WhatsApp Us
-              </a>
+              {/* Sidebar CTA */}
+              <div className="flex-shrink-0 rounded-xl border border-white/10 bg-white/[0.02] p-5 text-center">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-cyan-400">
+                  NF Nexa Tech
+                </p>
+                <p className="mb-4 text-sm font-semibold text-white">
+                  Need a software partner?
+                </p>
+                <p className="mb-5 text-xs leading-5 text-slate-500">
+                  We build web apps, mobile apps, and SaaS MVPs for startups
+                  and enterprises.
+                </p>
+                <Link
+                  href="/start-project"
+                  className="block w-full rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 py-2.5 text-xs font-bold text-white transition hover:opacity-90"
+                >
+                  Start Your Project
+                </Link>
+                <a
+                  href={siteConfig.social.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 block w-full rounded-lg border border-white/10 py-2.5 text-xs font-bold text-slate-300 transition hover:border-[#25D366]/30 hover:text-[#25D366]"
+                >
+                  WhatsApp Us
+                </a>
+              </div>
             </div>
           </aside>
         </div>
@@ -356,10 +356,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/#contact"
+              href="/start-project"
               className="rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-7 py-3 text-sm font-bold text-white transition hover:opacity-90"
             >
-              Get a Free Consultation
+              Start Your Project
             </Link>
             <Link
               href="/blog"

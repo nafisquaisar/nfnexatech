@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CalendlyModal from "@/components/CalendlyModal";
-import WhatsAppCta from "@/components/WhatsAppCta";
-import { CalendlyCtaButton, WhatsAppCtaButton } from "@/components/LocalSeoCtas";
+import FloatingCtas from "@/components/FloatingCtas";
+import { StartProjectButton, WhatsAppCtaButton } from "@/components/LocalSeoCtas";
 import { siteConfig } from "@/config/site";
 import { testimonials } from "@/data/content";
 import { faqs } from "@/data/content";
@@ -84,7 +83,7 @@ export default function LocalSeoPage({
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <CalendlyCtaButton label="Book Free Consultation" />
+            <StartProjectButton label="Start Your Project" />
             <WhatsAppCtaButton city={city} service={service} />
           </div>
         </div>
@@ -231,7 +230,7 @@ export default function LocalSeoPage({
             today and get a no-obligation proposal within 48 hours.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <CalendlyCtaButton label="Book Free Consultation" />
+            <StartProjectButton label="Start Your Project" />
             <Link
               href="/#contact"
               className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300 transition hover:border-white/30"
@@ -243,8 +242,7 @@ export default function LocalSeoPage({
       </section>
 
       <Footer />
-      <WhatsAppCta />
-      <CalendlyModal />
+      <FloatingCtas />
     </div>
   );
 }

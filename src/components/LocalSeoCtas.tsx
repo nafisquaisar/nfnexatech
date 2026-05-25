@@ -1,19 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/config/site";
 
-export function CalendlyCtaButton({ label = "Book Free Consultation", className = "" }: { label?: string; className?: string }) {
+export function StartProjectButton({ label = "Start Your Project", className = "" }: { label?: string; className?: string }) {
   return (
-    <button
-      onClick={() => {
-        trackEvent("cta_click", { label: "local_seo_calendly" });
-        window.dispatchEvent(new CustomEvent("open-calendly"));
-      }}
+    <Link
+      href="/start-project"
+      onClick={() => trackEvent("cta_click", { label: "local_seo_start_project" })}
       className={`rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-7 py-3.5 text-sm font-bold text-white transition hover:opacity-90 ${className}`}
     >
       {label}
-    </button>
+    </Link>
   );
 }
 

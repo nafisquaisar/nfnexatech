@@ -8,8 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import CompanyDetails from "@/components/CompanyDetails";
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
-import WhatsAppCta from "@/components/WhatsAppCta";
-import CalendlyModal from "@/components/CalendlyModal";
+import FloatingCtas from "@/components/FloatingCtas";
 
 /**
  * Composition of all homepage sections.
@@ -17,7 +16,7 @@ import CalendlyModal from "@/components/CalendlyModal";
  *   Hook (Hero) → Trust (Stats) → Value (Services) → Process
  *   → Social Proof (Projects + Testimonials) → Credibility (Details)
  *   → Objection Handling (FAQ) → Capture (Contact)
- *   + Global: CalendlyModal + WhatsAppCta (sticky overlays)
+ *   + Global: FloatingCtas (sticky overlays — Start Project + WhatsApp)
  *
  * NOTE: "use client" intentionally removed — child components declare
  * their own client boundaries. This keeps RSC benefits for static children.
@@ -37,8 +36,7 @@ export default function HomePageSections() {
       <Contact />
 
       {/* ── Global sticky overlays ── */}
-      <WhatsAppCta />
-      <CalendlyModal />
+      <FloatingCtas />
     </main>
   );
 }

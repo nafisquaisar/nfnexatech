@@ -13,8 +13,7 @@ declare global {
 
 export type TrackEventName =
   | "cta_click"
-  | "calendly_open"
-  | "calendly_close"
+  | "start_project_click"
   | "whatsapp_click"
   | "form_submit_start"
   | "form_submit_success"
