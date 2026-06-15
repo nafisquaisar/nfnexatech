@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Services from "@/components/Services";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import Projects from "@/components/Projects";
+import WebsiteShowcase from "@/components/WebsiteShowcase";
 import Testimonials from "@/components/Testimonials";
 import CompanyDetails from "@/components/CompanyDetails";
 import Faq from "@/components/Faq";
@@ -29,6 +30,7 @@ export default function HomePageSections() {
       <About />
       <Services />
       <ProcessTimeline />
+      <WebsiteShowcase />
       <Projects />
       <Testimonials />
       <CompanyDetails />

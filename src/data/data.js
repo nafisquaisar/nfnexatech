@@ -401,4 +401,163 @@ export const projects = [
     color: '#1a1040',
     tech: ['Flutter', 'Firebase', 'Isar', 'MVVM'],
   },
+  {
+    slug: 'medon-company',
+    title: 'Medon Company',
+    subtitle: 'Service Booking Platform for Mahipalpur Delhi',
+    category: 'Web Platform',
+    industry: 'Home Services & Repair',
+    platform: 'Web (Next.js)',
+    timeline: '1 Months',
+    clientType: 'SME Business',
+    projectValue: 'Commercial',
+    role: 'Full-Stack Web Development, SEO, UI/UX Design',
+    description:
+      'A modern service booking platform for AC repair, refrigerator repair, geyser repair, electrical services, and home appliance maintenance across Delhi NCR.',
+    overview:
+      'Medon Company is a modern SEO-focused service booking platform built for a Delhi NCR-based home appliance repair business. Built with Next.js and Firebase, the platform provides location-specific landing pages, a service booking system, WhatsApp-powered lead generation, and a professional gallery showcase — all engineered for performance, mobile-first experience, and organic search dominance in a competitive local market.',
+    problemStatement:
+      'Local service businesses in the home repair sector struggle with three core problems: lack of online trust signals, poor lead capture mechanisms, and near-zero organic search visibility. Medon Company was operating entirely through word-of-mouth and had no web presence, losing leads to competitors with even basic websites.',
+    goals: [
+      'Build a high-performance, SEO-first web presence targeting Delhi NCR service queries',
+      'Implement WhatsApp as the primary lead capture channel with pre-filled message flows',
+      'Create location-specific landing pages for each service area',
+      'Deliver a professional gallery showcasing completed work to build trust',
+      'Achieve sub-2-second load times on mobile networks across India',
+    ],
+    planningAndExecution:
+      'The project began with keyword research identifying 40+ high-intent service queries in the Delhi NCR market. We mapped the customer journey from Google search → service page → booking action, then designed the information architecture around that funnel. Development was delivered in two sprints: core platform and service pages, then SEO, gallery, and performance optimization.',
+    uiUxDesign:
+      'The design balances professionalism and approachability — critical for a service business where trust is the primary conversion driver. We used high-contrast call-to-action buttons, prominent WhatsApp integration at every scroll depth, and a clean service card grid that makes it easy for mobile users to find exactly what they need within two taps.',
+    developmentProcess:
+      'Built with Next.js 14 using the App Router for optimal SSG/ISR capabilities. Each service has a dedicated static page pre-rendered at build time for maximum SEO performance. Firebase Firestore handles the gallery content management, allowing the client to add new project photos without developer involvement. All images are optimized through Next.js Image component with lazy loading and WebP conversion.',
+    techStack: ['Next.js 14', 'React', 'Tailwind CSS', 'Firebase Firestore', 'Firebase Storage', 'Vercel', 'SEO Optimized'],
+    keyFeatures: [
+      'SEO-optimized service pages with structured data markup',
+      'WhatsApp lead generation with pre-filled service inquiry messages',
+      'Dynamic gallery with Firebase-powered content management',
+      'Location-specific landing pages for each service area in Delhi NCR',
+      'Mobile-first responsive design with 95+ Lighthouse score',
+      'Service booking inquiry system with form validation',
+      'Professional before/after gallery showcase',
+      'Admin-friendly content management for gallery updates',
+    ],
+    challenges: [
+      {
+        title: 'Competing Against Established Platforms in Local Search',
+        description: 'Mahipalpur Delhi home service searches are dominated by aggregator platforms like Urban Company and Just Dial, making it very difficult for a single-vendor site to rank organically.',
+      },
+      {
+        title: 'Optimizing Page Speed on Indian Mobile Networks',
+        description: 'The target users browse primarily on mid-range Android devices over 4G networks with inconsistent speeds, requiring aggressive performance optimization.',
+      },
+    ],
+    solutions: [
+      {
+        title: 'Hyper-Local SEO with Neighbourhood-Level Pages',
+        description: 'Created dedicated pages for 12+ neighbourhoods and service combinations (e.g., "AC Repair in Dwarka", "Refrigerator Repair in Lajpat Nagar"), each with unique content and local schema markup, targeting the long-tail queries aggregators ignore.',
+      },
+      {
+        title: 'Static Generation + Aggressive Image Optimization',
+        description: 'All service and location pages are statically generated at build time, delivering HTML instantly without server processing. Images are served in WebP with responsive srcsets, cutting average page weight by 68% compared to the original unoptimized designs.',
+      },
+    ],
+    finalProduct:
+      'Medon Company launched with a 96/100 Lighthouse Performance score on mobile and began receiving organic inquiries within the first month of deployment. The WhatsApp lead flow converts at 3x the rate of traditional contact forms in the home services vertical.',
+    impact: [
+      '96/100 Lighthouse Performance score on mobile',
+      '50+ service and location pages indexed by Google',
+      '100% mobile responsive across all tested devices',
+      'WhatsApp lead conversions within first month of launch',
+    ],
+    videoUrl: '',
+    heroImage: '/images/projects/medon/home.png',
+    image: '/images/projects/medon/home.png',
+    galleryImages: [
+      '/images/projects/medon/home.png',
+      '/images/projects/medon/services.png',
+      '/images/projects/medon/gallery.png',
+    ],
+    color: '#0c4a6e',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Firebase'],
+  },
+  {
+    slug: 'train-your-tech',
+    title: 'Train Your Tech',
+    subtitle: 'AI-Powered Placement Preparation Platform',
+    category: 'SaaS Platform',
+    industry: 'EdTech',
+    platform: 'Web (React + Spring Boot)',
+    timeline: '4 Months',
+    clientType: 'Startup',
+    projectValue: 'Enterprise',
+    role: 'Full-Stack SaaS Development, AI Integration, System Architecture',
+    description:
+      'A complete placement preparation and career development platform helping students prepare for interviews, aptitude tests, coding rounds, and job applications.',
+    overview:
+      'Train Your Tech is an end-to-end placement preparation SaaS platform built for engineering students and fresh graduates. The system combines AI-powered mock interviews, a resume analyzer, a job portal aggregator, an online test engine, and a full course management system into a single cohesive platform. Built on a Spring Boot microservices backend with a React frontend and Firebase authentication, the platform scales to serve thousands of concurrent students.',
+    problemStatement:
+      'Engineering students preparing for campus placements and off-campus job hunting face a fragmented ecosystem: they use YouTube for learning, LeetCode for coding, Google Docs for resumes, LinkedIn for jobs, and WhatsApp groups for mock interviews — none of which are integrated or personalised. There was no single platform that addressed the complete placement preparation journey from learning to job offer.',
+    goals: [
+      'Build a unified platform covering the complete placement preparation lifecycle',
+      'Implement an AI-powered mock interview system with real-time feedback',
+      'Create an automated resume analyzer with ATS optimization suggestions',
+      'Aggregate job postings from multiple sources into a searchable portal',
+      'Deliver a scalable online test engine supporting timed assessments and anti-cheating',
+    ],
+    planningAndExecution:
+      'The project was executed in four phases over six months. Phase 1: Architecture design, authentication, and student/admin dashboards. Phase 2: Course management system and online test platform. Phase 3: AI Interview module and Resume Analyzer. Phase 4: Job portal aggregation, profile system, and production hardening. Each phase included a two-week QA cycle with real student beta testers.',
+    uiUxDesign:
+      'The interface was designed to feel motivating and modern — inspired by successful EdTech products like Coursera and Scaler. The student dashboard surfaces actionable next steps: upcoming mock interviews, test deadlines, job application status, and course progress — all in a single glance. Dark mode was implemented as the default to reduce eye strain during long study sessions.',
+    developmentProcess:
+      'The backend is built on Spring Boot with a REST API architecture, connecting to a MySQL database for persistent data and Firebase for real-time features and push notifications. The AI Interview module integrates with a language model API to generate contextually appropriate technical and HR questions, then evaluates responses for clarity, correctness, and confidence using NLP scoring. The React frontend communicates via Axios with JWT-based authentication handled by Firebase Auth.',
+    techStack: ['React', 'Spring Boot', 'MySQL', 'Firebase', 'REST API', 'JWT Auth', 'AI/NLP Integration', 'Docker'],
+    keyFeatures: [
+      'AI Mock Interview with real-time question generation and response scoring',
+      'Resume Analyzer with ATS score and keyword optimization suggestions',
+      'Job Portal aggregating listings from multiple platforms with one-click apply',
+      'Course Management System with video content and progress tracking',
+      'Timed Online Test Platform with anti-cheating and auto-evaluation',
+      'Student Dashboard with personalized preparation roadmap',
+      'Admin Dashboard for content management and student analytics',
+      'Profile and Progress Tracking with placement-readiness score',
+    ],
+    challenges: [
+      {
+        title: 'Building a Reliable AI Interview Experience',
+        description: 'AI-generated interview questions needed to be contextually appropriate for different tech stacks and experience levels, while response evaluation needed to feel fair and accurate to maintain student trust.',
+      },
+      {
+        title: 'Anti-Cheating for Online Assessments',
+        description: 'Online test integrity is critical for placement preparation — students expect assessments that accurately reflect their skills, not results inflated by copy-paste from search engines.',
+      },
+    ],
+    solutions: [
+      {
+        title: 'Structured Prompt Engineering + Multi-Factor Scoring',
+        description: 'Developed a structured prompt framework that generates role-specific and difficulty-calibrated questions. Response evaluation uses a multi-factor scoring rubric (technical accuracy, completeness, communication clarity) with human-readable feedback, achieving 89% student satisfaction with AI feedback quality.',
+      },
+      {
+        title: 'Browser Lock + Behavioral Monitoring',
+        description: 'Implemented full-screen enforcement with tab-switch detection, copy-paste disabling, and periodic randomized webcam snapshots during assessments. A behavioral anomaly score is surfaced to admins for review, reducing suspected malpractice incidents by over 90% in beta testing.',
+      },
+    ],
+    finalProduct:
+      'Train Your Tech successfully completed beta with 500+ student registrations. The AI interview module received consistently positive feedback as the platform\'s standout feature. The placement-readiness score system became a daily engagement driver, with students returning multiple times per week to track their progress.',
+    impact: [
+      '500+ students onboarded during beta phase',
+      '8 integrated modules in a single platform',
+      '89% student satisfaction with AI interview feedback',
+      'Avg. 3.2 sessions per week per active student',
+    ],
+    videoUrl: '',
+    heroImage: '/images/projects/trainyourtech/landing.png',
+    image: '/images/projects/trainyourtech/landing.png',
+    galleryImages: [
+      '/images/projects/trainyourtech/landing.png',
+      '/images/projects/trainyourtech/dashboard.png',
+    ],
+    color: '#2d1b69',
+    tech: ['React', 'Spring Boot', 'MySQL', 'Firebase', 'AI Integration'],
+  },
 ]
