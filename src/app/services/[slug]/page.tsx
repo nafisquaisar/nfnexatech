@@ -45,19 +45,65 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const service = servicesData.find((s) => s.slug === slug);
   if (!service) notFound();
 
-  // JSON-LD Service schema
+  // JSON-LD ProfessionalService schema (upgraded from basic Service)
   const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "ProfessionalService",
+    "@id": `${siteConfig.url}/services/${service.slug}#service`,
     name: service.title,
     description: service.metaDescription,
+    url: `${siteConfig.url}/services/${service.slug}`,
+    image: `${siteConfig.url}/api/og?title=${encodeURIComponent(service.title)}&type=service`,
     provider: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
+      telephone: siteConfig.contact.phone,
+      email: siteConfig.contact.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
+        addressLocality: "New Delhi",
+        addressRegion: "Delhi",
+        postalCode: "110037",
+        addressCountry: "IN",
+      },
     },
     areaServed: "Worldwide",
     serviceType: service.title,
+    serviceOutput: `Custom ${service.title} solution delivered to your specifications`,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "INR",
+        description: "Custom pricing based on project scope — contact for a free quote",
+      },
+      availability: "https://schema.org/InStock",
+      seller: { "@id": `${siteConfig.url}/#organization` },
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${service.title} Features`,
+      itemListElement: service.features.map((f, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: { "@type": "Service", name: f },
+      })),
+    },
+  };
+
+  // JSON-LD BreadcrumbList schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home",     item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${siteConfig.url}/services` },
+      { "@type": "ListItem", position: 3, name: service.title, item: `${siteConfig.url}/services/${service.slug}` },
+    ],
   };
 
   return (
@@ -65,6 +111,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* NAVBAR */}

@@ -87,21 +87,43 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${postUrl}#article`,
     headline: post.title,
     description: post.description,
     datePublished: post.date,
     dateModified: post.updatedDate ?? post.date,
+    wordCount: post.wordCount,
+    timeRequired: `PT${post.readingTime}M`,
+    inLanguage: "en-IN",
     author: {
       "@type": "Person",
       name: post.author.name,
+      jobTitle: post.author.role,
+      url: siteConfig.url,
+      worksFor: {
+        "@type": "Organization",
+        name: siteConfig.name,
+        url: siteConfig.url,
+      },
     },
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/logo.png`,
+        width: 512,
+        height: 512,
+      },
     },
+    image: post.image
+      ? { "@type": "ImageObject", url: `${siteConfig.url}${post.image}` }
+      : { "@type": "ImageObject", url: `${siteConfig.url}/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&type=blog` },
     mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
     keywords: post.tags.join(", "),
+    articleSection: post.category,
+    isPartOf: { "@id": `${siteConfig.url}/#website` },
   };
 
   /* ── Breadcrumb JSON-LD ── */
@@ -269,7 +291,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
                   <p className="text-sm leading-6 text-slate-400">
                     Nafis builds web and mobile products at NF Nexa Tech —
-                    a software agency in Bhopal, India, specialising in
+                    a software agency in Mahipalpur, New Delhi, specialising in
                     Next.js, Flutter, and SaaS MVP development.
                   </p>
                   <Link

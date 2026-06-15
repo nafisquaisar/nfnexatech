@@ -56,7 +56,7 @@ const localFaqs = [
   {
     question: "What software services does NF Nexa Tech offer in Bhopal?",
     answer:
-      "We offer end-to-end software development: web applications (React, Next.js), Android apps (Java/Kotlin), Flutter cross-platform apps, UI/UX design, backend APIs (Node.js, Firebase), and SaaS MVP development — all from our Bhopal office.",
+      "We offer end-to-end software development: web applications (React, Next.js), Android apps (Java/Kotlin), Flutter cross-platform apps, UI/UX design, backend APIs (Node.js, Firebase), and SaaS MVP development — serving clients in Bhopal and across India from our New Delhi office.",
   },
   {
     question: "How much does software development cost in Bhopal?",
@@ -66,7 +66,7 @@ const localFaqs = [
   {
     question: "Do you work with clients outside Bhopal?",
     answer:
-      "Yes — while based in Bhopal (Madhya Pradesh), we work with clients across India (Delhi, Mumbai, Bangalore, Pune, Patna) and internationally (USA, UK, UAE). All communication is remote-first via WhatsApp, Slack, and video calls.",
+      "Yes — based in New Delhi, we work with clients across India (Bhopal, Mumbai, Bangalore, Pune, Patna) and internationally (USA, UK, UAE). All communication is remote-first via WhatsApp, Slack, and video calls.",
   },
   {
     question: "How do I get started with NF Nexa Tech?",
@@ -87,16 +87,16 @@ const schema = {
   email: siteConfig.contact.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "34, Sneh Nagar, Siddharth Enclave, Ayodhya Nagar",
-    addressLocality: "Bhopal",
-    addressRegion: "Madhya Pradesh",
-    postalCode: "462022",
+    streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
+    addressLocality: "New Delhi",
+    addressRegion: "Delhi",
+    postalCode: "110037",
     addressCountry: "IN",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 23.2599,
-    longitude: 77.4126,
+    latitude: 28.5357,
+    longitude: 77.1199,
   },
   areaServed: { "@type": "City", name: "Bhopal" },
   priceRange: "₹₹",

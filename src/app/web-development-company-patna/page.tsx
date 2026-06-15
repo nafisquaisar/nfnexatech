@@ -51,7 +51,7 @@ const localFaqs = [
   {
     question: "Is there a good web development company in Patna?",
     answer:
-      "NF Nexa Tech serves clients in Patna and across Bihar with professional web development, mobile app development, and SaaS services. While our office is in Bhopal, we work remotely with Patna-based startups, businesses, and institutions.",
+      "NF Nexa Tech serves clients in Patna and across Bihar with professional web development, mobile app development, and SaaS services. While our office is in New Delhi (Mahipalpur), we work remotely with Patna-based startups, businesses, and institutions.",
   },
   {
     question: "What web development services are available for Patna businesses?",
@@ -87,10 +87,10 @@ const schema = {
   email: siteConfig.contact.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "34, Sneh Nagar, Siddharth Enclave, Ayodhya Nagar",
-    addressLocality: "Bhopal",
-    addressRegion: "Madhya Pradesh",
-    postalCode: "462022",
+    streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
+    addressLocality: "New Delhi",
+    addressRegion: "Delhi",
+    postalCode: "110037",
     addressCountry: "IN",
   },
   areaServed: [

@@ -2,8 +2,8 @@
 
 function CompanyDetails() {
   const details = [
-    { label: 'State / Location', value: 'Bhopal, Madhya Pradesh, India' },
-    { label: 'Office Address', value: '34, Sneh Nagar, Siddharth Enclave, Ayodhya Nagar, Bhopal, MP 462022' },
+    { label: 'State / Location', value: 'Mahipalpur, New Delhi, Delhi, India' },
+    { label: 'Office Address', value: 'Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur, New Delhi - 110037' },
     { label: 'Founder', value: 'Nafis Quaisar' },
     { label: 'Company Type', value: 'Software Agency — Web & Mobile Development' },
   ]

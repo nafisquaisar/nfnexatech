@@ -7,16 +7,16 @@ export const siteConfig = {
   tagline: "Digital Product Studio",
   description:
     "NF Nexa Tech is a premium software agency specialising in web development, Android apps, Flutter, UI/UX design, and SaaS MVP development for startups and enterprises worldwide.",
-  url: "https://nfnexatech.com",
+  url: "https://nfnexatech.tech",
   locale: "en_IN",
   ogImage: "/og-default.png",
 
   contact: {
     email: "nfnexatech@gmail.com",
     phone: "+91 9801999829",
-    address: "34, Sneh Nagar, Siddharth Enclave, Ayodhya Nagar, Bhopal, MP 462022, India",
-    city: "Bhopal",
-    state: "Madhya Pradesh",
+    address: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur, New Delhi - 110037, South West Delhi, Delhi, India",
+    city: "New Delhi",
+    state: "Delhi",
     country: "India",
     countryCode: "IN",
   },

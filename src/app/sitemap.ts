@@ -1,70 +1,28 @@
-import { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
-import { projects } from "@/data/data";
-import { getAllPosts } from "@/lib/blog";
+/**
+ * Sitemap Index — served at /sitemap.xml
+ *
+ * Returns a sitemap index that delegates to four focused sub-sitemaps.
+ * Google recommends splitting large sites into multiple sitemaps by content type.
+ *
+ * Sub-sitemaps:
+ *   /sitemap-pages.xml     → Core pages + local SEO landing pages
+ *   /sitemap-services.xml  → All service pages with image tags
+ *   /sitemap-blog.xml      → All published blog posts (dynamic, with real dates)
+ *   /sitemap-projects.xml  → All project case studies with image tags
+ *   /sitemap-images.xml    → Dedicated image sitemap (logo, heroes, OG images)
+ */
 
-export default function sitemap(): MetadataRoute.Sitemap {
+import { siteConfig } from "@/config/site";
+
+export default function sitemap() {
   const base = siteConfig.url;
   const now = new Date().toISOString();
 
-  // Static routes
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: base,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${base}/blog`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${base}/projects`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+  return [
+    { url: `${base}/sitemap-pages.xml`,    lastModified: now },
+    { url: `${base}/sitemap-services.xml`, lastModified: now },
+    { url: `${base}/sitemap-blog.xml`,     lastModified: now },
+    { url: `${base}/sitemap-projects.xml`, lastModified: now },
+    { url: `${base}/sitemap-images.xml`,   lastModified: now },
   ];
-
-  // Service routes
-  const serviceRoutes: MetadataRoute.Sitemap = siteConfig.services.map((s) => ({
-    url: `${base}/services/${s.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.9,
-  }));
-
-  // Project case study routes
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
-    url: `${base}/projects/${p.slug}`,
-    lastModified: now,
-    changeFrequency: "yearly" as const,
-    priority: 0.7,
-  }));
-
-  // Blog post routes — dynamically pulled from MDX files
-  const blogPosts = getAllPosts();
-  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((p) => ({
-    url: `${base}/blog/${p.slug}`,
-    lastModified: p.updatedDate ?? p.date,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
-
-  // Local SEO landing pages
-  const localSeoRoutes: MetadataRoute.Sitemap = [
-    "/software-company-bhopal",
-    "/web-development-company-patna",
-    "/software-company-india",
-  ].map((path) => ({
-    url: `${base}${path}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
-
-  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...blogRoutes, ...localSeoRoutes];
 }

@@ -10,23 +10,27 @@ const servicesOgImage = ogImage({
 });
 
 export const metadata = {
-  title: "Services",
-  description: `${siteConfig.name} offers web development, Android apps, Flutter, UI/UX design, backend APIs, and SaaS MVP development for startups and enterprises.`,
+  title: "Software Development Services — Web, App & SaaS | NF Nexa Tech",
+  description:
+    "Expert software development services: web development (React/Next.js), Android & Flutter app development, UI/UX design, backend APIs, and SaaS MVP development. Serving startups and enterprises worldwide from New Delhi, India.",
   alternates: { canonical: `${siteConfig.url}/services` },
   openGraph: {
-    title: `Services | ${siteConfig.name}`,
-    description: `${siteConfig.name} offers web development, Android apps, Flutter, UI/UX design, backend APIs, and SaaS MVP development for startups and enterprises.`,
+    title: "Software Development Services | NF Nexa Tech",
+    description:
+      "Web development, Android & Flutter apps, UI/UX design, and SaaS MVP development — end-to-end software services for startups and enterprises.",
     url: `${siteConfig.url}/services`,
     type: "website",
     images: [servicesOgImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: `Services | ${siteConfig.name}`,
-    description: `${siteConfig.name} offers web development, Android apps, Flutter, UI/UX design, backend APIs, and SaaS MVP development for startups and enterprises.`,
+    title: "Software Development Services | NF Nexa Tech",
+    description:
+      "Web development, Android & Flutter apps, UI/UX design, and SaaS MVP development — end-to-end software services for startups and enterprises.",
     images: [servicesOgImage.url],
   },
 };
+
 
 export default function ServicesIndexPage() {
   return (

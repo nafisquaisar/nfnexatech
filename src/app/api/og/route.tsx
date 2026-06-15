@@ -260,7 +260,7 @@ export async function GET(req: NextRequest) {
                 letterSpacing: "0.04em",
               }}
             >
-              nfnexatech.com
+              nfnexatech.tech
             </div>
 
             {/* Gradient line */}

@@ -88,8 +88,8 @@ const schema = {
   email: siteConfig.contact.email,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Bhopal",
-    addressRegion: "Madhya Pradesh",
+    addressLocality: "New Delhi",
+    addressRegion: "Delhi",
     addressCountry: "IN",
   },
   areaServed: [
@@ -114,7 +114,7 @@ export default function SoftwareCompanyIndia() {
       slug="software-company-india"
       headline="India's Premier Software Development Company"
       subheadline="Production-grade web apps, mobile apps, and SaaS products built by an expert Indian tech team — trusted by startups and businesses worldwide."
-      description="NF Nexa Tech is a leading software company in India offering full-stack web development, Android app development, Flutter cross-platform apps, and SaaS MVP development. We combine international engineering standards with competitive Indian pricing to help startups and businesses scale faster. Based in Bhopal, we serve clients across India, the USA, UK, UAE, and beyond."
+      description="NF Nexa Tech is a leading software company in India offering full-stack web development, Android app development, Flutter cross-platform apps, and SaaS MVP development. We combine international engineering standards with competitive Indian pricing to help startups and businesses scale faster. Based in New Delhi (Mahipalpur), we serve clients across India, the USA, UK, UAE, and beyond."
       geo={{ lat: 20.5937, lng: 78.9629 }}
       localFaqs={localFaqs}
       schema={schema}

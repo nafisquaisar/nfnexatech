@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 const homeOgUrl =
   `${siteConfig.url}/api/og?` +
   new URLSearchParams({
-    title: `${siteConfig.name} — Premium Software Agency`,
+    title: "Software Development Company India",
     type: "page",
   }).toString();
 
@@ -41,7 +41,7 @@ const homeOgUrl =
 //
 // HOW TO SET UP GOOGLE SEARCH CONSOLE:
 //   1. Go to https://search.google.com/search-console
-//   2. Click "Add property" → choose "URL prefix" → enter https://nfnexatech.com
+//   2. Click "Add property" → choose "URL prefix" → enter https://nfnexatech.tech
 //   3. Select "HTML tag" verification method
 //   4. Copy the content value from the meta tag shown, e.g.:
 //        <meta name="google-site-verification" content="PASTE_THIS_VALUE" />
@@ -58,23 +58,33 @@ const bingToken = process.env.BING_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
   title: {
-    default: `${siteConfig.name} — Premium Software Agency`,
+    default: `Software Development Company India | ${siteConfig.name}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: [
+    // Primary commercial keywords
+    "software development company India",
+    "web development company India",
+    "Android app development company",
+    "Flutter app development company",
+    "SaaS development company",
+    "UI UX design agency India",
+    // Secondary / long-tail
     "software agency",
-    "web development",
-    "Android app development",
-    "Flutter development",
-    "UI UX design",
-    "SaaS MVP",
     "Next.js development",
     "React development",
-    "Firebase",
-    "Bhopal",
-    "India",
+    "Firebase backend",
+    "SaaS MVP development",
+    "startup software development",
+    "mobile app development India",
+    // Local keywords
+    "software company New Delhi",
+    "web developer Mahipalpur",
+    "IT company Delhi",
+    // Brand
     "NF Nexa Tech",
   ],
   authors: [{ name: siteConfig.founder, url: siteConfig.url }],
@@ -97,23 +107,24 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Premium Software Agency`,
+    title: `Software Development Company India | ${siteConfig.name}`,
     description: siteConfig.description,
     images: [
       {
         url: homeOgUrl,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} — Premium Software Agency`,
+        alt: `${siteConfig.name} — Software Development Company India`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Premium Software Agency`,
+    title: `Software Development Company India | ${siteConfig.name}`,
     description: siteConfig.description,
     images: [homeOgUrl],
     creator: "@nfnexatech",
+    site: "@nfnexatech",
   },
   alternates: {
     canonical: siteConfig.url,
