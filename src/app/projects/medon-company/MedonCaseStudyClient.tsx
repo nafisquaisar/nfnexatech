@@ -88,30 +88,113 @@ function SH({ label, title, color }: { label: string; title: string; color: stri
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Browser mockup (screenshot)
+   Lightbox
+───────────────────────────────────────────────────────────── */
+function CaseLightbox({
+  isOpen, src, label, onClose,
+}: { isOpen: boolean; src: string; label: string; onClose: () => void }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [isOpen, onClose]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-black/92 backdrop-blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.22 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="relative my-10 w-[92%] max-w-5xl"
+            initial={{ scale: 0.94, opacity: 0, y: 16 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.94, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="overflow-hidden rounded-2xl border border-white/20 shadow-2xl shadow-black/80">
+              <div className="flex items-center gap-3 border-b border-white/10 bg-slate-900 px-4 py-2.5">
+                <button onClick={onClose} className="h-3 w-3 rounded-full bg-red-500 transition-colors hover:bg-red-400" />
+                <div className="h-3 w-3 rounded-full bg-yellow-400/80" />
+                <div className="h-3 w-3 rounded-full bg-green-500/80" />
+                <span className="ml-2 text-[11px] text-slate-400">{label}</span>
+              </div>
+              <div className="bg-slate-950">
+                <Image
+                  src={src}
+                  alt={label}
+                  width={1440}
+                  height={900}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                  priority
+                />
+              </div>
+            </div>
+            <p className="mt-3 text-center text-xs text-slate-500">Click outside or press Esc to close</p>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Browser frame — full screenshot, no cropping
 ───────────────────────────────────────────────────────────── */
 function BrowserFrame({ src, alt, url }: { src: string; alt: string; url: string }) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/12 shadow-2xl shadow-black/60">
-      {/* Chrome bar */}
-      <div className="flex items-center gap-3 border-b border-white/10 bg-slate-900/90 px-4 py-2.5">
-        <div className="flex items-center gap-1.5">
-          <div className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
-          <div className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
-          <div className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
-        </div>
-        <div className="flex flex-1 items-center gap-1.5 rounded-md border border-white/10 bg-slate-800/60 px-3 py-1">
-          <svg className="h-2.5 w-2.5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clipRule="evenodd" />
+    <>
+      <div
+        className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/12 shadow-2xl shadow-black/60 transition-all duration-300 hover:border-white/25 hover:shadow-black/80"
+        onClick={() => setLightboxOpen(true)}
+      >
+        {/* Chrome bar */}
+        <div className="flex items-center gap-3 border-b border-white/10 bg-slate-900/90 px-4 py-2.5">
+          <div className="flex items-center gap-1.5">
+            <div className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+            <div className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
+            <div className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+          </div>
+          <div className="flex flex-1 items-center gap-1.5 rounded-md border border-white/10 bg-slate-800/60 px-3 py-1">
+            <svg className="h-2.5 w-2.5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clipRule="evenodd" />
+            </svg>
+            <span className="truncate text-[10px] text-slate-300">{url}</span>
+          </div>
+          {/* Expand icon */}
+          <svg className="h-3.5 w-3.5 text-slate-500 transition-colors group-hover:text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 110-2h4a1 1 0 011 1v4a1 1 0 11-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 112 0v1.586l2.293-2.293a1 1 0 011.414 1.414L6.414 15H8a1 1 0 110 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 110-2h1.586l-2.293-2.293a1 1 0 011.414-1.414L15 13.586V12a1 1 0 011-1z" clipRule="evenodd" />
           </svg>
-          <span className="truncate text-[10px] text-slate-300">{url}</span>
+        </div>
+        {/* Full screenshot — natural proportions, no clipping */}
+        <div className="relative bg-slate-950">
+          <Image
+            src={src}
+            alt={alt}
+            width={1440}
+            height={900}
+            style={{ width: "100%", height: "auto", display: "block" }}
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            className="transition-transform duration-500 group-hover:scale-[1.015]"
+          />
+          {/* Hover overlay */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/30">
+            <span className="rounded-xl border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
+              Open Full Screenshot
+            </span>
+          </div>
         </div>
       </div>
-      {/* Screenshot */}
-      <div className="relative" style={{ paddingBottom: "62.5%" }}>
-        <Image src={src} alt={alt} fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 60vw" />
-      </div>
-    </div>
+      <CaseLightbox isOpen={lightboxOpen} src={src} label={alt} onClose={() => setLightboxOpen(false)} />
+    </>
   );
 }
 
