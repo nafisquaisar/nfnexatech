@@ -54,34 +54,10 @@ function FaqItem({ faq, index }) {
   );
 }
 
-/** FAQ JSON-LD schema — rendered as a server-side script tag */
-function FaqSchema() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.answer,
-      },
-    })),
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
-}
 
 export default function Faq() {
   return (
     <section id="faq" className="bg-slate-950 py-24">
-      <FaqSchema />
-
       <div className="mx-auto w-[92%] max-w-4xl">
         <SectionTitle
           eyebrow="FAQ"
