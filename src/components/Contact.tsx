@@ -488,7 +488,7 @@ export default function Contact() {
               <iframe
                 title="NF Nexa Tech office location — Mahipalpur, New Delhi"
                 className="h-48 w-full border-0"
-                src="https://maps.google.com/maps?q=Flat+301+Janki+Hari+Niwas+Block+B+Bengali+Market+Mahipalpur+New+Delhi+110037+India&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=G4QG%2BMJ+Mahipalpur+Village+Mahipalpur+New+Delhi+Delhi+110037+India&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 loading="lazy"
               />
             </div>
