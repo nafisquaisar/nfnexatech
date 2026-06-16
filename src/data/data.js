@@ -488,7 +488,7 @@ export const projects = [
     category: 'SaaS Platform',
     industry: 'EdTech',
     platform: 'Web (React + Spring Boot)',
-    timeline: '4 Months',
+    timeline: '2.5 Months',
     clientType: 'Startup',
     projectValue: 'Enterprise',
     role: 'Full-Stack SaaS Development, AI Integration, System Architecture',
