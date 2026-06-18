@@ -40,7 +40,7 @@ function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logo/logo1.png"
+            src="/logo/navlogo.png"
             alt="NF Nexa Tech"
             width={42}
             height={42}
@@ -75,9 +75,8 @@ function Navbar() {
               <li key={item.label}>
                 <Link
                   href={href}
-                  className={`text-sm font-medium transition hover:text-cyan-300 ${
-                    isActive ? "text-cyan-400" : "text-slate-200"
-                  }`}
+                  className={`text-sm font-medium transition hover:text-cyan-300 ${isActive ? "text-cyan-400" : "text-slate-200"
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -102,9 +101,8 @@ function Navbar() {
                 <Link
                   href={href}
                   onClick={() => setIsOpen(false)}
-                  className={`block rounded-lg px-3 py-2.5 text-sm transition hover:bg-white/10 ${
-                    isActive ? "text-cyan-400" : "text-slate-100"
-                  }`}
+                  className={`block rounded-lg px-3 py-2.5 text-sm transition hover:bg-white/10 ${isActive ? "text-cyan-400" : "text-slate-100"
+                    }`}
                 >
                   {item.label}
                 </Link>
