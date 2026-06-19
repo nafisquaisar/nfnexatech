@@ -165,6 +165,13 @@ export default function Contact() {
         setStatus("success");
         lastSubmit.current = Date.now();
         trackEvent("form_submit_success", { label: data.service });
+
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "conversion", {
+            send_to: "AW-18240874915/G0rnCKqx5sAcEKPT9vID",
+          });
+        }
+
         setData({
           name: "",
           email: "",
