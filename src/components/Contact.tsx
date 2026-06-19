@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import SectionTitle from "./SectionTitle";
 import { trackEvent } from "@/lib/analytics";
+import { trackGoogleAdsConversion } from "@/lib/googleAds";
 import { siteConfig } from "@/config/site";
 
 /* ── Form field types ───────────────────────────────────── */
@@ -165,12 +166,8 @@ export default function Contact() {
         setStatus("success");
         lastSubmit.current = Date.now();
         trackEvent("form_submit_success", { label: data.service });
-
-        if (typeof window !== "undefined" && window.gtag) {
-          window.gtag("event", "conversion", {
-            send_to: "AW-18240874915/G0rnCKqx5sAcEKPT9vID",
-          });
-        }
+        // Fire Google Ads conversion — only on confirmed API success
+        trackGoogleAdsConversion();
 
         setData({
           name: "",

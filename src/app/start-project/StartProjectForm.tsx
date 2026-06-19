@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { trackGoogleAdsConversion } from "@/lib/googleAds";
 import { siteConfig } from "@/config/site";
 
 /* ── Form field types ───────────────────────────────────── */
@@ -174,6 +175,8 @@ export default function StartProjectForm() {
         trackEvent("form_submit_success", {
           label: `start_project_${data.service}`,
         });
+        // Fire Google Ads conversion — only on confirmed API success
+        trackGoogleAdsConversion();
         setData({
           name: "",
           email: "",

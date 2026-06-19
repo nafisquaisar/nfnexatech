@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/config/site";
+import { trackEvent } from "@/lib/analytics";
+import { trackGoogleAdsConversion } from "@/lib/googleAds";
 
 /**
  * Floating WhatsApp CTA button.
@@ -34,6 +36,10 @@ export default function WhatsAppCta() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with NF Nexa Tech on WhatsApp"
+      onClick={() => {
+        trackEvent("whatsapp_click", { label: "floating_whatsapp_cta" });
+        trackGoogleAdsConversion();
+      }}
       className={`relative flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 shadow-lg shadow-black/30 transition-all duration-500 hover:bg-[#20BD5B] hover:shadow-xl hover:shadow-[#25D366]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] ${visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0 pointer-events-none"
         }`}
     >

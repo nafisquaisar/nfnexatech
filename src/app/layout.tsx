@@ -161,10 +161,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // ── Analytics IDs ────────────────────────────────────────────────────────
+  // NEXT_PUBLIC_GOOGLE_ADS_ID  → Google Ads account ID (AW-XXXXXXXXXX)
+  // NEXT_PUBLIC_GA_ID          → GA4 Measurement ID (G-XXXXXXXXXX) — optional,
+  //                              leave unset or set to placeholder if no GA4 property
+  const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
 
+  // Validate IDs — ignore placeholder values
+  const validAdsId =
+    adsId && adsId !== "AW-XXXXXXXXXX" ? adsId : undefined;
+  const validGaId =
+    gaId && gaId.startsWith("G-") && gaId !== "G-XXXXXXXXXX"
+      ? gaId
+      : undefined;
 
+  // A primary tag ID is required to load the gtag script at all.
+  // Google recommends loading with the GA4 ID if present; otherwise Ads ID.
+  const primaryTagId = validGaId ?? validAdsId;
 
   return (
     <html
@@ -179,15 +194,36 @@ export default function RootLayout({
         {children}
         <Analytics />
 
-        {/* Google Analytics 4 — replace G-XXXXXXXXXX in .env.local */}
-        {gaId && gaId !== "G-XXXXXXXXXX" && (
+        {/*
+          Google Tag — loads gtag.js once for both GA4 and Google Ads.
+          Script is deferred with afterInteractive so it never blocks render.
+          Both IDs are configured in a single init script to avoid duplicate
+          gtag.js loads (which would double-count pageviews).
+
+          Required env vars (set in .env.local AND Vercel project settings):
+            NEXT_PUBLIC_GOOGLE_ADS_ID = AW-18240874915
+            NEXT_PUBLIC_GA_ID         = G-XXXXXXXXXX  (optional, if GA4 is set up)
+        */}
+        {primaryTagId && (
           <>
             <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${primaryTagId}`}
               strategy="afterInteractive"
             />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{send_page_view:true});`}
+            <Script id="gtag-init" strategy="afterInteractive">
+              {[
+                "window.dataLayer=window.dataLayer||[];",
+                "function gtag(){dataLayer.push(arguments);}",
+                "gtag('js',new Date());",
+                // Configure GA4 first if available (recommended order)
+                validGaId
+                  ? `gtag('config','${validGaId}',{send_page_view:true});`
+                  : "",
+                // Configure Google Ads account — required for conversion tracking
+                validAdsId ? `gtag('config','${validAdsId}');` : "",
+              ]
+                .filter(Boolean)
+                .join("")}
             </Script>
           </>
         )}
@@ -202,3 +238,4 @@ export default function RootLayout({
     </html>
   );
 }
+
