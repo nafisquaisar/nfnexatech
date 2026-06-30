@@ -13,7 +13,7 @@ const roles = [
   {
     title: "Founder",
     designation: "Founder & CEO",
-    id: "NF-EMP-001",
+    id: "NFT-CEO-001",
     href: "/verify/founder",
     icon: "👑",
     gradient: "from-amber-500/20 to-orange-500/10",
@@ -23,7 +23,7 @@ const roles = [
   {
     title: "Co-Founder",
     designation: "Co-Founder",
-    id: "NF-EMP-002",
+    id: "NFT-CF-002",
     href: "/verify/cofounder",
     icon: "🤝",
     gradient: "from-violet-500/20 to-purple-500/10",
@@ -33,7 +33,7 @@ const roles = [
   {
     title: "Business Development Executive",
     designation: "Business Development Executive",
-    id: "NF-EMP-003",
+    id: "NFT-BDE-003",
     href: "/verify/business-development-executive",
     icon: "📈",
     gradient: "from-emerald-500/20 to-teal-500/10",
@@ -43,7 +43,7 @@ const roles = [
   {
     title: "HR & Operations Executive",
     designation: "HR & Operations Executive",
-    id: "NF-EMP-004",
+    id: "NFT-HR-004",
     href: "/verify/hr-operations-executive",
     icon: "🧑‍💼",
     gradient: "from-sky-500/20 to-blue-500/10",
@@ -53,7 +53,7 @@ const roles = [
   {
     title: "UI/UX Designer",
     designation: "UI/UX Designer",
-    id: "NF-EMP-005",
+    id: "NFT-UXD-005",
     href: "/verify/ui-ux-designer",
     icon: "🎨",
     gradient: "from-pink-500/20 to-rose-500/10",

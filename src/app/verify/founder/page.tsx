@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Founder Verification | NF Nexa Tech",
+  title: "Founder & CEO Verification | NF Nexa Tech",
   description:
     "Official verification page for Nafis Quaisar, Founder & CEO of NF Nexa Tech. Verify employment status and credentials.",
   robots: { index: false, follow: false },
@@ -13,7 +13,7 @@ const employee = {
   name: "Nafis Quaisar",
   designation: "Founder & CEO",
   company: "NF Nexa Tech",
-  employeeId: "NF-EMP-001",
+  employeeId: "NFT-CEO-001",
   status: "Active",
   email: "admin@nfnexatech.tech",
   website: "https://nfnexatech.tech",
@@ -22,7 +22,7 @@ const employee = {
 };
 
 export default function FounderVerificationPage() {
-  return <VerificationPage employee={employee} accentFrom="from-amber-500" accentVia="via-orange-400" accentTo="to-yellow-500" borderColor="border-amber-500/30" glowColor="bg-amber-500/20" badgeText="NF-EMP-001 · Founder" />;
+  return <VerificationPage employee={employee} accentFrom="from-amber-500" accentVia="via-orange-400" accentTo="to-yellow-500" borderColor="border-amber-500/30" glowColor="bg-amber-500/20" badgeText="NFT-CEO-001 · Founder" photoSrc="/verify/founder.jpeg" />;
 }
 
 interface EmployeeData {
@@ -45,6 +45,7 @@ interface VerificationPageProps {
   borderColor: string;
   glowColor: string;
   badgeText: string;
+  photoSrc: string;
 }
 
 function VerificationPage({
@@ -55,6 +56,7 @@ function VerificationPage({
   borderColor,
   glowColor,
   badgeText,
+  photoSrc,
 }: VerificationPageProps) {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 relative overflow-hidden">
@@ -87,16 +89,15 @@ function VerificationPage({
           <div className="p-8 sm:p-10">
             {/* Header row */}
             <div className="mb-8 flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left">
-              {/* Avatar / Logo */}
+              {/* Avatar / Profile Photo */}
               <div className="relative shrink-0">
                 <div className={`absolute inset-0 rounded-2xl ${glowColor} blur-xl`} />
-                <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-slate-800 shadow-lg">
+                <div className="relative h-20 w-20 overflow-hidden rounded-2xl border border-white/10 bg-slate-800 shadow-lg">
                   <Image
-                    src="/logo.png"
-                    alt="NF Nexa Tech"
-                    width={48}
-                    height={48}
-                    className="object-contain"
+                    src={photoSrc}
+                    alt={employee.name}
+                    fill
+                    className="object-cover"
                     priority
                   />
                 </div>

@@ -5,7 +5,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "UI/UX Designer Verification | NF Nexa Tech",
   description:
-    "Official verification page for the UI/UX Designer of NF Nexa Tech. Verify employment status and credentials.",
+    "Official verification page for Absar Quaisar, UI/UX Designer of NF Nexa Tech. Verify employment status and credentials.",
   robots: { index: false, follow: false },
 };
 
@@ -34,17 +34,23 @@ export default function UIUXVerificationPage() {
             <div className="mb-8 flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left">
               <div className="relative shrink-0">
                 <div className="absolute inset-0 rounded-2xl bg-pink-500/20 blur-xl" />
-                <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-slate-800 shadow-lg">
-                  <Image src="/logo.png" alt="NF Nexa Tech" width={48} height={48} className="object-contain" priority />
+                <div className="relative h-20 w-20 overflow-hidden rounded-2xl border border-white/10 bg-slate-800 shadow-lg">
+                  <Image
+                    src="/verify/uiux.png"
+                    alt="Absar Quaisar"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
                 <div className="absolute -bottom-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full border-2 border-slate-900 bg-emerald-500 text-xs text-white shadow-lg">✓</div>
               </div>
 
               <div>
                 <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-800/60 px-3 py-1 text-xs font-mono text-slate-400">
-                  NF-EMP-005 · Design
+                  NFT-UXD-005 · Design
                 </div>
-                <h1 className="text-2xl font-bold text-white sm:text-3xl">UI/UX Designer</h1>
+                <h1 className="text-2xl font-bold text-white sm:text-3xl">Absar Quaisar</h1>
                 <p className="mt-1 bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-sm font-semibold text-transparent">
                   UI/UX Designer
                 </p>
@@ -64,16 +70,16 @@ export default function UIUXVerificationPage() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               {[
+                { label: "Full Name", value: "Absar Quaisar" },
                 { label: "Designation", value: "UI/UX Designer" },
                 { label: "Company", value: "NF Nexa Tech" },
-                { label: "Employee ID", value: "NF-EMP-005", mono: true },
+                { label: "Employee ID", value: "NFT-UXD-005", mono: true },
                 { label: "Department", value: "Design & Creative" },
                 { label: "Member Since", value: "2023" },
-                { label: "Official Email", value: "design@nfnexatech.tech" },
               ].map((field) => (
                 <div key={field.label} className="rounded-xl border border-slate-700/50 bg-slate-800/40 p-4">
                   <p className="mb-0.5 text-xs font-medium uppercase tracking-wider text-slate-500">{field.label}</p>
-                  <p className={`text-sm font-semibold text-white ${(field as {mono?: boolean}).mono ? "font-mono" : ""}`}>{field.value}</p>
+                  <p className={`text-sm font-semibold text-white ${(field as { mono?: boolean }).mono ? "font-mono" : ""}`}>{field.value}</p>
                 </div>
               ))}
 
@@ -88,7 +94,14 @@ export default function UIUXVerificationPage() {
                 </div>
               </div>
 
-              <div className="col-span-full rounded-xl border border-slate-700/50 bg-slate-800/40 p-4">
+              <div className="rounded-xl border border-slate-700/50 bg-slate-800/40 p-4">
+                <p className="mb-0.5 text-xs font-medium uppercase tracking-wider text-slate-500">Official Email</p>
+                <a href="mailto:design@nfnexatech.tech" className="break-all text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                  design@nfnexatech.tech
+                </a>
+              </div>
+
+              <div className="rounded-xl border border-slate-700/50 bg-slate-800/40 p-4">
                 <p className="mb-0.5 text-xs font-medium uppercase tracking-wider text-slate-500">Website</p>
                 <a href="https://nfnexatech.tech" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
                   nfnexatech.tech
@@ -103,7 +116,7 @@ export default function UIUXVerificationPage() {
               <p className="text-xs text-slate-500">
                 This verification is issued by <span className="font-semibold text-slate-400">NF Nexa Tech</span> and confirms the above individual is an official employee.
               </p>
-              <p className="font-mono text-[10px] text-slate-700">VERIFIED · NF-EMP-005 · nfnexatech.tech</p>
+              <p className="font-mono text-[10px] text-slate-700">VERIFIED · NFT-UXD-005 · nfnexatech.tech</p>
             </div>
           </div>
         </div>
