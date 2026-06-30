@@ -80,10 +80,10 @@ export default function VerifyPortalPage() {
             <div className="absolute inset-0 rounded-2xl bg-blue-500/20 blur-xl" />
             <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/80 backdrop-blur-sm shadow-xl">
               <Image
-                src="/logo.png"
+                src="/logo/navlogo.png"
                 alt="NF Nexa Tech Logo"
-                width={52}
-                height={52}
+                width={100}
+                height={100}
                 className="object-contain"
                 priority
               />
