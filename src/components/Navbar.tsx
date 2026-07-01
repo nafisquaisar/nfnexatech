@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
  */
 const NAV_ITEMS = [
   { label: "Home", anchor: "home" },
-  { label: "About", anchor: "about" },
+  { label: "About", href: "/about" },
   { label: "Services", anchor: "services" },
   { label: "Projects", anchor: "projects" },
   { label: "Blog", href: "/blog" },

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
@@ -854,12 +854,6 @@ export default function WebsiteShowcase() {
         </div>
       </div>
 
-      {/* Reduced motion override */}
-      <style>{`
-        @media (prefers-reduced-motion: reduce) {
-          * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        }
-      `}</style>
     </section>
   );
 }
