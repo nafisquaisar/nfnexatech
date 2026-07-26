@@ -27,6 +27,107 @@ export const services = [
 
 export const projects = [
   {
+    slug: 'nestiva-hospital',
+    title: 'Nestiva Hospital',
+    subtitle: 'Advanced Care, Human Touch',
+    category: 'Healthcare Website',
+    industry: 'Healthcare',
+    platform: 'Web',
+    timeline: '6 Weeks',
+    clientType: 'Healthcare Provider',
+    projectValue: 'Commercial',
+    role: 'UI/UX Design, Website Development, Healthcare Website Design',
+    description:
+      'A patient-focused digital experience for a modern multi-specialty hospital, bringing doctors, departments, appointments, emergency information and healthcare resources into one clear platform.',
+    overview:
+      'Nestiva Hospital needed a modern digital presence capable of communicating trust while helping patients quickly reach the information that matters most. The website was structured around common healthcare journeys — discovering specialists, exploring departments, understanding hospital facilities, accessing emergency information and moving toward appointment booking. NF Nexa Tech created a clean, responsive and patient-focused experience that balances healthcare credibility with modern digital design.',
+    problemStatement:
+      'Healthcare websites serve users with very different intentions. Some visitors may be researching a specialist, others may be comparing departments, and some may need urgent contact information. The challenge was to organise a large amount of healthcare information without making the experience feel complicated.',
+    goals: [
+      'Surface important healthcare journeys through clear navigation and strong calls to action',
+      'Communicate professionalism and confidence appropriate for a healthcare environment',
+      'Make finding doctors, departments and appointment/emergency information easy and fast',
+      'Deliver a clear, usable responsive experience across desktop, tablet and mobile',
+    ],
+    planningAndExecution:
+      'We approached Nestiva as a patient journey rather than simply a collection of hospital pages. The information architecture was built around the most common reasons a visitor arrives — finding a doctor, understanding a department, locating emergency contact, or booking an appointment. Each page decision was evaluated from the patient perspective first.',
+    uiUxDesign:
+      'A clean visual system using healthcare-appropriate typography, generous whitespace, teal-accented UI elements and structured content hierarchy establishes immediate professionalism. Doctors, departments, facilities, testimonials, FAQs and health resources are each given clear dedicated sections so visitors always know where they are and what to do next.',
+    developmentProcess:
+      'The website was built with a component-driven architecture, ensuring reusable section blocks for doctors, departments and health content. SEO metadata was implemented across all pages. Images were optimised for performance. The responsive layout was tested across mobile, tablet and desktop breakpoints.',
+    techStack: ['Next.js', 'React', 'Tailwind CSS', 'SEO Optimized'],
+    keyFeatures: [
+      'Doctor discovery with specialist cards and filtering',
+      'Department presentation helping patients understand available specialties',
+      'Prominent appointment CTAs throughout the patient journey',
+      '24/7 emergency contact information visually prioritised',
+      'Patient testimonials for social proof and trust',
+      'Hospital facilities showcase with visual content',
+      'Health insights / blog for patient education',
+      'FAQ section for common patient questions',
+      'Fully responsive across desktop, tablet and mobile',
+    ],
+    challenges: [
+      {
+        title: 'Complex Information Architecture',
+        description: 'Doctors, departments, facilities, patient resources and healthcare content needed clear organisation without overwhelming visitors.',
+      },
+      {
+        title: 'Trust & Credibility',
+        description: 'The visual experience needed to communicate professionalism and confidence appropriate for a healthcare environment.',
+      },
+      {
+        title: 'Fast Patient Navigation',
+        description: 'Important actions such as finding doctors, viewing departments and reaching appointment or emergency information needed to be easy to locate.',
+      },
+      {
+        title: 'Responsive Experience',
+        description: 'The experience needed to remain clear and usable across desktop, tablet and mobile screens.',
+      },
+    ],
+    solutions: [
+      {
+        title: 'Patient-First Information Architecture',
+        description: 'Navigation and page hierarchy were built around the most common patient journeys, with departments, doctors and emergency information surfaced at every level.',
+      },
+      {
+        title: 'Healthcare-Focused Visual Design',
+        description: 'A clean, teal-accented visual system with professional typography, generous spacing and trust signals communicates credibility without visual complexity.',
+      },
+    ],
+    finalProduct:
+      'The final experience gives Nestiva a structured digital presence where patients can move from discovering healthcare services to identifying specialists and taking the next step toward care without unnecessary complexity.',
+    impact: [
+      'Clear healthcare information architecture for patients',
+      'Stronger doctor and department discovery',
+      'Prominent appointment pathways throughout the experience',
+      'Visible emergency access for urgent situations',
+      'Responsive patient experience across all devices',
+      'Trust-focused visual design with testimonials and facility showcases',
+      'Scalable structure for additional doctors, departments and health content',
+    ],
+    videoUrl: '',
+    heroImage: '/images/projects/nestiva/nestiva-hospital-hero.png',
+    image: '/images/projects/nestiva/nestiva-hospital-hero.png',
+    galleryImages: [
+      '/images/projects/nestiva/nestiva-hospital-hero.png',
+      '/images/projects/nestiva/nestiva-departments.png',
+      '/images/projects/nestiva/nestiva-doctors.png',
+      '/images/projects/nestiva/nestiva-patient-testimonials.png',
+      '/images/projects/nestiva/nestiva-facilities.png',
+      '/images/projects/nestiva/nestiva-health-insights.png',
+      '/images/projects/nestiva/nestiva-faq-cta.png',
+    ],
+    color: '#0d9488',
+    tech: ['Next.js', 'React', 'Tailwind CSS'],
+    featured: true,
+    featuredLabel: 'Featured Healthcare Project',
+    featuredSub: 'Built for modern healthcare experiences.',
+    audiences: ['hospital', 'clinic', 'doctor', 'healthcare', 'medical'],
+    tags: ['Healthcare', 'Web Development', 'UI/UX'],
+    liveUrl: 'https://nestivahospital.vercel.app/',
+  },
+  {
     slug: 'tunelyf',
     title: 'TuneLyf Music App',
     subtitle: 'A next-generation music streaming experience built for discovery and immersion.',
@@ -98,6 +199,7 @@ export const projects = [
     image: '/images/projects/tunelyf/tunelyf_preview.png',
     galleryImages: [],
     color: '#1f2a44',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.song.nafis.nf.TuneLyf&hl=en_IN',
     phoneStack: {
       left: '/images/projects/tunelyf/left.png',
       center: '/images/projects/tunelyf/center.png',
@@ -177,6 +279,7 @@ export const projects = [
     image: '/images/projects/organizer/organizer_preview.png',
     galleryImages: [],
     color: '#0d2137',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.nafis.organizerclasses&hl=en_IN',
     tech: ['React', 'Firebase', 'Tailwind CSS'],
   },
   {
@@ -251,6 +354,7 @@ export const projects = [
     image: '/images/projects/smallstep/smallstep_preview.png',
     galleryImages: [],
     color: '#1a2a1a',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.app.nafis.nf2024.smallsteps&hl=en_IN',
     tech: ['Kotlin', 'Room DB', 'Material UI'],
   },
   {
@@ -325,6 +429,7 @@ export const projects = [
     image: '/images/projects/popular/popular_preview.png',
     galleryImages: [],
     color: '#2a1a0d',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.nf.popularbread&hl=en_IN',
     tech: ['Flutter', 'Firebase', 'MVVM'],
   },
   {
@@ -399,6 +504,7 @@ export const projects = [
     image: '/images/projects/kharchaplus/kharchaplus_preview.png',
     galleryImages: [],
     color: '#1a1040',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.nafis.nf.kharchaplus&hl=en_IN',
     tech: ['Flutter', 'Firebase', 'Isar', 'MVVM'],
   },
   {
@@ -480,6 +586,7 @@ export const projects = [
     ],
     color: '#0c4a6e',
     tech: ['Next.js', 'React', 'Tailwind CSS', 'Firebase'],
+    liveUrl: 'https://medoncompany.in',
   },
   {
     slug: 'train-your-tech',

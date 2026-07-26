@@ -157,7 +157,48 @@ function CaseStudyButton({ project }) {
   );
 }
 
-/** Arrow button for prev/next */
+/** Live site button — opens the deployed project URL */
+function LiveSiteButton({ project }) {
+  if (!project?.liveUrl) return null;
+
+  return (
+    <a
+      href={project.liveUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group/live inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-xs font-bold tracking-widest text-slate-300 backdrop-blur transition-all duration-300 hover:border-white/35 hover:bg-white/10 hover:text-white"
+    >
+      VIEW LIVE SITE
+      <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover/live:-translate-y-0.5 group-hover/live:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" clipRule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" /><path fillRule="evenodd" clipRule="evenodd" d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" />
+      </svg>
+    </a>
+  );
+}
+
+/** Play Store button — opens the Google Play listing */
+function PlayStoreButton({ project }) {
+  if (!project?.playStoreUrl) return null;
+
+  return (
+    <a
+      href={project.playStoreUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group/ps inline-flex items-center gap-2 rounded-lg border border-green-400/20 bg-green-500/5 px-4 py-2.5 text-xs font-bold tracking-widest text-green-300 backdrop-blur transition-all duration-300 hover:border-green-400/50 hover:bg-green-500/10 hover:text-green-200"
+    >
+      {/* Google Play icon */}
+      <svg className="h-3.5 w-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3.18 23.76c.3.17.64.24.98.2l12.49-11.8L13.12 8.6 3.18 23.76z"/>
+        <path d="M22.1 10.53c-.34-.22-.82-.37-1.43-.37H3.33c-.6 0-1.08.15-1.43.37l11.1 10.49 9.1-10.49z"/>
+        <path d="M1.9 1.24C1.56 1.46 1.33 1.87 1.33 2.42v19.16c0 .55.23.96.57 1.18l11.22-10.6L1.9 1.24z"/>
+        <path d="M3.18.24C2.84.28 2.5.53 2.22.9l10.9 10.3L16.65 7.7 3.18.24z"/>
+      </svg>
+      PLAY STORE
+    </a>
+  );
+}
+
 function ArrowBtn({ direction, onClick }) {
   const isLeft = direction === "left";
   return (
@@ -248,6 +289,19 @@ function Projects() {
                 </p>
               )}
 
+              {/* Featured badge — data-driven, shown only when project.featured = true */}
+              {project?.featured && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-400/40 bg-teal-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-teal-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-teal-400" />
+                    {project.featuredLabel ?? 'Featured Project'}
+                  </span>
+                  {project.featuredSub && (
+                    <span className="text-[11px] text-slate-500">{project.featuredSub}</span>
+                  )}
+                </div>
+              )}
+
               <h3 className="text-2xl font-bold leading-snug text-white sm:text-3xl xl:text-4xl">
                 {project?.title ?? "Untitled Project"}
               </h3>
@@ -260,13 +314,16 @@ function Projects() {
 
               <div className="h-px w-full bg-gradient-to-r from-white/10 via-cyan-500/20 to-transparent" />
 
-              <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-3 flex-wrap">
                 <CaseStudyButton project={project} />
+                <LiveSiteButton project={project} />
+                <PlayStoreButton project={project} />
                 <span className="text-xs text-slate-500 tabular-nums">
                   {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
                 </span>
               </div>
             </div>
+
           </div>
 
           {/* ── Arrow navigation ── */}
