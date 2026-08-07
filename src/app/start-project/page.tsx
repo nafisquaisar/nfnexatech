@@ -98,6 +98,13 @@ export default function StartProjectPage() {
                   {siteConfig.contact.phone}
                 </a>
                 <a
+                  href={`tel:${siteConfig.contact.phone2}`}
+                  className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-400/30 hover:text-white"
+                >
+                  <span className="text-xl">📞</span>
+                  {siteConfig.contact.phone2}
+                </a>
+                <a
                   href={`mailto:${siteConfig.contact.email}`}
                   className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-400/30 hover:text-white"
                 >

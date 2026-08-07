@@ -14,6 +14,7 @@ export const siteConfig = {
   contact: {
     email: "nfnexatech@gmail.com",
     phone: "+91 9801999829",
+    phone2: "+91 8109347584",
     address: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur, New Delhi - 110037, South West Delhi, Delhi, India",
     city: "New Delhi",
     state: "Delhi",
@@ -25,7 +26,8 @@ export const siteConfig = {
     linkedin: "https://linkedin.com/company/nf-nexa-tech",
     github: "https://github.com/nfnexatech",
     facebook: "https://facebook.com/nfnexatech",
-    whatsapp: "https://wa.me/919801999829",
+    whatsapp: "https://wa.me/918109347584",
+    whatsapp2: "https://wa.me/919801999829",
   },
 
   founder: "Nafis Quaisar",

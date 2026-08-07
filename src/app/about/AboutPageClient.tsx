@@ -1081,6 +1081,9 @@ export default function AboutPage() {
                 <a href="tel:+919801999829" className="block text-slate-400 hover:text-slate-300 transition-colors">
                   +91 98019 99829
                 </a>
+                <a href="tel:+918109347584" className="block text-slate-400 hover:text-slate-300 transition-colors">
+                  +91 81093 47584
+                </a>
               </div>
             </div>
             <div>

@@ -75,13 +75,21 @@ const organizationJsonLd = {
     postalCode: "110037",
     addressCountry: "IN",
   },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+91-9801999829",
-    contactType: "customer service",
-    email: "nfnexatech@gmail.com",
-    availableLanguage: ["English", "Hindi"],
-  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-9801999829",
+      contactType: "customer service",
+      email: "nfnexatech@gmail.com",
+      availableLanguage: ["English", "Hindi"],
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-8109347584",
+      contactType: "customer service",
+      availableLanguage: ["English", "Hindi"],
+    },
+  ],
   sameAs: [
     siteConfig.social.linkedin,
     siteConfig.social.github,

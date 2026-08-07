@@ -131,6 +131,12 @@ export default function Footer() {
               >
                 {siteConfig.contact.phone}
               </a>
+              <a
+                href={`tel:${siteConfig.contact.phone2}`}
+                className="block transition hover:text-slate-400"
+              >
+                {siteConfig.contact.phone2}
+              </a>
             </div>
           </nav>
 
