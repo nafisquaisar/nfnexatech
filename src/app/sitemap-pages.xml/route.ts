@@ -15,7 +15,8 @@ const pages = [
   { path: "/services",                       changeFreq: "monthly", priority: 0.9 },
   { path: "/projects",                       changeFreq: "monthly", priority: 0.8 },
   { path: "/blog",                           changeFreq: "weekly",  priority: 0.9 },
-  { path: "/contact",                        changeFreq: "yearly",  priority: 0.7 },
+  // NOTE: /contact is intentionally excluded — it redirects to /#contact.
+  // Redirect sources are not independently indexable pages.
   { path: "/start-project",                  changeFreq: "monthly", priority: 0.8 },
   { path: "/software-company-bhopal",        changeFreq: "monthly", priority: 0.8 },
   { path: "/software-company-india",         changeFreq: "monthly", priority: 0.8 },

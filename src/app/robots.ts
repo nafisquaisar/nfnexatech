@@ -25,7 +25,7 @@ export default function robots(): MetadataRoute.Robots {
           "/services/",
           "/projects/",
           "/blog/",
-          "/contact",
+          // NOTE: /contact intentionally omitted — it 301-redirects to /#contact
           "/start-project",
           "/software-company-bhopal",
           "/software-company-india",
