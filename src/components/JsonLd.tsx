@@ -67,7 +67,7 @@ function orgSchema() {
     },
     sameAs: [
       siteConfig.social.linkedin,
-      siteConfig.social.github,
+      siteConfig.social.instagram,
       siteConfig.social.facebook,
     ],
     knowsAbout: [
@@ -97,14 +97,6 @@ function websiteSchema() {
     description: siteConfig.description,
     inLanguage: "en-IN",
     publisher:  { "@id": `${siteConfig.url}/#organization` },
-    potentialAction: {
-      "@type":  "SearchAction",
-      target: {
-        "@type":      "EntryPoint",
-        urlTemplate:  `${siteConfig.url}/projects?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -144,19 +136,15 @@ function localBusinessSchema() {
       },
     ],
     areaServed: [
+      { "@type": "City", name: "New Delhi" },
+      { "@type": "City", name: "Delhi" },
+      { "@type": "AdministrativeArea", name: "Delhi NCR" },
       { "@type": "Country", name: "India" },
       { "@type": "Country", name: "United States" },
       { "@type": "Country", name: "United Kingdom" },
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "Country", name: "Australia" },
     ],
-    aggregateRating: {
-      "@type":       "AggregateRating",
-      ratingValue:   "4.9",
-      reviewCount:   "12",
-      bestRating:    "5",
-      worstRating:   "1",
-    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name:    "Software Development Services",
@@ -209,12 +197,6 @@ function professionalServiceSchema() {
           serviceType:   s.name,
         },
       })),
-    },
-    aggregateRating: {
-      "@type":       "AggregateRating",
-      ratingValue:   "4.9",
-      reviewCount:   "12",
-      bestRating:    "5",
     },
   };
 }

@@ -25,6 +25,7 @@ export default function robots(): MetadataRoute.Robots {
           "/services/",
           "/projects/",
           "/blog/",
+          "/locations/",
           // NOTE: /contact intentionally omitted — it 301-redirects to /#contact
           "/start-project",
           "/software-company-bhopal",
@@ -32,14 +33,14 @@ export default function robots(): MetadataRoute.Robots {
           "/web-development-company-patna",
         ],
         disallow: [
-          "/api/",         // Next.js API routes (internal)
-          "/api/og",       // OG image generator (not a page)
+          "/api/",         // Next.js API routes (internal) — /api/og intentionally NOT blocked (needed for OG images)
           "/_next/",       // Next.js build assets
           "/_vercel/",     // Vercel deployment internals
           "/static/",      // Static assets directory
-          "/*?*",          // Any URL with query parameters (avoids duplicate indexing)
           "/admin",        // Admin panel (if ever added)
           "/*.json$",      // Raw JSON data files
+          "/verify/",      // Employee verification portal — internal only
+          "/contact",      // Redirect-only page (redirects to /#contact)
         ],
       },
 

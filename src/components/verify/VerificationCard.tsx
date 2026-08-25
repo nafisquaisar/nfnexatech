@@ -201,7 +201,7 @@ export default function VerificationCard({ member }: VerificationCardProps) {
                 and confirms the above individual is an official employee.
               </p>
               <p className="font-mono text-[10px] text-slate-700">
-                VERIFIED · {member.employeeId} · nfnexatech.tech
+                VERIFIED · {member.employeeId} · nfnexatech.in
               </p>
             </div>
           </div>

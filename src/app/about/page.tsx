@@ -63,10 +63,10 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "NF Nexa Tech",
   url: siteConfig.url,
-  logo: `${siteConfig.url}/logo/navlogo.png`,
+  logo: `${siteConfig.url}/logo.png`,
   description:
     "NF Nexa Tech is a UDYAM-registered software development company from New Delhi, India, specialising in web applications, mobile apps, Flutter, UI/UX design and SaaS development.",
-  foundingDate: "2023-10-25",
+  foundingDate: String(siteConfig.foundedYear),  // 2023 (founded 25 October 2023)
   address: {
     "@type": "PostalAddress",
     streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
@@ -92,7 +92,7 @@ const organizationJsonLd = {
   ],
   sameAs: [
     siteConfig.social.linkedin,
-    siteConfig.social.github,
+    siteConfig.social.instagram,
     siteConfig.social.facebook,
   ],
   founder: {

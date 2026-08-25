@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   /* ── Article JSON-LD schema ── */
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "@id": `${postUrl}#article`,
     headline: post.title,
     description: post.description,

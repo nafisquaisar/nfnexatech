@@ -13,14 +13,16 @@ const pages = [
   { path: "/",                               changeFreq: "weekly",  priority: 1.0 },
   { path: "/about",                          changeFreq: "monthly", priority: 0.8 },
   { path: "/services",                       changeFreq: "monthly", priority: 0.9 },
-  { path: "/projects",                       changeFreq: "monthly", priority: 0.8 },
-  { path: "/blog",                           changeFreq: "weekly",  priority: 0.9 },
-  // NOTE: /contact is intentionally excluded — it redirects to /#contact.
-  // Redirect sources are not independently indexable pages.
+  // /projects intentionally excluded — canonical entry is in sitemap-projects.xml
+  // /blog intentionally excluded — canonical entry is in sitemap-blog.xml
+  // /contact intentionally excluded — it redirects to /#contact
   { path: "/start-project",                  changeFreq: "monthly", priority: 0.8 },
-  { path: "/software-company-bhopal",        changeFreq: "monthly", priority: 0.8 },
-  { path: "/software-company-india",         changeFreq: "monthly", priority: 0.8 },
-  { path: "/web-development-company-patna",  changeFreq: "monthly", priority: 0.7 },
+  // Location pages
+  { path: "/locations/delhi",                changeFreq: "monthly", priority: 0.9 },
+  // Legacy location pages (kept for existing rankings)
+  { path: "/software-company-bhopal",        changeFreq: "monthly", priority: 0.7 },
+  { path: "/software-company-india",         changeFreq: "monthly", priority: 0.7 },
+  { path: "/web-development-company-patna",  changeFreq: "monthly", priority: 0.6 },
 ] as const;
 
 function buildXml(now: string): string {

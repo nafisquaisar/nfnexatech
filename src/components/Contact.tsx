@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site";
 /* ── Form field types ───────────────────────────────────── */
 interface FormData {
   name: string;
+  company: string;
   email: string;
   phone: string;
   service: string;
@@ -105,6 +106,7 @@ export default function Contact() {
 
   const [data, setData] = useState<FormData>({
     name: "",
+    company: "",
     email: "",
     phone: "",
     service: "",
@@ -153,6 +155,7 @@ export default function Contact() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: data.name,
+          company: data.company || "Not provided",
           email: data.email,
           phone: data.phone || "Not provided",
           service: data.service,
@@ -171,6 +174,7 @@ export default function Contact() {
 
         setData({
           name: "",
+          company: "",
           email: "",
           phone: "",
           service: "",
@@ -193,8 +197,8 @@ export default function Contact() {
       <div className="mx-auto w-[92%] max-w-6xl">
         <SectionTitle
           eyebrow="Contact"
-          title="Let's discuss your next project"
-          subtitle="Tell us about your idea. We respond within 4 business hours."
+          title="Get a free quote"
+          subtitle="Tell us what you need — a website, an app, or something else. We respond the same day."
         />
 
         <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
@@ -269,6 +273,20 @@ export default function Contact() {
                     />
                   </Field>
 
+                  <Field label="Business / Company" id="contact-company">
+                    <input
+                      id="contact-company"
+                      type="text"
+                      placeholder="Your business or organisation name"
+                      value={data.company}
+                      onChange={(e) => set("company", e.target.value)}
+                      autoComplete="organization"
+                      className={inputCls}
+                    />
+                  </Field>
+                </div>
+
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   <Field label="Email Address *" id="contact-email" error={errors.email}>
                     <input
                       id="contact-email"
@@ -282,10 +300,8 @@ export default function Contact() {
                       aria-invalid={!!errors.email}
                     />
                   </Field>
-                </div>
 
-                <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  <Field label="Phone (optional)" id="contact-phone">
+                  <Field label="Phone / WhatsApp (recommended)" id="contact-phone">
                     <input
                       id="contact-phone"
                       type="tel"
@@ -296,7 +312,9 @@ export default function Contact() {
                       className={inputCls}
                     />
                   </Field>
+                </div>
 
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   <Field label="Service Needed *" id="contact-service" error={errors.service}>
                     <select
                       id="contact-service"
@@ -314,9 +332,7 @@ export default function Contact() {
                       ))}
                     </select>
                   </Field>
-                </div>
 
-                <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   <Field label="Project Budget" id="contact-budget">
                     <select
                       id="contact-budget"
@@ -332,7 +348,9 @@ export default function Contact() {
                       ))}
                     </select>
                   </Field>
+                </div>
 
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   <Field label="Ideal Timeline" id="contact-timeline">
                     <select
                       id="contact-timeline"

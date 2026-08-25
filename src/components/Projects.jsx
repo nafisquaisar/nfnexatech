@@ -256,8 +256,8 @@ function Projects() {
 
         <SectionTitle
           eyebrow="Case Study"
-          title="Every project tells a unique story"
-          subtitle="Being a software development company, we consider our work among our accolades. Our projects reflect our process, creativity, and technical expertise."
+          title="Projects we've built"
+          subtitle="Real work, real clients. Here's what we've built and what it took to build it."
         />
 
         {/* ── Main slider ── */}
@@ -397,6 +397,29 @@ function Projects() {
               )}
             </button>
           ))}
+        </div>
+
+        {/* ── Post-projects CTA ── */}
+        <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.02] p-8 text-center">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">Have a similar project?</p>
+          <h3 className="mb-3 text-2xl font-bold text-white">Tell us what you want to build</h3>
+          <p className="mx-auto mb-6 max-w-lg text-sm leading-7 text-slate-400">
+            Share your idea or requirements. We&apos;ll review it and tell you the most practical way to build it — with a timeline and a fixed price.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/start-project"
+              className="rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-7 py-3 text-sm font-bold text-white transition hover:opacity-90"
+            >
+              Discuss Your Project
+            </Link>
+            <a
+              href="#contact"
+              className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300 transition hover:border-white/30"
+            >
+              Send a Message
+            </a>
+          </div>
         </div>
 
       </div>

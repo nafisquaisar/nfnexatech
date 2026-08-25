@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 const homeOgUrl =
   `${siteConfig.url}/api/og?` +
   new URLSearchParams({
-    title: "Software Development Company India",
+    title: "Web Development Company in Delhi, India",
     type: "page",
   }).toString();
 
@@ -41,7 +41,7 @@ const homeOgUrl =
 //
 // HOW TO SET UP GOOGLE SEARCH CONSOLE:
 //   1. Go to https://search.google.com/search-console
-//   2. Click "Add property" → choose "URL prefix" → enter https://nfnexatech.tech
+//   2. Click "Add property" → choose "URL prefix" → enter https://nfnexatech.in
 //   3. Select "HTML tag" verification method
 //   4. Copy the content value from the meta tag shown, e.g.:
 //        <meta name="google-site-verification" content="PASTE_THIS_VALUE" />
@@ -60,30 +60,31 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
   title: {
-    default: `Software Development Company India | ${siteConfig.name}`,
+    default: `Web Development Company in Delhi, India | ${siteConfig.name}`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: "NF Nexa Tech is a web development company based in Mahipalpur, New Delhi. We build business websites, web apps, Android & Flutter apps, and SaaS products for startups and businesses across Delhi and India.",
   keywords: [
-    // Primary commercial keywords
-    "software development company India",
+    // Primary local keywords
+    "web development company Delhi",
+    "website development company Delhi",
+    "website design company Delhi",
+    "web developer Delhi",
+    "website designer Delhi",
+    "software development company Delhi",
+    "web development Mahipalpur",
+    "website design Mahipalpur",
+    // Broader India keywords
     "web development company India",
+    "software development company India",
     "Android app development company",
     "Flutter app development company",
     "SaaS development company",
     "UI UX design agency India",
-    // Secondary / long-tail
-    "software agency",
-    "Next.js development",
-    "React development",
-    "Firebase backend",
-    "SaaS MVP development",
-    "startup software development",
-    "mobile app development India",
-    // Local keywords
-    "software company New Delhi",
-    "web developer Mahipalpur",
-    "IT company Delhi",
+    // Long-tail
+    "custom website development Delhi",
+    "business website development Delhi",
+    "web development company near me",
     // Brand
     "NF Nexa Tech",
   ],
@@ -107,21 +108,21 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `Software Development Company India | ${siteConfig.name}`,
-    description: siteConfig.description,
+    title: `Web Development Company in Delhi, India | ${siteConfig.name}`,
+    description: "NF Nexa Tech is a web development company based in Mahipalpur, New Delhi. We build business websites, web apps, Android & Flutter apps, and SaaS products for startups and businesses across Delhi and India.",
     images: [
       {
         url: homeOgUrl,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} — Software Development Company India`,
+        alt: `${siteConfig.name} — Web Development Company in Delhi, India`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `Software Development Company India | ${siteConfig.name}`,
-    description: siteConfig.description,
+    title: `Web Development Company in Delhi, India | ${siteConfig.name}`,
+    description: "NF Nexa Tech is a web development company based in Mahipalpur, New Delhi. We build business websites, web apps, and SaaS products for Delhi businesses.",
     images: [homeOgUrl],
     creator: "@nfnexatech",
     site: "@nfnexatech",
@@ -183,7 +184,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       {/* Preconnect to Google Fonts CDN — eliminates DNS round-trip before font fetch */}

@@ -104,7 +104,7 @@ export default function Testimonials() {
         <SectionTitle
           eyebrow="Client Stories"
           title="What our clients say"
-          subtitle="We measure success by the outcomes we create for our clients — not just the code we ship."
+          subtitle="Real feedback from real clients. The specifics matter — 68% less food waste, 1,200+ students managed, an app that users actually love."
         />
 
         {/* Cards grid */}

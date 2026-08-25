@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { servicesData } from "@/data/content";
 import { siteConfig } from "@/config/site";
 import { ogImage } from "@/lib/og-image";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export function generateStaticParams() {
   return servicesData.map((s) => ({ slug: s.slug }));
@@ -20,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 
   return {
-    title: service.title,
+    title: `${service.title} in Delhi | ${siteConfig.name}`,
     description: service.metaDescription,
     alternates: {
       canonical: `${siteConfig.url}/services/${service.slug}`,
@@ -45,7 +47,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const service = servicesData.find((s) => s.slug === slug);
   if (!service) notFound();
 
-  // JSON-LD ProfessionalService schema (upgraded from basic Service)
+  // JSON-LD ProfessionalService schema
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -70,7 +72,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         addressCountry: "IN",
       },
     },
-    areaServed: "Worldwide",
+    areaServed: [
+      { "@type": "City", name: "New Delhi" },
+      { "@type": "City", name: "Delhi" },
+      { "@type": "Country", name: "India" },
+    ],
     serviceType: service.title,
     serviceOutput: `Custom ${service.title} solution delivered to your specifications`,
     offers: {
@@ -95,7 +101,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     },
   };
 
-  // JSON-LD BreadcrumbList schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -117,24 +122,22 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="text-sm font-semibold text-slate-300 hover:text-cyan-400 transition-colors">
-            ← Back to {siteConfig.name}
-          </Link>
-          <span className="hidden text-xs uppercase tracking-widest text-slate-500 sm:block">Services</span>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* HERO */}
-      <header className="relative overflow-hidden py-24">
+      <header className="relative overflow-hidden py-24 pt-36">
         <div aria-hidden className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/8 blur-[120px]" />
 
         <div className="relative mx-auto max-w-5xl px-6">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400">
-            {siteConfig.name} · Services
-          </p>
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-slate-500">
+            <Link href="/" className="hover:text-slate-300 transition">Home</Link>
+            <span>›</span>
+            <Link href="/services" className="hover:text-slate-300 transition">Services</Link>
+            <span>›</span>
+            <span className="text-slate-400">{service.title}</span>
+          </nav>
+
           <h1 className="mb-5 text-5xl font-extrabold leading-tight text-white sm:text-6xl">
             <span className="mr-3 text-5xl">{service.icon}</span>
             {service.title}
@@ -226,8 +229,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="mx-auto max-w-4xl px-6 pb-24">
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center">
           <h2 className="mb-4 text-3xl font-bold text-white">Ready to get started?</h2>
-          <p className="mb-8 text-slate-400">
+          <p className="mb-2 text-slate-400">
             Tell us about your project and we&apos;ll come back with a free proposal within 24 hours.
+          </p>
+          <p className="mb-8 text-sm text-slate-500">
+            Based in Mahipalpur, New Delhi — serving businesses across{" "}
+            <Link href="/locations/delhi" className="text-cyan-400 hover:underline">
+              Delhi
+            </Link>{" "}
+            and India.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -236,13 +246,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             >
               {service.cta}
             </Link>
-            <Link href="/" className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300">
-              View Our Work
+            <Link href="/services" className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300">
+              All Services
             </Link>
           </div>
         </div>
       </section>
 
+      <Footer />
     </div>
   );
 }

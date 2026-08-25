@@ -16,7 +16,7 @@ const blogOgImage = ogImage({
 });
 
 export const metadata: Metadata = {
-  title: "Blog — Insights & Guides",
+  title: "Web Development Blog — Insights & Guides",
   description:
     "Expert insights on web development, mobile apps, Flutter, SaaS, and software engineering from the NF Nexa Tech team.",
   alternates: {

@@ -6,8 +6,8 @@ export const siteConfig = {
   name: "NF Nexa Tech",
   tagline: "Digital Product Studio",
   description:
-    "NF Nexa Tech is a premium software agency specialising in web development, Android apps, Flutter, UI/UX design, and SaaS MVP development for startups and enterprises worldwide.",
-  url: "https://nfnexatech.tech",
+    "NF Nexa Tech is a web and software development company based in Mahipalpur, New Delhi. We build business websites, web apps, Android & Flutter apps, UI/UX design, and SaaS products for startups and businesses across Delhi and India.",
+  url: "https://nfnexatech.in",
   locale: "en_IN",
   ogImage: "/og-default.png",
 
@@ -23,15 +23,15 @@ export const siteConfig = {
   },
 
   social: {
-    linkedin: "https://linkedin.com/company/nf-nexa-tech",
-    github: "https://github.com/nfnexatech",
-    facebook: "https://facebook.com/nfnexatech",
+    linkedin: "https://www.linkedin.com/in/nfnexatech",
+    instagram: "https://www.instagram.com/nfnexatech/",
+    facebook: "https://www.facebook.com/nfnexatech",
     whatsapp: "https://wa.me/918109347584",
     whatsapp2: "https://wa.me/919801999829",
   },
 
   founder: "Nafis Quaisar",
-  foundedYear: 2022,
+  foundedYear: 2023,
 
   services: [
     { name: "Web Development", slug: "web-development" },

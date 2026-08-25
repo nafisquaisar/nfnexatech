@@ -6,9 +6,9 @@ import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: `Software Development Company India | ${siteConfig.name}`,
+  title: `Web Development Company in Delhi, India | ${siteConfig.name}`,
   description:
-    "NF Nexa Tech is a top-rated software development company in India — specialising in web development, Android & Flutter app development, UI/UX design, and SaaS MVP development for startups and enterprises worldwide.",
+    "NF Nexa Tech is a web development company based in Mahipalpur, New Delhi. We build business websites, web apps, Android & Flutter apps, and SaaS products for startups and businesses across Delhi and India.",
   alternates: {
     canonical: siteConfig.url,
   },

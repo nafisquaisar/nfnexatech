@@ -199,12 +199,12 @@ export default function VerifyPortalPage() {
           <p className="text-sm text-slate-600">
             This portal is maintained by NF Nexa Tech.{" "}
             <a
-              href="https://nfnexatech.tech"
+              href="https://nfnexatech.in"
               className="text-slate-500 underline-offset-2 hover:text-slate-400 hover:underline transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
-              nfnexatech.tech
+              nfnexatech.in
             </a>
           </p>
         </div>

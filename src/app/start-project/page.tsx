@@ -1,21 +1,32 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import { ogImage } from "@/lib/og-image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StartProjectForm from "./StartProjectForm";
 
 /* ── SEO metadata ────────────────────────────────────────── */
+const pageOgImage = ogImage({ title: "Start a Project with NF Nexa Tech", type: "page" });
+
 export const metadata: Metadata = {
-  title: "Start Your Project",
+  title: "Start a Project — Free Consultation & Proposal | NF Nexa Tech",
   description:
     "Tell us about your project. NF Nexa Tech builds web apps, mobile apps, and SaaS MVPs — get a free consultation and proposal within 48 hours.",
   alternates: { canonical: `${siteConfig.url}/start-project` },
   openGraph: {
-    title: "Start Your Project | NF Nexa Tech",
+    title: "Start a Project — Free Consultation & Proposal | NF Nexa Tech",
     description:
-      "Tell us about your project and get a free consultation within 48 hours.",
+      "Tell us about your project and get a free consultation within 48 hours. Web apps, mobile apps, SaaS MVPs.",
     url: `${siteConfig.url}/start-project`,
     type: "website",
+    images: [pageOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Start a Project — Free Consultation & Proposal | NF Nexa Tech",
+    description:
+      "Tell us about your project and get a free consultation within 48 hours.",
+    images: [pageOgImage.url],
   },
 };
 
@@ -38,17 +49,15 @@ export default function StartProjectPage() {
 
         <div className="relative mx-auto w-[92%] max-w-4xl text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-cyan-300">
-            🚀 Start Your Project
+            🚀 Free consultation · No commitment
           </div>
           <h1 className="mb-5 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
-            Let&apos;s build something{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              extraordinary
-            </span>
+            Tell us what you want to build
           </h1>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-400">
-            Share your project details and we&apos;ll get back to you with a
-            tailored proposal within 48 hours — no commitment required.
+            Fill in the details below. We&apos;ll review your brief within 4 hours,
+            schedule a free 30-minute call, and send you a detailed proposal with
+            timeline and pricing — no obligation.
           </p>
         </div>
       </header>

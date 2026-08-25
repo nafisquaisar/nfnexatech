@@ -38,23 +38,23 @@ function Hero() {
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8 bg-cyan-400/60" />
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
-              Premium Digital Product Studio
+              Web &amp; Software Development · Mahipalpur, New Delhi
             </p>
           </div>
 
           {/* Heading */}
           <h1 className="max-w-4xl text-5xl font-extrabold leading-tight text-white sm:text-6xl lg:text-7xl">
-            We Build Software{" "}
+            Websites &amp; Web Apps{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              That Scales
+              Built for Delhi Businesses
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">
-            NF Nexa Tech delivers production-grade web apps,
-            mobile apps, SaaS platforms, and scalable digital
-            experiences for startups and businesses worldwide.
+            NF Nexa Tech builds websites, web applications, Android apps, and SaaS
+            products for businesses in Delhi and across India. Based in Mahipalpur,
+            New Delhi — free consultation, fixed-price quotes.
           </p>
 
           {/* Pills */}
@@ -76,9 +76,9 @@ function Hero() {
               href="/start-project"
               id="hero-start-project-btn"
               className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-7 py-4 text-sm font-bold text-white shadow-2xl shadow-cyan-500/20 transition-all duration-300 hover:scale-[1.03]"
-              onClick={() => trackEvent("cta_click", { label: "hero_start_project" })}
+              onClick={() => trackEvent("cta_click", { label: "hero_get_quote" })}
             >
-              Start Your Project
+              Get a Free Quote
             </Link>
 
             <a
@@ -116,7 +116,7 @@ function Hero() {
                 </p>
 
                 <p className="text-xs text-slate-500">
-                  across India & internationally
+                  Delhi, Bhopal, Patna &amp; internationally
                 </p>
               </div>
             </div>
