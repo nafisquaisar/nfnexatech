@@ -180,11 +180,10 @@ function Navbar() {
 
       {/* ── Floating pill ── */}
       <nav
-        className={`mx-auto flex h-[64px] max-w-6xl items-center justify-between rounded-2xl px-4 sm:px-6 backdrop-blur-xl transition-all duration-300 ${
-          scrolled
+        className={`mx-auto flex h-[64px] max-w-6xl items-center justify-between rounded-2xl px-4 sm:px-6 backdrop-blur-xl transition-all duration-300 ${scrolled
             ? "bg-white shadow-[0_8px_32px_rgba(31,160,177,0.12),0_2px_8px_rgba(66,49,49,0.06)] border border-[#E7F1F2]"
             : "bg-white/95 shadow-[0_4px_24px_rgba(31,160,177,0.08),0_1px_4px_rgba(66,49,49,0.04)] border border-[#E7F1F2]/80"
-        }`}
+          }`}
       >
 
         {/* Logo */}
@@ -220,9 +219,8 @@ function Navbar() {
                 {hasDropdown ? (
                   /* Services button — opens dropdown */
                   <button
-                    className={`relative flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                      active ? "text-[#E8763A]" : "text-[#423131] hover:text-[#1FA0B1] hover:bg-[#E7F1F2]/50"
-                    }`}
+                    className={`relative flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${active ? "text-[#E8763A]" : "text-[#423131] hover:text-[#1FA0B1] hover:bg-[#E7F1F2]/50"
+                      }`}
                   >
                     {item.label}
                     <motion.svg
@@ -244,9 +242,8 @@ function Navbar() {
                   /* Plain link */
                   <Link
                     href={getHref(item as PlainItem)}
-                    className={`relative flex items-center px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                      active ? "text-[#E8763A]" : "text-[#423131] hover:text-[#1FA0B1] hover:bg-[#E7F1F2]/50"
-                    }`}
+                    className={`relative flex items-center px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${active ? "text-[#E8763A]" : "text-[#423131] hover:text-[#1FA0B1] hover:bg-[#E7F1F2]/50"
+                      }`}
                   >
                     {item.label}
                     {active && (
@@ -364,9 +361,8 @@ function Navbar() {
                     {hasDropdown ? (
                       <>
                         <button
-                          className={`flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${
-                            active ? "bg-[#E7F1F2] text-[#E8763A]" : "text-[#423131] hover:bg-[#E7F1F2]/70"
-                          }`}
+                          className={`flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${active ? "bg-[#E7F1F2] text-[#E8763A]" : "text-[#423131] hover:bg-[#E7F1F2]/70"
+                            }`}
                           onClick={() => setMobileExpanded(mobileOpen ? null : item.label)}
                         >
                           {item.label}
@@ -417,9 +413,8 @@ function Navbar() {
                       <Link
                         href={getHref(item as PlainItem)}
                         onClick={() => setIsOpen(false)}
-                        className={`block rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${
-                          active ? "bg-[#E7F1F2] text-[#E8763A]" : "text-[#423131] hover:bg-[#E7F1F2]/70 hover:text-[#1FA0B1]"
-                        }`}
+                        className={`block rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${active ? "bg-[#E7F1F2] text-[#E8763A]" : "text-[#423131] hover:bg-[#E7F1F2]/70 hover:text-[#1FA0B1]"
+                          }`}
                       >
                         {item.label}
                       </Link>

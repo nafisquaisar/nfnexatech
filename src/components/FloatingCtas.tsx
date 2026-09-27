@@ -37,11 +37,10 @@ export default function FloatingCtas() {
       <Link
         href="/start-project"
         onClick={() => trackEvent("cta_click", { label: "floating_start_project" })}
-        className={`group flex items-center gap-2 rounded-full border border-cyan-400/30 bg-slate-900/90 px-5 py-3 shadow-lg shadow-cyan-500/10 backdrop-blur-md transition-all duration-500 hover:border-cyan-400/60 hover:bg-slate-800 hover:shadow-cyan-500/20 ${
-          visible
+        className={`group flex items-center gap-2 rounded-full border border-cyan-400/30 bg-slate-900/90 px-5 py-3 shadow-lg shadow-cyan-500/10 backdrop-blur-md transition-all duration-500 hover:border-cyan-400/60 hover:bg-slate-800 hover:shadow-cyan-500/20 ${visible
             ? "translate-y-0 opacity-100"
             : "translate-y-8 opacity-0 pointer-events-none"
-        }`}
+          }`}
       >
         {/* Rocket icon */}
         <svg

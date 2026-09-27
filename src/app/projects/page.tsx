@@ -228,15 +228,13 @@ function ProjectCard({
   return (
     <Link
       href={`/projects/${slug}`}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 transition-all duration-300 hover:border-slate-700 hover:shadow-xl hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 ${
-        featured ? "lg:flex-row" : ""
-      }`}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 transition-all duration-300 hover:border-slate-700 hover:shadow-xl hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 ${featured ? "lg:flex-row" : ""
+        }`}
     >
       {/* Hero Image */}
       <div
-        className={`relative overflow-hidden ${
-          featured ? "h-56 lg:h-auto lg:w-1/2 flex-shrink-0" : "h-44"
-        }`}
+        className={`relative overflow-hidden ${featured ? "h-56 lg:h-auto lg:w-1/2 flex-shrink-0" : "h-44"
+          }`}
       >
         {heroImage ? (
           <Image

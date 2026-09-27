@@ -774,10 +774,10 @@ export default function AboutPageClient() {
               </div>
               <div className="space-y-3">
                 {[
-                  { name: "Next.js", color: "#ffffff", icon: "▲" },
-                  { name: "React.js", color: "#61DAFB", icon: "⚛" },
+                  { name: "Next.js", color: "#000000", icon: "N" },
+                  { name: "React.js", color: "#61DAFB", icon: "Re" },
                   { name: "TypeScript", color: "#3178C6", icon: "TS" },
-                  { name: "Tailwind CSS", color: "#38BDF8", icon: "🎨" },
+                  { name: "Tailwind CSS", color: "#38BDF8", icon: "Tw" },
                 ].map((t) => (
                   <div key={t.name} className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-[#F5F8FF]">
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg text-[11px] font-bold" style={{ backgroundColor: `${t.color}18`, color: t.color }}>{t.icon}</div>
@@ -788,7 +788,7 @@ export default function AboutPageClient() {
             </motion.div>
 
             {/* MOBILE */}
-            <motion.div variants={fadeUp} className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-5 backdrop-blur-sm">
+            <motion.div variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/40 bg-white/80 p-5 shadow-sm backdrop-blur-sm">
               <div className="mb-5 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8763A]/15">
                   <svg className="w-5 h-5 text-[#E8763A]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
@@ -800,10 +800,10 @@ export default function AboutPageClient() {
               </div>
               <div className="space-y-3">
                 {[
-                  { name: "Android", color: "#3DDC84", icon: "🤖" },
+                  { name: "Android", color: "#3DDC84", icon: "Ad" },
                   { name: "Kotlin", color: "#7F52FF", icon: "K" },
-                  { name: "Flutter", color: "#02569B", icon: "💙" },
-                  { name: "Dart", color: "#0175C2", icon: "🎯" },
+                  { name: "Flutter", color: "#02569B", icon: "Fl" },
+                  { name: "Dart", color: "#0175C2", icon: "D" },
                 ].map((t) => (
                   <div key={t.name} className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-[#F5F8FF]">
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg text-[11px] font-bold" style={{ backgroundColor: `${t.color}18`, color: t.color }}>{t.icon}</div>
@@ -814,7 +814,7 @@ export default function AboutPageClient() {
             </motion.div>
 
             {/* BACKEND */}
-            <motion.div variants={fadeUp} className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-5 backdrop-blur-sm">
+            <motion.div variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/40 bg-white/80 p-5 shadow-sm backdrop-blur-sm">
               <div className="mb-5 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22C55E]/15">
                   <svg className="w-5 h-5 text-[#22C55E]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" /></svg>
@@ -827,9 +827,9 @@ export default function AboutPageClient() {
               <div className="space-y-3">
                 {[
                   { name: "Node.js", color: "#68A063", icon: "JS" },
-                  { name: "Java", color: "#ED8B00", icon: "☕" },
-                  { name: "Python", color: "#3776AB", icon: "🐍" },
-                  { name: "Spring Boot", color: "#6DB33F", icon: "🌱" },
+                  { name: "Java", color: "#ED8B00", icon: "Jv" },
+                  { name: "Python", color: "#3776AB", icon: "Py" },
+                  { name: "Spring Boot", color: "#6DB33F", icon: "Sb" },
                 ].map((t) => (
                   <div key={t.name} className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-[#F5F8FF]">
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg text-[11px] font-bold" style={{ backgroundColor: `${t.color}18`, color: t.color }}>{t.icon}</div>
@@ -840,7 +840,7 @@ export default function AboutPageClient() {
             </motion.div>
 
             {/* DATABASE */}
-            <motion.div variants={fadeUp} className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-5 backdrop-blur-sm">
+            <motion.div variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/40 bg-white/80 p-5 shadow-sm backdrop-blur-sm">
               <div className="mb-5 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B5EA7]/15">
                   <svg className="w-5 h-5 text-[#7B5EA7]" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" /></svg>
@@ -852,9 +852,9 @@ export default function AboutPageClient() {
               </div>
               <div className="space-y-3">
                 {[
-                  { name: "Firebase", color: "#FFCA28", icon: "🔥" },
-                  { name: "MySQL", color: "#4479A1", icon: "🐬" },
-                  { name: "PostgreSQL", color: "#336791", icon: "🐘" },
+                  { name: "Firebase", color: "#FFCA28", icon: "Fb" },
+                  { name: "MySQL", color: "#4479A1", icon: "My" },
+                  { name: "PostgreSQL", color: "#336791", icon: "Pg" },
                 ].map((t) => (
                   <div key={t.name} className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-[#F5F8FF]">
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg text-[11px] font-bold" style={{ backgroundColor: `${t.color}18`, color: t.color }}>{t.icon}</div>
@@ -863,6 +863,78 @@ export default function AboutPageClient() {
                 ))}
               </div>
             </motion.div>
+          </motion.div>
+        </div>
+      </AnimSection>
+
+      {/* ── INDUSTRIES WE SERVE ──────────────────────────────────────────── */}
+      <AnimSection
+        id="industries"
+        className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #F0F7FF 0%, #F5F8FF 30%, #FAF7F5 60%, #F0F4FF 100%)" }}
+      >
+        {/* Background decorations */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-16 -left-16 h-[250px] w-[250px] rounded-full bg-[#B5E5EB]/20 blur-[90px]" />
+          <div className="absolute -bottom-16 -right-16 h-[250px] w-[250px] rounded-full bg-[#C4B5E8]/15 blur-[90px]" />
+          <div className="absolute top-6 left-6 grid grid-cols-4 gap-[6px] opacity-15">
+            {Array.from({ length: 16 }).map((_, i) => (
+              <div key={i} className="h-[5px] w-[5px] rounded-full bg-[#1FA0B1]" />
+            ))}
+          </div>
+          <div className="absolute bottom-8 right-8 grid grid-cols-3 gap-[6px] opacity-10">
+            {Array.from({ length: 9 }).map((_, i) => (
+              <div key={i} className="h-[5px] w-[5px] rounded-full bg-[#C4B5E8]" />
+            ))}
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-[92%] max-w-6xl">
+          {/* Header — left aligned */}
+          <div className="mb-8">
+            <SectionBadge>Industries</SectionBadge>
+            <h2 className="mt-2 text-[30px] font-extrabold tracking-tight text-[#1a1a1a] sm:text-[36px]">
+              Industries{" "}
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(90deg, #1FA0B1 0%, #7B5EA7 100%)" }}>We Serve</span>
+            </h2>
+            <p className="mt-2 text-[13px] text-[#6B5A5A]">
+              We build digital solutions for businesses across diverse industries, helping them grow, innovate and scale.
+            </p>
+          </div>
+
+          {/* Industry pills */}
+          <motion.div
+            variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
+            className="flex flex-wrap gap-3 justify-start"
+          >
+            {[
+              { name: "Healthcare", color: "#E8436E", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg> },
+              { name: "Education", color: "#1FA0B1", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15v-3.75m0 0h-.008v.008H6.75v-.008z" /></svg> },
+              { name: "Real Estate", color: "#2563EB", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg> },
+              { name: "E-Commerce", color: "#10B981", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg> },
+              { name: "Banking & Finance", color: "#7C3AED", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg> },
+              { name: "Manufacturing", color: "#D97706", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.6-3.03c-.51-.27-.68-.93-.37-1.42l.9-1.42a1 1 0 011.42-.2l3.18 2.24 5.15-5.94a1 1 0 011.48-.05l1.01 1.06c.38.4.36 1.03-.05 1.4L12.83 15a1 1 0 01-1.41.17zM3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18" /></svg> },
+              { name: "IT & Technology", color: "#0891B2", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" /></svg> },
+              { name: "Food & Beverage", color: "#EA580C", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.87c1.355 0 2.697.055 4.024.165C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.38a48.474 48.474 0 00-6-.37c-2.032 0-4.034.126-6 .37" /></svg> },
+              { name: "Automotive", color: "#DC2626", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg> },
+              { name: "Travel & Hospitality", color: "#4F46E5", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg> },
+              { name: "Logistics & Supply Chain", color: "#0D9488", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25m-2.25 0V5.625m0 0a2.25 2.25 0 114.5 0v.386m-4.5-.386a2.25 2.25 0 10-4.5 0v6.506" /></svg> },
+              { name: "Enterprise", color: "#2563EB", icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg> },
+            ].map((ind) => (
+              <motion.div
+                key={ind.name}
+                variants={fadeUp}
+                className="flex items-center gap-2.5 rounded-xl border border-[#E8E0D8]/40 bg-white/80 px-4 py-2.5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+              >
+                <div
+                  className="flex h-8 w-8 items-center justify-center rounded-lg"
+                  style={{ backgroundColor: `${ind.color}15`, color: ind.color }}
+                >
+                  {ind.icon}
+                </div>
+                <span className="text-[13px] font-semibold text-[#1a1a1a]">{ind.name}</span>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </AnimSection>
@@ -891,6 +963,158 @@ export default function AboutPageClient() {
               ))}
             </div>
           </div>
+        </div>
+      </AnimSection>
+
+      {/* ── LEADERSHIP ───────────────────────────────────────────────────── */}
+      <AnimSection
+        id="leadership"
+        className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #F0F7FF 0%, #F5F8FF 30%, #FAF7F5 60%, #F0F4FF 100%)" }}
+      >
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-20 -left-20 h-[280px] w-[280px] rounded-full bg-[#B5E5EB]/20 blur-[100px]" />
+          <div className="absolute -bottom-20 -right-20 h-[260px] w-[260px] rounded-full bg-[#C4B5E8]/15 blur-[100px]" />
+        </div>
+
+        <div className="relative mx-auto w-[92%] max-w-6xl">
+          <div className="mb-10 text-center">
+            <SectionBadge>Executive Team</SectionBadge>
+            <h2 className="mt-2 text-[30px] font-extrabold tracking-tight text-[#1a1a1a] sm:text-[36px]">
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(90deg, #1FA0B1 0%, #7B5EA7 100%)" }}>Leadership</span>
+            </h2>
+            <p className="mt-2 text-[13px] text-[#6B5A5A]">The founders who started NF Nexa Tech and still drive every major product decision.</p>
+          </div>
+
+          {/* Founder cards — 2 col */}
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
+            {/* Nafis Quaisar */}
+            <motion.div variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/40 bg-white/90 p-6 shadow-sm text-center relative overflow-hidden">
+              <div className="absolute top-4 left-4 text-[40px] font-serif text-[#1FA0B1]/10">&ldquo;</div>
+              <div className="absolute bottom-4 right-4 text-[40px] font-serif text-[#1FA0B1]/10">&rdquo;</div>
+              <div className="relative mx-auto mb-4 h-24 w-24">
+                <Image src="/verify/founder.jpeg" alt="Nafis Quaisar" width={96} height={96} className="rounded-full object-cover h-24 w-24" />
+                <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#22C55E] ring-2 ring-white">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                </div>
+              </div>
+              <div className="mb-1 inline-block rounded-full bg-[#1FA0B1]/10 px-3 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#1FA0B1]">Founder & CEO</div>
+              <h3 className="text-[18px] font-extrabold text-[#1a1a1a]">Nafis Quaisar</h3>
+              <p className="mb-4 text-[11px] font-semibold text-[#1FA0B1]">Founder & CEO</p>
+              <p className="mb-5 text-[12.5px] leading-[1.7] text-[#6B5A5A]">
+                Nafis Quaisar founded NF Nexa Tech with a vision to build world-class software solutions for startups and enterprises across India. With deep expertise in full-stack development, mobile apps and cloud architecture, he leads product strategy and engineering excellence at the company.
+              </p>
+              <div className="mb-4 flex items-center justify-center gap-6 text-[11px] text-[#9B8B8B]">
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-3 h-3 text-[#1FA0B1]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                  <span>Member since <strong className="text-[#1a1a1a]">2023</strong></span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-3 h-3 text-[#E8763A]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                  <span>Based in <strong className="text-[#1a1a1a]">New Delhi, India</strong></span>
+                </div>
+              </div>
+              <a href="https://nfnexatech.com/verify/nafis-quaisar" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1FA0B1] to-[#7B5EA7] px-5 py-2 text-[12px] font-bold text-white transition-all hover:shadow-lg hover:-translate-y-0.5">
+                View Verification Profile <span>→</span>
+              </a>
+            </motion.div>
+
+            {/* Saheb Alam */}
+            <motion.div variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/40 bg-white/90 p-6 shadow-sm text-center relative overflow-hidden">
+              <div className="absolute top-4 left-4 text-[40px] font-serif text-[#7B5EA7]/10">&ldquo;</div>
+              <div className="absolute bottom-4 right-4 text-[40px] font-serif text-[#7B5EA7]/10">&rdquo;</div>
+              <div className="relative mx-auto mb-4 h-24 w-24">
+                <Image src="/images/emp/founder.jpeg" alt="Saheb Alam" width={96} height={96} className="rounded-full object-cover h-24 w-24" />
+                <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#22C55E] ring-2 ring-white">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                </div>
+              </div>
+              <div className="mb-1 inline-block rounded-full bg-[#7B5EA7]/10 px-3 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#7B5EA7]">Co-Founder</div>
+              <h3 className="text-[18px] font-extrabold text-[#1a1a1a]">Saheb Alam</h3>
+              <p className="mb-4 text-[11px] font-semibold text-[#7B5EA7]">Co-Founder</p>
+              <p className="mb-5 text-[12.5px] leading-[1.7] text-[#6B5A5A]">
+                Saheb Alam co-founded NF Nexa Tech and drives business strategy, client relationships and operational growth. He plays a key role in expanding our services and building long-term partnerships with startups and businesses across India.
+              </p>
+              <div className="mb-4 flex items-center justify-center gap-6 text-[11px] text-[#9B8B8B]">
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-3 h-3 text-[#1FA0B1]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                  <span>Member since <strong className="text-[#1a1a1a]">2023</strong></span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-3 h-3 text-[#E8763A]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                  <span>Based in <strong className="text-[#1a1a1a]">New Delhi, India</strong></span>
+                </div>
+              </div>
+              <a href="https://nfnexatech.com/verify/saheb-alam" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#E8763A] to-[#E8436E] px-5 py-2 text-[12px] font-bold text-white transition-all hover:shadow-lg hover:-translate-y-0.5">
+                View Verification Profile <span>→</span>
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+      </AnimSection>
+
+      {/* ── MEET OUR PEOPLE ──────────────────────────────────────────────── */}
+      <AnimSection id="team" className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white/60">
+        <div className="relative mx-auto w-[92%] max-w-6xl">
+          <div className="mb-10 text-center">
+            <SectionBadge>The Team</SectionBadge>
+            <h2 className="mt-2 text-[30px] font-extrabold tracking-tight text-[#1a1a1a] sm:text-[36px]">
+              Meet Our{" "}
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(90deg, #1FA0B1 0%, #7B5EA7 100%)" }}>People</span>
+            </h2>
+            <p className="mt-2 text-[13px] text-[#6B5A5A]">A passionate, cross-functional team that ships world-class software every single week.</p>
+          </div>
+
+          {/* Team member cards — 3 col */}
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-10">
+            {[
+              { name: "Anzar", role: "Business Development Executive", color: "#1FA0B1", img: "/verify/bde.png", desc: "Anzar leads business development at NF Nexa Tech, connecting businesses with the right technology solutions and building long-term partnerships.", since: "2024" },
+              { name: "Khushi Mishra", role: "HR & Operations Executive", color: "#E8763A", img: "/verify/hr.jpeg", desc: "Khushi handles HR, team operations, recruitment and ensures a smooth and productive work environment at NF Nexa Tech.", since: "2024" },
+              { name: "Absar Quaisar", role: "UI/UX Designer", color: "#7B5EA7", img: "/verify/uiux.png", desc: "Absar creates intuitive, pixel-perfect user experiences and modern UI designs that help our products stand out.", since: "2024" },
+            ].map((m) => (
+              <motion.div key={m.name} variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/40 bg-white p-5 shadow-sm">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="relative h-14 w-14">
+                    <Image src={m.img} alt={m.name} width={56} height={56} className="rounded-xl object-cover h-14 w-14" />
+                    <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#22C55E] ring-2 ring-white">
+                      <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-[15px] font-extrabold text-[#1a1a1a]">{m.name}</h3>
+                <p className="mb-3 text-[11px] font-semibold" style={{ color: m.color }}>{m.role}</p>
+                <p className="mb-4 text-[12px] leading-[1.7] text-[#6B5A5A]">{m.desc}</p>
+                <div className="flex items-center gap-5 text-[10px] text-[#9B8B8B]">
+                  <div className="flex items-center gap-1">
+                    <svg className="w-3 h-3 text-[#1FA0B1]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                    <span>Member since <strong className="text-[#1a1a1a]">{m.since}</strong></span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <svg className="w-3 h-3 text-[#E8763A]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                    <span>Based in <strong className="text-[#1a1a1a]">New Delhi, India</strong></span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Team stats bar */}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>, value: "5+", label: "Team Members", color: "#1FA0B1" },
+              { icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>, value: "3+", label: "Core Departments", color: "#E8763A" },
+              { icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>, value: "100%", label: "Remote Friendly", color: "#7B5EA7" },
+              { icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" /></svg>, value: "Driven", label: "By Innovation", color: "#E8436E" },
+            ].map((s, i) => (
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-[#E8E0D8]/40 bg-white/80 px-4 py-3 shadow-sm">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: `${s.color}12`, color: s.color }}>{s.icon}</div>
+                <div>
+                  <div className="text-[18px] font-extrabold text-[#1a1a1a]">{s.value}</div>
+                  <div className="text-[10px] text-[#9B8B8B]">{s.label}</div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </AnimSection>
 

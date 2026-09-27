@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import ProcessTimeline from "@/components/ProcessTimeline";
+import Industries from "@/components/Industries";
 import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
 import Faq from "@/components/Faq";
@@ -29,6 +30,10 @@ export default function HomePageSections() {
       </SectionReveal>
 
       <SectionReveal direction="right">
+        <Industries />
+      </SectionReveal>
+
+      <SectionReveal direction="left">
         <ProcessTimeline />
       </SectionReveal>
 
