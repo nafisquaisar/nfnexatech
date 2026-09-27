@@ -1,86 +1,151 @@
 "use client";
 
 import { useState } from "react";
-import SectionTitle from "./SectionTitle";
+import Link from "next/link";
 import { faqs } from "@/data/content";
 
-/** Single FAQ accordion item */
-function FaqItem({ faq, index }) {
-  const [open, setOpen] = useState(false);
+function FaqItem({ faq, index, open, toggle }) {
+  const num = String(index + 1).padStart(2, "0");
+  const isOpen = open === index;
 
   return (
-    <div className="border-b border-white/8 last:border-0">
+    <div
+      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen ? "shadow-sm" : ""}`}
+      style={{
+        borderColor: isOpen ? "rgba(31,160,177,0.35)" : "rgba(198,209,215,0.45)",
+        backgroundColor: "rgba(255,255,255,0.95)",
+      }}
+    >
       <button
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={`faq-answer-${index}`}
-        id={`faq-question-${index}`}
-        className="flex w-full items-start justify-between gap-4 py-5 text-left"
+        onClick={() => toggle(isOpen ? -1 : index)}
+        aria-expanded={isOpen}
+        id={`faq-q-${index}`}
+        className="flex w-full items-center gap-4 px-5 py-4 text-left"
       >
-        <span className="text-base font-semibold text-slate-100 sm:text-lg">
+        {/* Number badge */}
+        <span
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[12px] font-bold"
+          style={{
+            backgroundColor: isOpen ? "rgba(31,160,177,0.15)" : "rgba(249,225,205,0.6)",
+            color: isOpen ? "#1FA0B1" : "#E8763A",
+          }}
+        >
+          {num}
+        </span>
+
+        {/* Question */}
+        <span className="flex-1 text-[13px] font-semibold" style={{ color: "#1a1a1a" }}>
           {faq.question}
         </span>
-        <span
-          aria-hidden
-          className={`mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-            open
-              ? "border-cyan-400/50 bg-cyan-400/10 rotate-45"
-              : "border-white/15 bg-white/5"
-          }`}
+
+        {/* Chevron */}
+        <svg
+          className="h-4 w-4 shrink-0 transition-transform duration-300"
+          style={{
+            color: isOpen ? "#1FA0B1" : "#9B8B8B",
+            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+          }}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
         >
-          <svg
-            className="h-3 w-3 text-slate-300"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2.5}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-          </svg>
-        </span>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
 
+      {/* Answer */}
       <div
-        id={`faq-answer-${index}`}
-        role="region"
-        aria-labelledby={`faq-question-${index}`}
-        className={`overflow-hidden transition-all duration-300 ${
-          open ? "max-h-96 pb-5 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className="overflow-hidden transition-all duration-300"
+        style={{ maxHeight: isOpen ? 300 : 0, opacity: isOpen ? 1 : 0 }}
       >
-        <p className="text-base leading-7 text-slate-400">{faq.answer}</p>
+        <p
+          className="px-5 pb-5 pl-[68px] text-[12px] leading-relaxed"
+          style={{ color: "#6B5A5A" }}
+        >
+          {faq.answer}
+        </p>
       </div>
     </div>
   );
 }
 
-
 export default function Faq() {
-  return (
-    <section id="faq" className="bg-slate-950 py-24">
-      <div className="mx-auto w-[92%] max-w-4xl">
-        <SectionTitle
-          eyebrow="FAQ"
-          title="Frequently asked questions"
-          subtitle="Everything you need to know before starting your project with us."
-        />
+  const [open, setOpen] = useState(0); // first one open by default
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-6 sm:px-8">
+  return (
+    <section
+      id="faq"
+      className="relative overflow-hidden py-14"
+      style={{ backgroundColor: "#FAF7F5" }}
+    >
+      {/* White overlay */}
+      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ backgroundColor: "rgba(250,247,245,0.82)", zIndex: 1 }} />
+
+      {/* Blobs */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 1 }}>
+        <div className="absolute -top-10 -right-10 h-56 w-56 rounded-full blur-[80px]" style={{ backgroundColor: "rgba(181,229,235,0.3)" }} />
+        <div className="absolute bottom-0 -left-10 h-48 w-48 rounded-full blur-[70px]" style={{ backgroundColor: "rgba(249,225,205,0.4)" }} />
+      </div>
+
+      <div className="relative mx-auto w-[92%] max-w-3xl" style={{ zIndex: 2 }}>
+
+        {/* Heading */}
+        <div className="mb-8">
+          <div className="mb-3 inline-flex items-center gap-3">
+            <span className="h-px w-10" style={{ backgroundColor: "rgba(31,160,177,0.5)" }} />
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: "#1FA0B1" }}>FAQ</span>
+          </div>
+          <h2 className="text-[36px] font-extrabold tracking-tight sm:text-[42px]" style={{ color: "#1a1a1a" }}>
+            Frequently Asked{" "}
+            <span style={{ color: "#1FA0B1" }}>Questions</span>
+          </h2>
+          <p className="mt-3 max-w-xl text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>
+            Everything you need to know before starting your project with us.
+          </p>
+        </div>
+
+        {/* FAQ accordion */}
+        <div className="flex flex-col gap-2.5">
           {faqs.map((faq, i) => (
-            <FaqItem key={i} faq={faq} index={i} />
+            <FaqItem
+              key={i}
+              faq={faq}
+              index={i}
+              open={open}
+              toggle={setOpen}
+            />
           ))}
         </div>
 
-        {/* CTA below FAQ */}
-        <p className="mt-8 text-center text-sm text-slate-500">
-          Can&apos;t find your answer?{" "}
-          <a
+        {/* Bottom CTA card */}
+        <div
+          className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border px-6 py-4"
+          style={{ borderColor: "rgba(198,209,215,0.5)", backgroundColor: "rgba(255,255,255,0.92)" }}
+        >
+          <div className="flex items-center gap-3">
+            <div
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+              style={{ backgroundColor: "rgba(181,229,235,0.4)" }}
+            >
+              <svg className="h-5 w-5" fill="none" stroke="#1FA0B1" strokeWidth={1.8} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 0 1-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+            <div>
+              <div className="text-[13px] font-bold" style={{ color: "#1a1a1a" }}>Still have questions?</div>
+              <div className="text-[11px]" style={{ color: "#6B5A5A" }}>Can&apos;t find your answer? Our team is here to help.</div>
+            </div>
+          </div>
+          <Link
             href="#contact"
-            className="font-semibold text-cyan-400 transition hover:text-cyan-300"
+            className="inline-flex items-center gap-2 rounded-full border-2 px-6 py-2.5 text-[13px] font-bold transition-all hover:scale-[1.03]"
+            style={{ borderColor: "#E8763A", color: "#E8763A", backgroundColor: "transparent" }}
           >
-            Contact us directly →
-          </a>
-        </p>
+            Contact Us →
+          </Link>
+        </div>
+
       </div>
     </section>
   );

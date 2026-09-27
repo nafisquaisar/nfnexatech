@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Faq from "@/components/Faq";
 import AboutPageClient from "./AboutPageClient";
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -170,17 +173,23 @@ export default function AboutPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        suppressHydrationWarning
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        suppressHydrationWarning
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        suppressHydrationWarning
       />
 
+      <Navbar />
       <AboutPageClient />
+      <Faq />
+      <Footer />
     </>
   );
 }

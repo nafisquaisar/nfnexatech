@@ -4,6 +4,7 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
+import PageTransition from "@/components/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,8 +23,8 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
-  colorScheme: "dark",
+  themeColor: "#FAF7F5",
+  colorScheme: "light",
 };
 
 // Build the dynamic OG image URL for the home page using the same /api/og route
@@ -191,8 +192,26 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-950 text-slate-100">
-        {children}
+      <body className="min-h-full flex flex-col bg-[#FAF7F5] text-[#423131]">
+        {/* ── Global blurred background — renders once, no per-section flash ── */}
+        <div
+          aria-hidden
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: -1,
+            backgroundImage: "url('/bg.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            filter: "blur(8px)",
+            transform: "scale(1.1)",
+            opacity: 0.5,
+          }}
+        />
+        <PageTransition>
+          {children}
+        </PageTransition>
         <Analytics />
 
         {/*

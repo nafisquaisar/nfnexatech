@@ -42,34 +42,35 @@ export const faqs = [
   {
     question: "What types of projects does NF Nexa Tech handle?",
     answer:
-      "We specialise in web development, Android and Flutter mobile apps, UI/UX design, backend APIs, and SaaS MVP development. We work with startups, SMEs, and enterprises across various industries.",
+      "We build websites, web applications, Android and Flutter apps, UI/UX designs, backend APIs, and SaaS products. We work with startups, small businesses, and growing companies in Delhi and across India.",
   },
   {
     question: "How long does a typical project take?",
     answer:
-      "Project timelines depend on scope. A focused MVP typically takes 6–10 weeks. A full-featured product — web platform, Android app, or custom SaaS — usually takes 3–5 months. We provide a detailed timeline during discovery.",
+      "It depends on the project and what you need. A small MVP can take around 6–10 weeks, while larger websites, apps, or SaaS products can take a few months. We discuss the timeline with you before starting.",
   },
   {
     question: "What is your development process?",
     answer:
-      "We follow an agile sprint model: (1) Discovery & architecture, (2) UI/UX design, (3) Development sprints with bi-weekly demos, (4) QA & performance testing, (5) Deployment & post-launch support. You are involved at every stage.",
+      "We start by understanding your idea and requirements. Then we plan the project, design the UI, develop the product, test everything, and finally launch it. We keep you updated throughout the process.",
   },
   {
     question: "Do you work with international clients?",
     answer:
-      "Yes — we work with clients globally. We communicate over email, WhatsApp, and video calls and align to your time zone for meetings. Payments are accepted internationally.",
+      "Yes. We work with clients in India and other countries. We usually communicate through email, WhatsApp, or video calls and can arrange meetings based on your time zone.",
   },
   {
     question: "What technologies do you use?",
     answer:
-      "Our core stack includes React, Next.js, Node.js, and Firebase for web. For mobile, we use Android (Java/Kotlin) and Flutter. For backend, we use REST APIs, Firebase Cloud Functions, and PostgreSQL/MongoDB.",
+      "We work with technologies such as Kotlin, Java, Flutter, React, Next.js, Spring Boot, Firebase, Python, MySQL, PostgreSQL, and REST APIs. We choose the technology based on what works best for your project.",
   },
   {
     question: "How do I get started?",
     answer:
-      "Simply contact us via the form below, email us at nfnexatech@gmail.com, or WhatsApp us directly. We will schedule a free 30-minute discovery call to understand your requirements and share a no-obligation proposal.",
+      "You can contact us through the form on our website, email us at nfnexatech@gmail.com, or message us on WhatsApp. We'll discuss your requirements, understand your idea, and guide you through the next steps.",
   },
 ];
+
 
 /**
  * Services detailed data — used for /services/[slug] pages.

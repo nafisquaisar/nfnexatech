@@ -3,465 +3,425 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import SectionTitle from "./SectionTitle";
-import { projects } from "../data/data";
 
-const AUTO_DELAY = 4000; // ms between auto-slides
+/* ── All Projects ─────────────────────────────────────── */
+const PROJECTS = [
+  {
+    slug: "popular-bread-inventory",
+    title: "Popular Bread Inventory",
+    tags: ["Android App", "Business / Inventory"],
+    tagColors: ["#E8763A", "#1FA0B1"],
+    description:
+      "A business inventory management app for a bread distribution company. Tracks stock, orders, deliveries, and daily reports with offline-first capability.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>, label: "Inventory\nTracking" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>, label: "Delivery\nManagement" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125z" /></svg>, label: "Daily\nReports" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0z" /></svg>, label: "Offline\nFirst" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25z" /></svg>, label: "Secure\nAuth" },
+    ],
+    tech: ["Flutter 3", "Firebase", "Hive", "MVVM", "Provider"],
+    highlights: [
+      { icon: "📦", title: "Real-time Inventory", desc: "Track stock levels live" },
+      { icon: "🚚", title: "Delivery Tracking", desc: "Monitor daily deliveries" },
+      { icon: "📊", title: "Business Reports", desc: "Daily/weekly summaries" },
+      { icon: "📶", title: "Offline-first", desc: "Works without internet, syncs later" },
+      { icon: "🔥", title: "Firebase Backend", desc: "Realtime database & auth" },
+    ],
+    image: "/images/projects/popular/popular_preview.png",
+    thumb: "/images/projects/popular/popular_preview.png",
+    accent: "#1FA0B1",
+  },
+  {
+    slug: "invoicelelo",
+    title: "InvoiceLelo",
+    tags: ["Android App", "Web App", "Business / Billing"],
+    tagColors: ["#7C5CBF", "#1FA0B1", "#E8763A"],
+    description:
+      "A GST billing and invoice generation platform for businesses. Generate professional invoices instantly — even without logging in. Login to save bill history, manage customers, and get your business verified.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" /></svg>, label: "Invoice\nGenerator" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>, label: "Guest\nBilling" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0z" /></svg>, label: "Customer\nManagement" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>, label: "Bill\nHistory" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12z" /></svg>, label: "Business\nVerified" },
+    ],
+    tech: ["Next.js", "Flutter", "Firebase", "Isar", "Razorpay"],
+    highlights: [
+      { icon: "🧾", title: "Instant Invoice", desc: "Generate PDF bills in seconds" },
+      { icon: "👤", title: "No Login Required", desc: "Create invoices without an account" },
+      { icon: "💼", title: "Customer Manager", desc: "Save and manage client details" },
+      { icon: "✅", title: "Business Verified Badge", desc: "Verified stamp after setup" },
+      { icon: "📱", title: "App + Web", desc: "Flutter app & Next.js website" },
+    ],
+    image: "/images/projects/invoicelelo/invoicelelo_preview.png",
+    thumb: "/images/projects/invoicelelo/invoicelelo_preview.png",
+    demo: "https://invoicelelo.in",
+    accent: "#7C5CBF",
+  },
+  {
+    slug: "kharcha-plus",
+    title: "Kharcha Plus",
+    tags: ["Android App", "Fintech / Utility"],
+    tagColors: ["#E8763A", "#1FA0B1"],
+    description:
+      "Kharcha Plus is an expense and utility tracking app that helps users manage daily expenses, food, electricity, and water consumption in one place.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8v1m0 10v1M5 12H3m18 0h-2M7.05 7.05 5.636 5.636M18.364 18.364l-1.414-1.414M7.05 16.95l-1.414 1.414M18.364 5.636l-1.414 1.414" /></svg>, label: "Expense\nTracking" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 0 0-1.022-.547l-2.387-.477a6 6 0 0 0-3.86.517l-.318.158a6 6 0 0 1-3.86.517L6.05 15.21a2 2 0 0 0-1.806.547M8 4h8l-1 1v5.172a2 2 0 0 0 .586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 0 0 9 10.172V5L8 4z" /></svg>, label: "Water\nTracking" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" /></svg>, label: "Analytics\n& Reports" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.111 16.404a5.5 5.5 0 0 1 7.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" /></svg>, label: "Offline\nSupport" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 0 1 2.828 0L16 16m-2-2 1.586-1.586a2 2 0 0 1 2.828 0L20 14m-6-6h.01M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" /></svg>, label: "Clean\nUI/UX" },
+    ],
+    tech: ["Flutter", "Isar DB", "Firebase", "Riverpod", "Charts"],
+    highlights: [
+      { icon: "📦", title: "4+ Modules", desc: "Expense, Food, Electricity, Water" },
+      { icon: "☁️", title: "Offline + Cloud Sync", desc: "Works offline and syncs with Firebase" },
+      { icon: "✨", title: "Beautiful & Simple UI", desc: "Easy to use for everyone" },
+      { icon: "📈", title: "Real-time Insights", desc: "Track and analyze your spending" },
+      { icon: "▶️", title: "Published on Play Store", desc: "Live and available for users" },
+    ],
+    image: "/images/projects/kharchaplus/kharchaplus_preview.png",
+    thumb: "/images/projects/kharchaplus/kharchaplus_preview.png",
+    demo: "https://play.google.com/store/apps/details?id=com.nafis.nf.kharchaplus&hl=en_IN",
+    accent: "#E8763A",
+  },
+  {
+    slug: "tunelyf",
+    title: "TuneLyf",
+    tags: ["Android App", "Music / Streaming"],
+    tagColors: ["#E8763A", "#7C5CBF"],
+    description:
+      "A modern music streaming app with personalized playlists, offline playback, dynamic player UI, and seamless user experience built for Android.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>, label: "Music\nStreaming" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4" /></svg>, label: "Offline\nPlayback" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3z" /></svg>, label: "Dynamic\nPlayer UI" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>, label: "Smart\nPlaylists" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "Fast\nPerformance" },
+    ],
+    tech: ["Kotlin", "MVVM", "ExoPlayer", "Firebase", "Material Design 3"],
+    highlights: [
+      { icon: "🎵", title: "Full Music Player", desc: "Custom player with queue management" },
+      { icon: "📱", title: "Offline Support", desc: "Download and play without internet" },
+      { icon: "🔒", title: "Firebase Auth", desc: "Secure user authentication" },
+      { icon: "🎨", title: "Material Design 3", desc: "Modern and clean UI" },
+      { icon: "⚡", title: "MVVM Architecture", desc: "Scalable and maintainable code" },
+    ],
+    image: "/images/projects/tunelyf/tunelyf_preview.png",
+    thumb: "/images/projects/tunelyf/tunelyf.png",
+    accent: "#7C5CBF",
+  },
+  {
+    slug: "organizer-classes",
+    title: "Organizer Classes",
+    tags: ["EdTech App", "Web Application"],
+    tagColors: ["#7C5CBF", "#1FA0B1"],
+    description:
+      "An ed-tech platform for online learning with video lectures, notes, quizzes, and student progress tracking. Built for coaching institutes.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25z" /></svg>, label: "Video\nLectures" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931zm0 0L19.5 7.125" /></svg>, label: "Notes &\nQuizzes" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" /></svg>, label: "Progress\nTracking" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0z" /></svg>, label: "Student\nManagement" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /></svg>, label: "Notifications" },
+    ],
+    tech: ["React 18", "Firebase", "Tailwind CSS", "Recharts", "RBAC"],
+    highlights: [
+      { icon: "🎓", title: "1,200+ Students", desc: "Actively using the platform" },
+      { icon: "📹", title: "Video Lectures", desc: "Organised by subject and topic" },
+      { icon: "📝", title: "Quiz & Tests", desc: "Auto-graded quizzes for students" },
+      { icon: "📊", title: "Admin Dashboard", desc: "Track student performance" },
+      { icon: "🔒", title: "Role-based Access", desc: "Admin, Teacher, Student roles" },
+    ],
+    image: "/images/projects/organizer/organizer_preview.png",
+    thumb: "/images/projects/organizer/organizer_preview.png",
+    accent: "#7C5CBF",
+  },
+  {
+    slug: "nestiva-hospital",
+    title: "Nestiva Hospital",
+    tags: ["Healthcare", "Web Development"],
+    tagColors: ["#1FA0B1", "#E8763A"],
+    description:
+      "A patient-focused digital experience for a modern multi-specialty hospital. Doctors, departments, appointments, and emergency information in one clear platform.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 0 0-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 0 1 5.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 0 1 9.288 0" /></svg>, label: "Doctor\nDirectory" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>, label: "Appointment\nBooking" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21" /></svg>, label: "Departments\nShowcase" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M10.5 8.25h3l-3 4.5h3" /></svg>, label: "Emergency\nInfo" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>, label: "Fully\nResponsive" },
+    ],
+    tech: ["Next.js", "React", "Tailwind CSS", "SEO Optimized"],
+    highlights: [
+      { icon: "🏥", title: "Multi-specialty Hospital", desc: "Full department showcase" },
+      { icon: "👨‍⚕️", title: "Doctor Discovery", desc: "Filter by specialty" },
+      { icon: "📅", title: "Appointment CTAs", desc: "Prominent booking flow" },
+      { icon: "🚨", title: "Emergency Info", desc: "24/7 contact, always visible" },
+      { icon: "📱", title: "100% Responsive", desc: "Mobile, tablet, desktop" },
+    ],
+    image: "/images/projects/nestiva/nestiva-hospital-hero.png",
+    thumb: "/images/projects/nestiva/nestiva-hospital-hero.png",
+    accent: "#1FA0B1",
+  },
+  {
+    slug: "small-steps",
+    title: "Small Steps",
+    tags: ["Android App", "Productivity"],
+    tagColors: ["#E8763A", "#1FA0B1"],
+    description:
+      "A habit tracking and productivity app with daily streaks, reminders, and progress visualization. Designed for building consistent daily habits.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>, label: "Habit\nTracking" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48z" /></svg>, label: "Daily\nStreaks" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>, label: "Smart\nReminders" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" /></svg>, label: "Progress\nCharts" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998z" /></svg>, label: "Dark\nMode" },
+    ],
+    tech: ["Kotlin", "Jetpack Compose", "Room DB", "WorkManager", "Clean Architecture"],
+    highlights: [
+      { icon: "✅", title: "Habit Tracking", desc: "Daily check-in for every habit" },
+      { icon: "🔥", title: "Streak System", desc: "Keep your motivation going" },
+      { icon: "⏰", title: "WorkManager Reminders", desc: "Reliable background alerts" },
+      { icon: "📊", title: "Progress Charts", desc: "Visual habit performance" },
+      { icon: "🏗️", title: "Clean Architecture", desc: "Scalable and testable code" },
+    ],
+    image: "/images/projects/smallstep/smallstep_preview.png",
+    thumb: "/images/projects/smallstep/smallstep_preview.png",
+    accent: "#E8763A",
+  },
+  {
+    slug: "medon-company",
+    title: "Medon Company",
+    tags: ["Web Application", "Service Business"],
+    tagColors: ["#1FA0B1", "#E8763A"],
+    description:
+      "A service-based website for AC & appliance repair services with professional design, local SEO, and service booking flow for Delhi NCR.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48z" /></svg>, label: "AC Repair\nServices" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l5.654-4.654m5.65-5.652 3.81-3.809a2.549 2.549 0 1 1 3.586 3.586l-3.81 3.81m-5.652-5.651 1.208-.766c.47-.14.94-.14 1.41 0" /></svg>, label: "Appliance\nRepair" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" /></svg>, label: "Delhi NCR\nLocal SEO" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>, label: "Responsive\nDesign" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5z" /></svg>, label: "Reviews &\nTestimonials" },
+    ],
+    tech: ["Next.js", "Tailwind CSS", "SEO", "Framer Motion"],
+    highlights: [
+      { icon: "❄️", title: "Service Pages", desc: "AC, Refrigerator, Washing Machine" },
+      { icon: "📍", title: "Local SEO", desc: "Ranked for Delhi NCR searches" },
+      { icon: "📱", title: "100% Responsive", desc: "Mobile-first design" },
+      { icon: "⭐", title: "Social Proof", desc: "Customer reviews & ratings" },
+      { icon: "📞", title: "WhatsApp CTA", desc: "Direct booking via WhatsApp" },
+    ],
+    image: "/images/projects/medon/home.png",
+    thumb: "/images/projects/medon/home.png",
+    accent: "#1FA0B1",
+  },
+  {
+    slug: "train-your-tech",
+    title: "Train Your Tech",
+    tags: ["EdTech Platform", "SaaS"],
+    tagColors: ["#7C5CBF", "#1FA0B1"],
+    description:
+      "A career development and placement preparation platform helping students with resume building, aptitude tests, coding rounds, and job applications.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" /></svg>, label: "Resume\nBuilder" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09zM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456zM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423z" /></svg>, label: "Aptitude\nTests" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>, label: "Coding\nRounds" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006-3.75 3.75m0 0-3.75-3.75m3.75 3.75V2.69m0 0a48.13 48.13 0 0 0-3.413.387c-1.069.16-1.837 1.094-1.837 2.175v1.561" /></svg>, label: "Job\nApplications" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" /></svg>, label: "Progress\nTracking" },
+    ],
+    tech: ["React", "Node.js", "Firebase", "Tailwind CSS"],
+    highlights: [
+      { icon: "📄", title: "Resume Builder", desc: "Smart resume generation tool" },
+      { icon: "🧠", title: "Mock Tests", desc: "Aptitude and reasoning practice" },
+      { icon: "💻", title: "Coding Rounds", desc: "DSA problem practice" },
+      { icon: "💼", title: "Job Portal", desc: "Apply directly via platform" },
+      { icon: "📊", title: "Analytics Dashboard", desc: "Track student performance" },
+    ],
+    image: "/images/projects/trainyourtech/landing.png",
+    thumb: "/images/projects/trainyourtech/dashboard.png",
+    accent: "#7C5CBF",
+  },
+];
 
-/* ─────────────────────────────────────────────────────────────
-   Tiny sub-components
-───────────────────────────────────────────────────────────── */
-
-/** Gradient placeholder when image is missing */
-function ImagePlaceholder() {
-  return (
-    <div className="flex h-full w-full items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-900/40 to-purple-900/40">
-      <svg className="h-16 w-16 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
-          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-        />
-      </svg>
-    </div>
-  );
-}
-
-/** Stacked 3-layer mockup with subtle 3-D tilt */
-function MockupStack({ image, alt }) {
-  return (
-    <div className="relative flex h-full w-full items-center justify-center">
-      {/* Shadow layer 3 — furthest back */}
-      <div
-        className="absolute inset-0 rounded-2xl border border-white/5 bg-white/3"
-        style={{ transform: "rotate(-6deg) scale(0.88) translateY(12px)", opacity: 0.35 }}
-      />
-      {/* Shadow layer 2 */}
-      <div
-        className="absolute inset-0 rounded-2xl border border-white/8 bg-white/5"
-        style={{ transform: "rotate(-3deg) scale(0.94) translateY(6px)", opacity: 0.55 }}
-      />
-      {/* Main card */}
-      <div className="group/img relative z-10 w-full overflow-hidden rounded-2xl border border-white/15 shadow-2xl shadow-black/60 transition-transform duration-700 hover:scale-[1.02]">
-        {image ? (
-          <div className="relative h-[420px] w-full p-4">
-            <Image
-              src={image}
-              alt={alt ?? "Project mockup"}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-contain transition-transform duration-700 group-hover/img:scale-105"
-            />
-          </div>
-        ) : (
-          <ImagePlaceholder />
-        )}
-        {/* Glass sheen */}
-        <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/5 via-transparent to-transparent" />
-      </div>
-    </div>
-  );
-}
-
-/** Animated vertical 3-phone fan mockup (e.g. TuneLyf) */
-function VerticalPhoneFanMockup({ project }) {
-  const color = project?.color ?? "#1f2a44";
-  const stack = project?.phoneStack ?? {};
-
-  if (!stack?.left && !stack?.center && !stack?.right) return null;
-
-  return (
-    <div className="phone-fan relative mx-auto h-[250px] w-full max-w-[390px] -translate-y-4 overflow-visible sm:h-[280px] sm:-translate-y-5 lg:h-[310px] lg:-translate-y-6">
-      {/* Colour blobs */}
-      <div className="absolute left-[10%] top-[10%] h-32 w-32 rounded-full opacity-35 blur-3xl" style={{ backgroundColor: color }} />
-      <div className="absolute right-[10%] top-[18%] h-28 w-28 rounded-full opacity-25 blur-3xl" style={{ backgroundColor: color }} />
-
-      {stack.left && (
-        <div className="phone-left absolute left-1/2 z-10 w-[125px] select-none sm:w-[145px] lg:w-[160px]" style={{ top: 28, transform: "translateX(-50%)" }}>
-          <Image src={stack.left} alt={`${project?.title ?? "Project"} left screen`} width={160} height={300} className="object-contain drop-shadow-xl" />
-        </div>
-      )}
-
-      {stack.right && (
-        <div className="phone-right absolute left-1/2 z-20 w-[125px] select-none sm:w-[145px] lg:w-[160px]" style={{ top: 28, transform: "translateX(-50%)" }}>
-          <Image src={stack.right} alt={`${project?.title ?? "Project"} right screen`} width={160} height={300} className="object-contain drop-shadow-xl" />
-        </div>
-      )}
-
-      {stack.center && (
-        <div className="phone-center absolute left-1/2 z-30 w-[145px] select-none sm:w-[165px] lg:w-[180px]" style={{ top: 8, transform: "translateX(-50%)" }}>
-          <Image src={stack.center} alt={`${project?.title ?? "Project"} center screen`} width={180} height={320} className="object-contain drop-shadow-xl" />
-        </div>
-      )}
-    </div>
-  );
-}
-
-/** HackerKernel-style horizontal 3-layer phone/app mockup */
-function PhoneLayerMockup({ project }) {
-  const color = project?.color ?? "#1f2a44";
-  const layers = project?.layers ?? {};
-
-  if (!layers?.top && !layers?.middle && !layers?.phone) return null;
-
-  return (
-    <div className="relative mx-auto h-[260px] w-full max-w-[520px] overflow-visible sm:h-[300px] md:h-[330px] lg:h-[350px]">
-      <div className="absolute left-[8%] top-[8%] h-32 w-32 rounded-full opacity-60 blur-2xl sm:h-40 sm:w-40" style={{ backgroundColor: color }} />
-      <div className="absolute right-[8%] top-[32%] h-24 w-24 rounded-full opacity-50 blur-2xl sm:h-32 sm:w-32" style={{ backgroundColor: color }} />
-
-      {layers.phone && (
-        <div className="absolute bottom-[6%] left-[6%] z-10 w-[70%] select-none">
-          <Image src={layers.phone} alt={`${project?.title ?? "Project"} phone`} width={364} height={400} className="object-contain drop-shadow-2xl" />
-        </div>
-      )}
-      {layers.middle && (
-        <div className="absolute left-[20%] top-[38%] z-20 w-[52%] select-none">
-          <Image src={layers.middle} alt={`${project?.title ?? "Project"} middle screen`} width={270} height={300} className="object-contain drop-shadow-2xl" />
-        </div>
-      )}
-      {layers.top && (
-        <div className="absolute left-[34%] top-[12%] z-30 w-[48%] select-none">
-          <Image src={layers.top} alt={`${project?.title ?? "Project"} top screen`} width={250} height={280} className="object-contain drop-shadow-2xl" />
-        </div>
-      )}
-    </div>
-  );
-}
-
-/** Tech badges row */
-function TechBadges({ tech }) {
-  if (!tech?.length) return null;
-  return (
-    <div className="flex flex-wrap gap-2">
-      {tech.map((t) => (
-        <span key={t} className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm">
-          {t}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-/** CTA button — navigates to /projects/:slug */
-function CaseStudyButton({ project }) {
-  if (!project || !project.slug) return null;
-
-  return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="group/btn inline-flex items-center gap-2 rounded-lg border border-cyan-400/40 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 px-5 py-2.5 text-xs font-bold tracking-widest text-white backdrop-blur transition-all duration-300 hover:border-cyan-400/80 hover:from-cyan-500/40 hover:to-purple-600/40 hover:shadow-lg hover:shadow-cyan-500/20"
-    >
-      VIEW CASE STUDY
-      <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" clipRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" />
-      </svg>
-    </Link>
-  );
-}
-
-/** Live site button — opens the deployed project URL */
-function LiveSiteButton({ project }) {
-  if (!project?.liveUrl) return null;
-
-  return (
-    <a
-      href={project.liveUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group/live inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-2.5 text-xs font-bold tracking-widest text-slate-300 backdrop-blur transition-all duration-300 hover:border-white/35 hover:bg-white/10 hover:text-white"
-    >
-      VIEW LIVE SITE
-      <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover/live:-translate-y-0.5 group-hover/live:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" clipRule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" /><path fillRule="evenodd" clipRule="evenodd" d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" />
-      </svg>
-    </a>
-  );
-}
-
-/** Play Store button — opens the Google Play listing */
-function PlayStoreButton({ project }) {
-  if (!project?.playStoreUrl) return null;
-
-  return (
-    <a
-      href={project.playStoreUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group/ps inline-flex items-center gap-2 rounded-lg border border-green-400/20 bg-green-500/5 px-4 py-2.5 text-xs font-bold tracking-widest text-green-300 backdrop-blur transition-all duration-300 hover:border-green-400/50 hover:bg-green-500/10 hover:text-green-200"
-    >
-      {/* Google Play icon */}
-      <svg className="h-3.5 w-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M3.18 23.76c.3.17.64.24.98.2l12.49-11.8L13.12 8.6 3.18 23.76z"/>
-        <path d="M22.1 10.53c-.34-.22-.82-.37-1.43-.37H3.33c-.6 0-1.08.15-1.43.37l11.1 10.49 9.1-10.49z"/>
-        <path d="M1.9 1.24C1.56 1.46 1.33 1.87 1.33 2.42v19.16c0 .55.23.96.57 1.18l11.22-10.6L1.9 1.24z"/>
-        <path d="M3.18.24C2.84.28 2.5.53 2.22.9l10.9 10.3L16.65 7.7 3.18.24z"/>
-      </svg>
-      PLAY STORE
-    </a>
-  );
-}
-
-function ArrowBtn({ direction, onClick }) {
-  const isLeft = direction === "left";
-  return (
-    <button
-      onClick={onClick}
-      aria-label={isLeft ? "Previous project" : "Next project"}
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-white"
-    >
-      <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-        {isLeft
-          ? <path fillRule="evenodd" clipRule="evenodd" d="M17 10a.75.75 0 01-.75.75H6.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L6.612 9.25H16.25A.75.75 0 0117 10z" />
-          : <path fillRule="evenodd" clipRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" />
-        }
-      </svg>
-    </button>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Main Projects / Case Study section
-───────────────────────────────────────────────────────────── */
-function Projects() {
+/* ── Main Section ───────────────────────────────────────── */
+export default function Projects() {
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
-  const [paused, setPaused] = useState(false);
   const timerRef = useRef(null);
 
-  const total = projects?.length || 0;
-
   const goTo = useCallback((idx) => {
-    setActive((idx + total) % total);
+    setActive((idx + PROJECTS.length) % PROJECTS.length);
     setAnimKey((k) => k + 1);
-  }, [total]);
+  }, []);
 
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
 
-  useEffect(() => {
-    if (paused) return;
-    timerRef.current = setInterval(next, AUTO_DELAY);
-    return () => clearInterval(timerRef.current);
-  }, [paused, next]);
+  const handleNav = useCallback((idx) => {
+    clearTimeout(timerRef.current);
+    goTo(idx);
+  }, [goTo]);
 
-  const project = projects?.[active] || null;
+  useEffect(() => {
+    timerRef.current = setTimeout(next, 6000);
+    return () => clearTimeout(timerRef.current);
+  }, [active, next]);
+
+  const p = PROJECTS[active];
 
   return (
-    <section id="projects" className="cs-noise relative overflow-hidden bg-slate-950 py-24">
+    <section id="projects" className="py-16" style={{ backgroundColor: "#FAF7F5" }}>
+      <div className="mx-auto w-[92%] max-w-6xl">
 
-      {/* ── Glowing background blobs ── */}
-      <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 h-[540px] w-[540px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[130px]" />
-      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-[420px] translate-x-1/3 translate-y-1/3 rounded-full bg-purple-600/12 blur-[120px]" />
-      <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/8 blur-[100px]" />
-
-      <div className="relative mx-auto w-[92%] max-w-6xl">
-
-        <SectionTitle
-          eyebrow="Case Study"
-          title="Projects we've built"
-          subtitle="Real work, real clients. Here's what we've built and what it took to build it."
-        />
-
-        {/* ── Main slider ── */}
-        <div
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          className="relative rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-2xl backdrop-blur-xl md:p-10 lg:p-14"
-        >
-          <div
-            key={animKey}
-            className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
-            style={{ animation: "cs-fade 0.45s ease both" }}
-          >
-            {/* ── LEFT: Mockup area ── */}
-            <div className="relative flex h-[300px] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-900/30 sm:h-[340px] lg:h-[390px]">
-              {project?.phoneStack
-                ? <VerticalPhoneFanMockup project={project} />
-                : project?.layers
-                  ? <PhoneLayerMockup project={project} />
-                  : <MockupStack image={project?.image} alt={project?.title} />
-              }
+        {/* Header */}
+        <div className="mb-8 flex items-end justify-between">
+          <div>
+            <div className="mb-2 flex items-center gap-3">
+              <div className="h-px w-8" style={{ backgroundColor: "#1FA0B1" }} />
+              <span className="text-[11px] font-bold uppercase tracking-[0.25em]" style={{ color: "#1FA0B1" }}>Case Study</span>
+              <div className="h-px w-8" style={{ backgroundColor: "#1FA0B1" }} />
             </div>
-
-            {/* ── RIGHT: Project info ── */}
-            <div className="flex flex-col gap-5">
-              {project?.category && (
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-400">
-                  {project.category}{project?.platform && ` | ${project.platform}`}
-                </p>
-              )}
-
-              {/* Featured badge — data-driven, shown only when project.featured = true */}
-              {project?.featured && (
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-400/40 bg-teal-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-teal-300">
-                    <span className="h-1.5 w-1.5 rounded-full bg-teal-400" />
-                    {project.featuredLabel ?? 'Featured Project'}
-                  </span>
-                  {project.featuredSub && (
-                    <span className="text-[11px] text-slate-500">{project.featuredSub}</span>
-                  )}
-                </div>
-              )}
-
-              <h3 className="text-2xl font-bold leading-snug text-white sm:text-3xl xl:text-4xl">
-                {project?.title ?? "Untitled Project"}
-              </h3>
-
-              <p className="text-base leading-relaxed text-slate-400">
-                {project?.description ?? "No description available for this project."}
-              </p>
-
-              <TechBadges tech={project?.tech} />
-
-              <div className="h-px w-full bg-gradient-to-r from-white/10 via-cyan-500/20 to-transparent" />
-
-              <div className="flex items-center gap-3 flex-wrap">
-                <CaseStudyButton project={project} />
-                <LiveSiteButton project={project} />
-                <PlayStoreButton project={project} />
-                <span className="text-xs text-slate-500 tabular-nums">
-                  {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-                </span>
-              </div>
-            </div>
-
+            <h2 className="text-[32px] font-extrabold tracking-tight sm:text-[40px]" style={{ color: "#1a1a1a" }}>
+              Projects We&apos;ve <span style={{ color: "#E8763A" }}>Built</span>
+            </h2>
+            <p className="mt-3 max-w-xl text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>
+              Explore some of the websites, apps, and software products we&apos;ve built for our clients.
+            </p>
           </div>
-
-          {/* ── Arrow navigation ── */}
-          <div className="absolute right-6 top-6 flex gap-2 md:right-10 md:top-10">
-            <ArrowBtn direction="left" onClick={prev} />
-            <ArrowBtn direction="right" onClick={next} />
+          {/* Arrow buttons */}
+          <div className="hidden gap-2 sm:flex">
+            <button onClick={prev} className="flex h-9 w-9 items-center justify-center rounded-full border transition-all hover:border-[#1FA0B1] hover:text-[#1FA0B1]"
+              style={{ borderColor: "rgba(198,209,215,0.7)", color: "#6B5A5A" }}>
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button onClick={next} className="flex h-9 w-9 items-center justify-center rounded-full border transition-all hover:border-[#1FA0B1] hover:text-[#1FA0B1]"
+              style={{ borderColor: "rgba(198,209,215,0.7)", color: "#6B5A5A" }}>
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
-
-          {/* ── Dot indicators ── */}
-          <div className="mt-8 flex items-center justify-center gap-2">
-            {projects.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                aria-label={`Go to project ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-500 ${i === active
-                  ? "w-8 bg-gradient-to-r from-cyan-400 to-purple-500"
-                  : "w-1.5 bg-white/20 hover:bg-white/40"
-                  }`}
-              />
-            ))}
-          </div>
-
-          {/* ── Progress bar ── */}
-          {!paused && (
-            <div className="absolute bottom-0 left-0 h-[2px] w-full overflow-hidden rounded-b-3xl">
-              <div
-                key={`prog-${animKey}`}
-                className="h-full bg-gradient-to-r from-cyan-400 to-purple-500"
-                style={{ animation: `prog-fill ${AUTO_DELAY}ms linear forwards` }}
-              />
-            </div>
-          )}
         </div>
 
-        {/* ── Thumbnail strip ── */}
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {projects.map((p, i) => (
-            <button
-              key={p?.title ?? i}
-              onClick={() => goTo(i)}
-              className={`group relative overflow-hidden rounded-xl border transition-all duration-500 ${i === active
-                ? "border-cyan-400/60 shadow-lg shadow-cyan-500/20"
-                : "border-white/10 hover:border-white/30"
-                }`}
-            >
-              {p?.image ? (
-                <div className="relative h-16 w-full sm:h-20">
-                  <Image
-                    src={p.image}
-                    alt={p?.title ?? "Project thumbnail"}
-                    fill
-                    sizes="(max-width: 640px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-              ) : (
-                <div
-                  className={`h-16 w-full sm:h-20 ${!p?.color ? "bg-gradient-to-br from-cyan-900/40 to-purple-900/40" : ""}`}
-                  style={p?.color ? { background: `linear-gradient(135deg, ${p.color}99, ${p.color}33)` } : undefined}
-                />
-              )}
-              {/* Overlay + title */}
-              <div className={`absolute inset-0 flex items-end bg-gradient-to-t p-2 transition-all duration-300 ${i === active ? "from-slate-950/90 via-slate-950/40" : "from-slate-950/70 via-slate-950/20"}`}>
-                <span className={`line-clamp-1 text-[10px] font-semibold leading-tight transition-colors duration-300 sm:text-xs ${i === active ? "text-cyan-300" : "text-slate-300"}`}>
-                  {p?.title ?? "Untitled"}
+        {/* Main card */}
+        <div key={animKey} className="mb-4 grid overflow-hidden rounded-2xl border"
+          style={{ borderColor: "rgba(198,209,215,0.5)", gridTemplateColumns: "1fr 1.4fr", backgroundColor: "white" }}>
+
+          {/* Left: image */}
+          <div className="relative min-h-[300px] overflow-hidden" style={{ backgroundColor: `${p.accent}10` }}>
+            <div className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(circle at 30% 50%, ${p.accent}20, transparent 70%)` }} />
+            <Image
+              src={p.image}
+              alt={p.title}
+              fill
+              className="object-contain drop-shadow-xl"
+              sizes="40vw"
+              priority
+            />
+          </div>
+
+          {/* Center: details */}
+          <div className="flex flex-col gap-3 border-l p-5" style={{ borderColor: "rgba(198,209,215,0.35)" }}>
+            <div className="flex flex-wrap gap-1.5">
+              {p.tags.map((tag, i) => (
+                <span key={tag}
+                  className="rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+                  style={{ backgroundColor: `${p.tagColors[i]}18`, color: p.tagColors[i] }}>
+                  {tag}
                 </span>
-              </div>
-              {i === active && (
-                <div className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-cyan-400 to-purple-500" />
+              ))}
+            </div>
+
+            <h3 className="text-[26px] font-extrabold" style={{ color: "#1a1a1a" }}>{p.title}</h3>
+            <p className="text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>{p.description}</p>
+
+            {/* Feature icons */}
+            <div className="flex gap-4">
+              {p.features.map((f) => (
+                <div key={f.label} className="flex flex-col items-center gap-0.5 text-center">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg" style={{ backgroundColor: `${p.accent}15`, color: p.accent }}>{f.icon}</div>
+                  <span className="text-[9px] leading-tight whitespace-pre-line" style={{ color: "#6B5A5A" }}>{f.label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Tech */}
+            <div className="flex flex-wrap gap-1.5">
+              {p.tech.map((t) => (
+                <span key={t} className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold"
+                  style={{ backgroundColor: `${p.accent}15`, color: p.accent }}>
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div className="mt-auto flex flex-wrap gap-2.5 pt-1">
+              <Link href={`/projects/${p.slug}`}
+                className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[12px] font-bold text-white transition-all hover:scale-[1.03]"
+                style={{ backgroundColor: p.accent, boxShadow: `0 4px 12px ${p.accent}35` }}>
+                View Case Study →
+              </Link>
+              {p.demo ? (
+                <a href={p.demo} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border px-5 py-2 text-[12px] font-semibold transition-all hover:scale-[1.03]"
+                  style={{ borderColor: "rgba(198,209,215,0.6)", color: "#1a1a1a" }}>
+                  Live Demo ↗
+                </a>
+              ) : (
+                <Link href={`/projects/${p.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-full border px-5 py-2 text-[12px] font-semibold transition-all hover:scale-[1.03]"
+                  style={{ borderColor: "rgba(198,209,215,0.6)", color: "#1a1a1a" }}>
+                  Live Demo ↗
+                </Link>
               )}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Thumbnail cards ── */}
+        <div className="grid grid-cols-4 gap-3 sm:grid-cols-9">
+          {PROJECTS.map((proj, idx) => (
+            <button
+              key={proj.slug}
+              onClick={() => handleNav(idx)}
+              className={`group relative overflow-hidden rounded-xl border transition-all duration-200 ${active === idx
+                ? "scale-[1.04] shadow-md"
+                : "hover:scale-[1.02] hover:shadow-sm"
+                }`}
+              style={{
+                borderColor: active === idx ? proj.accent : "rgba(198,209,215,0.5)",
+                borderWidth: active === idx ? 2 : 1,
+              }}
+            >
+              <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: `${proj.accent}10` }}>
+                <Image src={proj.thumb} alt={proj.title} fill className="object-cover" sizes="10vw" />
+                {active === idx && (
+                  <div className="absolute inset-x-0 bottom-0 h-0.5 origin-left" style={{ backgroundColor: proj.accent,
+                    animation: `progress 6s linear forwards`, animationKey: animKey }} />
+                )}
+              </div>
+              <div className="p-1.5 text-center">
+                <div className="text-[8px] font-semibold leading-tight" style={{ color: active === idx ? proj.accent : "#6B5A5A" }}>
+                  {proj.title}
+                </div>
+              </div>
             </button>
           ))}
         </div>
 
-        {/* ── Post-projects CTA ── */}
-        <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.02] p-8 text-center">
-          <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">Have a similar project?</p>
-          <h3 className="mb-3 text-2xl font-bold text-white">Tell us what you want to build</h3>
-          <p className="mx-auto mb-6 max-w-lg text-sm leading-7 text-slate-400">
-            Share your idea or requirements. We&apos;ll review it and tell you the most practical way to build it — with a timeline and a fixed price.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/start-project"
-              className="rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-7 py-3 text-sm font-bold text-white transition hover:opacity-90"
-            >
-              Discuss Your Project
-            </Link>
-            <a
-              href="#contact"
-              className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300 transition hover:border-white/30"
-            >
-              Send a Message
-            </a>
-          </div>
-        </div>
-
       </div>
 
-      {/* Keyframes */}
       <style>{`
-        @keyframes prog-fill {
-          from { width: 0%; }
-          to   { width: 100%; }
-        }
-        @keyframes cs-fade {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fan-left {
-          0%   { transform: translateX(-50%) rotate(0deg)   scale(1); }
-          60%  { transform: translateX(calc(-50% - 86px))  rotate(-10deg) scale(1); }
-          100% { transform: translateX(calc(-50% - 80px))  rotate(-9deg)  scale(1); }
-        }
-        @keyframes fan-right {
-          0%   { transform: translateX(-50%) rotate(0deg)   scale(1); }
-          60%  { transform: translateX(calc(-50% + 86px))  rotate(10deg)  scale(1); }
-          100% { transform: translateX(calc(-50% + 80px))  rotate(9deg)   scale(1); }
-        }
-        @keyframes fan-center {
-          0%   { transform: translateX(-50%) translateY(14px) scale(1); opacity: 0.4; }
-          100% { transform: translateX(-50%) translateY(0px)  scale(1); opacity: 1;   }
-        }
-        @keyframes float-idle {
-          0%, 100% { transform: translateX(-50%) translateY(0px)  scale(1); }
-          50%       { transform: translateX(-50%) translateY(-4px) scale(1); }
-        }
-        .phone-fan .phone-left  { animation: fan-left   0.7s cubic-bezier(0.34,1.56,0.64,1) 0.15s both; }
-        .phone-fan .phone-right { animation: fan-right  0.7s cubic-bezier(0.34,1.56,0.64,1) 0.15s both; }
-        .phone-fan .phone-center {
-          animation:
-            fan-center 0.5s ease                            0.05s both,
-            float-idle 3.5s ease-in-out                     1.2s  infinite;
+        @keyframes progress {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
         }
       `}</style>
     </section>
   );
 }
 
-export default Projects;

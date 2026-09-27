@@ -809,8 +809,10 @@ export default function WebsiteShowcase() {
   return (
     <section
       id="website-projects"
-      className="relative overflow-x-hidden bg-slate-950"
+      className="relative overflow-x-hidden"
+      style={{ backgroundImage: "url('/bg.webp')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
     >
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundColor: "rgba(250,247,245,0.88)" }} />
       {/* ── Background atmosphere (non-overflowing) ── */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-32 -top-32 h-[700px] w-[700px] rounded-full bg-cyan-500/6 blur-[160px]" />

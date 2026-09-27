@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
     ],
     // Modern formats — AVIF first for best compression, WebP fallback
     formats: ["image/avif", "image/webp"],
+    // Allow quality:100 for hero image
+    qualities: [100, 75],
     // Explicit srcset breakpoints — avoids generating unnecessary variants
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
