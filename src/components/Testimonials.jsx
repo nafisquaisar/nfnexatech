@@ -164,14 +164,30 @@ function TestiCard({ t, active }) {
 }
 
 /* ── Main Section ────────────────────────────────────────── */
-const VISIBLE = 3; // cards visible at once
-
 export default function Testimonials() {
   const total = TESTIMONIALS.length;
-  // offset = index of first visible card (0 or 1 for 4 cards / 3 visible)
-  const maxOffset = total - VISIBLE; // = 1
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  // Update visibleCount on resize
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 640) setVisibleCount(1);
+      else if (window.innerWidth < 1024) setVisibleCount(2);
+      else setVisibleCount(3);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const maxOffset = Math.max(0, total - visibleCount);
   const [offset, setOffset] = useState(0);
   const timerRef = useRef(null);
+
+  // Clamp offset when visibleCount changes (e.g. on resize)
+  useEffect(() => {
+    setOffset((o) => Math.min(o, maxOffset));
+  }, [maxOffset]);
 
   const startTimer = useCallback(() => {
     clearInterval(timerRef.current);
@@ -195,8 +211,8 @@ export default function Testimonials() {
     startTimer(); // reset autoplay on manual nav
   };
 
-  // translate percentage: each card takes (100/VISIBLE)% of container width
-  const translatePct = -(offset * (100 / VISIBLE));
+  // translate percentage: each card takes (100/visibleCount)% of container width
+  const translatePct = -(offset * (100 / visibleCount));
 
   return (
     <section
@@ -222,7 +238,7 @@ export default function Testimonials() {
               <span className="h-px w-10" style={{ backgroundColor: "rgba(31,160,177,0.5)" }} />
               <span className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: "#1FA0B1" }}>Client Stories</span>
             </div>
-            <h2 className="text-[36px] font-extrabold tracking-tight sm:text-[42px]" style={{ color: "#1a1a1a" }}>
+            <h2 className="text-[28px] sm:text-[36px] font-extrabold tracking-tight lg:text-[42px]" style={{ color: "#1a1a1a" }}>
               What our clients{" "}
               <span style={{ color: "#1FA0B1" }}>say</span>
             </h2>
@@ -263,15 +279,15 @@ export default function Testimonials() {
           {/* Sliding track */}
           <div
             className="flex gap-4 transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(calc(${translatePct}% - ${offset * (16 / VISIBLE)}px))` }}
+            style={{ transform: `translateX(calc(${translatePct}% - ${offset * (16 / visibleCount)}px))` }}
           >
             {TESTIMONIALS.map((t, i) => (
               <div
                 key={t.id}
                 className="shrink-0"
-                style={{ width: `calc((100% - ${(VISIBLE - 1) * 16}px) / ${VISIBLE})` }}
+                style={{ width: `calc((100% - ${(visibleCount - 1) * 16}px) / ${visibleCount})` }}
               >
-                <TestiCard t={t} active={i >= offset && i < offset + VISIBLE} />
+                <TestiCard t={t} active={i >= offset && i < offset + visibleCount} />
               </div>
             ))}
           </div>

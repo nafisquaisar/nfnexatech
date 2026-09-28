@@ -677,53 +677,35 @@ export default function AboutPageClient() {
 
           {/* Row 1 — 4 cards */}
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-4">
-            <div className="flex items-stretch gap-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { n: "01", title: "Discovery",    color: "#1FA0B1", desc: "We start with a call to understand your goals, constraints, audience and competitive landscape." },
                 { n: "02", title: "Planning",     color: "#1FA0B1", desc: "We produce a detailed project brief, feature map and delivery roadmap with clear milestones." },
                 { n: "03", title: "UI/UX Design", color: "#1FA0B1", desc: "Wireframes and high-fidelity Figma prototypes, validated before a single line of code is written." },
                 { n: "04", title: "Development",  color: "#1FA0B1", desc: "Agile sprints with weekly demos. Clean, typed, testable code committed to a shared repository daily." },
-              ].map((p, idx, arr) => (
-                <div key={p.n} className="flex flex-1 items-center">
-                  <motion.div variants={fadeUp} className="flex-1 rounded-2xl border border-[#E8E0D8]/60 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md hover:-translate-y-0.5">
-                    <div className="mb-3 text-[12px] font-extrabold tracking-widest" style={{ color: p.color }}>{p.n}</div>
-                    <h3 className="mb-2 text-[14px] font-bold text-[#1a1a1a]">{p.title}</h3>
-                    <p className="text-[12px] leading-relaxed text-[#6B5A5A]">{p.desc}</p>
-                  </motion.div>
-                  {idx < arr.length - 1 && (
-                    <div className="flex flex-shrink-0 items-center px-1.5">
-                      <div className="h-px w-6 border-t-2 border-dashed border-[#1FA0B1]/30" />
-                      <div className="h-2.5 w-2.5 rounded-full border-2 border-[#1FA0B1]/40 bg-white" />
-                      <div className="h-px w-6 border-t-2 border-dashed border-[#1FA0B1]/30" />
-                    </div>
-                  )}
-                </div>
+              ].map((p) => (
+                <motion.div key={p.n} variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/60 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md hover:-translate-y-0.5">
+                  <div className="mb-3 text-[12px] font-extrabold tracking-widest" style={{ color: p.color }}>{p.n}</div>
+                  <h3 className="mb-2 text-[14px] font-bold text-[#1a1a1a]">{p.title}</h3>
+                  <p className="text-[12px] leading-relaxed text-[#6B5A5A]">{p.desc}</p>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Row 2 — 3 cards centered */}
+          {/* Row 2 — 3 cards */}
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <div className="flex items-stretch justify-center gap-0 max-w-[75%] mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:max-w-[75%] lg:mx-auto">
               {[
                 { n: "05", title: "Testing",     color: "#E8763A", desc: "Unit tests, integration tests, cross-browser QA, performance audits and security scans before release." },
                 { n: "06", title: "Deployment",  color: "#E8763A", desc: "Automated CI/CD pipeline. Zero-downtime deployments on Vercel, AWS or your preferred cloud." },
                 { n: "07", title: "Maintenance", color: "#E8763A", desc: "Proactive monitoring, bug fixes, feature updates and performance optimization keeping your product stable." },
-              ].map((p, idx, arr) => (
-                <div key={p.n} className="flex flex-1 items-center">
-                  <motion.div variants={fadeUp} className="flex-1 rounded-2xl border border-[#E8E0D8]/60 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md hover:-translate-y-0.5">
-                    <div className="mb-3 text-[12px] font-extrabold tracking-widest" style={{ color: p.color }}>{p.n}</div>
-                    <h3 className="mb-2 text-[14px] font-bold text-[#1a1a1a]">{p.title}</h3>
-                    <p className="text-[12px] leading-relaxed text-[#6B5A5A]">{p.desc}</p>
-                  </motion.div>
-                  {idx < arr.length - 1 && (
-                    <div className="flex flex-shrink-0 items-center px-1.5">
-                      <div className="h-px w-6 border-t-2 border-dashed border-[#E8763A]/30" />
-                      <div className="h-2.5 w-2.5 rounded-full border-2 border-[#E8763A]/40 bg-white" />
-                      <div className="h-px w-6 border-t-2 border-dashed border-[#E8763A]/30" />
-                    </div>
-                  )}
-                </div>
+              ].map((p) => (
+                <motion.div key={p.n} variants={fadeUp} className="rounded-2xl border border-[#E8E0D8]/60 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md hover:-translate-y-0.5">
+                  <div className="mb-3 text-[12px] font-extrabold tracking-widest" style={{ color: p.color }}>{p.n}</div>
+                  <h3 className="mb-2 text-[14px] font-bold text-[#1a1a1a]">{p.title}</h3>
+                  <p className="text-[12px] leading-relaxed text-[#6B5A5A]">{p.desc}</p>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -1024,7 +1006,7 @@ export default function AboutPageClient() {
               <div className="absolute top-4 left-4 text-[40px] font-serif text-[#7B5EA7]/10">&ldquo;</div>
               <div className="absolute bottom-4 right-4 text-[40px] font-serif text-[#7B5EA7]/10">&rdquo;</div>
               <div className="relative mx-auto mb-4 h-24 w-24">
-                <Image src="/images/emp/founder.jpeg" alt="Saheb Alam" width={96} height={96} className="rounded-full object-cover h-24 w-24" />
+                <Image src="/verify/co-founder.png" alt="Saheb Alam" width={96} height={96} className="rounded-full object-cover h-24 w-24" />
                 <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#22C55E] ring-2 ring-white">
                   <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                 </div>

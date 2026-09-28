@@ -343,20 +343,20 @@ function ProjectCarousel({ projects, sectionLabel, sectionIcon, sectionColor }) 
   return (
     <div className="mb-16">
       {/* Section label + arrows */}
-      <div className="mb-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl" style={{ backgroundColor: `${sectionColor}15`, color: sectionColor }}>{sectionIcon}</div>
-          <h3 className="text-[24px] font-extrabold" style={{ color: "#1a1a1a" }}>{sectionLabel}</h3>
-          <div className="h-px flex-1 min-w-[40px]" style={{ backgroundColor: "rgba(198,209,215,0.5)" }} />
+      <div className="mb-6 flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div className="flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: `${sectionColor}15`, color: sectionColor }}>{sectionIcon}</div>
+          <h3 className="text-[20px] sm:text-[24px] font-extrabold" style={{ color: "#1a1a1a" }}>{sectionLabel}</h3>
+          <div className="h-px flex-1 min-w-[20px] hidden sm:block" style={{ backgroundColor: "rgba(198,209,215,0.5)" }} />
         </div>
-        <div className="flex gap-2">
-          <button onClick={prev} className="flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-200 hover:border-[#1FA0B1] hover:text-[#1FA0B1] hover:shadow-sm"
+        <div className="flex gap-2 shrink-0">
+          <button onClick={prev} className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border-2 transition-all duration-200 hover:border-[#1FA0B1] hover:text-[#1FA0B1] hover:shadow-sm"
             style={{ borderColor: "rgba(198,209,215,0.5)", color: "#6B5A5A", backgroundColor: "white" }}>
             <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <button onClick={next} className="flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-200 hover:border-[#1FA0B1] hover:text-[#1FA0B1] hover:shadow-sm"
+          <button onClick={next} className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border-2 transition-all duration-200 hover:border-[#1FA0B1] hover:text-[#1FA0B1] hover:shadow-sm"
             style={{ borderColor: "rgba(198,209,215,0.5)", color: "#6B5A5A", backgroundColor: "white" }}>
             <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -366,10 +366,10 @@ function ProjectCarousel({ projects, sectionLabel, sectionIcon, sectionColor }) 
       </div>
 
       {/* Main card */}
-      <div key={animKey} className="mb-5 grid overflow-hidden rounded-2xl border shadow-sm"
+      <div key={animKey} className="mb-5 overflow-hidden rounded-2xl border shadow-sm flex flex-col sm:grid"
         style={{ borderColor: "rgba(198,209,215,0.4)", gridTemplateColumns: "1fr 1.5fr", backgroundColor: "white" }}>
-        {/* Left: image with browser mockup */}
-        <div className="relative flex items-center justify-center overflow-hidden p-6" style={{ backgroundColor: `${p.accent}06`, background: `linear-gradient(135deg, ${p.accent}08 0%, ${p.accent}03 50%, rgba(250,247,245,1) 100%)` }}>
+        {/* Top/Left: image with browser mockup */}
+        <div className="relative flex items-center justify-center overflow-hidden p-4 sm:p-6" style={{ backgroundColor: `${p.accent}06`, background: `linear-gradient(135deg, ${p.accent}08 0%, ${p.accent}03 50%, rgba(250,247,245,1) 100%)` }}>
           {/* Decorative dots pattern */}
           <div className="pointer-events-none absolute top-4 left-4 grid grid-cols-3 gap-1.5 opacity-20">
             {Array.from({ length: 9 }).map((_, i) => (
@@ -387,9 +387,9 @@ function ProjectCarousel({ projects, sectionLabel, sectionIcon, sectionColor }) 
             {/* Browser top bar */}
             <div className="flex items-center gap-2 px-3 py-2" style={{ backgroundColor: "#f1f3f5" }}>
               <div className="flex gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#FF5F57" }} />
-                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#FEBC2E" }} />
-                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#28C840" }} />
+                <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full" style={{ backgroundColor: "#FF5F57" }} />
+                <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full" style={{ backgroundColor: "#FEBC2E" }} />
+                <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full" style={{ backgroundColor: "#28C840" }} />
               </div>
               <div className="mx-2 flex-1 rounded-md px-3 py-1 text-[10px] font-medium truncate" style={{ backgroundColor: "#fff", color: "#999", border: "1px solid #e5e7eb" }}>
                 {p.demo || `nfnexatech.com/projects/${p.slug}`}
@@ -397,60 +397,60 @@ function ProjectCarousel({ projects, sectionLabel, sectionIcon, sectionColor }) 
             </div>
             {/* Screenshot */}
             <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: "#fff" }}>
-              <Image src={p.image} alt={p.title} fill className="object-contain" sizes="40vw" priority />
+              <Image src={p.image} alt={p.title} fill className="object-contain" sizes="(max-width: 640px) 92vw, 40vw" priority />
             </div>
           </div>
         </div>
-        {/* Right: details */}
-        <div className="flex flex-col gap-4 border-l p-6" style={{ borderColor: "rgba(198,209,215,0.3)" }}>
+        {/* Bottom/Right: details */}
+        <div className="flex flex-col gap-3 sm:gap-4 border-t sm:border-t-0 sm:border-l p-4 sm:p-6" style={{ borderColor: "rgba(198,209,215,0.3)" }}>
           <div className="flex flex-wrap gap-2">
             {p.tags.map((tag, i) => (
-              <span key={tag} className="rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider"
+              <span key={tag} className="rounded-full px-3 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider"
                 style={{ backgroundColor: `${p.tagColors[i]}12`, color: p.tagColors[i] }}>{tag}</span>
             ))}
           </div>
-          <h3 className="text-[28px] font-extrabold leading-tight" style={{ color: "#1a1a1a" }}>{p.title}</h3>
-          <p className="text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>{p.description}</p>
-          <div className="flex flex-wrap gap-5">
+          <h3 className="text-[22px] sm:text-[28px] font-extrabold leading-tight" style={{ color: "#1a1a1a" }}>{p.title}</h3>
+          <p className="text-[13px] sm:text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>{p.description}</p>
+          <div className="flex flex-wrap gap-3 sm:gap-5">
             {p.features.map((f) => (
               <div key={f.label} className="flex flex-col items-center gap-1 text-center">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: `${p.accent}12`, color: p.accent }}>{f.icon}</div>
-                <span className="text-[10px] font-medium leading-tight whitespace-pre-line" style={{ color: "#6B5A5A" }}>{f.label}</span>
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl" style={{ backgroundColor: `${p.accent}12`, color: p.accent }}>{f.icon}</div>
+                <span className="text-[9px] sm:text-[10px] font-medium leading-tight whitespace-pre-line" style={{ color: "#6B5A5A" }}>{f.label}</span>
               </div>
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
             {p.tech.map((t) => (
-              <span key={t} className="rounded-full px-3 py-1 text-[11px] font-semibold"
+              <span key={t} className="rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-[11px] font-semibold"
                 style={{ backgroundColor: `${p.accent}10`, color: p.accent }}>{t}</span>
             ))}
           </div>
           <div className="mt-auto flex flex-wrap gap-3 pt-2">
             <Link href={`/projects/${p.slug}`}
-              className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[13px] font-bold text-white transition-all duration-200 hover:scale-[1.03] hover:shadow-lg"
+              className="inline-flex items-center gap-2 rounded-full px-5 sm:px-6 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-bold text-white transition-all duration-200 hover:scale-[1.03] hover:shadow-lg"
               style={{ backgroundColor: p.accent, boxShadow: `0 4px 14px ${p.accent}30` }}>
               View Case Study →
             </Link>
             {p.demo ? (
               <a href={p.demo} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border-2 px-6 py-2.5 text-[13px] font-semibold transition-all duration-200 hover:scale-[1.03] hover:shadow-sm"
+                className="inline-flex items-center gap-2 rounded-full border-2 px-5 sm:px-6 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-semibold transition-all duration-200 hover:scale-[1.03] hover:shadow-sm"
                 style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "white" }}>Live Demo ↗</a>
             ) : (
               <Link href={`/projects/${p.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border-2 px-6 py-2.5 text-[13px] font-semibold transition-all duration-200 hover:scale-[1.03] hover:shadow-sm"
+                className="inline-flex items-center gap-2 rounded-full border-2 px-5 sm:px-6 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-semibold transition-all duration-200 hover:scale-[1.03] hover:shadow-sm"
                 style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "white" }}>Live Demo ↗</Link>
             )}
           </div>
         </div>
       </div>
 
-      {/* Thumbnail cards */}
-      <div className="grid gap-2.5" style={{ gridTemplateColumns: `repeat(${projects.length}, 1fr)` }}>
+      {/* Thumbnail cards — horizontal scroll on mobile */}
+      <div className="flex gap-2 overflow-x-auto pb-1 sm:grid sm:gap-2.5 scrollbar-hide" style={{ gridTemplateColumns: `repeat(${projects.length}, 1fr)` }}>
         {projects.map((proj, idx) => (
           <button
             key={`${proj.slug}-${idx}`}
             onClick={() => handleNav(idx)}
-            className={`group relative overflow-hidden rounded-xl border-2 transition-all duration-300 ${active === idx ? "shadow-lg scale-[1.03]" : "hover:scale-[1.02] hover:shadow-md"}`}
+            className={`group relative overflow-hidden rounded-xl border-2 transition-all duration-300 shrink-0 sm:shrink w-[120px] sm:w-auto ${active === idx ? "shadow-lg scale-[1.03]" : "hover:scale-[1.02] hover:shadow-md"}`}
             style={{
               borderColor: active === idx ? proj.accent : "rgba(198,209,215,0.4)",
               backgroundColor: "white",

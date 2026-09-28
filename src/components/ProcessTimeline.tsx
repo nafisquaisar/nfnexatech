@@ -96,7 +96,7 @@ export default function ProcessTimeline() {
             <span className="h-px w-10" style={{ backgroundColor: "rgba(31,160,177,0.5)" }} />
             <span className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: "#1FA0B1" }}>Our Process</span>
           </motion.div>
-          <motion.h2 variants={headingReveal} className="text-[36px] font-extrabold tracking-tight sm:text-[42px]" style={{ color: "#1a1a1a" }}>
+          <motion.h2 variants={headingReveal} className="text-[28px] sm:text-[36px] font-extrabold tracking-tight lg:text-[42px]" style={{ color: "#1a1a1a" }}>
             How We Work{" "}
             <span style={{ color: "#E8763A" }}>Together</span>
           </motion.h2>
@@ -121,17 +121,9 @@ export default function ProcessTimeline() {
               className="relative flex flex-col"
               whileHover={{ y: -4, transition: { duration: 0.28, ease: EASE_SPRING } }}
             >
-
-              {/* Dotted connector arrow — between cards (desktop only) */}
-              {i < STEPS.length - 1 && (
-                <div className="absolute top-[36px] left-full z-10 hidden lg:flex items-center" style={{ width: "calc(100% - 100%)", marginLeft: "-1px" }}>
-                  {/* We use a pseudo approach via the gap */}
-                </div>
-              )}
-
               {/* Card */}
               <div
-                className="flex flex-col gap-3 rounded-2xl border p-5 shadow-sm h-full transition-all hover:shadow-md hover:-translate-y-0.5"
+                className="flex flex-col gap-3 rounded-2xl border p-4 sm:p-5 shadow-sm h-full transition-all hover:shadow-md hover:-translate-y-0.5"
                 style={{ borderColor: "rgba(198,209,215,0.5)", backgroundColor: "rgba(255,255,255,0.92)" }}
               >
                 {/* Top row: step number + icon */}
@@ -146,7 +138,7 @@ export default function ProcessTimeline() {
 
                   {/* Icon badge */}
                   <span
-                    className="flex h-11 w-11 items-center justify-center rounded-xl"
+                    className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl"
                     style={{ backgroundColor: step.bg, color: step.color }}
                   >
                     {step.icon}
@@ -154,7 +146,7 @@ export default function ProcessTimeline() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-[15px] font-bold" style={{ color: "#1a1a1a" }}>
+                <h3 className="text-[14px] sm:text-[15px] font-bold" style={{ color: "#1a1a1a" }}>
                   {step.title}
                 </h3>
 
@@ -165,18 +157,32 @@ export default function ProcessTimeline() {
 
                 {/* Time badge */}
                 <div
-                  className="mt-auto flex items-center gap-1.5 rounded-lg px-3 py-2"
+                  className="mt-auto flex items-center gap-1.5 rounded-lg px-2.5 sm:px-3 py-2"
                   style={{ backgroundColor: step.bg }}
                 >
                   {/* Clock icon */}
                   <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke={step.color} strokeWidth={2} viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <span className="text-[11px] font-semibold" style={{ color: step.color }}>
+                  <span className="text-[10px] sm:text-[11px] font-semibold" style={{ color: step.color }}>
                     {step.duration}
                   </span>
                 </div>
               </div>
+
+              {/* Vertical connector — mobile only (between cards) */}
+              {i < STEPS.length - 1 && (
+                <div className="flex lg:hidden flex-col items-center py-1">
+                  <div className="flex flex-col items-center gap-0.5">
+                    {[0, 1, 2].map((d) => (
+                      <div key={d} className="rounded-full" style={{ width: 4, height: 4, backgroundColor: "rgba(198,209,215,0.9)" }} />
+                    ))}
+                  </div>
+                  <svg className="h-3 w-3 mt-0.5" fill="none" viewBox="0 0 12 12">
+                    <path d="M6 2v8M3 7l3 3 3-3" stroke="#E8763A" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              )}
             </motion.div>
           ))}
 
