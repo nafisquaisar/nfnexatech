@@ -48,32 +48,37 @@ export default function BlogPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen text-[#1a1a1a] overflow-x-hidden" style={{ backgroundColor: "#FAF7F5" }}>
       <Navbar />
 
       {/* ── HERO HEADER ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden pb-12 pt-36">
+      <section className="relative overflow-hidden pb-12 pt-36" style={{ background: "linear-gradient(135deg, #F0F7FF 0%, #FAF7F5 50%, #FFF4ED 100%)" }}>
         {/* Glow blobs */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/8 blur-[120px]"
+          className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
+          style={{ backgroundColor: "rgba(31,160,177,0.12)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-20 right-0 h-[300px] w-[300px] rounded-full bg-purple-500/10 blur-[100px]"
+          className="pointer-events-none absolute -bottom-20 right-0 h-[300px] w-[300px] rounded-full blur-[100px]"
+          style={{ backgroundColor: "rgba(232,118,58,0.10)" }}
         />
 
-        <div className="relative mx-auto w-[92%] max-w-6xl text-center">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
+        <div className="relative mx-auto w-[92%] max-w-6xl">
+          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-[#1FA0B1]">
             Insights & Guides
           </p>
-          <h1 className="mb-5 text-5xl font-extrabold leading-tight text-white sm:text-6xl">
+          <h1 className="mb-5 text-[42px] font-extrabold leading-tight text-[#1a1a1a] sm:text-[56px]">
             The NF Nexa Tech{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: "linear-gradient(90deg, #1FA0B1 0%, #E8763A 100%)" }}
+            >
               Blog
             </span>
           </h1>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-400">
+          <p className="max-w-2xl text-[15px] leading-relaxed" style={{ color: "#6B5A5A" }}>
             Practical guides on web development, mobile apps, SaaS MVPs, and
             software engineering — written by developers who ship production
             software.
@@ -86,11 +91,11 @@ export default function BlogPage() {
         {featuredPost && (
           <section className="mb-16">
             <div className="mb-5 flex items-center gap-3">
-              <span className="h-px flex-1 bg-white/8" />
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+              <span className="h-px flex-1" style={{ backgroundColor: "rgba(31,160,177,0.2)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#1FA0B1" }}>
                 Featured
               </span>
-              <span className="h-px flex-1 bg-white/8" />
+              <span className="h-px flex-1" style={{ backgroundColor: "rgba(31,160,177,0.2)" }} />
             </div>
             <BlogCard post={featuredPost} featured />
           </section>
@@ -99,43 +104,15 @@ export default function BlogPage() {
         {/* ── ALL POSTS: Search + Filter + Grid ───────────── */}
         <section>
           <div className="mb-5 flex items-center gap-3">
-            <span className="h-px flex-1 bg-white/8" />
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <span className="h-px flex-1" style={{ backgroundColor: "rgba(31,160,177,0.2)" }} />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#1FA0B1" }}>
               All Articles ({allPosts.length})
             </span>
-            <span className="h-px flex-1 bg-white/8" />
+            <span className="h-px flex-1" style={{ backgroundColor: "rgba(31,160,177,0.2)" }} />
           </div>
 
           {/* BlogFilters is a client component — handles search + category */}
           <BlogFilters posts={remainingPosts} categories={categories} />
-        </section>
-
-        {/* ── NEWSLETTER / CTA STRIP ──────────────────────── */}
-        <section className="mt-24 rounded-3xl border border-white/10 bg-white/[0.02] p-10 text-center">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-            Work with us
-          </p>
-          <h2 className="mb-4 text-3xl font-bold text-white">
-            Have a project in mind?
-          </h2>
-          <p className="mx-auto mb-8 max-w-xl text-base text-slate-400">
-            We help startups and businesses build web apps, mobile apps, and
-            SaaS products — from concept to production.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/#contact"
-              className="rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-7 py-3 text-sm font-bold text-white transition hover:opacity-90"
-            >
-              Start a Project
-            </Link>
-            <Link
-              href="/#services"
-              className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300 transition hover:border-cyan-400/40 hover:text-white"
-            >
-              View Services
-            </Link>
-          </div>
         </section>
       </div>
 

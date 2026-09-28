@@ -7,28 +7,53 @@ interface TableOfContentsProps {
   items: TocItem[];
 }
 
-/**
- * Sticky table of contents for the blog sidebar.
- * Highlights the currently visible section using IntersectionObserver.
- * Client-only — IntersectionObserver is a browser API.
- */
-export default function TableOfContents({ items }: TableOfContentsProps) {
-  const [activeId, setActiveId] = useState<string>("");
+/* Group flat items into H2 sections, each carrying their H3 children */
+interface TocSection {
+  h2: TocItem;
+  children: TocItem[];
+}
 
-  /* ── Intersection observer to track active heading ── */
+function groupItems(items: TocItem[]): TocSection[] {
+  const sections: TocSection[] = [];
+  let current: TocSection | null = null;
+
+  for (const item of items) {
+    if (item.level === 2) {
+      current = { h2: item, children: [] };
+      sections.push(current);
+    } else if (item.level === 3 && current) {
+      current.children.push(item);
+    }
+  }
+  return sections;
+}
+
+export default function TableOfContents({ items }: TableOfContentsProps) {
+  const [activeId, setActiveId]         = useState<string>("");
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set());
+
+  const sections = groupItems(items);
+
+  /* ── Intersection observer ── */
   useEffect(() => {
     if (items.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Pick the first entry that is visible
         const visible = entries.find((e) => e.isIntersecting);
-        if (visible) setActiveId(visible.target.id);
+        if (!visible) return;
+        const id = visible.target.id;
+        setActiveId(id);
+
+        /* Auto-expand the parent section of the active heading */
+        const parentSection = sections.find(
+          (s) => s.h2.id === id || s.children.some((c) => c.id === id)
+        );
+        if (parentSection) {
+          setOpenSections((prev) => new Set([...prev, parentSection.h2.id]));
+        }
       },
-      {
-        rootMargin: "-80px 0px -70% 0px", // trigger when heading enters top 30% of viewport
-        threshold: 0,
-      }
+      { rootMargin: "-80px 0px -70% 0px", threshold: 0 }
     );
 
     items.forEach(({ id }) => {
@@ -37,49 +62,148 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
     });
 
     return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
-  const handleClick = useCallback(
+  const scrollTo = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       e.preventDefault();
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-        setActiveId(id);
-      }
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      setActiveId(id);
     },
     []
   );
 
-  if (items.length === 0) return null;
+  const toggleSection = (id: string) => {
+    setOpenSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  if (sections.length === 0) return null;
 
   return (
     <nav
       aria-label="Table of contents"
-      className="overflow-y-auto rounded-xl border border-white/10 bg-white/[0.02] p-5"
+      className="flex min-h-0 flex-1 flex-col rounded-xl"
+      style={{
+        border: "1px solid rgba(198,209,215,0.45)",
+        backgroundColor: "#FFFFFF",
+        boxShadow: "0 1px 6px rgba(0,0,0,0.04)",
+      }}
     >
-      <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-        On this page
-      </p>
+      {/* Header — never scrolls */}
+      <div
+        className="flex items-center gap-2 px-4 py-3"
+        style={{ borderBottom: "1px solid rgba(198,209,215,0.35)" }}
+      >
+        {/* List icon */}
+        <svg
+          className="h-3.5 w-3.5 flex-shrink-0"
+          style={{ color: "#9B8B8B" }}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          viewBox="0 0 24 24"
+        >
+          <line x1="8"  y1="6"  x2="21" y2="6"  />
+          <line x1="8"  y1="12" x2="21" y2="12" />
+          <line x1="8"  y1="18" x2="21" y2="18" />
+          <line x1="3"  y1="6"  x2="3.01" y2="6"  />
+          <line x1="3"  y1="12" x2="3.01" y2="12" />
+          <line x1="3"  y1="18" x2="3.01" y2="18" />
+        </svg>
+        <span
+          className="text-[10px] font-bold uppercase tracking-[0.2em]"
+          style={{ color: "#9B8B8B" }}
+        >
+          On this page
+        </span>
+      </div>
 
-      <ul className="space-y-1.5">
-        {items.map((item) => {
-          const isActive = activeId === item.id;
-          const isH3 = item.level === 3;
+      {/* Sections — scroll internally when list is long */}
+      <ul className="overflow-y-auto py-2" style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(198,209,215,0.6) transparent" }}>
+        {sections.map((section) => {
+          const isOpen      = openSections.has(section.h2.id);
+          const isH2Active  = activeId === section.h2.id;
+          const hasChildren = section.children.length > 0;
+          const isChildActive = section.children.some((c) => c.id === activeId);
 
           return (
-            <li key={item.id} className={isH3 ? "ml-3" : ""}>
-              <a
-                href={`#${item.id}`}
-                onClick={(e) => handleClick(e, item.id)}
-                className={`block rounded-md px-3 py-1.5 text-xs leading-5 transition-all duration-200 ${
-                  isActive
-                    ? "border-l-2 border-cyan-400 bg-cyan-400/10 font-semibold text-cyan-300"
-                    : "border-l-2 border-transparent text-slate-500 hover:border-white/20 hover:text-slate-300"
-                }`}
-              >
-                {item.text}
-              </a>
+            <li key={section.h2.id}>
+              {/* H2 row */}
+              <div className="flex items-center">
+                <a
+                  href={`#${section.h2.id}`}
+                  onClick={(e) => scrollTo(e, section.h2.id)}
+                  className="flex-1 truncate px-4 py-1.5 text-[12px] transition-colors duration-150"
+                  style={{
+                    color: isH2Active || isChildActive ? "#1FA0B1" : "#374151",
+                    fontWeight: isH2Active || isChildActive ? 600 : 400,
+                  }}
+                  title={section.h2.text}
+                >
+                  {section.h2.text}
+                </a>
+
+                {/* Collapse toggle — only if has children */}
+                {hasChildren && (
+                  <button
+                    aria-label={isOpen ? "Collapse section" : "Expand section"}
+                    onClick={() => toggleSection(section.h2.id)}
+                    className="mr-3 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded transition-colors hover:bg-gray-100"
+                  >
+                    <svg
+                      className="h-3 w-3 transition-transform duration-200"
+                      style={{
+                        color: "#9B8B8B",
+                        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+
+              {/* H3 children — collapsible */}
+              {hasChildren && isOpen && (
+                <ul className="mb-1">
+                  {section.children.map((child) => {
+                    const isChildItemActive = activeId === child.id;
+                    return (
+                      <li key={child.id}>
+                        <a
+                          href={`#${child.id}`}
+                          onClick={(e) => scrollTo(e, child.id)}
+                          className="block truncate py-1 pl-8 pr-4 text-[11px] transition-colors duration-150"
+                          style={{
+                            color: isChildItemActive ? "#1FA0B1" : "#9B8B8B",
+                            fontWeight: isChildItemActive ? 600 : 400,
+                            borderLeft: isChildItemActive
+                              ? "2px solid #1FA0B1"
+                              : "2px solid transparent",
+                            paddingLeft: isChildItemActive ? "28px" : "30px",
+                          }}
+                          title={child.text}
+                        >
+                          {child.text}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </li>
           );
         })}

@@ -40,10 +40,11 @@ export default function BlogFilters({ posts, categories }: BlogFiltersProps) {
         <div className="relative w-full max-w-sm">
           <svg
             aria-hidden="true"
-            className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500"
+            className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            style={{ color: "#9B8B8B" }}
           >
             <path
               strokeLinecap="round"
@@ -57,7 +58,8 @@ export default function BlogFilters({ posts, categories }: BlogFiltersProps) {
             placeholder="Search articles…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-cyan-400/40 focus:outline-none focus:ring-0 transition-colors"
+            className="w-full rounded-xl border py-2.5 pl-10 pr-4 text-sm placeholder:text-[#9B8B8B] focus:outline-none focus:ring-0 transition-colors"
+            style={{ borderColor: "rgba(198,209,215,0.5)", backgroundColor: "rgba(255,255,255,0.8)", color: "#1a1a1a" }}
           />
         </div>
 
@@ -73,9 +75,10 @@ export default function BlogFilters({ posts, categories }: BlogFiltersProps) {
               onClick={() => setActiveCategory(cat)}
               className={`rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${
                 activeCategory === cat
-                  ? "border-cyan-400/60 bg-cyan-400/10 text-cyan-300"
-                  : "border-white/10 bg-white/[0.02] text-slate-400 hover:border-white/20 hover:text-slate-200"
+                  ? "border-[#1FA0B1]/60 bg-[#B5E5EB]/20 text-[#1FA0B1]"
+                  : "bg-white text-[#6B5A5A] hover:border-[#1FA0B1]/30 hover:text-[#1FA0B1]"
               }`}
+              style={{ borderColor: activeCategory === cat ? undefined : "rgba(198,209,215,0.5)" }}
             >
               {cat}
             </button>
@@ -91,13 +94,13 @@ export default function BlogFilters({ posts, categories }: BlogFiltersProps) {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-white/8 bg-white/[0.02] py-20 text-center">
+        <div className="flex flex-col items-center justify-center rounded-2xl border py-20 text-center" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "rgba(255,255,255,0.6)" }}>
           <svg
-            aria-hidden="true"
-            className="mb-4 h-12 w-12 text-slate-600"
+            className="mb-4 h-12 w-12"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            style={{ color: "#C6D1D7" }}
           >
             <path
               strokeLinecap="round"
@@ -106,10 +109,10 @@ export default function BlogFilters({ posts, categories }: BlogFiltersProps) {
               d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="text-base font-medium text-slate-400">
+          <p className="text-base font-medium" style={{ color: "#1a1a1a" }}>
             No articles found
           </p>
-          <p className="mt-1 text-sm text-slate-600">
+          <p className="mt-1 text-sm" style={{ color: "#9B8B8B" }}>
             Try a different search term or category
           </p>
           <button
@@ -117,7 +120,8 @@ export default function BlogFilters({ posts, categories }: BlogFiltersProps) {
               setQuery("");
               setActiveCategory("All");
             }}
-            className="mt-5 rounded-lg border border-white/10 px-4 py-2 text-xs text-slate-400 hover:text-white transition-colors"
+            className="mt-5 rounded-full border px-4 py-2 text-xs transition-colors hover:text-[#1FA0B1] hover:border-[#1FA0B1]/40"
+            style={{ borderColor: "rgba(198,209,215,0.5)", color: "#6B5A5A" }}
           >
             Clear filters
           </button>
@@ -126,7 +130,7 @@ export default function BlogFilters({ posts, categories }: BlogFiltersProps) {
 
       {/* Result count */}
       {query || activeCategory !== "All" ? (
-        <p className="mt-6 text-center text-xs text-slate-600">
+        <p className="mt-6 text-center text-xs" style={{ color: "#9B8B8B" }}>
           {filtered.length} article{filtered.length !== 1 ? "s" : ""} found
         </p>
       ) : null}

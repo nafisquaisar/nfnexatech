@@ -8,7 +8,7 @@ import { motion, useInView } from "framer-motion";
 /* ── Static data ─────────────────────────────────────────────────────────── */
 
 const STATS = [
-  { value: "15+", label: "Projects Delivered", color: "#E8763A", bg: "rgba(249,225,205,0.7)" },
+  { value: "70+", label: "Projects Delivered", color: "#E8763A", bg: "rgba(249,225,205,0.7)" },
   { value: "10+", label: "Happy Clients",       color: "#1FA0B1", bg: "rgba(181,229,235,0.5)" },
   { value: "10",  label: "Team Members",        color: "#E8763A", bg: "rgba(249,225,205,0.7)" },
   { value: "2+",  label: "Years of Excellence", color: "#1FA0B1", bg: "rgba(181,229,235,0.5)" },
@@ -202,7 +202,7 @@ export default function AboutPageClient() {
         >
           {[
             {
-              value: "15+", label: "Projects Delivered", sub: "Across 6+ industries", color: "#E8763A", bg: "rgba(249,225,205,0.6)",
+              value: "70+", label: "Projects Delivered", sub: "Across 6+ industries", color: "#E8763A", bg: "rgba(249,225,205,0.6)",
               icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             },
             {

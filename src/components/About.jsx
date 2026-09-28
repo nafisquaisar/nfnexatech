@@ -9,7 +9,7 @@ const HIGHLIGHTS = [
   },
   {
     icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>,
-    text: "50+ Projects Delivered", sub: "Startups & businesses", color: "#E8763A", bg: "rgba(249,225,205,0.55)"
+    text: "70+ Projects Delivered", sub: "Startups & businesses", color: "#E8763A", bg: "rgba(249,225,205,0.55)"
   },
   {
     icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path strokeLinecap="round" strokeLinejoin="round" d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>,

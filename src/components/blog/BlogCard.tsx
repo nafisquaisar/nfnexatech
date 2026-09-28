@@ -11,18 +11,18 @@ interface BlogCardProps {
 /** Category badge colours — deterministic from category name */
 const CATEGORY_COLORS: Record<string, string> = {
   "Mobile Development":
-    "bg-cyan-400/10 text-cyan-300 border-cyan-400/20",
-  Business: "bg-purple-400/10 text-purple-300 border-purple-400/20",
-  Startup: "bg-emerald-400/10 text-emerald-300 border-emerald-400/20",
-  SaaS: "bg-blue-400/10 text-blue-300 border-blue-400/20",
-  Design: "bg-pink-400/10 text-pink-300 border-pink-400/20",
-  General: "bg-slate-400/10 text-slate-300 border-slate-400/20",
+    "bg-[#B5E5EB]/20 text-[#1FA0B1] border-[#1FA0B1]/25",
+  Business: "bg-[#F9E1CD]/30 text-[#E8763A] border-[#E8763A]/25",
+  Startup: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  SaaS: "bg-blue-50 text-blue-700 border-blue-200",
+  Design: "bg-pink-50 text-pink-700 border-pink-200",
+  General: "bg-[#F5F5F5] text-[#6B5A5A] border-[#E8E0D8]/60",
 };
 
 function categoryBadge(category: string) {
   const cls =
     CATEGORY_COLORS[category] ??
-    "bg-white/5 text-slate-300 border-white/10";
+    "bg-[#B5E5EB]/15 text-[#1FA0B1] border-[#1FA0B1]/20";
   return (
     <span
       className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-widest ${cls}`}
@@ -35,13 +35,13 @@ function categoryBadge(category: string) {
 /** Gradient placeholder when no image is provided */
 function ImagePlaceholder({ category }: { category: string }) {
   const gradients: Record<string, string> = {
-    "Mobile Development": "from-cyan-900/40 to-blue-900/40",
-    Business: "from-purple-900/40 to-slate-900/40",
-    Startup: "from-emerald-900/40 to-teal-900/40",
-    SaaS: "from-blue-900/40 to-indigo-900/40",
-    Design: "from-pink-900/40 to-rose-900/40",
+    "Mobile Development": "from-[#B5E5EB]/30 to-[#F0F7FF]",
+    Business: "from-[#F9E1CD]/30 to-[#FFF4ED]",
+    Startup: "from-emerald-50 to-teal-50",
+    SaaS: "from-blue-50 to-indigo-50",
+    Design: "from-pink-50 to-rose-50",
   };
-  const grad = gradients[category] ?? "from-slate-800/60 to-slate-900/60";
+  const grad = gradients[category] ?? "from-[#FAF7F5] to-[#F5F0EB]";
   return (
     <div
       className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${grad}`}
@@ -67,9 +67,10 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className={`group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-cyan-400/30 hover:bg-white/[0.04] hover:shadow-lg hover:shadow-cyan-500/5 ${
+      className={`group flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-lg ${
         featured ? "md:flex-row" : ""
       }`}
+      style={{ borderColor: "rgba(198,209,215,0.45)", backgroundColor: "rgba(255,255,255,0.92)" }}
     >
       {/* Thumbnail */}
       <div
@@ -95,7 +96,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
           <ImagePlaceholder category={post.category} />
         )}
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent" />
       </div>
 
       {/* Content */}
@@ -103,14 +104,14 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
         {/* Category + reading time */}
         <div className="flex items-center gap-3">
           {categoryBadge(post.category)}
-          <span className="text-xs text-slate-500">
+          <span className="text-xs" style={{ color: "#9B8B8B" }}>
             {post.readingTime} min read
           </span>
         </div>
 
         {/* Title */}
         <h3
-          className={`font-bold leading-snug text-white transition-colors group-hover:text-cyan-200 ${
+          className={`font-bold leading-snug text-[#1a1a1a] transition-colors group-hover:text-[#1FA0B1] ${
             featured ? "text-xl sm:text-2xl" : "text-lg"
           }`}
         >
@@ -118,7 +119,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
         </h3>
 
         {/* Description */}
-        <p className="line-clamp-2 flex-1 text-sm leading-6 text-slate-400">
+        <p className="line-clamp-2 flex-1 text-sm leading-6" style={{ color: "#6B5A5A" }}>
           {post.description}
         </p>
 
@@ -128,7 +129,8 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
             {post.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-md border border-white/8 bg-white/[0.03] px-2 py-0.5 text-[11px] text-slate-500"
+                className="rounded-md border px-2 py-0.5 text-[11px]"
+                style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "rgba(250,247,245,0.8)", color: "#9B8B8B" }}
               >
                 {tag}
               </span>
@@ -137,10 +139,10 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
         )}
 
         {/* Footer: Author + Date */}
-        <div className="mt-auto flex items-center justify-between border-t border-white/8 pt-4">
+        <div className="mt-auto flex items-center justify-between border-t pt-4" style={{ borderColor: "rgba(198,209,215,0.35)" }}>
           <div className="flex items-center gap-2">
             {/* Author avatar — initials fallback */}
-            <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 text-[10px] font-bold text-white">
+            <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ background: "linear-gradient(135deg, #1FA0B1 0%, #E8763A 100%)" }}>
               {post.author.name
                 .split(" ")
                 .map((n) => n[0])
@@ -148,14 +150,14 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
                 .slice(0, 2)}
             </div>
             <div>
-              <p className="text-xs font-medium text-slate-300">
+              <p className="text-xs font-medium text-[#1a1a1a]">
                 {post.author.name}
               </p>
             </div>
           </div>
           <time
             dateTime={post.date}
-            className="text-xs text-slate-500"
+            className="text-xs" style={{ color: "#9B8B8B" }}
           >
             {formatDate(post.date)}
           </time>

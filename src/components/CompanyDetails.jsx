@@ -52,7 +52,7 @@ const INFO_CARDS = [
 const STATS = [
   { icon: "📅", value: "2023", label: "Founded In", color: "#1FA0B1", bg: "rgba(181,229,235,0.4)" },
   { icon: "😊", value: "10+", label: "Happy Clients", color: "#E8763A", bg: "rgba(249,225,205,0.55)" },
-  { icon: "🚀", value: "50+", label: "Projects Delivered", color: "#1FA0B1", bg: "rgba(181,229,235,0.4)" },
+  { icon: "🚀", value: "70+", label: "Projects Delivered", color: "#1FA0B1", bg: "rgba(181,229,235,0.4)" },
   { icon: "🏆", value: "3+", label: "Years of Experience", color: "#7C5CBF", bg: "rgba(196,181,253,0.35)" },
 ];
 

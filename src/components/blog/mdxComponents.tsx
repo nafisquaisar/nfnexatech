@@ -10,21 +10,14 @@ import { CodeBlock } from "./CodeBlock";
 
 /* ─── Heading anchors ──────────────────────────────────────── */
 
-/**
- * Renders heading children alongside a "#" permalink.
- *
- * Previously this wrapped children inside an <a>, which caused a React
- * hydration error ("cannot nest <a> inside <a>") whenever MDX content
- * placed a link inside a heading. Now we render children as-is and
- * append a separate <a> for the permalink — no nesting possible.
- */
 function headingAnchor(id: string, children: React.ReactNode) {
   return (
     <span className="group/hl">
       {children}
       <a
         href={`#${id}`}
-        className="ml-2 no-underline opacity-0 text-cyan-500 transition-opacity duration-200 group-hover/hl:opacity-100"
+        className="ml-2 no-underline opacity-0 transition-opacity duration-200 group-hover/hl:opacity-100"
+        style={{ color: "#1FA0B1" }}
         aria-label={`Link to section: ${id}`}
       >
         #
@@ -40,7 +33,8 @@ export const mdxComponents = {
   h1: ({ children, id }: { children: React.ReactNode; id?: string }) => (
     <h1
       id={id}
-      className="mb-4 mt-10 scroll-mt-24 text-3xl font-extrabold leading-tight text-white sm:text-4xl"
+      className="mb-4 mt-10 scroll-mt-24 text-3xl font-extrabold leading-tight sm:text-4xl"
+      style={{ color: "#111827" }}
     >
       {id ? headingAnchor(id, children) : children}
     </h1>
@@ -49,7 +43,8 @@ export const mdxComponents = {
   h2: ({ children, id }: { children: React.ReactNode; id?: string }) => (
     <h2
       id={id}
-      className="mb-4 mt-12 scroll-mt-24 border-b border-white/8 pb-3 text-2xl font-bold text-white"
+      className="mb-4 mt-12 scroll-mt-24 pb-3 text-2xl font-bold border-b"
+      style={{ color: "#111827", borderColor: "rgba(198,209,215,0.5)" }}
     >
       {id ? headingAnchor(id, children) : children}
     </h2>
@@ -58,7 +53,8 @@ export const mdxComponents = {
   h3: ({ children, id }: { children: React.ReactNode; id?: string }) => (
     <h3
       id={id}
-      className="mb-3 mt-8 scroll-mt-24 text-xl font-bold text-slate-100"
+      className="mb-3 mt-8 scroll-mt-24 text-xl font-bold"
+      style={{ color: "#111827" }}
     >
       {id ? headingAnchor(id, children) : children}
     </h3>
@@ -67,7 +63,8 @@ export const mdxComponents = {
   h4: ({ children, id }: { children: React.ReactNode; id?: string }) => (
     <h4
       id={id}
-      className="mb-2 mt-6 scroll-mt-24 text-lg font-semibold text-slate-200"
+      className="mb-2 mt-6 scroll-mt-24 text-lg font-semibold"
+      style={{ color: "#1F2937" }}
     >
       {children}
     </h4>
@@ -75,7 +72,7 @@ export const mdxComponents = {
 
   /* Body text */
   p: ({ children }: { children: React.ReactNode }) => (
-    <p className="my-5 text-base leading-8 text-slate-300">{children}</p>
+    <p className="my-5 text-[16px] leading-[1.85]" style={{ color: "#374151" }}>{children}</p>
   ),
 
   /* Lists */
@@ -88,23 +85,26 @@ export const mdxComponents = {
   ),
 
   li: ({ children }: { children: React.ReactNode }) => (
-    <li className="flex items-start gap-2.5 text-base leading-7 text-slate-300">
-      <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400" />
+    <li className="flex items-start gap-2.5 text-[15px] leading-7" style={{ color: "#374151" }}>
+      <span className="mt-[10px] h-[6px] w-[6px] flex-shrink-0 rounded-full" style={{ backgroundColor: "#1FA0B1" }} />
       <span>{children}</span>
     </li>
   ),
 
   /* Inline elements */
   strong: ({ children }: { children: React.ReactNode }) => (
-    <strong className="font-semibold text-white">{children}</strong>
+    <strong className="font-semibold" style={{ color: "#111827" }}>{children}</strong>
   ),
 
   em: ({ children }: { children: React.ReactNode }) => (
-    <em className="italic text-slate-200">{children}</em>
+    <em className="italic" style={{ color: "#4B5563" }}>{children}</em>
   ),
 
   code: ({ children }: { children: React.ReactNode }) => (
-    <code className="rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-sm text-cyan-300">
+    <code
+      className="rounded-md px-1.5 py-0.5 font-mono text-sm"
+      style={{ backgroundColor: "rgba(31,160,177,0.08)", color: "#1FA0B1", border: "1px solid rgba(31,160,177,0.15)" }}
+    >
       {children}
     </code>
   ),
@@ -114,40 +114,46 @@ export const mdxComponents = {
 
   /* Blockquote */
   blockquote: ({ children }: { children: React.ReactNode }) => (
-    <blockquote className="my-6 rounded-r-xl border-l-4 border-cyan-400/50 bg-cyan-400/5 py-1 pl-6 pr-4 italic text-slate-400">
+    <blockquote
+      className="my-6 rounded-r-xl py-3 pl-5 pr-4 not-italic"
+      style={{ borderLeft: "3px solid #1FA0B1", backgroundColor: "rgba(181,229,235,0.07)", color: "#4B5563" }}
+    >
       {children}
     </blockquote>
   ),
 
   /* Tables */
   table: ({ children }: { children: React.ReactNode }) => (
-    <div className="my-7 overflow-x-auto rounded-xl border border-white/10">
+    <div className="my-7 overflow-x-auto rounded-xl border" style={{ borderColor: "rgba(198,209,215,0.4)" }}>
       <table className="w-full border-collapse text-sm">{children}</table>
     </div>
   ),
 
   thead: ({ children }: { children: React.ReactNode }) => (
-    <thead className="bg-white/[0.04]">{children}</thead>
+    <thead style={{ backgroundColor: "rgba(181,229,235,0.1)" }}>{children}</thead>
   ),
 
   th: ({ children }: { children: React.ReactNode }) => (
-    <th className="border-b border-white/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">
+    <th
+      className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider border-b"
+      style={{ color: "#374151", backgroundColor: "rgba(243,244,246,0.8)", borderColor: "rgba(198,209,215,0.4)" }}
+    >
       {children}
     </th>
   ),
 
   td: ({ children }: { children: React.ReactNode }) => (
-    <td className="border-b border-white/8 px-4 py-3 text-slate-300">
+    <td className="border-b px-4 py-3 text-[14px]" style={{ color: "#374151", borderColor: "rgba(198,209,215,0.3)" }}>
       {children}
     </td>
   ),
 
   tr: ({ children }: { children: React.ReactNode }) => (
-    <tr className="transition-colors hover:bg-white/[0.02]">{children}</tr>
+    <tr className="transition-colors hover:bg-[#B5E5EB]/5">{children}</tr>
   ),
 
   /* HR */
-  hr: () => <hr className="my-10 border-white/10" />,
+  hr: () => <hr className="my-10" style={{ borderColor: "rgba(198,209,215,0.4)" }} />,
 
   /* Links */
   a: ({
@@ -160,7 +166,8 @@ export const mdxComponents = {
       return (
         <Link
           href={href}
-          className="text-cyan-400 underline underline-offset-2 transition hover:text-cyan-300"
+          className="underline underline-offset-2 transition hover:opacity-80"
+          style={{ color: "#1FA0B1" }}
           {...props}
         >
           {children}
@@ -172,7 +179,8 @@ export const mdxComponents = {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-cyan-400 underline underline-offset-2 transition hover:text-cyan-300"
+        className="underline underline-offset-2 transition hover:opacity-80"
+        style={{ color: "#1FA0B1" }}
         {...props}
       >
         {children}
@@ -191,7 +199,8 @@ export const mdxComponents = {
       src={src}
       alt={alt ?? ""}
       loading="lazy"
-      className="my-8 w-full rounded-xl border border-white/10 object-cover shadow-lg shadow-black/30"
+      className="my-8 w-full rounded-xl object-cover shadow-md"
+      style={{ border: "1px solid rgba(198,209,215,0.4)" }}
       {...props}
     />
   ),

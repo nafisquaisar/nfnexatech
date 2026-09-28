@@ -43,7 +43,7 @@ export const siteConfig = {
   ],
 
   stats: [
-    { value: "15+", label: "Projects Delivered" },
+    { value: "70+", label: "Projects Delivered" },
     { value: "10+", label: "Happy Clients" },
     { value: "4+", label: "Years of Excellence" },
     { value: "100%", label: "On-Time Delivery" },
