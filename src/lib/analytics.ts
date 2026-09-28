@@ -19,7 +19,8 @@ export type TrackEventName =
   | "form_submit_success"
   | "form_submit_error"
   | "blog_read"
-  | "service_view";
+  | "service_view"
+  | "contact_form_submit";
 
 interface EventProps {
   label?: string;
