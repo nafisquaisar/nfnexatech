@@ -11,14 +11,7 @@ import { trackGoogleAdsConversion } from "@/lib/googleAds";
  * Positioned bottom-right, above any mobile navigation.
  */
 export default function WhatsAppCta() {
-  const [visible, setVisible] = useState(false);
   const [pulsed, setPulsed] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setVisible(window.scrollY > 300);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Pulse the button after 5s to draw attention
   useEffect(() => {
@@ -40,8 +33,7 @@ export default function WhatsAppCta() {
         trackEvent("whatsapp_click", { label: "floating_whatsapp_cta" });
         trackGoogleAdsConversion();
       }}
-      className={`relative flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 shadow-lg shadow-black/30 transition-all duration-500 hover:bg-[#20BD5B] hover:shadow-xl hover:shadow-[#25D366]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] ${visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0 pointer-events-none"
-        }`}
+      className="relative flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 shadow-lg shadow-black/30 transition-all duration-500 hover:bg-[#20BD5B] hover:shadow-xl hover:shadow-[#25D366]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
     >
       {/* Pulse ring */}
       {pulsed && (

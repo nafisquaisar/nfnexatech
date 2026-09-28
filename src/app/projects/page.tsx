@@ -54,24 +54,90 @@ const staticProjects = [
   {
     slug: "medon-company",
     title: "Medon Company",
-    subtitle: "Service Booking Platform for Delhi NCR",
+    subtitle: "Appliance Repair & Service Booking Website",
     category: "Web Platform",
     description:
-      "A high-performance, SEO-optimized service booking platform for a Delhi NCR home appliance repair business. Hyper-local landing pages, WhatsApp lead generation, and Firebase-powered gallery.",
+      "A service website built for Medon Company to help customers find appliance repair services, explore service areas, and book a visit online.",
     heroImage: "/images/projects/medon/home.png",
     color: "#06b6d4",
-    tech: ["Next.js", "Firebase", "Tailwind CSS"],
+    tech: ["Next.js", "Tailwind CSS", "Firebase"],
   },
   {
     slug: "train-your-tech",
     title: "Train Your Tech",
-    subtitle: "AI-Powered Placement Preparation Platform",
-    category: "SaaS Platform",
+    subtitle: "Placement Preparation Platform for Students",
+    category: "EdTech Platform",
     description:
-      "An AI-powered EdTech SaaS platform with mock interviews, resume analyzer, job portal, course management, and online tests — built with Spring Boot, React, Firebase, and MySQL.",
+      "A placement preparation platform that brings courses, resume analysis, interview practice, tests, and job opportunities together for students.",
     heroImage: "/images/projects/trainyourtech/landing.png",
     color: "#a855f7",
-    tech: ["Spring Boot", "React", "Firebase", "MySQL"],
+    tech: ["React", "Spring Boot", "MySQL", "Firebase"],
+  },
+  {
+    slug: "madza-company",
+    title: "Madza Company",
+    subtitle: "Home Services Platform",
+    category: "Home Services",
+    description:
+      "A home services website that helps customers explore and book AC, appliance, invisible grill, electrical, and plumbing services.",
+    heroImage: "/images/projects/madzacompany/home.png",
+    color: "#06b6d4",
+    tech: ["Next.js", "Tailwind CSS", "Firebase"],
+  },
+  {
+    slug: "popular-bread",
+    title: "Popular Bread",
+    subtitle: "Bread Business Management App",
+    category: "Business Management App",
+    description:
+      "A business management app built to manage bread purchases, stock, sales, wastage, capital, and daily business performance in one place.",
+    heroImage: "/images/projects/popular/popular_preview.png",
+    color: "#f97316",
+    tech: ["Android", "Firebase", "Hive", "Cloud Storage"],
+  },
+  {
+    slug: "tunelyf",
+    title: "TuneLyf",
+    subtitle: "Online & Local Music Player",
+    category: "Music & Entertainment",
+    description:
+      "A music player that brings online and local music together, with search, favorites, playlists, recent plays, and background playback.",
+    heroImage: "/images/projects/tunelyf/tunelyf_preview.png",
+    color: "#8b5cf6",
+    tech: ["Android", "Audius API", "Audio Playback"],
+  },
+  {
+    slug: "organizer-classes",
+    title: "Organizer Classes",
+    subtitle: "Online Learning & Exam Prep",
+    category: "EdTech Platform",
+    description:
+      "An online learning platform where students can purchase courses, watch classes, study notes, practice tests, and access previous year questions.",
+    heroImage: "/images/projects/organizer/organizer_preview.png",
+    color: "#f97316",
+    tech: ["Android", "Razorpay", "Video Learning"],
+  },
+  {
+    slug: "kharcha-plus",
+    title: "Kharcha Plus",
+    subtitle: "Expense & Utility Management",
+    category: "Finance & Utility",
+    description:
+      "An expense and utility management app for tracking daily spending, electricity, water, food, and mess expenses in one place.",
+    heroImage: "/images/projects/kharchaplus/kharchaplus_preview.png",
+    color: "#0f9f9a",
+    tech: ["Flutter", "Riverpod", "Isar", "Firebase"],
+  },
+  {
+    slug: "small-steps",
+    title: "Small Steps",
+    subtitle: "Notes & Checklist App",
+    category: "Productivity App",
+    description:
+      "A simple notes and checklist app for writing things down, managing tasks, and keeping personal notes protected.",
+    heroImage: "/images/projects/smallstep/smallstep_preview.png",
+    color: "#14b8a6",
+    tech: ["Android", "Local Storage", "Biometric Auth"],
   },
 ];
 
@@ -81,7 +147,7 @@ export default function ProjectsPage() {
   const otherDynamicProjects = projects.filter((p) => !p.featured);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen" style={{ backgroundColor: "#FAF7F5", color: "#1a1a1a" }}>
       <Navbar />
 
       {/* ── JSON-LD ── */}
@@ -94,7 +160,7 @@ export default function ProjectsPage() {
       <header className="relative overflow-hidden pb-10 pt-36">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-violet-500/8 blur-[120px]"
+          className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-violet-500/5 blur-[120px]"
         />
         <div
           aria-hidden
@@ -104,10 +170,10 @@ export default function ProjectsPage() {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-violet-300">
             Our Work
           </div>
-          <h1 className="mb-5 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mb-5 text-3xl font-extrabold leading-tight text-[#1a1a1a] sm:text-4xl lg:text-5xl">
             Projects &amp; Case Studies
           </h1>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-400">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#6B5A5A]">
             Real work. Real results. Browse our portfolio of web apps, mobile apps, SaaS platforms,
             and digital products built for startups and businesses across India.
           </p>
@@ -119,7 +185,7 @@ export default function ProjectsPage() {
         {/* ── Featured Projects ── */}
         {featuredProjects.length > 0 && (
           <section aria-labelledby="featured-heading" className="mb-16">
-            <h2 id="featured-heading" className="mb-8 text-xl font-bold text-slate-200">
+            <h2 id="featured-heading" className="mb-8 text-xl font-bold text-[#1a1a1a]">
               Featured Projects
             </h2>
             <div className="grid gap-8 lg:grid-cols-2">
@@ -143,7 +209,7 @@ export default function ProjectsPage() {
 
         {/* ── All Other Projects ── */}
         <section aria-labelledby="all-heading">
-          <h2 id="all-heading" className="mb-8 text-xl font-bold text-slate-200">
+          <h2 id="all-heading" className="mb-8 text-xl font-bold text-[#1a1a1a]">
             All Projects
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -179,17 +245,17 @@ export default function ProjectsPage() {
         </section>
 
         {/* ── CTA ── */}
-        <section className="mt-16 rounded-2xl border border-slate-800 bg-slate-900/60 p-10 text-center backdrop-blur-sm">
-          <h2 className="mb-3 text-2xl font-bold text-white">
+        <section className="mt-16 rounded-2xl border border-slate-800 bg-[#f1f3f5]/60 p-10 text-center backdrop-blur-sm">
+          <h2 className="mb-3 text-2xl font-bold text-[#1a1a1a]">
             Have a project in mind?
           </h2>
-          <p className="mx-auto mb-7 max-w-xl text-slate-400">
+          <p className="mx-auto mb-7 max-w-xl text-[#6B5A5A]">
             Tell us what you want to build. We&apos;ll review your brief within 4 hours and send
             you a detailed proposal with timeline and pricing.
           </p>
           <Link
             href="/start-project"
-            className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:bg-violet-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+            className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-7 py-3.5 text-sm font-semibold text-[#1a1a1a] shadow-lg transition hover:bg-violet-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
           >
             Start a Project →
           </Link>
@@ -228,7 +294,7 @@ function ProjectCard({
   return (
     <Link
       href={`/projects/${slug}`}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 transition-all duration-300 hover:border-slate-700 hover:shadow-xl hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 ${featured ? "lg:flex-row" : ""
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-[#f1f3f5]/60 transition-all duration-300 hover:border-slate-700 hover:shadow-xl hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 ${featured ? "lg:flex-row" : ""
         }`}
     >
       {/* Hero Image */}
@@ -254,18 +320,18 @@ function ProjectCard({
           </div>
         )}
         {/* Category badge */}
-        <div className="absolute left-3 top-3 z-10 rounded-md bg-slate-950/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-slate-300 backdrop-blur-sm">
+        <div className="absolute left-3 top-3 z-10 rounded-md bg-white/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#4a4a4a] backdrop-blur-sm">
           {category}
         </div>
       </div>
 
       {/* Content */}
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-1 text-lg font-bold text-white group-hover:text-violet-300 transition-colors">
+        <h3 className="mb-1 text-lg font-bold text-[#1a1a1a] group-hover:text-violet-300 transition-colors">
           {title}
         </h3>
-        <p className="mb-3 text-xs font-medium text-slate-400">{subtitle}</p>
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-slate-500 line-clamp-3">
+        <p className="mb-3 text-xs font-medium text-[#6B5A5A]">{subtitle}</p>
+        <p className="mb-4 flex-1 text-sm leading-relaxed text-[#999] line-clamp-3">
           {description}
         </p>
         {/* Tech stack */}
@@ -273,13 +339,13 @@ function ProjectCard({
           {tech.slice(0, 4).map((t) => (
             <span
               key={t}
-              className="rounded-md border border-slate-700/60 bg-slate-800/60 px-2 py-0.5 text-[11px] font-medium text-slate-400"
+              className="rounded-md border border-slate-700/60 bg-slate-800/60 px-2 py-0.5 text-[11px] font-medium text-[#6B5A5A]"
             >
               {t}
             </span>
           ))}
           {tech.length > 4 && (
-            <span className="rounded-md border border-slate-700/60 bg-slate-800/60 px-2 py-0.5 text-[11px] font-medium text-slate-500">
+            <span className="rounded-md border border-slate-700/60 bg-slate-800/60 px-2 py-0.5 text-[11px] font-medium text-[#999]">
               +{tech.length - 4}
             </span>
           )}
@@ -291,3 +357,4 @@ function ProjectCard({
     </Link>
   );
 }
+

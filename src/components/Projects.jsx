@@ -7,8 +7,9 @@ import Link from "next/link";
 /* ── All Projects ─────────────────────────────────────── */
 const PROJECTS = [
   {
-    slug: "popular-bread-inventory",
+    slug: "popular-bread",
     title: "Popular Bread Inventory",
+    category: "app",
     tags: ["Android App", "Business / Inventory"],
     tagColors: ["#E8763A", "#1FA0B1"],
     description:
@@ -30,15 +31,17 @@ const PROJECTS = [
     ],
     image: "/images/projects/popular/popular_preview.png",
     thumb: "/images/projects/popular/popular_preview.png",
+    demo: "https://play.google.com/store/apps/details?id=com.nf.popularbread&pcampaignid=web_share",
     accent: "#1FA0B1",
   },
   {
     slug: "invoicelelo",
     title: "InvoiceLelo",
-    tags: ["Android App", "Web App", "Business / Billing"],
-    tagColors: ["#7C5CBF", "#1FA0B1", "#E8763A"],
+    category: "website",
+    tags: ["Web App", "Business / Billing"],
+    tagColors: ["#1FA0B1", "#E8763A"],
     description:
-      "A GST billing and invoice generation platform for businesses. Generate professional invoices instantly — even without logging in. Login to save bill history, manage customers, and get your business verified.",
+      "InvoiceLelo is a GST billing platform built for small businesses. It helps users create invoices, manage customers, and keep track of their bills from one place.",
     features: [
       { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" /></svg>, label: "Invoice\nGenerator" },
       { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>, label: "Guest\nBilling" },
@@ -46,22 +49,50 @@ const PROJECTS = [
       { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>, label: "Bill\nHistory" },
       { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12z" /></svg>, label: "Business\nVerified" },
     ],
-    tech: ["Next.js", "Flutter", "Firebase", "Isar", "Razorpay"],
+    tech: ["Next.js", "Firebase", "Razorpay", "SEO"],
     highlights: [
       { icon: "🧾", title: "Instant Invoice", desc: "Generate PDF bills in seconds" },
       { icon: "👤", title: "No Login Required", desc: "Create invoices without an account" },
       { icon: "💼", title: "Customer Manager", desc: "Save and manage client details" },
       { icon: "✅", title: "Business Verified Badge", desc: "Verified stamp after setup" },
-      { icon: "📱", title: "App + Web", desc: "Flutter app & Next.js website" },
+      { icon: "🌐", title: "Web Platform", desc: "Accessible from any browser" },
     ],
-    image: "/images/projects/invoicelelo/invoicelelo_preview.png",
-    thumb: "/images/projects/invoicelelo/invoicelelo_preview.png",
+    image: "/images/projects/invoicelelo/home.png",
+    thumb: "/images/projects/invoicelelo/home.png",
     demo: "https://invoicelelo.in",
+    accent: "#7C5CBF",
+  },
+  {
+    slug: "invoicelelo",
+    title: "InvoiceLelo",
+    category: "app",
+    tags: ["Android App", "Business / Billing"],
+    tagColors: ["#E8763A", "#7C5CBF"],
+    description:
+      "InvoiceLelo is a GST billing platform built for small businesses. It helps users create invoices, manage customers, and keep track of their bills from one place.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" /></svg>, label: "Invoice\nGenerator" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>, label: "Guest\nBilling" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0z" /></svg>, label: "Customer\nManagement" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>, label: "Bill\nHistory" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12z" /></svg>, label: "Business\nVerified" },
+    ],
+    tech: ["Flutter", "Firebase", "Isar", "Razorpay"],
+    highlights: [
+      { icon: "🧾", title: "Instant Invoice", desc: "Generate PDF bills in seconds" },
+      { icon: "👤", title: "No Login Required", desc: "Create invoices without an account" },
+      { icon: "💼", title: "Customer Manager", desc: "Save and manage client details" },
+      { icon: "✅", title: "Business Verified Badge", desc: "Verified stamp after setup" },
+      { icon: "📱", title: "Mobile App", desc: "Flutter app for Android" },
+    ],
+    image: "/images/projects/invoicelelo/login.png",
+    thumb: "/images/projects/invoicelelo/bill.png",
     accent: "#7C5CBF",
   },
   {
     slug: "kharcha-plus",
     title: "Kharcha Plus",
+    category: "app",
     tags: ["Android App", "Fintech / Utility"],
     tagColors: ["#E8763A", "#1FA0B1"],
     description:
@@ -89,6 +120,7 @@ const PROJECTS = [
   {
     slug: "tunelyf",
     title: "TuneLyf",
+    category: "app",
     tags: ["Android App", "Music / Streaming"],
     tagColors: ["#E8763A", "#7C5CBF"],
     description:
@@ -115,6 +147,7 @@ const PROJECTS = [
   {
     slug: "organizer-classes",
     title: "Organizer Classes",
+    category: "app",
     tags: ["EdTech App", "Web Application"],
     tagColors: ["#7C5CBF", "#1FA0B1"],
     description:
@@ -141,6 +174,7 @@ const PROJECTS = [
   {
     slug: "nestiva-hospital",
     title: "Nestiva Hospital",
+    category: "website",
     tags: ["Healthcare", "Web Development"],
     tagColors: ["#1FA0B1", "#E8763A"],
     description:
@@ -160,13 +194,14 @@ const PROJECTS = [
       { icon: "🚨", title: "Emergency Info", desc: "24/7 contact, always visible" },
       { icon: "📱", title: "100% Responsive", desc: "Mobile, tablet, desktop" },
     ],
-    image: "/images/projects/nestiva/nestiva-hospital-hero.png",
-    thumb: "/images/projects/nestiva/nestiva-hospital-hero.png",
+    image: "/images/projects/nestiva/nestivahome.png",
+    thumb: "/images/projects/nestiva/nestivahome.png",
     accent: "#1FA0B1",
   },
   {
     slug: "small-steps",
     title: "Small Steps",
+    category: "app",
     tags: ["Android App", "Productivity"],
     tagColors: ["#E8763A", "#1FA0B1"],
     description:
@@ -191,8 +226,37 @@ const PROJECTS = [
     accent: "#E8763A",
   },
   {
+    slug: "madza-company",
+    title: "MADZA Company",
+    category: "website",
+    tags: ["Home Services", "Web Application"],
+    tagColors: ["#1FA0B1", "#E8763A"],
+    description:
+      "A professional home services platform for AC repair, invisible grill installation, refrigerator, washing machine, geyser repair, electrical & plumbing services across Mumbai, Bihar, Kolkata & Hyderabad.",
+    features: [
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M18 17.5a2.5 2.5 0 1 1-4 2.03V12M6 12H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 8h12" /></svg>, label: "AC Repair\nServices" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1" /><path d="M12 3v18M3 12h18" /></svg>, label: "Invisible\nGrill" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 6a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6z" /><path d="M5 10h14" /><path d="M15 7v6" /></svg>, label: "Refrigerator\nRepair" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" /></svg>, label: "Multi-City\nCoverage" },
+      { icon: <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>, label: "Online\nBooking" },
+    ],
+    tech: ["Next.js", "Tailwind CSS", "SEO", "Turbopack"],
+    highlights: [
+      { icon: "❄️", title: "AC & Appliance Repair", desc: "AC, Fridge, Washing Machine, Geyser" },
+      { icon: "🏗️", title: "Invisible Grill", desc: "Balcony & window safety grills" },
+      { icon: "📍", title: "4 Cities", desc: "Mumbai, Bihar, Kolkata, Hyderabad" },
+      { icon: "⚡", title: "Electrical & Plumbing", desc: "Full home service solutions" },
+      { icon: "📞", title: "WhatsApp Booking", desc: "Direct service booking via WhatsApp" },
+    ],
+    image: "/images/projects/madzacompany/home.png",
+    thumb: "/images/projects/madzacompany/home.png",
+    demo: "https://madzacompany.in",
+    accent: "#1FA0B1",
+  },
+  {
     slug: "medon-company",
     title: "Medon Company",
+    category: "website",
     tags: ["Web Application", "Service Business"],
     tagColors: ["#1FA0B1", "#E8763A"],
     description:
@@ -214,11 +278,13 @@ const PROJECTS = [
     ],
     image: "/images/projects/medon/home.png",
     thumb: "/images/projects/medon/home.png",
+    demo: "https://medoncompany.in",
     accent: "#1FA0B1",
   },
   {
     slug: "train-your-tech",
     title: "Train Your Tech",
+    category: "website",
     tags: ["EdTech Platform", "SaaS"],
     tagColors: ["#7C5CBF", "#1FA0B1"],
     description:
@@ -244,16 +310,20 @@ const PROJECTS = [
   },
 ];
 
-/* ── Main Section ───────────────────────────────────────── */
-export default function Projects() {
+/* ── Derived lists ──────────────────────────────────────── */
+const WEBSITES = PROJECTS.filter((p) => p.category === "website" || p.category === "both");
+const APPS = PROJECTS.filter((p) => p.category === "app" || p.category === "both");
+
+/* ── Carousel Sub-component ─────────────────────────────── */
+function ProjectCarousel({ projects, sectionLabel, sectionIcon, sectionColor }) {
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const timerRef = useRef(null);
 
   const goTo = useCallback((idx) => {
-    setActive((idx + PROJECTS.length) % PROJECTS.length);
+    setActive((idx + projects.length) % projects.length);
     setAnimKey((k) => k + 1);
-  }, []);
+  }, [projects.length]);
 
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
@@ -268,151 +338,178 @@ export default function Projects() {
     return () => clearTimeout(timerRef.current);
   }, [active, next]);
 
-  const p = PROJECTS[active];
+  const p = projects[active];
 
+  return (
+    <div className="mb-16">
+      {/* Section label + arrows */}
+      <div className="mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl" style={{ backgroundColor: `${sectionColor}15`, color: sectionColor }}>{sectionIcon}</div>
+          <h3 className="text-[24px] font-extrabold" style={{ color: "#1a1a1a" }}>{sectionLabel}</h3>
+          <div className="h-px flex-1 min-w-[40px]" style={{ backgroundColor: "rgba(198,209,215,0.5)" }} />
+        </div>
+        <div className="flex gap-2">
+          <button onClick={prev} className="flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-200 hover:border-[#1FA0B1] hover:text-[#1FA0B1] hover:shadow-sm"
+            style={{ borderColor: "rgba(198,209,215,0.5)", color: "#6B5A5A", backgroundColor: "white" }}>
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button onClick={next} className="flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-200 hover:border-[#1FA0B1] hover:text-[#1FA0B1] hover:shadow-sm"
+            style={{ borderColor: "rgba(198,209,215,0.5)", color: "#6B5A5A", backgroundColor: "white" }}>
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Main card */}
+      <div key={animKey} className="mb-5 grid overflow-hidden rounded-2xl border shadow-sm"
+        style={{ borderColor: "rgba(198,209,215,0.4)", gridTemplateColumns: "1fr 1.5fr", backgroundColor: "white" }}>
+        {/* Left: image with browser mockup */}
+        <div className="relative flex items-center justify-center overflow-hidden p-6" style={{ backgroundColor: `${p.accent}06`, background: `linear-gradient(135deg, ${p.accent}08 0%, ${p.accent}03 50%, rgba(250,247,245,1) 100%)` }}>
+          {/* Decorative dots pattern */}
+          <div className="pointer-events-none absolute top-4 left-4 grid grid-cols-3 gap-1.5 opacity-20">
+            {Array.from({ length: 9 }).map((_, i) => (
+              <div key={i} className="h-1 w-1 rounded-full" style={{ backgroundColor: p.accent }} />
+            ))}
+          </div>
+          <div className="pointer-events-none absolute bottom-4 right-4 grid grid-cols-3 gap-1.5 opacity-20">
+            {Array.from({ length: 9 }).map((_, i) => (
+              <div key={i} className="h-1 w-1 rounded-full" style={{ backgroundColor: p.accent }} />
+            ))}
+          </div>
+
+          {/* Browser mockup frame */}
+          <div className="relative w-full overflow-hidden rounded-lg shadow-2xl" style={{ transform: "perspective(1200px) rotateY(-2deg) rotateX(1deg)", boxShadow: `0 25px 60px -12px ${p.accent}25, 0 8px 24px -8px rgba(0,0,0,0.15)` }}>
+            {/* Browser top bar */}
+            <div className="flex items-center gap-2 px-3 py-2" style={{ backgroundColor: "#f1f3f5" }}>
+              <div className="flex gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#FF5F57" }} />
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#FEBC2E" }} />
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#28C840" }} />
+              </div>
+              <div className="mx-2 flex-1 rounded-md px-3 py-1 text-[10px] font-medium truncate" style={{ backgroundColor: "#fff", color: "#999", border: "1px solid #e5e7eb" }}>
+                {p.demo || `nfnexatech.com/projects/${p.slug}`}
+              </div>
+            </div>
+            {/* Screenshot */}
+            <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: "#fff" }}>
+              <Image src={p.image} alt={p.title} fill className="object-contain" sizes="40vw" priority />
+            </div>
+          </div>
+        </div>
+        {/* Right: details */}
+        <div className="flex flex-col gap-4 border-l p-6" style={{ borderColor: "rgba(198,209,215,0.3)" }}>
+          <div className="flex flex-wrap gap-2">
+            {p.tags.map((tag, i) => (
+              <span key={tag} className="rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider"
+                style={{ backgroundColor: `${p.tagColors[i]}12`, color: p.tagColors[i] }}>{tag}</span>
+            ))}
+          </div>
+          <h3 className="text-[28px] font-extrabold leading-tight" style={{ color: "#1a1a1a" }}>{p.title}</h3>
+          <p className="text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>{p.description}</p>
+          <div className="flex flex-wrap gap-5">
+            {p.features.map((f) => (
+              <div key={f.label} className="flex flex-col items-center gap-1 text-center">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: `${p.accent}12`, color: p.accent }}>{f.icon}</div>
+                <span className="text-[10px] font-medium leading-tight whitespace-pre-line" style={{ color: "#6B5A5A" }}>{f.label}</span>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {p.tech.map((t) => (
+              <span key={t} className="rounded-full px-3 py-1 text-[11px] font-semibold"
+                style={{ backgroundColor: `${p.accent}10`, color: p.accent }}>{t}</span>
+            ))}
+          </div>
+          <div className="mt-auto flex flex-wrap gap-3 pt-2">
+            <Link href={`/projects/${p.slug}`}
+              className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[13px] font-bold text-white transition-all duration-200 hover:scale-[1.03] hover:shadow-lg"
+              style={{ backgroundColor: p.accent, boxShadow: `0 4px 14px ${p.accent}30` }}>
+              View Case Study →
+            </Link>
+            {p.demo ? (
+              <a href={p.demo} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border-2 px-6 py-2.5 text-[13px] font-semibold transition-all duration-200 hover:scale-[1.03] hover:shadow-sm"
+                style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "white" }}>Live Demo ↗</a>
+            ) : (
+              <Link href={`/projects/${p.slug}`}
+                className="inline-flex items-center gap-2 rounded-full border-2 px-6 py-2.5 text-[13px] font-semibold transition-all duration-200 hover:scale-[1.03] hover:shadow-sm"
+                style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "white" }}>Live Demo ↗</Link>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Thumbnail cards */}
+      <div className="grid gap-2.5" style={{ gridTemplateColumns: `repeat(${projects.length}, 1fr)` }}>
+        {projects.map((proj, idx) => (
+          <button
+            key={`${proj.slug}-${idx}`}
+            onClick={() => handleNav(idx)}
+            className={`group relative overflow-hidden rounded-xl border-2 transition-all duration-300 ${active === idx ? "shadow-lg scale-[1.03]" : "hover:scale-[1.02] hover:shadow-md"}`}
+            style={{
+              borderColor: active === idx ? proj.accent : "rgba(198,209,215,0.4)",
+              backgroundColor: "white",
+            }}
+          >
+            <div className="relative aspect-[16/9] overflow-hidden" style={{ backgroundColor: `${proj.accent}08` }}>
+              <Image src={proj.thumb} alt={proj.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="15vw" />
+              {active === idx && (
+                <div className="absolute inset-0 ring-2 ring-inset rounded-t-[10px]" style={{ ringColor: `${proj.accent}30` }} />
+              )}
+              {active === idx && (
+                <div className="absolute inset-x-0 bottom-0 h-[3px] origin-left" style={{ backgroundColor: proj.accent, animation: "progress 6s linear forwards" }} />
+              )}
+            </div>
+            <div className="px-1.5 py-1.5 text-center">
+              <div className="text-[10px] font-bold leading-tight truncate" style={{ color: active === idx ? proj.accent : "#4a4a4a" }}>{proj.title}</div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Main Section ───────────────────────────────────────── */
+export default function Projects() {
   return (
     <section id="projects" className="py-16" style={{ backgroundColor: "#FAF7F5" }}>
       <div className="mx-auto w-[92%] max-w-6xl">
-
         {/* Header */}
-        <div className="mb-8 flex items-end justify-between">
-          <div>
-            <div className="mb-2 flex items-center gap-3">
-              <div className="h-px w-8" style={{ backgroundColor: "#1FA0B1" }} />
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em]" style={{ color: "#1FA0B1" }}>Case Study</span>
-              <div className="h-px w-8" style={{ backgroundColor: "#1FA0B1" }} />
-            </div>
-            <h2 className="text-[32px] font-extrabold tracking-tight sm:text-[40px]" style={{ color: "#1a1a1a" }}>
-              Projects We&apos;ve <span style={{ color: "#E8763A" }}>Built</span>
-            </h2>
-            <p className="mt-3 max-w-xl text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>
-              Explore some of the websites, apps, and software products we&apos;ve built for our clients.
-            </p>
+        <div className="mb-10">
+          <div className="mb-2 flex items-center gap-3">
+            <div className="h-px w-8" style={{ backgroundColor: "#1FA0B1" }} />
+            <span className="text-[11px] font-bold uppercase tracking-[0.25em]" style={{ color: "#1FA0B1" }}>Case Study</span>
+            <div className="h-px w-8" style={{ backgroundColor: "#1FA0B1" }} />
           </div>
-          {/* Arrow buttons */}
-          <div className="hidden gap-2 sm:flex">
-            <button onClick={prev} className="flex h-9 w-9 items-center justify-center rounded-full border transition-all hover:border-[#1FA0B1] hover:text-[#1FA0B1]"
-              style={{ borderColor: "rgba(198,209,215,0.7)", color: "#6B5A5A" }}>
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button onClick={next} className="flex h-9 w-9 items-center justify-center rounded-full border transition-all hover:border-[#1FA0B1] hover:text-[#1FA0B1]"
-              style={{ borderColor: "rgba(198,209,215,0.7)", color: "#6B5A5A" }}>
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+          <h2 className="text-[32px] font-extrabold tracking-tight sm:text-[40px]" style={{ color: "#1a1a1a" }}>
+            Projects We&apos;ve <span style={{ color: "#E8763A" }}>Built</span>
+          </h2>
+          <p className="mt-3 max-w-xl text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>
+            Explore some of the websites, apps, and software products we&apos;ve built for our clients.
+          </p>
         </div>
 
-        {/* Main card */}
-        <div key={animKey} className="mb-4 grid overflow-hidden rounded-2xl border"
-          style={{ borderColor: "rgba(198,209,215,0.5)", gridTemplateColumns: "1fr 1.4fr", backgroundColor: "white" }}>
+        {/* Websites Carousel */}
+        <ProjectCarousel
+          projects={WEBSITES}
+          sectionLabel="Websites"
+          sectionIcon={<svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2" /><line x1="3" y1="7" x2="21" y2="7" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>}
+          sectionColor="#1FA0B1"
+        />
 
-          {/* Left: image */}
-          <div className="relative min-h-[300px] overflow-hidden" style={{ backgroundColor: `${p.accent}10` }}>
-            <div className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(circle at 30% 50%, ${p.accent}20, transparent 70%)` }} />
-            <Image
-              src={p.image}
-              alt={p.title}
-              fill
-              className="object-contain drop-shadow-xl"
-              sizes="40vw"
-              priority
-            />
-          </div>
-
-          {/* Center: details */}
-          <div className="flex flex-col gap-3 border-l p-5" style={{ borderColor: "rgba(198,209,215,0.35)" }}>
-            <div className="flex flex-wrap gap-1.5">
-              {p.tags.map((tag, i) => (
-                <span key={tag}
-                  className="rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider"
-                  style={{ backgroundColor: `${p.tagColors[i]}18`, color: p.tagColors[i] }}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <h3 className="text-[26px] font-extrabold" style={{ color: "#1a1a1a" }}>{p.title}</h3>
-            <p className="text-[14px] leading-relaxed" style={{ color: "#6B5A5A" }}>{p.description}</p>
-
-            {/* Feature icons */}
-            <div className="flex gap-4">
-              {p.features.map((f) => (
-                <div key={f.label} className="flex flex-col items-center gap-0.5 text-center">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg" style={{ backgroundColor: `${p.accent}15`, color: p.accent }}>{f.icon}</div>
-                  <span className="text-[9px] leading-tight whitespace-pre-line" style={{ color: "#6B5A5A" }}>{f.label}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Tech */}
-            <div className="flex flex-wrap gap-1.5">
-              {p.tech.map((t) => (
-                <span key={t} className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold"
-                  style={{ backgroundColor: `${p.accent}15`, color: p.accent }}>
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="mt-auto flex flex-wrap gap-2.5 pt-1">
-              <Link href={`/projects/${p.slug}`}
-                className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[12px] font-bold text-white transition-all hover:scale-[1.03]"
-                style={{ backgroundColor: p.accent, boxShadow: `0 4px 12px ${p.accent}35` }}>
-                View Case Study →
-              </Link>
-              {p.demo ? (
-                <a href={p.demo} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border px-5 py-2 text-[12px] font-semibold transition-all hover:scale-[1.03]"
-                  style={{ borderColor: "rgba(198,209,215,0.6)", color: "#1a1a1a" }}>
-                  Live Demo ↗
-                </a>
-              ) : (
-                <Link href={`/projects/${p.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-full border px-5 py-2 text-[12px] font-semibold transition-all hover:scale-[1.03]"
-                  style={{ borderColor: "rgba(198,209,215,0.6)", color: "#1a1a1a" }}>
-                  Live Demo ↗
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* ── Thumbnail cards ── */}
-        <div className="grid grid-cols-4 gap-3 sm:grid-cols-9">
-          {PROJECTS.map((proj, idx) => (
-            <button
-              key={proj.slug}
-              onClick={() => handleNav(idx)}
-              className={`group relative overflow-hidden rounded-xl border transition-all duration-200 ${active === idx
-                ? "scale-[1.04] shadow-md"
-                : "hover:scale-[1.02] hover:shadow-sm"
-                }`}
-              style={{
-                borderColor: active === idx ? proj.accent : "rgba(198,209,215,0.5)",
-                borderWidth: active === idx ? 2 : 1,
-              }}
-            >
-              <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: `${proj.accent}10` }}>
-                <Image src={proj.thumb} alt={proj.title} fill className="object-cover" sizes="10vw" />
-                {active === idx && (
-                  <div className="absolute inset-x-0 bottom-0 h-0.5 origin-left" style={{ backgroundColor: proj.accent,
-                    animation: `progress 6s linear forwards`, animationKey: animKey }} />
-                )}
-              </div>
-              <div className="p-1.5 text-center">
-                <div className="text-[8px] font-semibold leading-tight" style={{ color: active === idx ? proj.accent : "#6B5A5A" }}>
-                  {proj.title}
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
-
+        {/* Apps Carousel */}
+        <ProjectCarousel
+          projects={APPS}
+          sectionLabel="Apps"
+          sectionIcon={<svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2" /><line x1="12" y1="18" x2="12.01" y2="18" strokeLinecap="round" strokeWidth={2.5} /></svg>}
+          sectionColor="#E8763A"
+        />
       </div>
 
       <style>{`
@@ -424,4 +521,3 @@ export default function Projects() {
     </section>
   );
 }
-

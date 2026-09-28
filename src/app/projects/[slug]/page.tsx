@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 /* ── Helpers ─────────────────────────────────────────────── */
 function Badge({ label }: { label: string }) {
   return (
-    <span className="rounded-md border border-cyan-400/25 bg-cyan-400/10 px-3 py-1.5 text-xs font-semibold text-cyan-300 tracking-wide">
+    <span className="rounded-md border px-3 py-1.5 text-xs font-semibold tracking-wide" style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1FA0B1", backgroundColor: "white" }}>
       {label}
     </span>
   );
@@ -57,12 +57,12 @@ function Badge({ label }: { label: string }) {
 
 function MetaCard({ label, value, icon }: { label: string; value: string; icon: string }) {
   return (
-    <div className="flex flex-col gap-1.5 rounded-2xl border border-white/8 bg-white/[0.03] p-5 backdrop-blur-sm">
+    <div className="flex flex-col gap-1.5 rounded-2xl border p-5" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
       <span className="text-xl">{icon}</span>
-      <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+      <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#999" }}>
         {label}
       </span>
-      <span className="text-sm font-semibold text-slate-200">
+      <span className="text-sm font-semibold" style={{ color: "#1a1a1a" }}>
         {value}
       </span>
     </div>
@@ -71,8 +71,8 @@ function MetaCard({ label, value, icon }: { label: string; value: string; icon: 
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mb-6 text-2xl font-bold text-white sm:text-3xl">
-      <span className="border-b-2 border-cyan-400/50 pb-1">
+    <h2 className="mb-6 text-2xl font-bold sm:text-3xl" style={{ color: "#1a1a1a" }}>
+      <span className="border-b-2 pb-1" style={{ borderColor: "rgba(31,160,177,0.5)" }}>
         {children}
       </span>
     </h2>
@@ -91,20 +91,21 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen" style={{ backgroundColor: "#FAF7F5", color: "#1a1a1a" }}>
 
       {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 border-b" style={{ backgroundColor: "rgba(250,247,245,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(198,209,215,0.3)" }}>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
 
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-cyan-400 transition-colors"
+            className="flex items-center gap-2 text-sm font-semibold transition-colors hover:text-[#1FA0B1]"
+            style={{ color: "#6B5A5A" }}
           >
             ← Back to Portfolio
           </Link>
 
-          <span className="hidden text-xs uppercase tracking-widest text-slate-500 sm:block">
+          <span className="hidden text-xs uppercase tracking-widest sm:block" style={{ color: "#999" }}>
             Case Study
           </span>
 
@@ -118,21 +119,21 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
           <div className="mb-5 flex items-center gap-3">
 
-            <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-cyan-400">
+            <span className="rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "#1FA0B1", borderColor: "rgba(31,160,177,0.3)", backgroundColor: "rgba(31,160,177,0.08)" }}>
               {project.category}
             </span>
 
-            <span className="text-xs text-slate-500">
+            <span className="text-xs" style={{ color: "#6B5A5A" }}>
               {project.industry}
             </span>
 
           </div>
 
-          <h1 className="mb-4 max-w-3xl text-5xl font-extrabold text-white">
+          <h1 className="mb-4 max-w-3xl text-5xl font-extrabold" style={{ color: "#1a1a1a" }}>
             {project.title}
           </h1>
 
-          <p className="mb-10 max-w-2xl text-lg leading-relaxed text-slate-400">
+          <p className="mb-10 max-w-2xl text-lg leading-relaxed" style={{ color: "#6B5A5A" }}>
             {project.subtitle}
           </p>
 
@@ -149,7 +150,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
       {/* HERO IMAGE */}
       {project.heroImage && (
         <div className="mx-auto mb-20 max-w-5xl px-6">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10">
+          <div className="relative overflow-hidden rounded-3xl border shadow-lg" style={{ borderColor: "rgba(198,209,215,0.4)" }}>
             <Image
               src={project.heroImage}
               alt={`${project.title} — hero screenshot`}
@@ -214,7 +215,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           Project Overview
         </SectionHeading>
 
-        <p className="leading-8 text-slate-400">
+        <p className="leading-8" style={{ color: "#6B5A5A" }}>
           {project.overview}
         </p>
 
@@ -223,13 +224,13 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
       {/* CTA */}
       <section className="mx-auto max-w-4xl px-6 pb-24">
 
-        <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center">
+        <div className="rounded-3xl border p-10 text-center" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
 
-          <h2 className="mb-4 text-3xl font-bold text-white">
+          <h2 className="mb-4 text-3xl font-bold" style={{ color: "#1a1a1a" }}>
             Need a Similar Project?
           </h2>
 
-          <p className="mb-8 text-slate-400">
+          <p className="mb-8" style={{ color: "#6B5A5A" }}>
             NF Nexa Tech builds scalable apps and modern digital products.
           </p>
 
@@ -237,14 +238,16 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
             <Link
               href="/#contact"
-              className="rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-7 py-3 text-sm font-bold text-white"
+              className="rounded-xl px-7 py-3 text-sm font-bold text-white transition-all hover:brightness-110 hover:shadow-lg"
+              style={{ backgroundColor: "#1FA0B1" }}
             >
               Contact Us
             </Link>
 
             <Link
               href="/"
-              className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300"
+              className="rounded-xl border px-7 py-3 text-sm font-bold transition-all hover:shadow-sm"
+              style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "#FAF7F5" }}
             >
               View All Projects
             </Link>

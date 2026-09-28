@@ -1,143 +1,115 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-/* ─────────────────────────────────────────────────────────────
-   Animated counter
-───────────────────────────────────────────────────────────── */
-function useCounter(end: number, duration = 1600, started: boolean) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!started) return;
-    let startTime: number | null = null;
-    const step = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * end));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [end, duration, started]);
-  return count;
+/* ────────────────────────────────────────────────────────────
+   SVG Icon Map
+   ──────────────────────────────────────────────────────────── */
+
+const ic = "h-5 w-5";
+
+const ICONS: Record<string, React.ReactNode> = {
+  /* meta */
+  globe:     <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A8.966 8.966 0 0 1 3 12c0-1.268.262-2.475.734-3.571" /></svg>,
+  clock:     <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>,
+  home:      <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>,
+  "map-pin": <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" /></svg>,
+  briefcase: <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75a23.978 23.978 0 0 1-7.577-1.22 2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>,
+  phone:     <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>,
+
+  /* features */
+  wrench:    <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75a4.5 4.5 0 0 1-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 1 1-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 0 1 6.336-4.486l-3.276 3.276a3.004 3.004 0 0 0 2.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852z" /></svg>,
+  calendar:  <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>,
+  chat:      <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>,
+  currency:  <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 8.25H9m6 3H9m3 6-3-3h1.5a3 3 0 1 0 0-6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>,
+  image:     <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0z" /></svg>,
+  star:      <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5z" /></svg>,
+  responsive:<svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>,
+
+  /* tech */
+  code:      <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>,
+  component: <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875S10.5 3.089 10.5 4.125c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.421 48.421 0 0 1-4.185-.428l.204-.253c.342-.428.548-.96.548-1.524 0-2.065-1.266-3.52-2.66-3.52s-2.66 1.455-2.66 3.52c0 .564.207 1.096.548 1.524l.204.253a48.64 48.64 0 0 1-4.185.428.64.64 0 0 1-.657-.643v0" /></svg>,
+  palette:   <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" /></svg>,
+  fire:      <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18z" /></svg>,
+  cloud:     <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15z" /></svg>,
+  deploy:    <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" /></svg>,
+
+  /* misc */
+  check:     <svg className={ic} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg>,
+};
+
+function Icon({ name, className = "" }: { name: string; className?: string }) {
+  return <span className={className}>{ICONS[name] ?? <span>{name}</span>}</span>;
 }
 
-function AnimCounter({ end, suffix, label, color, started }: {
-  end: number; suffix: string; label: string; color: string; started: boolean;
-}) {
-  const count = useCounter(end, 1600, started);
-  return (
-    <div className="flex flex-col items-center text-center">
-      <span className="text-3xl font-black sm:text-4xl" style={{ color }}>
-        {count}{suffix}
-      </span>
-      <span className="mt-1 text-xs text-slate-400">{label}</span>
-    </div>
-  );
-}
 
-/* ─────────────────────────────────────────────────────────────
-   Reveal wrapper
-───────────────────────────────────────────────────────────── */
-function Reveal({ children, delay = 0, y = 24 }: {
-  children: React.ReactNode; delay?: number; y?: number;
-}) {
+/* ────────────────────────────────────────────────────────────
+   Helper Components
+   ──────────────────────────────────────────────────────────── */
+
+function Reveal({ children, delay = 0, y = 24 }: { children: React.ReactNode; delay?: number; y?: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+    <motion.div initial={{ opacity: 0, y }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}>
       {children}
     </motion.div>
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Section anchor wrapper
-───────────────────────────────────────────────────────────── */
-function Section({ id, children, className = "" }: {
-  id: string; children: React.ReactNode; className?: string;
-}) {
-  return (
-    <section id={id} className={`scroll-mt-24 pb-20 ${className}`}>
-      {children}
-    </section>
-  );
+function Section({ id, children }: { id: string; children: React.ReactNode }) {
+  return <section id={id} className="scroll-mt-24 pb-20">{children}</section>;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Section heading
-───────────────────────────────────────────────────────────── */
 function SH({ label, title, color }: { label: string; title: string; color: string }) {
   return (
     <Reveal>
       <div className="mb-10">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em]" style={{ color }}>
-          {label}
-        </p>
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">{title}</h2>
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em]" style={{ color }}>{label}</p>
+        <h2 className="text-2xl font-bold sm:text-3xl" style={{ color: "#1a1a1a" }}>{title}</h2>
         <div className="mt-3 h-px w-16" style={{ background: color }} />
       </div>
     </Reveal>
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
+
+/* ────────────────────────────────────────────────────────────
    Lightbox
-───────────────────────────────────────────────────────────── */
-function CaseLightbox({
-  isOpen, src, label, onClose,
-}: { isOpen: boolean; src: string; label: string; onClose: () => void }) {
+   ──────────────────────────────────────────────────────────── */
+
+function Lightbox({ isOpen, src, label, onClose }: { isOpen: boolean; src: string; label: string; onClose: () => void }) {
   useEffect(() => {
     if (!isOpen) return;
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    const h = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
   }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-black/92 backdrop-blur-md"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.22 }}
-          onClick={onClose}
-        >
-          <motion.div
-            className="relative my-10 w-[92%] max-w-5xl"
-            initial={{ scale: 0.94, opacity: 0, y: 16 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.94, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="overflow-hidden rounded-2xl border border-white/20 shadow-2xl shadow-black/80">
-              <div className="flex items-center gap-3 border-b border-white/10 bg-slate-900 px-4 py-2.5">
-                <button onClick={onClose} className="h-3 w-3 rounded-full bg-red-500 transition-colors hover:bg-red-400" />
+        <motion.div className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-black/70 backdrop-blur-md"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.22 }} onClick={onClose}>
+          <motion.div className="relative my-10 w-[92%] max-w-5xl"
+            initial={{ scale: 0.94, opacity: 0, y: 16 }} animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.94, opacity: 0 }} transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}>
+            <div className="overflow-hidden rounded-2xl border shadow-2xl" style={{ borderColor: "rgba(198,209,215,0.3)" }}>
+              <div className="flex items-center gap-3 border-b px-4 py-2.5" style={{ backgroundColor: "#f1f3f5", borderColor: "rgba(198,209,215,0.3)" }}>
+                <button onClick={onClose} className="h-3 w-3 rounded-full bg-red-500 hover:bg-red-400" />
                 <div className="h-3 w-3 rounded-full bg-yellow-400/80" />
                 <div className="h-3 w-3 rounded-full bg-green-500/80" />
-                <span className="ml-2 text-[11px] text-slate-400">{label}</span>
+                <span className="ml-2 text-[11px]" style={{ color: "#6B5A5A" }}>{label}</span>
               </div>
-              <div className="bg-slate-950">
-                <Image
-                  src={src}
-                  alt={label}
-                  width={1440}
-                  height={900}
-                  style={{ width: "100%", height: "auto", display: "block" }}
-                  priority
-                />
+              <div style={{ backgroundColor: "#fff" }}>
+                <Image src={src} alt={label} width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} priority />
               </div>
             </div>
-            <p className="mt-3 text-center text-xs text-slate-500">Click outside or press Esc to close</p>
+            <p className="mt-3 text-center text-xs" style={{ color: "#6B5A5A" }}>Click outside or press Esc to close</p>
           </motion.div>
         </motion.div>
       )}
@@ -145,184 +117,160 @@ function CaseLightbox({
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Browser frame — full screenshot, no cropping
-───────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────
+   Browser Frame
+   ──────────────────────────────────────────────────────────── */
+
 function BrowserFrame({ src, alt, url }: { src: string; alt: string; url: string }) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <div
-        className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/12 shadow-2xl shadow-black/60 transition-all duration-300 hover:border-white/25 hover:shadow-black/80"
-        onClick={() => setLightboxOpen(true)}
-      >
+      <div className="group relative cursor-pointer overflow-hidden rounded-2xl border shadow-lg transition-all duration-300 hover:shadow-xl"
+        style={{ borderColor: "rgba(198,209,215,0.4)" }} onClick={() => setOpen(true)}>
+
         {/* Chrome bar */}
-        <div className="flex items-center gap-3 border-b border-white/10 bg-slate-900/90 px-4 py-2.5">
+        <div className="flex items-center gap-3 border-b px-4 py-2.5" style={{ backgroundColor: "#f1f3f5", borderColor: "rgba(198,209,215,0.3)" }}>
           <div className="flex items-center gap-1.5">
             <div className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
             <div className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
             <div className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
           </div>
-          <div className="flex flex-1 items-center gap-1.5 rounded-md border border-white/10 bg-slate-800/60 px-3 py-1">
-            <svg className="h-2.5 w-2.5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+          <div className="flex flex-1 items-center gap-1.5 rounded-md border bg-white px-3 py-1" style={{ borderColor: "rgba(198,209,215,0.5)" }}>
+            <svg className="h-2.5 w-2.5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clipRule="evenodd" />
             </svg>
-            <span className="truncate text-[10px] text-slate-300">{url}</span>
+            <span className="truncate text-[10px]" style={{ color: "#6B5A5A" }}>{url}</span>
           </div>
-          {/* Expand icon */}
-          <svg className="h-3.5 w-3.5 text-slate-500 transition-colors group-hover:text-white" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 110-2h4a1 1 0 011 1v4a1 1 0 11-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 112 0v1.586l2.293-2.293a1 1 0 011.414 1.414L6.414 15H8a1 1 0 110 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 110-2h1.586l-2.293-2.293a1 1 0 011.414-1.414L15 13.586V12a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
         </div>
-        {/* Full screenshot — natural proportions, no clipping */}
-        <div className="relative bg-slate-950">
-          <Image
-            src={src}
-            alt={alt}
-            width={1440}
-            height={900}
+
+        {/* Screenshot */}
+        <div className="relative" style={{ backgroundColor: "#fff" }}>
+          <Image src={src} alt={alt} width={1440} height={900}
             style={{ width: "100%", height: "auto", display: "block" }}
             sizes="(max-width: 1024px) 100vw, 60vw"
-            className="transition-transform duration-500 group-hover:scale-[1.015]"
-          />
-          {/* Hover overlay */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/30">
-            <span className="rounded-xl border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
-              Open Full Screenshot
-            </span>
+            className="transition-transform duration-500 group-hover:scale-[1.015]" loading="lazy" />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/20">
+            <span className="rounded-xl border border-white/40 bg-white/80 px-4 py-2 text-xs font-bold opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100"
+              style={{ color: "#1a1a1a" }}>Open Full Screenshot</span>
           </div>
         </div>
       </div>
-      <CaseLightbox isOpen={lightboxOpen} src={src} label={alt} onClose={() => setLightboxOpen(false)} />
+
+      <Lightbox isOpen={open} src={src} label={alt} onClose={() => setOpen(false)} />
     </>
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   NAV ITEMS per data
-───────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────
+   Sidebar Navigation
+   ──────────────────────────────────────────────────────────── */
+
 const navItems = [
-  { id: "overview", label: "Overview" },
-  { id: "challenge", label: "Challenge" },
-  { id: "solution", label: "Solution" },
-  { id: "features", label: "Features" },
+  { id: "overview",    label: "Overview" },
+  { id: "challenge",   label: "The Challenge" },
+  { id: "approach",    label: "Our Approach" },
+  { id: "features",    label: "Key Features" },
   { id: "screenshots", label: "Screenshots" },
-  { id: "tech", label: "Tech Stack" },
-  { id: "timeline", label: "Timeline" },
-  { id: "results", label: "Results" },
+  { id: "tech",        label: "Tech Stack" },
+  { id: "timeline",    label: "Timeline" },
+  { id: "result",      label: "The Result" },
 ];
 
-/* ─────────────────────────────────────────────────────────────
-   MAIN CLIENT COMPONENT
-───────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────
+   Main Component
+   ──────────────────────────────────────────────────────────── */
+
 export default function MedonCaseStudyClient({ data }: { data: any }) {
   const [activeSection, setActiveSection] = useState("overview");
   const [scrolled, setScrolled] = useState(false);
-  const resultsRef = useRef<HTMLDivElement>(null);
-  const resultsInView = useInView(resultsRef, { once: true, amount: 0.3 });
-  const [counterStarted, setCounterStarted] = useState(false);
 
+  /* scroll-spy */
   useEffect(() => {
-    if (resultsInView) setCounterStarted(true);
-  }, [resultsInView]);
-
-  /* Track active section via IntersectionObserver */
-  useEffect(() => {
-    const sections = navItems.map((n) => document.getElementById(n.id)).filter(Boolean);
+    const els = navItems.map((n) => document.getElementById(n.id)).filter(Boolean);
     const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActiveSection(e.target.id);
-        });
-      },
-      { rootMargin: "-30% 0px -60% 0px" }
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); }),
+      { rootMargin: "-30% 0px -60% 0px" },
     );
-    sections.forEach((s) => obs.observe(s!));
+    els.forEach((el) => obs.observe(el!));
     return () => obs.disconnect();
   }, []);
 
-  /* Navbar shadow on scroll */
+  /* sticky shadow */
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const h = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
   }, []);
 
-  const { color, colorRgb, title, subtitle, category, liveUrl, meta, overview,
-    challenge, solution, features, screenshots, techStack, results, timeline } = data;
+  const {
+    color, colorRgb, title, subtitle, category, liveUrl,
+    meta, overview, challenge, approach, features,
+    screenshots, techStack, results, timeline,
+  } = data;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen" style={{ backgroundColor: "#FAF7F5", color: "#1a1a1a" }}>
 
-      {/* ── Sticky top navbar ── */}
-      <nav className={`sticky top-0 z-50 border-b border-white/5 transition-all duration-300 ${scrolled ? "bg-slate-950/95 shadow-lg shadow-black/40 backdrop-blur-xl" : "bg-slate-950/80 backdrop-blur-lg"}`}>
+      {/* ─── Top Navbar ─── */}
+      <nav
+        className={`sticky top-0 z-50 border-b transition-all duration-300 ${scrolled ? "shadow-lg shadow-black/5" : ""}`}
+        style={{ backgroundColor: scrolled ? "rgba(250,247,245,0.95)" : "rgba(250,247,245,0.85)", backdropFilter: "blur(16px)", borderColor: "rgba(198,209,215,0.3)" }}
+      >
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2 text-sm font-semibold text-slate-400 transition-colors hover:text-white">
+          <Link href="/" className="flex items-center gap-2 text-sm font-semibold transition-colors hover:text-[#06b6d4]" style={{ color: "#6B5A5A" }}>
             <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H6.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L6.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
             </svg>
             Back to Portfolio
           </Link>
-          <div className="hidden items-center gap-1 sm:flex">
-            <span className="rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-widest" style={{ color, borderColor: `rgba(${colorRgb},0.4)`, background: `rgba(${colorRgb},0.1)` }}>
-              {category}
-            </span>
-          </div>
+
+          <span className="hidden rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-widest sm:inline-block"
+            style={{ color, borderColor: `rgba(${colorRgb},0.4)`, background: `rgba(${colorRgb},0.1)` }}>{category}</span>
+
           {liveUrl && (
             <a href={liveUrl} target="_blank" rel="noopener noreferrer"
-              className="hidden items-center gap-1.5 rounded-lg px-4 py-1.5 text-xs font-bold text-white transition-all duration-300 hover:brightness-110 sm:flex"
-              style={{ background: `rgba(${colorRgb},0.25)`, border: `1px solid rgba(${colorRgb},0.5)` }}>
-              Visit Website ↗
-            </a>
+              className="hidden items-center gap-1.5 rounded-lg px-4 py-1.5 text-xs font-bold text-white transition-all hover:brightness-110 sm:flex"
+              style={{ backgroundColor: color }}>Visit Website ↗</a>
           )}
         </div>
       </nav>
 
+      {/* ─── Layout Grid ─── */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="lg:grid lg:grid-cols-[220px_1fr] lg:gap-12 xl:grid-cols-[260px_1fr]">
 
-          {/* ── STICKY SIDEBAR ── */}
+          {/* ─── Sidebar ─── */}
           <aside className="hidden lg:block">
             <div className="sticky top-20 pt-16">
-              {/* Project label */}
-              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Case Study</p>
-              <h3 className="mb-6 text-sm font-bold text-white">{title}</h3>
+              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest" style={{ color: "#999" }}>Case Study</p>
+              <h3 className="mb-6 text-sm font-bold" style={{ color: "#1a1a1a" }}>{title}</h3>
 
-              {/* Nav links */}
               <nav className="flex flex-col gap-0.5">
                 {navItems.map((item) => {
-                  const isActive = activeSection === item.id;
+                  const active = activeSection === item.id;
                   return (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-250"
-                      style={{
-                        color: isActive ? "white" : "rgb(100,116,139)",
-                        background: isActive ? `rgba(${colorRgb},0.12)` : "transparent",
-                      }}
-                    >
-                      <span
-                        className="h-1.5 w-1.5 rounded-full flex-shrink-0 transition-all duration-300"
-                        style={{ background: isActive ? color : "rgba(100,116,139,0.5)", transform: isActive ? "scale(1.4)" : "scale(1)" }}
-                      />
+                    <a key={item.id} href={`#${item.id}`}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all"
+                      style={{ color: active ? "#1a1a1a" : "#6B5A5A", background: active ? `rgba(${colorRgb},0.1)` : "transparent" }}>
+                      <span className="h-1.5 w-1.5 rounded-full flex-shrink-0 transition-all"
+                        style={{ background: active ? color : "rgba(198,209,215,0.6)", transform: active ? "scale(1.4)" : "scale(1)" }} />
                       {item.label}
-                      {isActive && (
-                        <motion.div layoutId="sidebar-active" className="ml-auto h-4 w-0.5 rounded-full" style={{ background: color }} />
-                      )}
+                      {active && <motion.div layoutId="sidebar-active-m" className="ml-auto h-4 w-0.5 rounded-full" style={{ background: color }} />}
                     </a>
                   );
                 })}
               </nav>
 
-              {/* Quick meta below nav */}
-              <div className="mt-8 space-y-3 border-t border-white/8 pt-6">
+              <div className="mt-8 space-y-3 border-t pt-6" style={{ borderColor: "rgba(198,209,215,0.3)" }}>
                 {meta.slice(0, 4).map((m: any) => (
                   <div key={m.label} className="flex items-start gap-2.5">
-                    <span className="text-sm">{m.icon}</span>
+                    <Icon name={m.icon} className="text-[#06b6d4]" />
                     <div>
-                      <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500">{m.label}</p>
-                      <p className="text-xs font-medium text-slate-300">{m.value}</p>
+                      <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: "#999" }}>{m.label}</p>
+                      <p className="text-xs font-medium" style={{ color: "#1a1a1a" }}>{m.value}</p>
                     </div>
                   </div>
                 ))}
@@ -330,227 +278,68 @@ export default function MedonCaseStudyClient({ data }: { data: any }) {
 
               {liveUrl && (
                 <a href={liveUrl} target="_blank" rel="noopener noreferrer"
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-bold text-white transition-all duration-300 hover:brightness-110"
-                  style={{ background: `linear-gradient(135deg, rgba(${colorRgb},0.4), rgba(${colorRgb},0.2))`, border: `1px solid rgba(${colorRgb},0.5)` }}>
-                  Visit Live Site ↗
-                </a>
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-bold text-white transition-all hover:brightness-110"
+                  style={{ backgroundColor: color }}>Visit Live Site ↗</a>
               )}
             </div>
           </aside>
 
-          {/* ── MAIN CONTENT ── */}
+          {/* ─── Main Content ─── */}
           <main className="pb-24 pt-12">
 
-            {/* ── HERO ── */}
+            {/* Hero */}
             <Reveal>
               <header className="mb-16">
-                <div className="mb-4 flex flex-wrap items-center gap-3">
-                  <span className="rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-widest" style={{ color, borderColor: `rgba(${colorRgb},0.4)`, background: `rgba(${colorRgb},0.1)` }}>
-                    {category}
-                  </span>
-                  {liveUrl && (
-                    <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 underline decoration-dotted hover:text-cyan-400">
-                      medoncompany.in ↗
-                    </a>
-                  )}
-                </div>
-                <h1 className="mb-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">{title}</h1>
-                <p className="mb-8 text-lg text-slate-400">{subtitle}</p>
-
-                {/* Tech badges */}
+                <span className="mb-4 inline-block rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-widest"
+                  style={{ color, borderColor: `rgba(${colorRgb},0.4)`, background: `rgba(${colorRgb},0.1)` }}>{category}</span>
+                <h1 className="mb-3 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl" style={{ color: "#1a1a1a" }}>{title}</h1>
+                <p className="mb-8 text-lg" style={{ color: "#6B5A5A" }}>{subtitle}</p>
                 <div className="flex flex-wrap gap-2">
                   {techStack.map((t: any) => (
-                    <span key={t.name} className="rounded-md border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300">
-                      {t.name}
-                    </span>
+                    <span key={t.name} className="rounded-md border px-3 py-1 text-xs font-medium"
+                      style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "white" }}>{t.name}</span>
                   ))}
                 </div>
               </header>
             </Reveal>
 
-            {/* ── HERO SCREENSHOT ── */}
+            {/* Hero Screenshot */}
             <Reveal delay={0.1}>
               <div className="mb-16">
-                <BrowserFrame
-                  src={screenshots[0].src}
-                  alt={`${title} — ${screenshots[0].label}`}
-                  url="medoncompany.in"
-                />
+                <BrowserFrame src={screenshots[0].src} alt={`${title} — ${screenshots[0].label}`} url="medoncompany.in" />
               </div>
             </Reveal>
 
-            {/* ── META CARDS ── */}
+            {/* Meta Cards */}
             <Reveal delay={0.05}>
               <div className="mb-16 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {meta.map((m: any) => (
-                  <div key={m.label} className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-sm">
-                    <span className="text-xl">{m.icon}</span>
-                    <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">{m.label}</p>
-                    <p className="mt-0.5 text-sm font-semibold text-slate-200">{m.value}</p>
+                  <div key={m.label} className="rounded-2xl border p-4" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
+                    <Icon name={m.icon} className="text-[#06b6d4]" />
+                    <p className="mt-2 text-[10px] font-bold uppercase tracking-widest" style={{ color: "#999" }}>{m.label}</p>
+                    <p className="mt-0.5 text-sm font-semibold" style={{ color: "#1a1a1a" }}>{m.value}</p>
                   </div>
                 ))}
               </div>
             </Reveal>
 
-            {/* ── OVERVIEW ── */}
+            {/* 01 — Overview */}
             <Section id="overview">
-              <SH label="Project Overview" title="About This Project" color={color} />
-              <Reveal>
-                <p className="text-base leading-8 text-slate-400">{overview}</p>
-              </Reveal>
+              <SH label="01. Overview" title={subtitle} color={color} />
+              <Reveal><p className="text-base leading-8" style={{ color: "#6B5A5A" }}>{overview}</p></Reveal>
             </Section>
 
-            {/* ── CHALLENGE ── */}
+            {/* 02 — The Challenge */}
             <Section id="challenge">
-              <SH label={challenge.heading} title="The Problem We Solved" color={color} />
-              <Reveal>
-                <p className="mb-6 text-base leading-8 text-slate-400">{challenge.body}</p>
-              </Reveal>
-              <div className="space-y-3">
-                {challenge.points.map((p: string, i: number) => (
-                  <Reveal key={p} delay={0.05 * i}>
-                    <div className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4">
-                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-red-500/15 text-xs font-bold text-red-400">✕</span>
-                      <span className="text-sm leading-relaxed text-slate-300">{p}</span>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </Section>
-
-            {/* ── SOLUTION ── */}
-            <Section id="solution">
-              <SH label={solution.heading} title="How We Built It" color={color} />
-              <Reveal>
-                <p className="mb-6 text-base leading-8 text-slate-400">{solution.body}</p>
-              </Reveal>
-              <div className="space-y-3">
-                {solution.points.map((p: string, i: number) => (
-                  <Reveal key={p} delay={0.05 * i}>
-                    <div className="flex items-start gap-3 rounded-xl border bg-white/[0.03] p-4" style={{ borderColor: `rgba(${colorRgb},0.2)` }}>
-                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold" style={{ background: `rgba(${colorRgb},0.15)`, color }}>✓</span>
-                      <span className="text-sm leading-relaxed text-slate-300">{p}</span>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </Section>
-
-            {/* ── FEATURES ── */}
-            <Section id="features">
-              <SH label="Feature Showcase" title="What We Built" color={color} />
-              <div className="grid gap-4 sm:grid-cols-2">
-                {features.map((f: any, i: number) => (
-                  <Reveal key={f.title} delay={0.04 * i}>
-                    <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.05]"
-                      style={{ borderColor: `rgba(${colorRgb},0.1)` }}>
-                      <div className="mb-3 flex items-center gap-3">
-                        <span className="text-2xl">{f.icon}</span>
-                        <h3 className="font-bold text-white">{f.title}</h3>
-                      </div>
-                      <p className="text-sm leading-relaxed text-slate-400">{f.desc}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </Section>
-
-            {/* ── SCREENSHOTS ── */}
-            <Section id="screenshots">
-              <SH label="Screenshots Gallery" title="See It in Action" color={color} />
-              <div className="space-y-8">
-                {screenshots.map((s: any, i: number) => (
-                  <Reveal key={s.src} delay={0.08 * i}>
-                    <div>
-                      <div className="mb-3 flex items-center gap-3">
-                        <span className="font-mono text-xs font-bold" style={{ color }}>
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <h3 className="text-sm font-semibold text-white">{s.label}</h3>
-                        <div className="h-px flex-1 bg-white/8" />
-                      </div>
-                      <BrowserFrame src={s.src} alt={`${title} — ${s.label}`} url="medoncompany.in" />
-                      {s.desc && <p className="mt-3 text-sm text-slate-500">{s.desc}</p>}
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </Section>
-
-            {/* ── TECH STACK ── */}
-            <Section id="tech">
-              <SH label="Technical Stack" title="Technologies Used" color={color} />
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {techStack.map((t: any, i: number) => (
-                  <Reveal key={t.name} delay={0.05 * i}>
-                    <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5" style={{ borderColor: `rgba(${colorRgb},0.15)` }}>
-                      <div className="mb-2 flex items-center gap-2">
-                        <span className="text-xl">{t.icon}</span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color }}>{t.category}</span>
-                      </div>
-                      <h4 className="mb-1.5 font-bold text-white">{t.name}</h4>
-                      <p className="text-xs leading-relaxed text-slate-400">{t.desc}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </Section>
-
-            {/* ── TIMELINE ── */}
-            <Section id="timeline">
-              <SH label="Project Timeline" title="How We Delivered" color={color} />
-              <div className="relative space-y-0">
-                {/* Vertical line */}
-                <div className="absolute left-[27px] top-0 h-full w-px bg-white/8" />
-                {timeline.map((t: any, i: number) => (
-                  <Reveal key={t.phase} delay={0.06 * i}>
-                    <div className="relative flex gap-6 pb-8">
-                      {/* Phase dot */}
-                      <div className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-white/15 bg-slate-900 text-xs font-bold"
-                        style={{ color, borderColor: `rgba(${colorRgb},0.35)`, background: `rgba(${colorRgb},0.08)` }}>
-                        {t.phase}
-                      </div>
-                      <div className="flex-1 pt-3">
-                        <div className="mb-1 flex flex-wrap items-center gap-3">
-                          <h3 className="font-bold text-white">{t.title}</h3>
-                          <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-400">
-                            {t.duration}
-                          </span>
-                        </div>
-                        <p className="text-sm leading-relaxed text-slate-400">{t.desc}</p>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </Section>
-
-            {/* ── RESULTS ── */}
-            <Section id="results">
-              <SH label="Project Results" title="What We Achieved" color={color} />
-              <div ref={resultsRef} className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                {results.map((r: any, i: number) => (
-                  <motion.div
-                    key={r.label}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={counterStarted ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.5, delay: 0.08 * i, ease: "backOut" }}
-                    className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center"
-                    style={{ borderColor: `rgba(${colorRgb},0.2)` }}
-                  >
-                    <AnimCounter end={r.value} suffix={r.suffix} label={r.label} color={color} started={counterStarted} />
-                  </motion.div>
-                ))}
-              </div>
-
-              <Reveal>
-                <div className="rounded-3xl border border-white/8 bg-white/[0.03] p-8">
-                  <h3 className="mb-4 font-bold text-white">Key Outcomes</h3>
+              <SH label={`02. ${challenge.heading}`} title={challenge.heading} color={color} />
+              <Reveal><p className="mb-8 text-base leading-8" style={{ color: "#6B5A5A" }}>{challenge.body}</p></Reveal>
+              <Reveal delay={0.05}>
+                <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
                   <ul className="space-y-3">
-                    {["96/100 Lighthouse Performance score on mobile", "50+ service and location pages indexed by Google", "100% mobile responsive across all tested devices", "WhatsApp lead conversions within first month of launch"].map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-slate-300">
-                        <span className="mt-0.5 h-4 w-4 flex-shrink-0 rounded-full text-[10px] font-bold flex items-center justify-center" style={{ background: `rgba(${colorRgb},0.2)`, color }}>✓</span>
-                        {item}
+                    {challenge.points.map((p: string, i: number) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Icon name="check" className="mt-0.5 flex-shrink-0 text-[#06b6d4]" />
+                        <span className="text-sm leading-relaxed" style={{ color: "#4a4a4a" }}>{p}</span>
                       </li>
                     ))}
                   </ul>
@@ -558,24 +347,130 @@ export default function MedonCaseStudyClient({ data }: { data: any }) {
               </Reveal>
             </Section>
 
-            {/* ── CTA ── */}
+            {/* 03 — Our Approach */}
+            <Section id="approach">
+              <SH label={`03. ${approach.heading}`} title={approach.heading} color={color} />
+              <Reveal><p className="mb-8 text-base leading-8" style={{ color: "#6B5A5A" }}>{approach.body}</p></Reveal>
+              <Reveal delay={0.05}>
+                <div className="rounded-2xl border p-6" style={{ borderColor: `rgba(${colorRgb},0.25)`, backgroundColor: "white" }}>
+                  <ul className="space-y-3">
+                    {approach.points.map((p: string, i: number) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Icon name="check" className="mt-0.5 flex-shrink-0 text-[#06b6d4]" />
+                        <span className="text-sm leading-relaxed" style={{ color: "#4a4a4a" }}>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            </Section>
+
+            {/* 04 — Key Features */}
+            <Section id="features">
+              <SH label="04. Key Features" title="What the website includes" color={color} />
+              <div className="grid gap-4 sm:grid-cols-2">
+                {features.map((f: any, i: number) => (
+                  <Reveal key={f.title} delay={0.04 * i}>
+                    <div className="rounded-2xl border p-5 transition-all duration-300 hover:shadow-md"
+                      style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
+                      <div className="mb-3 flex items-center gap-3">
+                        <Icon name={f.icon} className="text-[#06b6d4]" />
+                        <h3 className="font-bold" style={{ color: "#1a1a1a" }}>{f.title}</h3>
+                      </div>
+                      <p className="text-sm leading-relaxed" style={{ color: "#6B5A5A" }}>{f.desc}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </Section>
+
+            {/* 05 — Screenshots */}
+            <Section id="screenshots">
+              <SH label="05. Screenshots" title="See it in action" color={color} />
+              <div className="space-y-8">
+                {screenshots.map((s: any, i: number) => (
+                  <Reveal key={s.src} delay={0.08 * i}>
+                    <div>
+                      <div className="mb-3 flex items-center gap-3">
+                        <span className="font-mono text-xs font-bold" style={{ color }}>{String(i + 1).padStart(2, "0")}</span>
+                        <h3 className="text-sm font-semibold" style={{ color: "#1a1a1a" }}>{s.label}</h3>
+                        <div className="h-px flex-1" style={{ backgroundColor: "rgba(198,209,215,0.4)" }} />
+                      </div>
+                      <BrowserFrame src={s.src} alt={`${title} — ${s.label}`} url="medoncompany.in" />
+                      {s.desc && <p className="mt-3 text-sm" style={{ color: "#6B5A5A" }}>{s.desc}</p>}
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </Section>
+
+            {/* 06 — Tech Stack */}
+            <Section id="tech">
+              <SH label="06. Tech Stack" title="Technologies Used" color={color} />
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {techStack.map((t: any, i: number) => (
+                  <Reveal key={t.name} delay={0.05 * i}>
+                    <div className="rounded-2xl border p-5" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
+                      <div className="mb-2 flex items-center gap-2">
+                        <Icon name={t.icon} className="text-[#06b6d4]" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color }}>{t.category}</span>
+                      </div>
+                      <h4 className="mb-1.5 font-bold" style={{ color: "#1a1a1a" }}>{t.name}</h4>
+                      <p className="text-xs leading-relaxed" style={{ color: "#6B5A5A" }}>{t.desc}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </Section>
+
+            {/* 07 — Timeline */}
+            <Section id="timeline">
+              <SH label="07. Timeline" title="How We Delivered" color={color} />
+              <div className="relative space-y-0">
+                <div className="absolute left-[27px] top-0 h-full w-px" style={{ backgroundColor: "rgba(198,209,215,0.4)" }} />
+                {timeline.map((t: any, i: number) => (
+                  <Reveal key={t.phase} delay={0.06 * i}>
+                    <div className="relative flex gap-6 pb-8">
+                      <div className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border text-xs font-bold"
+                        style={{ color, borderColor: `rgba(${colorRgb},0.35)`, backgroundColor: "white" }}>{t.phase}</div>
+                      <div className="flex-1 pt-3">
+                        <h3 className="mb-1 font-bold" style={{ color: "#1a1a1a" }}>{t.title}</h3>
+                        <p className="text-sm leading-relaxed" style={{ color: "#6B5A5A" }}>{t.desc}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </Section>
+
+            {/* 08 — The Result */}
+            <Section id="result">
+              <SH label="08. The Result" title="The Result" color={color} />
+              <Reveal>
+                <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                  {results.map((r: any) => (
+                    <div key={r.label} className="rounded-2xl border p-5 text-center" style={{ borderColor: `rgba(${colorRgb},0.3)`, backgroundColor: "white" }}>
+                      <p className="text-2xl font-black sm:text-3xl" style={{ color }}>{r.value}{r.suffix}</p>
+                      <p className="mt-1 text-xs" style={{ color: "#6B5A5A" }}>{r.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </Section>
+
+            {/* CTA */}
             <Reveal>
-              <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center">
+              <div className="rounded-3xl border p-10 text-center" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-widest" style={{ color }}>Start a Project</p>
-                <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl">Need a Similar Platform?</h2>
-                <p className="mx-auto mb-8 max-w-md text-slate-400">
-                  We build high-performance, SEO-optimized web platforms for businesses across India and worldwide.
+                <h2 className="mb-4 text-2xl font-bold sm:text-3xl" style={{ color: "#1a1a1a" }}>Need a Similar Website?</h2>
+                <p className="mx-auto mb-8 max-w-md" style={{ color: "#6B5A5A" }}>
+                  We build service booking websites, local business platforms, and digital solutions for businesses across India.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4">
-                  <Link href="/#contact"
-                    className="rounded-xl px-8 py-3 text-sm font-bold text-white transition-all duration-300 hover:brightness-110"
-                    style={{ background: `linear-gradient(135deg, rgba(${colorRgb},0.7), rgba(${colorRgb},0.4))`, border: `1px solid rgba(${colorRgb},0.6)` }}>
-                    Start Your Project →
-                  </Link>
-                  <Link href="/"
-                    className="rounded-xl border border-white/15 bg-white/5 px-8 py-3 text-sm font-bold text-slate-300 transition-all duration-300 hover:border-white/30 hover:text-white">
-                    View All Projects
-                  </Link>
+                  <Link href="/#contact" className="rounded-xl px-8 py-3 text-sm font-bold text-white transition-all hover:brightness-110 hover:shadow-lg"
+                    style={{ backgroundColor: color }}>Start Your Project →</Link>
+                  <Link href="/" className="rounded-xl border px-8 py-3 text-sm font-bold transition-all hover:shadow-sm"
+                    style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "#FAF7F5" }}>View All Projects</Link>
                 </div>
               </div>
             </Reveal>

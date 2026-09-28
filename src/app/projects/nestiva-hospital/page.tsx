@@ -4,22 +4,21 @@ import NestivaHospitalCaseStudyClient from "./NestivaHospitalCaseStudyClient";
 
 /* ── SEO Metadata ───────────────────────────────────────── */
 export const metadata: Metadata = {
-  title:
-    "Nestiva Hospital Website Case Study | Healthcare Web Development | NF Nexa Tech",
+  title: "Nestiva Hospital Website Case Study | NF Nexa Tech",
   description:
-    "Explore how NF Nexa Tech designed and developed Nestiva Hospital's modern healthcare website with doctor discovery, departments, appointment journeys, emergency access, patient resources and responsive UX.",
+    "See how NF Nexa Tech designed and developed the Nestiva Hospital website to make doctors, departments, appointments, emergency information, and hospital services easier to find.",
   alternates: {
     canonical: `${siteConfig.url}/projects/nestiva-hospital`,
   },
   openGraph: {
     title: "Nestiva Hospital Case Study | NF Nexa Tech",
     description:
-      "How NF Nexa Tech built a patient-first healthcare website for Nestiva Hospital — doctor discovery, departments, appointments, emergency access and a fully responsive experience.",
+      "See how NF Nexa Tech designed and developed the Nestiva Hospital website to make doctors, departments, appointments, emergency information, and hospital services easier to find.",
     url: `${siteConfig.url}/projects/nestiva-hospital`,
     type: "article",
     images: [
       {
-        url: `${siteConfig.url}/images/projects/nestiva/nestiva-hospital-hero.png`,
+        url: `${siteConfig.url}/images/projects/nestiva/nestivahome.png`,
         width: 1200,
         height: 630,
         alt: "Nestiva Hospital website homepage designed by NF Nexa Tech",
@@ -30,8 +29,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nestiva Hospital Case Study | NF Nexa Tech",
     description:
-      "Explore how NF Nexa Tech designed and developed Nestiva Hospital's modern healthcare website.",
-    images: [`${siteConfig.url}/images/projects/nestiva/nestiva-hospital-hero.png`],
+      "See how NF Nexa Tech designed and developed the Nestiva Hospital website to make doctors, departments, appointments, emergency information, and hospital services easier to find.",
+    images: [`${siteConfig.url}/images/projects/nestiva/nestivahome.png`],
   },
 };
 
@@ -39,9 +38,9 @@ export const metadata: Metadata = {
 export const nestivaData = {
   slug: "nestiva-hospital",
   title: "Nestiva Hospital",
-  headline: "Designing a Digital Healthcare Experience Built Around Patients",
+  headline: "A Clearer, Simpler Way to Find Healthcare Information",
   subtitle:
-    "Nestiva is a modern multi-specialty hospital website designed to make healthcare information easier to discover and important patient actions easier to complete.",
+    "Nestiva is a multi-specialty hospital website designed to help patients find doctors, departments, facilities, and important hospital information without getting lost in too many pages.",
   category: "Healthcare",
   categoryFull: "HEALTHCARE • WEBSITE DESIGN & DEVELOPMENT",
   color: "#0d9488",
@@ -51,12 +50,12 @@ export const nestivaData = {
   tagline: "Advanced Care, Human Touch",
 
   meta: [
-    { icon: "🌐", label: "Platform", value: "Web" },
-    { icon: "⏱️", label: "Timeline", value: "6 Weeks" },
-    { icon: "🏥", label: "Industry", value: "Healthcare" },
-    { icon: "🤝", label: "Client Type", value: "Healthcare Provider" },
-    { icon: "💼", label: "Focus", value: "Patient Experience" },
-    { icon: "📱", label: "Responsive", value: "Mobile, Tablet, Desktop" },
+    { icon: "globe", label: "Platform", value: "Web" },
+    { icon: "clock", label: "Timeline", value: "6 Weeks" },
+    { icon: "hospital", label: "Industry", value: "Healthcare" },
+    { icon: "handshake", label: "Client Type", value: "Healthcare Provider" },
+    { icon: "briefcase", label: "Focus", value: "Patient Experience" },
+    { icon: "phone", label: "Responsive", value: "Mobile, Tablet, Desktop" },
   ],
 
   services: [
@@ -70,31 +69,31 @@ export const nestivaData = {
   ],
 
   overview:
-    "Nestiva Hospital needed a modern digital presence capable of communicating trust while helping patients quickly reach the information that matters most. The website was structured around common healthcare journeys — discovering specialists, exploring departments, understanding hospital facilities, accessing emergency information and moving toward appointment booking. NF Nexa Tech created a clean, responsive and patient-focused experience that balances healthcare credibility with modern digital design.",
+    "Nestiva Hospital needed a website that felt trustworthy while making everyday information easy to find. We organised the experience around the things patients are most likely to look for, such as doctors, departments, facilities, emergency information, and appointments. The result is a clean and responsive website that makes those journeys easier.",
 
   challenge: {
     heading: "The Challenge",
-    body: "Healthcare websites serve users with very different intentions. Some visitors may be researching a specialist, others may be comparing departments, and some may need urgent contact information. The challenge was to organise a large amount of healthcare information without making the experience feel complicated.",
+    body: "A hospital website has to serve different people for different reasons. Someone may be looking for a doctor, another person may want to know about a department, while someone else may need emergency contact information. The challenge was to bring all of this together without making the website difficult to use.",
     points: [
       {
         number: "01",
-        title: "Complex Information Architecture",
-        desc: "Doctors, departments, facilities, patient resources and healthcare content needed clear organisation without overwhelming visitors.",
+        title: "Organising a Lot of Information",
+        desc: "Doctors, departments, facilities, patient resources, and other information needed to be easy to find without overwhelming visitors.",
       },
       {
         number: "02",
-        title: "Trust & Credibility",
-        desc: "The visual experience needed to communicate professionalism and confidence appropriate for healthcare.",
+        title: "Building Trust",
+        desc: "The design needed to feel professional and reassuring, which is especially important when people are looking for healthcare.",
       },
       {
         number: "03",
-        title: "Fast Patient Navigation",
-        desc: "Important actions such as finding doctors, viewing departments and reaching appointment or emergency information needed to be easy to locate.",
+        title: "Making Important Actions Easy",
+        desc: "Finding doctors, exploring departments, contacting the hospital, and reaching appointment information needed to be straightforward.",
       },
       {
         number: "04",
-        title: "Responsive Experience",
-        desc: "The experience needed to remain clear and usable across desktop, tablet and mobile screens.",
+        title: "Working Across Devices",
+        desc: "The website needed to work well on phones, tablets, and desktop screens.",
       },
     ],
   },
@@ -102,200 +101,179 @@ export const nestivaData = {
   approach: {
     heading: "Our Approach",
     intro:
-      "We approached Nestiva as a patient journey rather than simply a collection of hospital pages.",
+      "We designed the website around how patients actually look for information, rather than simply putting hospital content into separate pages.",
     points: [
       {
-        icon: "🧭",
-        title: "Patient-First UX",
-        desc: "Important healthcare journeys are surfaced through clear navigation and strong calls to action.",
+        icon: "compass",
+        title: "Easy Navigation",
+        desc: "The main healthcare information and actions are kept easy to find throughout the website.",
       },
       {
-        icon: "🎨",
-        title: "Healthcare-Focused UI",
-        desc: "A clean visual system, readable typography, generous spacing and healthcare-oriented design establish a professional experience.",
+        icon: "palette",
+        title: "Simple Visual Design",
+        desc: "Clean layouts, readable typography, and comfortable spacing keep the experience clear and professional.",
       },
       {
-        icon: "🗂️",
-        title: "Structured Content",
-        desc: "Doctors, departments, facilities, testimonials, FAQs and health resources are separated into easily understandable sections.",
+        icon: "layout",
+        title: "Clear Content Structure",
+        desc: "Doctors, departments, facilities, testimonials, FAQs, and health information are organised into clear sections.",
       },
       {
-        icon: "🎯",
-        title: "Conversion-Focused Journeys",
-        desc: "Appointment and contact actions are placed throughout the experience so visitors always have a clear next step.",
+        icon: "target",
+        title: "Clear Next Steps",
+        desc: "Appointment and contact options are placed where patients are likely to need them.",
       },
     ],
   },
 
   features: [
     {
-      icon: "👨‍⚕️",
-      title: "Doctor Discovery",
-      desc: "Specialist cards and doctor information help visitors identify relevant medical professionals.",
+      icon: "doctor",
+      title: "Find a Doctor",
+      desc: "Doctor profiles help visitors find specialists and learn more about the available doctors.",
     },
     {
-      icon: "🏥",
-      title: "Department Discovery",
-      desc: "Dedicated department presentation helps patients understand available specialties.",
+      icon: "hospital",
+      title: "Explore Departments",
+      desc: "Visitors can browse the hospital's departments and understand the services available.",
     },
     {
-      icon: "📅",
-      title: "Appointment Journey",
-      desc: "Prominent appointment CTAs make the next step clear throughout the website.",
+      icon: "calendar",
+      title: "Appointments",
+      desc: "Appointment actions are easy to find throughout the website.",
     },
     {
-      icon: "🚨",
-      title: "24/7 Emergency Information",
-      desc: "Emergency contact information is visually prioritised for quick access.",
+      icon: "emergency",
+      title: "Emergency Information",
+      desc: "Important emergency contact information is kept visible and easy to reach.",
     },
     {
-      icon: "💬",
+      icon: "chat",
       title: "Patient Testimonials",
-      desc: "Patient stories add social proof and human context to the hospital experience.",
+      desc: "Patient stories give visitors a better idea of the experience and add a personal touch.",
     },
     {
-      icon: "🏗️",
-      title: "Hospital Facilities Showcase",
-      desc: "Facility visuals help communicate the hospital environment and infrastructure.",
+      icon: "facilities",
+      title: "Hospital Facilities",
+      desc: "Facility sections give visitors a visual look at the hospital and its infrastructure.",
     },
     {
-      icon: "📰",
-      title: "Health Insights / Blog",
-      desc: "Educational healthcare content supports patient awareness and organic content discovery.",
+      icon: "news",
+      title: "Health Insights",
+      desc: "Health articles provide useful information while giving the website more helpful content to explore.",
     },
     {
-      icon: "❓",
-      title: "FAQ Section",
-      desc: "Common patient questions can be answered without making users search through multiple pages.",
+      icon: "question",
+      title: "FAQs",
+      desc: "Common questions are answered in one place so visitors don't have to search through multiple pages.",
     },
     {
-      icon: "📱",
-      title: "Responsive Experience",
-      desc: "Layout and interactions work smoothly across desktop, tablet and mobile screen sizes.",
+      icon: "responsive",
+      title: "Responsive Design",
+      desc: "The website adapts to desktop, tablet, and mobile screens.",
     },
   ],
 
   screenshots: [
     {
-      src: "/images/projects/nestiva/nestiva-hospital-hero.png",
-      label: "Homepage / Hero",
-      desc: "Primary entry point establishing trust and surfacing the most important patient actions.",
-      position: "right",
+      src: "/images/projects/nestiva/nestivahome.png",
+      label: "Homepage",
+      desc: "The main entry point with key hospital information and actions.",
     },
     {
-      src: "/images/projects/nestiva/nestiva-departments.png",
-      label: "Hospital Achievements & Departments",
-      desc: "Trust statistics and department discovery for patients researching available specialties.",
-      position: "left",
+      src: "/images/projects/nestiva/specialist.png",
+      label: "Specialists",
+      desc: "Doctor profiles with specialities and appointment options.",
     },
     {
-      src: "/images/projects/nestiva/nestiva-doctors.png",
-      label: "Doctors",
-      desc: "Specialist discovery with doctor cards, filters and direct appointment pathways.",
-      position: "right",
+      src: "/images/projects/nestiva/doctorpage.png",
+      label: "Doctor Page",
+      desc: "Individual doctor profile with details and contact information.",
     },
     {
-      src: "/images/projects/nestiva/nestiva-why-choose.png",
-      label: "Why Choose Nestiva",
-      desc: "Trust-building section communicating the hospital's core strengths to prospective patients.",
-      position: "left",
+      src: "/images/projects/nestiva/gallery.png",
+      label: "Gallery & Facilities",
+      desc: "A visual look at the hospital's infrastructure and care environment.",
     },
     {
-      src: "/images/projects/nestiva/nestiva-patient-testimonials.png",
-      label: "Patient Testimonials",
-      desc: "Social proof from patients adding human context and building confidence.",
-      position: "right",
-    },
-    {
-      src: "/images/projects/nestiva/nestiva-facilities.png",
-      label: "Facilities",
-      desc: "Visual showcase communicating the hospital's infrastructure and care environment.",
-      position: "left",
-    },
-    {
-      src: "/images/projects/nestiva/nestiva-health-insights.png",
-      label: "Health Insights",
-      desc: "Educational content supporting patient awareness and organic search discovery.",
-      position: "right",
-    },
-    {
-      src: "/images/projects/nestiva/nestiva-faq-cta.png",
-      label: "FAQ / Appointment CTA / Footer",
-      desc: "Final conversion layer — common questions answered and appointment action reinforced.",
-      position: "left",
+      src: "/images/projects/nestiva/article.png",
+      label: "Health Articles",
+      desc: "Health articles with useful information for patients.",
     },
   ],
 
+
+
   uxDecisions: [
     {
-      icon: "🔍",
+      icon: "search",
       title: "Find Care",
-      desc: "Help visitors discover departments and specialists quickly without unnecessary navigation.",
+      desc: "Make it easier for visitors to find doctors and departments without going through unnecessary pages.",
     },
     {
-      icon: "🏆",
-      title: "Build Confidence",
-      desc: "Use doctors, facilities, patient stories and structured hospital information to reinforce credibility.",
+      icon: "trophy",
+      title: "Build Trust",
+      desc: "Doctors, facilities, patient stories, and clear hospital information help visitors understand what Nestiva offers.",
     },
     {
-      icon: "⚡",
-      title: "Reduce Friction",
-      desc: "Keep appointment, contact and emergency actions easy to find at every scroll depth.",
+      icon: "bolt",
+      title: "Keep Things Simple",
+      desc: "Appointment, contact, and emergency options are kept easy to reach when they are needed.",
     },
     {
-      icon: "📚",
-      title: "Educate",
-      desc: "Use FAQs and health articles to answer common questions and provide useful information to patients.",
+      icon: "book",
+      title: "Useful Information",
+      desc: "FAQs and health articles help answer common questions before a patient needs to contact the hospital.",
     },
   ],
 
   results: {
     heading: "The Result",
-    body: "The final experience gives Nestiva a structured digital presence where patients can move from discovering healthcare services to identifying specialists and taking the next step toward care without unnecessary complexity.",
+    body: "The finished website gives Nestiva a clear digital presence where patients can explore services, find doctors and departments, and take the next step without having to work through a complicated interface.",
     outcomes: [
-      "Clear healthcare information architecture",
-      "Stronger doctor and department discovery",
-      "Prominent appointment pathways",
-      "Visible emergency access",
-      "Responsive patient experience across all devices",
-      "Trust-focused visual design",
-      "Scalable structure for additional doctors, departments and health content",
+      "Clear and organised hospital information",
+      "Easier doctor and department discovery",
+      "Easy-to-find appointment options",
+      "Quick access to emergency information",
+      "Responsive experience across devices",
+      "A clean and trustworthy visual design",
+      "A structure that can be expanded with new doctors, departments, and health content",
     ],
   },
 
   techDelivery: {
-    heading: "Built for Performance and Growth",
-    body: "The website was built with a component-driven, SEO-friendly architecture designed to scale as the hospital grows — adding new doctors, departments and health content without reworking the underlying structure.",
+    heading: "Built to Stay Easy to Maintain",
+    body: "The website uses a structured component-based setup so new doctors, departments, and health content can be added without having to rebuild the whole website.",
     points: [
       {
-        icon: "📱",
-        title: "Responsive Architecture",
-        desc: "Layout and components tested across mobile, tablet and desktop breakpoints for a consistent patient experience.",
+        icon: "responsive",
+        title: "Responsive Layout",
+        desc: "The layout works across mobile, tablet, and desktop screen sizes.",
       },
       {
-        icon: "🧩",
+        icon: "puzzle",
         title: "Reusable Components",
-        desc: "Doctor cards, department blocks and content sections are built as reusable components for easy expansion.",
+        desc: "Common sections such as doctor cards, department blocks, and content areas can be reused as the website grows.",
       },
       {
-        icon: "🔍",
-        title: "SEO Metadata",
-        desc: "Page-level meta titles, descriptions and Open Graph tags implemented for search and social discoverability.",
+        icon: "search",
+        title: "SEO Setup",
+        desc: "Page titles, descriptions, and social sharing information are set up to help the website appear correctly in search and social previews.",
       },
       {
-        icon: "🖼️",
-        title: "Image Optimization",
-        desc: "All images processed for appropriate formats and sizes to minimise page weight and improve load performance.",
+        icon: "image",
+        title: "Optimised Images",
+        desc: "Images are prepared in suitable sizes and formats to keep the website lighter and faster.",
       },
       {
-        icon: "♿",
-        title: "Accessible Markup",
-        desc: "Semantic HTML with appropriate heading hierarchy and sufficient colour contrast throughout.",
+        icon: "accessibility",
+        title: "Accessible Structure",
+        desc: "Semantic HTML, clear headings, and readable contrast are used throughout the website.",
       },
       {
-        icon: "📈",
-        title: "Scalable Data Structure",
-        desc: "Doctor profiles, department pages and health content are structured for easy addition of new entries.",
+        icon: "chart",
+        title: "Easy to Extend",
+        desc: "The structure makes it easier to add new doctors, departments, and health content later.",
       },
     ],
   },

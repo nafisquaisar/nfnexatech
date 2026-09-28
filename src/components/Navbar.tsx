@@ -130,20 +130,61 @@ function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
+  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const IDLE_MS = 3_000; // auto-hide after 3 s of no activity
+
+  /* ── Reset the idle timer: show navbar, restart countdown ── */
+  const resetIdle = useRef(() => {
+    // If near the top of the page, never auto-hide
+    if (window.scrollY <= 80) return;
+
+    setHidden(false);
+    if (idleTimer.current) clearTimeout(idleTimer.current);
+    idleTimer.current = setTimeout(() => {
+      // Only auto-hide if user is scrolled past the hero
+      if (window.scrollY > 80) setHidden(true);
+    }, IDLE_MS);
+  });
+
+  /* ── Scroll direction detection ── */
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
       setScrolled(currentY > 20);
-      // Hide when scrolling DOWN past 80px, show when scrolling UP
-      if (currentY > 80) {
-        setHidden(currentY > lastScrollY.current);
-      } else {
+
+      if (currentY <= 80) {
+        // At top / hero section — always visible, clear idle timer
         setHidden(false);
+        if (idleTimer.current) clearTimeout(idleTimer.current);
+      } else if (currentY > lastScrollY.current) {
+        // Scrolling DOWN — hide immediately
+        setHidden(true);
+        if (idleTimer.current) clearTimeout(idleTimer.current);
+      } else {
+        // Scrolling UP — show & start idle countdown
+        setHidden(false);
+        if (idleTimer.current) clearTimeout(idleTimer.current);
+        idleTimer.current = setTimeout(() => {
+          if (window.scrollY > 80) setHidden(true);
+        }, IDLE_MS);
       }
+
       lastScrollY.current = currentY;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ── Mouse / touch activity shows navbar & restarts idle timer ── */
+  useEffect(() => {
+    const handler = () => resetIdle.current();
+    window.addEventListener("mousemove", handler, { passive: true });
+    window.addEventListener("touchstart", handler, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handler);
+      window.removeEventListener("touchstart", handler);
+      if (idleTimer.current) clearTimeout(idleTimer.current);
+    };
   }, []);
 
   // Close dropdown on route change
