@@ -71,7 +71,7 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/#contact"
+                  href="/start-project"
                   className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13px] font-bold text-white transition-all hover:scale-[1.03]"
                   style={{ background: "linear-gradient(135deg,#1FA0B1,#36c2d6)", boxShadow: "0 6px 20px rgba(31,160,177,0.35)" }}
                 >

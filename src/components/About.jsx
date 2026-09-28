@@ -121,14 +121,14 @@ function About() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-3 pt-1">
-              <a
-                href="#contact"
+              <Link
+                href="/start-project"
                 id="about-get-quote"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-bold text-white"
                 style={{ backgroundColor: "#1FA0B1", boxShadow: "0 4px 14px rgba(31,160,177,0.35)" }}
               >
                 Get a Free Quote →
-              </a>
+              </Link>
               <Link
                 href="/about"
                 id="about-learn-more"

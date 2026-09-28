@@ -160,20 +160,25 @@ export default function ProjectsPage() {
       <header className="relative overflow-hidden pb-10 pt-36">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-violet-500/5 blur-[120px]"
+          className="pointer-events-none absolute -top-32 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-40"
+          style={{ background: "radial-gradient(circle, rgba(31,160,177,0.25) 0%, rgba(232,118,58,0.1) 50%, transparent 70%)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-cyan-500/8 blur-[120px]"
+          className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full opacity-30"
+          style={{ background: "radial-gradient(circle, rgba(249,225,205,0.4) 0%, transparent 70%)" }}
         />
-        <div className="relative mx-auto w-[92%] max-w-5xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-violet-300">
-            Our Work
+        <div className="relative mx-auto w-[92%] max-w-5xl">
+          <div className="mb-4 inline-flex items-center gap-3">
+            <span className="block h-px w-8" style={{ backgroundColor: "#1FA0B1" }} />
+            <span className="text-[11px] font-bold uppercase tracking-[0.25em]" style={{ color: "#1FA0B1" }}>
+              Our Work
+            </span>
           </div>
-          <h1 className="mb-5 text-3xl font-extrabold leading-tight text-[#1a1a1a] sm:text-4xl lg:text-5xl">
-            Projects &amp; Case Studies
+          <h1 className="mb-5 text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl" style={{ color: "#1a1a1a" }}>
+            Projects &amp; <span style={{ color: "#E8763A" }}>Case Studies</span>
           </h1>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#6B5A5A]">
+          <p className="max-w-2xl text-base leading-relaxed" style={{ color: "#6B5A5A" }}>
             Real work. Real results. Browse our portfolio of web apps, mobile apps, SaaS platforms,
             and digital products built for startups and businesses across India.
           </p>
@@ -243,23 +248,6 @@ export default function ProjectsPage() {
             ))}
           </div>
         </section>
-
-        {/* ── CTA ── */}
-        <section className="mt-16 rounded-2xl border border-slate-800 bg-[#f1f3f5]/60 p-10 text-center backdrop-blur-sm">
-          <h2 className="mb-3 text-2xl font-bold text-[#1a1a1a]">
-            Have a project in mind?
-          </h2>
-          <p className="mx-auto mb-7 max-w-xl text-[#6B5A5A]">
-            Tell us what you want to build. We&apos;ll review your brief within 4 hours and send
-            you a detailed proposal with timeline and pricing.
-          </p>
-          <Link
-            href="/start-project"
-            className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-7 py-3.5 text-sm font-semibold text-[#1a1a1a] shadow-lg transition hover:bg-violet-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
-          >
-            Start a Project →
-          </Link>
-        </section>
       </main>
 
       <Footer />
@@ -294,12 +282,17 @@ function ProjectCard({
   return (
     <Link
       href={`/projects/${slug}`}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-[#f1f3f5]/60 transition-all duration-300 hover:border-slate-700 hover:shadow-xl hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 ${featured ? "lg:flex-row" : ""
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1FA0B1] ${featured ? "lg:flex-row" : ""
         }`}
+      style={{
+        borderColor: "rgba(198,209,215,0.4)",
+        backgroundColor: "rgba(255,255,255,0.7)",
+        backdropFilter: "blur(12px)",
+      }}
     >
       {/* Hero Image */}
       <div
-        className={`relative overflow-hidden ${featured ? "h-56 lg:h-auto lg:w-1/2 flex-shrink-0" : "h-44"
+        className={`relative overflow-hidden ${featured ? "h-56 lg:h-auto lg:w-1/2 flex-shrink-0" : "h-48"
           }`}
       >
         {heroImage ? (
@@ -309,29 +302,37 @@ function ProjectCard({
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes={featured ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 640px) 100vw, 33vw"}
-            style={{ backgroundColor: `${color}33` }}
+            style={{ backgroundColor: `${color}15` }}
           />
         ) : (
           <div
-            className="absolute inset-0 flex items-center justify-center text-4xl"
-            style={{ backgroundColor: `${color}33` }}
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ backgroundColor: `${color}15` }}
           >
-            🚀
+            <svg className="h-10 w-10" style={{ color: `${color}80` }} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+            </svg>
           </div>
         )}
         {/* Category badge */}
-        <div className="absolute left-3 top-3 z-10 rounded-md bg-white/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#4a4a4a] backdrop-blur-sm">
+        <div
+          className="absolute left-3 top-3 z-10 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider backdrop-blur-md"
+          style={{ backgroundColor: `${color}18`, color, border: `1px solid ${color}25` }}
+        >
           {category}
         </div>
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-1 text-lg font-bold text-[#1a1a1a] group-hover:text-violet-300 transition-colors">
-          {title}
+      <div className="flex flex-1 flex-col p-5">
+        <h3
+          className="mb-1 text-[15px] font-bold transition-colors duration-300"
+          style={{ color: "#1a1a1a" }}
+        >
+          <span className="group-hover:text-[#1FA0B1] transition-colors duration-300">{title}</span>
         </h3>
-        <p className="mb-3 text-xs font-medium text-[#6B5A5A]">{subtitle}</p>
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-[#999] line-clamp-3">
+        <p className="mb-2.5 text-[12px] font-medium" style={{ color: "#6B5A5A" }}>{subtitle}</p>
+        <p className="mb-4 flex-1 text-[13px] leading-relaxed line-clamp-3" style={{ color: "#9B8B8B" }}>
           {description}
         </p>
         {/* Tech stack */}
@@ -339,19 +340,26 @@ function ProjectCard({
           {tech.slice(0, 4).map((t) => (
             <span
               key={t}
-              className="rounded-md border border-slate-700/60 bg-slate-800/60 px-2 py-0.5 text-[11px] font-medium text-[#6B5A5A]"
+              className="rounded-md border px-2 py-0.5 text-[10px] font-medium"
+              style={{ borderColor: "rgba(198,209,215,0.5)", color: "#6B5A5A", backgroundColor: "rgba(250,247,245,0.8)" }}
             >
               {t}
             </span>
           ))}
           {tech.length > 4 && (
-            <span className="rounded-md border border-slate-700/60 bg-slate-800/60 px-2 py-0.5 text-[11px] font-medium text-[#999]">
+            <span
+              className="rounded-md border px-2 py-0.5 text-[10px] font-medium"
+              style={{ borderColor: "rgba(198,209,215,0.5)", color: "#9B8B8B", backgroundColor: "rgba(250,247,245,0.8)" }}
+            >
               +{tech.length - 4}
             </span>
           )}
         </div>
-        <div className="mt-4 text-xs font-semibold text-violet-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-          View case study →
+        <div className="mt-3.5 flex items-center gap-1.5 text-[12px] font-semibold transition-all duration-300 group-hover:gap-2.5" style={{ color: "#1FA0B1" }}>
+          View case study
+          <svg className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
         </div>
       </div>
     </Link>
