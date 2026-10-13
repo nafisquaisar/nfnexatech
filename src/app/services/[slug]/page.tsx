@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { servicesData } from "@/data/content";
+import { serviceFaqs } from "@/data/serviceFaqs";
 import { siteConfig } from "@/config/site";
 import { ogImage } from "@/lib/og-image";
 import Navbar from "@/components/Navbar";
@@ -19,19 +20,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const image = ogImage({ title: service.title, category: "Service", type: "service" });
 
+  // NOTE: The root layout uses template: "%s | NF Nexa Tech"
+  // So this title renders as: "Web Development Services in Delhi | NF Nexa Tech"
+  // Do NOT include "| NF Nexa Tech" here — it would create a double-brand title.
   return {
-    title: `${service.title} in Delhi | ${siteConfig.name}`,
+    title: `${service.title} Services in Delhi`,
     description: service.metaDescription,
     alternates: { canonical: `${siteConfig.url}/services/${service.slug}` },
     openGraph: {
-      title: `${service.title} | ${siteConfig.name}`,
+      // OG tags don't use the template — include full brand here
+      title: `${service.title} Services in Delhi | ${siteConfig.name}`,
       description: service.metaDescription,
       url: `${siteConfig.url}/services/${service.slug}`,
+      siteName: siteConfig.name,
+      locale: siteConfig.locale,
+      type: "website",
       images: [image],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${service.title} | ${siteConfig.name}`,
+      site: "@nfnexatech",
+      creator: "@nfnexatech",
+      title: `${service.title} Services in Delhi | ${siteConfig.name}`,
       description: service.metaDescription,
       images: [image.url],
     },
@@ -50,6 +60,59 @@ const ICONS = {
   server: <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" /></svg>,
   rocket: <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" /></svg>,
 };
+
+/* ── Service FAQ accordion (server-rendered, no JS required) ───── */
+function ServiceFaqItem({
+  faq,
+  index,
+  color,
+  colorRgb,
+}: {
+  faq: { question: string; answer: string };
+  index: number;
+  color: string;
+  colorRgb: string;
+}) {
+  return (
+    <details
+      className="group overflow-hidden rounded-xl border transition-all"
+      style={{ borderColor: "rgba(198,209,215,0.45)", backgroundColor: "rgba(255,255,255,0.95)" }}
+    >
+      <summary
+        className="flex cursor-pointer list-none items-center gap-4 px-5 py-4 marker:hidden"
+        style={{ color: "#1a1a1a" }}
+      >
+        {/* Number badge */}
+        <span
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-[11px] font-bold"
+          style={{ backgroundColor: `rgba(${colorRgb},0.12)`, color }}
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        {/* Phase 5/6: h3 heading for question — semantic heading hierarchy */}
+        <h3 className="flex-1 text-[13px] font-semibold m-0">{faq.question}</h3>
+        {/* Chevron */}
+        <svg
+          aria-hidden="true"
+          className="h-4 w-4 shrink-0 transition-transform duration-300 group-open:rotate-180"
+          style={{ color }}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+      <p
+        className="px-5 pb-5 pl-[68px] text-[13px] leading-relaxed"
+        style={{ color: "#6B5A5A" }}
+      >
+        {faq.answer}
+      </p>
+    </details>
+  );
+}
 
 const SERVICE_THEME: Record<string, { color: string; colorRgb: string; icon: keyof typeof ICONS }> = {
   "web-development":         { color: "#0ea5e9", colorRgb: "14,165,233",  icon: "globe" },
@@ -127,6 +190,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     },
     areaServed: [
       { "@type": "City", name: "New Delhi" },
+      { "@type": "City", name: "Patna" },
+      { "@type": "City", name: "Darbhanga" },
+      { "@type": "City", name: "Jhanjharpur" },
       { "@type": "Country", name: "India" },
     ],
     serviceType: service.title,
@@ -140,6 +206,20 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       })),
     },
   };
+
+  // Phase 6: FAQPage JSON-LD — only emitted when visible FAQ exists on page.
+  const pageFaqs = serviceFaqs[slug] ?? [];
+  const faqSchema = pageFaqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: pageFaqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      }
+    : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -155,6 +235,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <div className="min-h-screen" style={{ backgroundColor: "#FAF7F5", color: "#1a1a1a" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {/* Phase 6: FAQPage schema — only injected when FAQ data exists for this service */}
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
 
       <Navbar />
 
@@ -293,6 +375,82 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
       )}
+
+      {/* ── FAQ — Phase 6 ── */}
+      {pageFaqs.length > 0 && (
+        <section className="mx-auto max-w-5xl px-6 py-16">
+          <div className="mb-8">
+            <div className="mb-3 flex items-center gap-3">
+              <span className="block h-px w-8" style={{ backgroundColor: theme.color }} />
+              <p className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: theme.color }}>FAQ</p>
+            </div>
+            <h2 className="text-2xl font-bold" style={{ color: "#1a1a1a" }}>Common Questions</h2>
+          </div>
+          <div className="flex flex-col gap-3">
+            {pageFaqs.map((faq, i) => (
+              <ServiceFaqItem key={i} faq={faq} index={i} color={theme.color} colorRgb={theme.colorRgb} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── AREAS WE SERVE ── */}
+      <section className="mx-auto max-w-5xl px-6 pb-10">
+        <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "rgba(255,255,255,0.6)" }}>
+          <h2 className="mb-2 text-base font-bold" style={{ color: "#1a1a1a" }}>Areas We Serve</h2>
+          <p className="mb-4 text-[13px] leading-relaxed" style={{ color: "#6B5A5A" }}>
+            Based in Mahipalpur, New Delhi, NF Nexa Tech provides {service.title.toLowerCase()} services to businesses in Delhi and remotely across India.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: `${service.title} in Delhi`, href: "/locations/delhi" },
+              { label: `${service.title} in Patna`, href: "/locations/patna" },
+              { label: `${service.title} in Darbhanga`, href: "/locations/darbhanga" },
+              { label: `${service.title} in Jhanjharpur`, href: "/locations/jhanjharpur" },
+            ].map((loc) => (
+              <Link
+                key={loc.href}
+                href={loc.href}
+                className="rounded-lg border px-3 py-1.5 text-[12px] font-medium transition hover:shadow-sm"
+                style={{ borderColor: `rgba(${theme.colorRgb},0.25)`, color: theme.color, backgroundColor: `rgba(${theme.colorRgb},0.05)` }}
+              >
+                {loc.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── START A PROJECT CTA ── */}
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <div
+          className="rounded-3xl p-10 text-center"
+          style={{ background: `linear-gradient(135deg, rgba(${theme.colorRgb},0.08) 0%, rgba(${theme.colorRgb},0.03) 100%)`, border: `1px solid rgba(${theme.colorRgb},0.2)` }}
+        >
+          <h2 className="mb-3 text-2xl font-extrabold" style={{ color: "#1a1a1a" }}>
+            Ready to start your {service.title.toLowerCase()} project?
+          </h2>
+          <p className="mb-8 text-sm leading-7" style={{ color: "#6B5A5A" }}>
+            Tell us about your project. We&apos;ll respond the same day and send you a detailed proposal within 48 hours.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/start-project"
+              className="rounded-xl px-8 py-3.5 text-sm font-bold text-white transition-all hover:brightness-110 hover:shadow-lg"
+              style={{ backgroundColor: theme.color }}
+            >
+              Start a Project
+            </Link>
+            <Link
+              href="/projects"
+              className="rounded-xl border px-8 py-3.5 text-sm font-bold transition-all hover:shadow-sm"
+              style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "white" }}
+            >
+              View Portfolio
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ── OTHER SERVICES ── */}
       <section className="mx-auto max-w-5xl px-6 pb-16">

@@ -12,20 +12,27 @@ const servicesOgImage = ogImage({
 });
 
 export const metadata = {
-  title: "Web & Software Development Services | NF Nexa Tech",
+  // The root layout template appends "| NF Nexa Tech" automatically.
+  // Renders as: "Web & Software Development Services | NF Nexa Tech"
+  title: "Web & Software Development Services",
   description:
     "Web development, Android & Flutter app development, UI/UX design, backend APIs, and SaaS MVP development — built by a Delhi-based team for businesses across India.",
   alternates: { canonical: `${siteConfig.url}/services` },
   openGraph: {
+    // OG tags don't use the template — include full brand explicitly.
     title: "Web & Software Development Services | NF Nexa Tech",
     description:
       "Web development, Android & Flutter apps, UI/UX design, and SaaS MVPs — built by a Delhi-based team for startups and businesses.",
     url: `${siteConfig.url}/services`,
+    siteName: "NF Nexa Tech",
+    locale: "en_IN",
     type: "website",
     images: [servicesOgImage],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@nfnexatech",
+    creator: "@nfnexatech",
     title: "Web & Software Development Services | NF Nexa Tech",
     description:
       "Web development, Android & Flutter apps, UI/UX design, and SaaS MVPs — built by a Delhi-based team.",
@@ -40,6 +47,24 @@ const breadcrumbSchema = {
     { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
     { "@type": "ListItem", position: 2, name: "Services", item: `${siteConfig.url}/services` },
   ],
+};
+
+// ItemList schema — lists all services for Google rich results
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${siteConfig.url}/services#servicelist`,
+  name: "Software Development Services by NF Nexa Tech",
+  description:
+    "Web development, Android app development, Flutter app development, UI/UX design, backend API development, and SaaS MVP development — provided by NF Nexa Tech, based in Mahipalpur, New Delhi.",
+  url: `${siteConfig.url}/services`,
+  numberOfItems: siteConfig.services.length,
+  itemListElement: siteConfig.services.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: `${siteConfig.url}/services/${s.slug}`,
+    name: s.name,
+  })),
 };
 
 /* ── Card icons (real SVGs) ───────────────────────────────── */
@@ -83,6 +108,10 @@ export default function ServicesIndexPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
 
       <Navbar />
 
@@ -105,11 +134,12 @@ export default function ServicesIndexPage() {
           </p>
         </div>
         <h1 className="mb-5 text-4xl font-extrabold leading-tight sm:text-5xl" style={{ color: "#1a1a1a" }}>
-          Our <span style={{
+          Web, Mobile &amp;{" "}
+          <span style={{
             background: "linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-          }}>Services</span>
+          }}>Software Development Services</span>
         </h1>
         <p className="max-w-2xl text-base leading-relaxed" style={{ color: "#6B5A5A" }}>
           We build websites, web applications, mobile apps, and SaaS platforms for
@@ -168,7 +198,33 @@ export default function ServicesIndexPage() {
             );
           })}
         </ul>
+      </section>
 
+      {/* ── Areas We Serve ── */}
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <div className="rounded-2xl border p-6 sm:p-8" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "rgba(255,255,255,0.6)" }}>
+          <h2 className="mb-2 text-lg font-bold" style={{ color: "#1a1a1a" }}>Areas We Serve</h2>
+          <p className="mb-5 text-[13px] leading-relaxed" style={{ color: "#6B5A5A" }}>
+            Based in Mahipalpur, New Delhi, NF Nexa Tech provides software development services to businesses in Delhi and remotely across India.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: "Delhi / New Delhi", href: "/locations/delhi" },
+              { label: "Patna, Bihar", href: "/locations/patna" },
+              { label: "Darbhanga, Bihar", href: "/locations/darbhanga" },
+              { label: "Jhanjharpur, Bihar", href: "/locations/jhanjharpur" },
+            ].map((loc) => (
+              <Link
+                key={loc.href}
+                href={loc.href}
+                className="rounded-lg border px-4 py-2 text-[13px] font-medium transition hover:shadow-sm"
+                style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "rgba(255,255,255,0.8)" }}
+              >
+                {loc.label}
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       <Footer />

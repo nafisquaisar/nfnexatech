@@ -14,22 +14,29 @@ const ogImg = ogImage({
 });
 
 export const metadata: Metadata = {
-  title: "Website Development Company in Delhi | NF Nexa Tech",
+  // Root layout template appends "| NF Nexa Tech" automatically.
+  // Renders as: "Website Development Company in Delhi | NF Nexa Tech"
+  title: "Website Development Company in Delhi",
   description:
     "NF Nexa Tech is a website development company based in Mahipalpur, New Delhi. We build business websites, web apps, and custom software for Delhi businesses. Call us for a free consultation.",
   alternates: {
     canonical: `${siteConfig.url}/locations/delhi`,
   },
   openGraph: {
+    // OG tags do not use the template — include full brand explicitly.
     title: "Website Development Company in Delhi | NF Nexa Tech",
     description:
       "Web design and development company in Mahipalpur, New Delhi. Business websites, web apps, and custom software built for Delhi businesses.",
     url: `${siteConfig.url}/locations/delhi`,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
     type: "website",
     images: [ogImg],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@nfnexatech",
+    creator: "@nfnexatech",
     title: "Website Development Company in Delhi | NF Nexa Tech",
     description:
       "Web design and development company in Mahipalpur, New Delhi. Business websites, web apps, and custom software for Delhi businesses.",
@@ -49,21 +56,25 @@ const schema = {
   email: siteConfig.contact.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
-    addressLocality: "New Delhi",
-    addressRegion: "Delhi",
-    postalCode: "110037",
-    addressCountry: "IN",
+    streetAddress: siteConfig.contact.streetAddress,
+    addressLocality: siteConfig.contact.city,
+    addressRegion: siteConfig.contact.state,
+    postalCode: siteConfig.contact.postalCode,
+    addressCountry: siteConfig.contact.countryCode,
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 28.5357,
-    longitude: 77.1199,
+    latitude: siteConfig.geo.lat,
+    longitude: siteConfig.geo.lng,
   },
   areaServed: [
     { "@type": "City", name: "New Delhi" },
     { "@type": "City", name: "Delhi" },
     { "@type": "AdministrativeArea", name: "Delhi NCR" },
+    { "@type": "City", name: "Patna" },
+    { "@type": "City", name: "Darbhanga" },
+    { "@type": "City", name: "Jhanjharpur" },
+    { "@type": "Country", name: "India" },
   ],
   priceRange: "₹₹",
 };
@@ -274,7 +285,8 @@ export default function DelhiPage() {
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
             <p className="text-sm text-slate-400">
-              <span className="font-semibold text-slate-200">Based at:</span> Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur, New Delhi — 110037
+              <span className="font-semibold text-slate-200">Based at:</span>{" "}
+              {siteConfig.contact.streetAddress}, {siteConfig.contact.city} — {siteConfig.contact.postalCode}
             </p>
             <p className="mt-2 text-sm text-slate-400">
               <span className="font-semibold text-slate-200">Phone:</span>{" "}
@@ -377,6 +389,31 @@ export default function DelhiPage() {
         </div>
       </section>
 
+      {/* ── WE ALSO SERVE ACROSS INDIA ── */}
+      <section className="py-16">
+        <div className="mx-auto w-[92%] max-w-5xl">
+          <h2 className="mb-3 text-xl font-bold text-white">We also serve businesses across India</h2>
+          <p className="mb-5 max-w-2xl text-sm leading-7 text-slate-400">
+            While our physical office is in Mahipalpur, New Delhi, we provide software development services remotely to businesses across India.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { label: "Patna, Bihar", href: "/locations/patna" },
+              { label: "Darbhanga, Bihar", href: "/locations/darbhanga" },
+              { label: "Jhanjharpur, Bihar", href: "/locations/jhanjharpur" },
+            ].map((loc) => (
+              <Link
+                key={loc.href}
+                href={loc.href}
+                className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400/20 hover:text-cyan-300"
+              >
+                {loc.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── PROJECT EXAMPLES ── */}
       <section className="py-20">
         <div className="mx-auto w-[92%] max-w-5xl">
@@ -404,7 +441,7 @@ export default function DelhiPage() {
                 title: "Organizer Classes",
                 desc: "Education management platform for a coaching institute with 1,200+ students. Replaced all spreadsheet workflows with a single web application.",
                 tags: ["React", "Firebase", "Web App"],
-                href: "/#projects",
+                href: "/projects/organizer-classes",
               },
             ].map((proj) => (
               <Link
@@ -468,7 +505,7 @@ export default function DelhiPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <StartProjectButton label="Start Your Project" />
             <Link
-              href="/#contact"
+              href="/contact"
               className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300 transition hover:border-white/30"
             >
               Send a Message

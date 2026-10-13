@@ -9,7 +9,10 @@ import Contact from "@/components/Contact";
 const pageOgImage = ogImage({ title: "Start a Project with NF Nexa Tech", type: "page" });
 
 export const metadata: Metadata = {
-  title: "Start a Project — Free Consultation & Proposal | NF Nexa Tech",
+  // Phase 6: Root layout template appends "| NF Nexa Tech" automatically.
+  // Using only the page title portion to avoid "NF Nexa Tech | NF Nexa Tech" duplication.
+  // Final rendered title: "Start a Project — Free Consultation & Proposal | NF Nexa Tech"
+  title: "Start a Project — Free Consultation & Proposal",
   description:
     "Tell us about your project. NF Nexa Tech builds web apps, mobile apps, and SaaS MVPs — get a free consultation and proposal within 48 hours.",
   alternates: { canonical: `${siteConfig.url}/start-project` },

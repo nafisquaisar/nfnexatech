@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 const INFO_CARDS = [
   {
@@ -16,7 +19,10 @@ const INFO_CARDS = [
   },
   {
     label: "Office Address",
-    value: "Flat 201, Jheel Hari Niwas,\nBlock B, Bangali Market,\nMahipalpur, New Delhi - 110037",
+    // Phase 20: Reads from siteConfig.contact so this card always reflects
+    // the single authoritative address in src/config/site.ts.
+    // GBP-confirmed address used (no flat number or market name until owner verifies).
+    value: `${siteConfig.contact.streetAddress},\n${siteConfig.contact.city} ${siteConfig.contact.postalCode}`,
     color: "#1FA0B1",
     bg: "rgba(181,229,235,0.35)",
     icon: (
@@ -49,9 +55,10 @@ const INFO_CARDS = [
   },
 ];
 
+// Phase 1: Stats aligned with siteConfig.stats — single source of truth.
 const STATS = [
   { icon: "📅", value: "2023", label: "Founded In", color: "#1FA0B1", bg: "rgba(181,229,235,0.4)" },
-  { icon: "😊", value: "10+", label: "Happy Clients", color: "#E8763A", bg: "rgba(249,225,205,0.55)" },
+  { icon: "😊", value: "30+", label: "Happy Clients", color: "#E8763A", bg: "rgba(249,225,205,0.55)" },
   { icon: "🚀", value: "70+", label: "Projects Delivered", color: "#1FA0B1", bg: "rgba(181,229,235,0.4)" },
   { icon: "🏆", value: "3+", label: "Years of Experience", color: "#7C5CBF", bg: "rgba(196,181,253,0.35)" },
 ];

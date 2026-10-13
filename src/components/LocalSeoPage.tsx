@@ -232,7 +232,7 @@ export default function LocalSeoPage({
           <div className="flex flex-wrap items-center justify-center gap-4">
             <StartProjectButton label="Start Your Project" />
             <Link
-              href="/#contact"
+              href="/contact"
               className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300 transition hover:border-white/30"
             >
               Send Project Brief

@@ -226,26 +226,28 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
         <div className="rounded-3xl border p-10 text-center" style={{ borderColor: "rgba(198,209,215,0.4)", backgroundColor: "white" }}>
 
+          {/* Phase 8: Natural conversion path — "Have a similar project?" */}
           <h2 className="mb-4 text-3xl font-bold" style={{ color: "#1a1a1a" }}>
-            Need a Similar Project?
+            Have a similar project?
           </h2>
 
           <p className="mb-8" style={{ color: "#6B5A5A" }}>
-            NF Nexa Tech builds scalable apps and modern digital products.
+            Tell us what you&apos;re building. We&apos;ll respond the same day with a detailed proposal.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
 
+            {/* Phase 8: Links to /start-project — not /#contact */}
             <Link
-              href="/#contact"
+              href="/start-project"
               className="rounded-xl px-7 py-3 text-sm font-bold text-white transition-all hover:brightness-110 hover:shadow-lg"
               style={{ backgroundColor: "#1FA0B1" }}
             >
-              Contact Us
+              Start a Project
             </Link>
 
             <Link
-              href="/"
+              href="/projects"
               className="rounded-xl border px-7 py-3 text-sm font-bold transition-all hover:shadow-sm"
               style={{ borderColor: "rgba(198,209,215,0.5)", color: "#1a1a1a", backgroundColor: "#FAF7F5" }}
             >

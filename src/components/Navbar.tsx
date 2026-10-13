@@ -212,12 +212,28 @@ function Navbar() {
   }
 
   return (
-    <motion.header
-      className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-8"
-      initial={{ opacity: 0, y: -24 }}
-      animate={{ opacity: 1, y: hidden ? "-110%" : 0 }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <>
+      {/*
+        ── SEO: Static service link nav ───────────────────────────────────────
+        These links are visually hidden (sr-only) but present in the SSR HTML.
+        Purpose: ensures Googlebot can discover all service page URLs from the
+        initial server response, without depending on JS-triggered dropdown interaction.
+        The footer also has these links, but belt-and-suspenders is safer for crawlability.
+        Using clip/position technique (not display:none) so Google follows them.
+      */}
+      <nav aria-label="Service pages" className="sr-only">
+        {SERVICE_LINKS.map((link) => (
+          <a key={link.href} href={link.href}>{link.label}</a>
+        ))}
+        <a href="/services">All Services</a>
+      </nav>
+
+      <motion.header
+        className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-8"
+        initial={{ opacity: 0, y: -24 }}
+        animate={{ opacity: 1, y: hidden ? "-110%" : 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      >
 
       {/* ── Floating pill ── */}
       <nav
@@ -478,6 +494,7 @@ function Navbar() {
         )}
       </AnimatePresence>
     </motion.header>
+    </>
   );
 }
 

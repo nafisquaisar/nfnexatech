@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import { faqs } from "@/data/content";
+import { faqs } from "@/data/faqs"; // Phase 4: canonical source
 
 /**
  * Global JSON-LD structured data — injected once in the root layout via page.tsx.
@@ -10,19 +10,31 @@ import { faqs } from "@/data/content";
  *   3. LocalBusiness         — Local pack / Maps integration
  *   4. ProfessionalService   — Professional service rich results
  *   5. FAQPage               — FAQ accordion in SERPs (homepage FAQs)
- *   6. AggregateRating       — Star rating snippet
- *   7. BreadcrumbList (home) — Breadcrumb trail in SERPs
+ *   6. BreadcrumbList (home) — Breadcrumb trail in SERPs
+ *
+ * Phase 7: openingHoursSpecification now reads from siteConfig.businessHours
+ *          so Footer, Contact, and JSON-LD all share one source of truth.
+ *
+ * Phase 15: All LocalBusiness entities representing the same physical office
+ *           use the canonical @id: https://nfnexatech.in/#localbusiness
+ *           Location-specific pages use sameAs to reference this entity.
  *
  * All are Server Component-safe — no "use client" needed.
  */
 
-const STREET   = "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur";
-const CITY     = "New Delhi";
-const REGION   = "Delhi";
-const POSTAL   = "110037";
-const COUNTRY  = "IN";
-const LAT      = 28.5357;
-const LNG      = 77.1199;
+// Phase 20: All address constants now delegate to siteConfig.contact.
+// Changing siteConfig.contact.* in src/config/site.ts is the only edit
+// required to keep every JSON-LD schema consistent.
+const STREET   = siteConfig.contact.streetAddress;
+const CITY     = siteConfig.contact.city;
+const REGION   = siteConfig.contact.state;
+const POSTAL   = siteConfig.contact.postalCode;
+const COUNTRY  = siteConfig.contact.countryCode;
+// Phase 20.1: Coordinates now read from siteConfig.geo (owner-confirmed,
+// 13 Oct 2026). Updating siteConfig.geo in site.ts is the only change needed
+// to keep LocalBusiness and ProfessionalService geo blocks in sync.
+const LAT      = siteConfig.geo.lat;
+const LNG      = siteConfig.geo.lng;
 
 const postalAddress = {
   "@type":           "PostalAddress",
@@ -52,8 +64,10 @@ function orgSchema() {
     foundingDate:  String(siteConfig.foundedYear),
     founder: {
       "@type":     "Person",
+      // Stable @id so Google links this Person across all pages that reference founder
+      "@id":       `${siteConfig.url}/#founder`,
       name:        siteConfig.founder,
-      jobTitle:    "Founder & Lead Developer",
+      jobTitle:    "Founder & CEO",
       worksFor:    { "@id": `${siteConfig.url}/#organization` },
     },
     address:       postalAddress,
@@ -69,6 +83,8 @@ function orgSchema() {
       siteConfig.social.linkedin,
       siteConfig.social.instagram,
       siteConfig.social.facebook,
+      // Phase 14: Google Maps Business Profile URL — confirmed from codebase (Testimonials.jsx).
+      "https://maps.app.goo.gl/D7jqDzLm3ampPqAc6",
     ],
     knowsAbout: [
       "Web Development",
@@ -81,7 +97,13 @@ function orgSchema() {
       "Firebase",
       "Node.js",
     ],
-    numberOfEmployees: { "@type": "QuantitativeValue", value: 5 },
+    // Phase 16: Co-founder added to Organization entity.
+    employee: [
+      { "@id": `${siteConfig.url}/#founder` },
+      { "@id": `${siteConfig.url}/#cofounder` },
+    ],
+    // numberOfEmployees intentionally omitted — no authoritative headcount
+    // is available in the project configuration. Add when confirmed by owner.
     serviceType: siteConfig.services.map((s) => s.name),
   };
 }
@@ -101,10 +123,12 @@ function websiteSchema() {
 }
 
 // ── 3. LocalBusiness ──────────────────────────────────────────────────────────
+// Phase 15: Canonical @id — all location pages reference this entity via sameAs.
 function localBusinessSchema() {
   return {
     "@context":          "https://schema.org",
     "@type":             "LocalBusiness",
+    // Canonical LocalBusiness @id — used consistently across all pages.
     "@id":               `${siteConfig.url}/#localbusiness`,
     name:                siteConfig.name,
     description:         siteConfig.description,
@@ -121,29 +145,31 @@ function localBusinessSchema() {
       latitude:   LAT,
       longitude:  LNG,
     },
-    openingHoursSpecification: [
-      {
-        "@type":      "OpeningHoursSpecification",
-        dayOfWeek:    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens:        "09:00",
-        closes:       "19:00",
-      },
-      {
-        "@type":      "OpeningHoursSpecification",
-        dayOfWeek:    ["Saturday"],
-        opens:        "10:00",
-        closes:       "16:00",
-      },
-    ],
+    // Phase 7: Opening hours from siteConfig.businessHours — single source of truth.
+    openingHoursSpecification: siteConfig.businessHours.map((h) => ({
+      "@type":      "OpeningHoursSpecification",
+      dayOfWeek:    h.daysOfWeek,
+      opens:        h.opens,
+      closes:       h.closes,
+    })),
     areaServed: [
       { "@type": "City", name: "New Delhi" },
       { "@type": "City", name: "Delhi" },
       { "@type": "AdministrativeArea", name: "Delhi NCR" },
+      // P2: Bihar service cities added — consistent with P1 location pages
+      { "@type": "City", name: "Patna" },
+      { "@type": "City", name: "Darbhanga" },
+      { "@type": "City", name: "Jhanjharpur" },
       { "@type": "Country", name: "India" },
       { "@type": "Country", name: "United States" },
       { "@type": "Country", name: "United Kingdom" },
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "Country", name: "Australia" },
+    ],
+    sameAs: [
+      // Phase 14: Google Business Profile URL confirmed from codebase.
+      "https://maps.app.goo.gl/D7jqDzLm3ampPqAc6",
+      siteConfig.social.linkedin,
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -157,6 +183,20 @@ function localBusinessSchema() {
         },
       })),
     },
+  };
+}
+
+// ── Phase 15: Co-Founder Person schema ────────────────────────────────────────────
+// Saheb Alam is visibly identified as Co-Founder on the About page and in team data.
+// No LinkedIn URL or social profile added — not confirmed available in codebase.
+function coFounderSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type":    "Person",
+    "@id":      `${siteConfig.url}/#cofounder`,
+    name:       siteConfig.coFounder,
+    jobTitle:   "Co-Founder",
+    worksFor:   { "@id": `${siteConfig.url}/#organization` },
   };
 }
 
@@ -217,47 +257,8 @@ function faqSchema() {
   };
 }
 
-// ── 6. AggregateRating + Reviews ─────────────────────────────────────────────
-function reviewSchema() {
-  return {
-    "@context":      "https://schema.org",
-    "@type":         "Organization",
-    "@id":           `${siteConfig.url}/#organization`,
-    name:            siteConfig.name,
-    aggregateRating: {
-      "@type":       "AggregateRating",
-      ratingValue:   "4.9",
-      reviewCount:   "12",
-      bestRating:    "5",
-      worstRating:   "1",
-    },
-    review: [
-      {
-        "@type":        "Review",
-        author:         { "@type": "Person", name: "Arjun Mehta" },
-        datePublished:  "2024-09-15",
-        reviewBody:     "NF Nexa Tech delivered our music streaming app on time and exceeded every benchmark we set. The ExoPlayer integration and UI polish were truly world-class.",
-        reviewRating:   { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      },
-      {
-        "@type":        "Review",
-        author:         { "@type": "Person", name: "Priya Sharma" },
-        datePublished:  "2024-11-02",
-        reviewBody:     "They completely transformed how we manage 1,200+ students. The platform replaced all our spreadsheets in two weeks. Support has been excellent.",
-        reviewRating:   { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      },
-      {
-        "@type":        "Review",
-        author:         { "@type": "Person", name: "Rajesh Gupta" },
-        datePublished:  "2025-01-20",
-        reviewBody:     "The inventory system reduced our nightly stock-count from 90 minutes to 8 minutes. Wastage dropped by 68%. The ROI was immediate and measurable.",
-        reviewRating:   { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      },
-    ],
-  };
-}
 
-// ── 7. BreadcrumbList (Homepage) ──────────────────────────────────────────────
+// ── 6. BreadcrumbList (Homepage) ──────────────────────────────────────────────
 function homeBreadcrumbSchema() {
   return {
     "@context": "https://schema.org",
@@ -279,10 +280,13 @@ export default function JsonLd() {
     orgSchema(),
     websiteSchema(),
     localBusinessSchema(),
+    coFounderSchema(),
     professionalServiceSchema(),
     faqSchema(),
-    reviewSchema(),
-    homeBreadcrumbSchema(),
+    // Phase 17: Single-item BreadcrumbList for homepage removed — a breadcrumb
+    // containing only the homepage itself provides no navigation value to crawlers.
+    // BreadcrumbList is retained on inner pages where it represents real hierarchy.
+    // homeBreadcrumbSchema() — intentionally omitted.
   ];
 
   return (

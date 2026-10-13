@@ -11,9 +11,11 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 
   return {
-    title: "Software Company in India | NF Nexa Tech — Web & App Development",
+    // Phase 10: Removed "premier software company" superlative.
+    title: "Software Development Company Serving Businesses Across India | NF Nexa Tech",
     description:
-      "NF Nexa Tech is a premier software company in India offering web development, Android app development, Flutter apps, and SaaS MVP development. Trusted by startups and businesses across India and globally.",
+      // Phase 10: Removed "premier" and "Trusted" claims.
+      "NF Nexa Tech is a software development company in New Delhi offering web development, Android app development, Flutter apps, and SaaS MVP development for businesses across India and globally. Get a free consultation.",
     keywords: [
       "software company India",
       "software development company India",
@@ -31,18 +33,20 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: `${siteConfig.url}/software-company-india`,
     },
     openGraph: {
-      title: "Top Software Company in India | NF Nexa Tech",
+      // Phase 10: Removed "Top Software Company" and "India's trusted" superlatives.
+      title: "Software Development Company in India | NF Nexa Tech",
       description:
-        "India's trusted software development company. Web apps, mobile apps, and SaaS products built to international standards. Work with us from anywhere in the world.",
+        "Delhi-based software development company serving businesses across India. Web apps, mobile apps, and SaaS products built to quality standards.",
       url: `${siteConfig.url}/software-company-india`,
       type: "website",
       images: [image],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Top Software Company in India | NF Nexa Tech",
+      // Phase 10: Removed "Top Software Company" superlative.
+      title: "Software Development Company in India | NF Nexa Tech",
       description:
-        "India's trusted software development company. Web apps, mobile apps, and SaaS products built to international standards.",
+        "Delhi-based software development company serving businesses across India. Web apps, mobile apps, and SaaS products.",
       images: [image.url],
     },
   };
@@ -82,7 +86,8 @@ const schema = {
   "@id": `${siteConfig.url}/software-company-india#organization`,
   name: `${siteConfig.name} — Software Company in India`,
   description:
-    "Leading software development company in India. Web apps, Android apps, Flutter, and SaaS MVPs for startups and enterprises.",
+    // Phase 10: Removed "leading software development company" claim.
+    "Software development company in New Delhi serving businesses across India. Web apps, Android apps, Flutter, and SaaS MVPs.",
   url: `${siteConfig.url}/software-company-india`,
   telephone: siteConfig.contact.phone,
   email: siteConfig.contact.email,
@@ -112,9 +117,10 @@ export default function SoftwareCompanyIndia() {
       countryCode="IN"
       service="Software Company"
       slug="software-company-india"
-      headline="India's Premier Software Development Company"
-      subheadline="Production-grade web apps, mobile apps, and SaaS products built by an expert Indian tech team — trusted by startups and businesses worldwide."
-      description="NF Nexa Tech is a leading software company in India offering full-stack web development, Android app development, Flutter cross-platform apps, and SaaS MVP development. We combine international engineering standards with competitive Indian pricing to help startups and businesses scale faster. Based in New Delhi (Mahipalpur), we serve clients across India, the USA, UK, UAE, and beyond."
+      // Phase 10: Removed "India's Premier Software Development Company" superlative headline.
+      headline="Software Development Company Serving Businesses Across India"
+      subheadline="NF Nexa Tech is a Delhi-based software company offering web apps, mobile apps, and SaaS products for businesses across India and internationally."
+      description="NF Nexa Tech is a software development company based in New Delhi (Mahipalpur) offering full-stack web development, Android app development, Flutter cross-platform apps, and SaaS MVP development. We combine quality engineering with competitive pricing to help startups and businesses across India and internationally scale their digital products. Based in New Delhi, we serve clients across India, the USA, UK, UAE, and beyond."
       geo={{ lat: 20.5937, lng: 78.9629 }}
       localFaqs={localFaqs}
       schema={schema}

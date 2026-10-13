@@ -7,7 +7,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { trackEvent } from "@/lib/analytics";
 import { EASE_OUT_EXPO, EASE_SPRING } from "@/lib/motion";
 
-/* ─── Stats ─────────────────────────────────────────────── */
+/* ─── Stats — values kept in sync with siteConfig.stats (Phase 1) ───────── */
 const STATS = [
   {
     id: "clients",
@@ -33,7 +33,9 @@ const STATS = [
   },
 ];
 
-/* ─── Trust logos ────────────────────────────────────────── */
+/* ─── Technology stack logos ─────────────────────────────── */
+// Phase 14: These are technology/platform logos — not client endorsements.
+// Label changed from "Trusted by Businesses Worldwide" to "Technologies We Use".
 const TRUST_LOGOS = ["Google", "Firebase", "AWS", "Vercel", "Notion", "Microsoft"];
 
 /* ─── Shared easing shorthand ────────────────────────────── */
@@ -174,14 +176,14 @@ function Hero() {
 
           {/* Headline — line by line */}
           <h1 className="text-[48px] font-extrabold leading-[1.08] tracking-tight text-[#1a1a1a] sm:text-[54px] lg:text-[58px]">
-            <motion.span variants={itemUp} className="block">Digital Solutions</motion.span>
-            <motion.span variants={itemUp} className="block">That Create</motion.span>
+            <motion.span variants={itemUp} className="block">Web, Mobile &amp;</motion.span>
+            <motion.span variants={itemUp} className="block">Software</motion.span>
             <motion.span
               variants={itemUp}
               className="inline-flex flex-wrap items-baseline gap-x-3 mt-1"
             >
-              <span className="text-[#E8763A]">Real</span>
-              <span className="text-[#1FA0B1]">Impact</span>
+              <span className="text-[#E8763A]">Development</span>
+              <span className="text-[#1FA0B1]">Company</span>
             </motion.span>
           </h1>
 
@@ -270,7 +272,7 @@ function Hero() {
           <div className="flex items-center gap-4">
             <div className="flex-1 h-px bg-[#C6D1D7]/50" />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B8ACA7] whitespace-nowrap">
-              Trusted by Businesses Worldwide
+              Technologies We Use
             </p>
             <div className="flex-1 h-px bg-[#C6D1D7]/50" />
           </div>

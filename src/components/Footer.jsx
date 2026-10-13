@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
@@ -9,7 +11,7 @@ const COMPANY_LINKS = [
   { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const LOCATION_LINKS = [
@@ -17,6 +19,18 @@ const LOCATION_LINKS = [
   { label: "Mahipalpur", href: "/locations/delhi" },
   { label: "Aerocity", href: "/locations/delhi" },
   { label: "South Delhi", href: "/locations/delhi" },
+];
+
+// P2: Updated to include canonical P1 location pages.
+// Patna now uses /locations/patna (canonical) — /web-development-company-patna
+// permanently 301 redirects to it via next.config.ts.
+const WE_SERVE_LINKS = [
+  { label: "Delhi / New Delhi", href: "/locations/delhi" },
+  { label: "Patna, Bihar", href: "/locations/patna" },
+  { label: "Darbhanga, Bihar", href: "/locations/darbhanga" },
+  { label: "Jhanjharpur, Bihar", href: "/locations/jhanjharpur" },
+  { label: "Bhopal, MP", href: "/software-company-bhopal" },
+  { label: "Across India", href: "/software-company-india" },
 ];
 
 const TRUST_BADGES = [
@@ -109,7 +123,7 @@ export default function Footer() {
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
                   </svg>
-                  Schedule a Call
+                  Chat on WhatsApp
                 </a>
               </div>
               {/* Trust badges */}
@@ -130,8 +144,8 @@ export default function Footer() {
       <div style={{ backgroundColor: "#F0EBE7", borderTop: "1px solid rgba(198,209,215,0.5)" }}>
         <div className="mx-auto w-[92%] max-w-6xl">
 
-          {/* Main grid */}
-          <div className="grid gap-10 py-14 grid-cols-2 lg:grid-cols-[1.8fr_1fr_1.2fr_1.2fr]">
+          {/* Main grid — 5 columns on large screens */}
+          <div className="grid gap-10 py-14 grid-cols-2 lg:grid-cols-[1.8fr_1fr_1.2fr_0.8fr_1.2fr]">
 
             {/* Brand col */}
             <div className="col-span-2 lg:col-span-1">
@@ -204,6 +218,25 @@ export default function Footer() {
               </ul>
             </nav>
 
+            {/* We Serve col — Phase 19: natural internal links for location pages */}
+            <nav aria-label="Locations we serve">
+              <h3 className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "#9B8B8B" }}>We Serve</h3>
+              <ul className="space-y-3">
+                {WE_SERVE_LINKS.map((link) => (
+                  <li key={link.href + link.label}>
+                    <Link href={link.href}
+                      className="flex items-center justify-between text-[13px] transition-all hover:text-[#1FA0B1]"
+                      style={{ color: "#6B5A5A" }}>
+                      {link.label}
+                      <svg className="h-3 w-3 opacity-40" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
             {/* Contact Info col */}
             <nav aria-label="Contact Info">
               <h3 className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "#9B8B8B" }}>Contact Info</h3>
@@ -218,9 +251,7 @@ export default function Footer() {
                   <div>
                     <div className="text-[11px] font-bold" style={{ color: "#1a1a1a" }}>Our Office</div>
                     <div className="text-[11px] leading-relaxed" style={{ color: "#6B5A5A" }}>
-                      Flat 201, Jheel Hari Niwas, Block B,<br />
-                      Bangali Market, Mahipalpur,<br />
-                      New Delhi – 110037, India
+                      {siteConfig.contact.address}
                     </div>
                   </div>
                 </div>
@@ -235,7 +266,7 @@ export default function Footer() {
                     <div className="text-[11px] font-bold" style={{ color: "#1a1a1a" }}>Call Us</div>
                     <a href={`tel:${siteConfig.contact.phone}`} className="block text-[11px] transition hover:text-[#1FA0B1]" style={{ color: "#6B5A5A" }}>{siteConfig.contact.phone}</a>
                     <a href={`tel:${siteConfig.contact.phone2}`} className="block text-[11px] transition hover:text-[#1FA0B1]" style={{ color: "#6B5A5A" }}>{siteConfig.contact.phone2}</a>
-                    <div className="text-[10px]" style={{ color: "#9B8B8B" }}>Mon – Sat, 10:00 AM – 7:00 PM</div>
+                    <div className="text-[10px]" style={{ color: "#9B8B8B" }}>{siteConfig.businessHours[0].displayLabel}</div>
                   </div>
                 </div>
                 {/* Email */}

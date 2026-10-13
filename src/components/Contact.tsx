@@ -69,7 +69,7 @@ const CONTACT_ROWS = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
       </svg>
     ),
-    label: "Our Office", value: "Mahipalpur, New Delhi – 110037", sub: "Bangali Market, Block B",
+    label: "Our Office", value: "Mahipalpur, New Delhi \u2013 110037", sub: "Mahipalpur Village, New Delhi",
     href: "https://maps.google.com/?q=Mahipalpur,New+Delhi", color: "#E8763A", bg: "rgba(249,225,205,0.55)",
   },
 ];
@@ -450,7 +450,7 @@ export default function Contact() {
               </div>
               <div style={{ height: 160 }}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.5!2d77.1!3d28.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b3a5b5b5b5b%3A0x0!2sMahipalpur%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.017198282368!2d77.12399917521357!3d28.5392027757158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d00221cb92f%3A0xd8b1b0b82e8947c9!2sNF%20Nexa%20Tech!5e0!3m2!1sen!2sin!4v1791869132725!5m2!1sen!2sin"
                   width="100%"
                   height="160"
                   style={{ border: 0 }}

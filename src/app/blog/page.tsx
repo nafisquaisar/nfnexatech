@@ -16,23 +16,31 @@ const blogOgImage = ogImage({
 });
 
 export const metadata: Metadata = {
-  title: "Web Development Blog — Insights & Guides",
+  // Phase 16: More descriptive title accurately representing the blog content.
+  // Root layout template appends "| NF Nexa Tech".
+  // Renders as: "Software Development Guides & Insights | NF Nexa Tech"
+  title: "Software Development Guides & Insights",
   description:
     "Expert insights on web development, mobile apps, Flutter, SaaS, and software engineering from the NF Nexa Tech team.",
   alternates: {
     canonical: `${siteConfig.url}/blog`,
   },
   openGraph: {
-    title: `Blog | ${siteConfig.name}`,
+    // OG tags do not use the template — include full brand explicitly.
+    title: "Web Development Blog — Insights & Guides | NF Nexa Tech",
     description:
       "Expert insights on web development, mobile apps, Flutter, SaaS, and software engineering from the NF Nexa Tech team.",
     url: `${siteConfig.url}/blog`,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
     type: "website",
     images: [blogOgImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: `Blog | ${siteConfig.name}`,
+    site: "@nfnexatech",
+    creator: "@nfnexatech",
+    title: "Web Development Blog — Insights & Guides | NF Nexa Tech",
     description:
       "Expert insights on web development, mobile apps, Flutter, SaaS, and software engineering from the NF Nexa Tech team.",
     images: [blogOgImage.url],

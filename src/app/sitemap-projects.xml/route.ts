@@ -13,12 +13,38 @@ import { siteConfig } from "@/config/site";
 const BASE = siteConfig.url;
 
 // Static project pages not in data.js — each has its own directory
+// P2: Added nestiva-hospital, popular-bread, madza-company, organizer-classes
+// (these were previously missing from the sitemap — GSC blind spot)
 const STATIC_PROJECTS = [
+  {
+    slug: "nestiva-hospital",
+    title: "Nestiva Hospital",
+    heroImage: "/images/projects/nestiva/nestivahome.png",
+    subtitle: "Multi-Specialty Hospital Website Design & Development",
+  },
   {
     slug: "medon-company",
     title: "Medon Company",
     heroImage: "/images/projects/medon/home.png",
     subtitle: "Service Booking Platform for Delhi NCR",
+  },
+  {
+    slug: "madza-company",
+    title: "Madza Company",
+    heroImage: "/images/projects/madzacompany/home.png",
+    subtitle: "Home Services Platform",
+  },
+  {
+    slug: "popular-bread",
+    title: "Popular Bread",
+    heroImage: "/images/projects/popular/popular_preview.png",
+    subtitle: "Bread Business Management Android App",
+  },
+  {
+    slug: "organizer-classes",
+    title: "Organizer Classes",
+    heroImage: "/images/projects/organizer/organizer_preview.png",
+    subtitle: "Online Learning Platform for Exam Preparation",
   },
   {
     slug: "train-your-tech",

@@ -11,9 +11,10 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 
   return {
-    title: "Web Development Company in Patna | NF Nexa Tech",
+    // Phase 10: Removed "Best Web Development Company" superlative.
+    title: "Web Development Services for Businesses in Patna | NF Nexa Tech",
     description:
-      "NF Nexa Tech is a top web development company serving Patna, Bihar. We build high-performance React, Next.js web apps, mobile apps, and SaaS products. Get a free quote today.",
+      "NF Nexa Tech is a Delhi-based software company offering web development services for businesses in Patna, Bihar. We build high-performance React, Next.js web apps, mobile apps, and SaaS products. Get a free quote today.",
     keywords: [
       "web development company Patna",
       "web developer Patna",
@@ -30,18 +31,20 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: `${siteConfig.url}/web-development-company-patna`,
     },
     openGraph: {
-      title: "Best Web Development Company in Patna | NF Nexa Tech",
+      // Phase 10: Removed "Best Web Development Company" superlative from OG title.
+      title: "Web Development Services for Businesses in Patna | NF Nexa Tech",
       description:
-        "Professional web development services for Patna businesses. React, Next.js, Android, Flutter — built to global standards.",
+        "Professional web development services for Patna businesses. React, Next.js, Android, Flutter — built to quality standards.",
       url: `${siteConfig.url}/web-development-company-patna`,
       type: "website",
       images: [image],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Best Web Development Company in Patna | NF Nexa Tech",
+      // Phase 10: Removed "Best Web Development Company" superlative from Twitter title.
+      title: "Web Development Services for Businesses in Patna | NF Nexa Tech",
       description:
-        "Professional web development services for Patna businesses. React, Next.js, Android, Flutter — built to global standards.",
+        "Professional web development services for Patna businesses. React, Next.js, Android, Flutter.",
       images: [image.url],
     },
   };
@@ -78,8 +81,10 @@ const localFaqs = [
 const schema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  // Phase 15: sameAs references canonical LocalBusiness entity.
+  "sameAs": `${siteConfig.url}/#localbusiness`,
   "@id": `${siteConfig.url}/web-development-company-patna#localbusiness`,
-  name: `${siteConfig.name} — Web Development Company serving Patna`,
+  name: `${siteConfig.name} — Web Development Services for Patna`,
   description:
     "Professional web development company serving Patna, Bihar. React, Next.js, mobile apps, and SaaS solutions.",
   url: `${siteConfig.url}/web-development-company-patna`,
@@ -87,11 +92,11 @@ const schema = {
   email: siteConfig.contact.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
-    addressLocality: "New Delhi",
-    addressRegion: "Delhi",
-    postalCode: "110037",
-    addressCountry: "IN",
+    streetAddress: siteConfig.contact.streetAddress,
+    addressLocality: siteConfig.contact.city,
+    addressRegion: siteConfig.contact.state,
+    postalCode: siteConfig.contact.postalCode,
+    addressCountry: siteConfig.contact.countryCode,
   },
   areaServed: [
     { "@type": "City", name: "Patna" },
@@ -109,9 +114,10 @@ export default function WebDevelopmentCompanyPatna() {
       countryCode="IN"
       service="Web Development Company"
       slug="web-development-company-patna"
-      headline="Premium Web Development for Patna Businesses"
-      subheadline="NF Nexa Tech delivers world-class web apps, mobile apps, and SaaS products for startups and businesses in Patna, Bihar."
-      description="Looking for a reliable web development company in Patna? NF Nexa Tech builds high-performance React and Next.js web applications, Android apps, Flutter mobile apps, and SaaS MVPs — with a dedicated team, transparent process, and 4-hour response time. We serve clients across Patna, Bihar and all of India."
+      // Phase 10: Removed "Premium Web Development" superlative from headline.
+      headline="Web Development Services for Businesses in Patna"
+      subheadline="NF Nexa Tech is a Delhi-based software company offering web development, mobile apps, and SaaS products for businesses in Patna, Bihar."
+      description="Looking for web development services in Patna? NF Nexa Tech is a Delhi-based software development company serving businesses in Patna, Bihar. We build high-performance React and Next.js web applications, Android apps, Flutter mobile apps, and SaaS MVPs — with a dedicated team, transparent process, and regular updates. We serve clients across Patna, Bihar and all of India."
       geo={{ lat: 25.5941, lng: 85.1376 }}
       localFaqs={localFaqs}
       schema={schema}

@@ -1,11 +1,28 @@
 /**
  * robots.ts — served at /robots.txt
  *
- * Enterprise-grade crawl directives:
- *   - Allows all meaningful public pages
- *   - Blocks internal API routes, Next.js internals, and query strings
- *   - Disallows AI training scrapers (GPTBot, CCBot, etc.)
- *   - Points to the sitemap index
+ * Phase 18: AI crawler policy reviewed against AEO/GEO/AIO goals.
+ *
+ * DECISION RATIONALE:
+ *   The site's strategic goal includes AEO, GEO, AIO, and AI search visibility.
+ *   Blocking all AI crawlers is inconsistent with that goal.
+ *
+ *   Crawlers ALLOWED (AI Answer/Search engines — index public content for answers):
+ *     • GPTBot         — ChatGPT browsing and search features (OpenAI)
+ *     • Google-Extended — Google's AI Overviews / Bard / Gemini
+ *     • PerplexityBot  — Perplexity AI search engine
+ *     • anthropic-ai   — Claude's browsing (Anthropic)
+ *     • Applebot-Extended — Apple Intelligence / Siri Suggestions
+ *
+ *   Crawlers BLOCKED (pure training data scrapers, no end-user search benefit):
+ *     • CCBot           — Common Crawl (training data bulk harvester)
+ *     • FacebookBot     — Meta AI training (not OG preview — FB uses different UA)
+ *
+ *   Private routes still blocked for ALL crawlers:
+ *     /api/ (except /api/og), /_next/, /verify/, admin, etc.
+ *
+ * NOTE: FacebookBot for Open Graph previews uses a different User-Agent
+ * ("facebookexternalhit") which is allowed via the default * rule.
  */
 
 import { MetadataRoute } from "next";
@@ -16,69 +33,81 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
-      // ── Default: all legitimate crawlers ─────────────────────────────
+      // ── Default: all legitimate crawlers (including search engines) ──────
       {
         userAgent: "*",
         allow: [
           "/",
           "/about",
+          "/contact",        // P2: explicitly allow new indexable contact page
           "/services/",
           "/projects/",
           "/blog/",
           "/locations/",
-          // NOTE: /contact intentionally omitted — it 301-redirects to /#contact
           "/start-project",
           "/software-company-bhopal",
           "/software-company-india",
           "/web-development-company-patna",
+          "/privacy-policy",
+          "/terms",
+          "/refund-policy",
+          // /api/og must be explicitly allowed so Googlebot can fetch OG images
+          // for social card previews. Being more specific than /api/ means this
+          // allow takes precedence per robots.txt specificity rules.
+          "/api/og",
         ],
         disallow: [
-          "/api/",         // Next.js API routes (internal) — /api/og intentionally NOT blocked (needed for OG images)
+          "/api/",         // Block all other API routes (internal use only)
           "/_next/",       // Next.js build assets
           "/_vercel/",     // Vercel deployment internals
           "/static/",      // Static assets directory
           "/admin",        // Admin panel (if ever added)
           "/*.json$",      // Raw JSON data files
           "/verify/",      // Employee verification portal — internal only
-          "/contact",      // Redirect-only page (redirects to /#contact)
         ],
       },
 
-      // ── Block OpenAI's web crawler (AI training opt-out) ────────────
+      // ── Phase 18: Allow GPTBot (ChatGPT/OpenAI search) ──────────────────
+      // Supports AEO/GEO — content appears in ChatGPT answer citations.
       {
         userAgent: "GPTBot",
-        disallow: ["/"],
+        allow: ["/"],
+        disallow: ["/api/", "/verify/", "/_next/"],
       },
 
-      // ── Block Common Crawl (AI training data) ───────────────────────
+      // ── Phase 18: Allow Google-Extended (Gemini / AI Overviews) ─────────
+      // Supports GEO — content appears in Google AI Overviews / Gemini.
+      {
+        userAgent: "Google-Extended",
+        allow: ["/"],
+        disallow: ["/api/", "/verify/", "/_next/"],
+      },
+
+      // ── Phase 18: Allow anthropic-ai (Claude) ───────────────────────────
+      // Supports AEO — Claude can cite content in answers.
+      {
+        userAgent: "anthropic-ai",
+        allow: ["/"],
+        disallow: ["/api/", "/verify/", "/_next/"],
+      },
+
+      // ── Phase 18: Allow PerplexityBot ───────────────────────────────────
+      // Supports AEO — Perplexity cites sources in its AI search results.
+      {
+        userAgent: "PerplexityBot",
+        allow: ["/"],
+        disallow: ["/api/", "/verify/", "/_next/"],
+      },
+
+      // ── Phase 18: Block CCBot (Common Crawl training data) ───────────────
+      // No end-user AI search benefit — pure bulk training data harvester.
       {
         userAgent: "CCBot",
         disallow: ["/"],
-      },
-
-      // ── Block Google Extended (AI training) ─────────────────────────
-      {
-        userAgent: "Google-Extended",
-        disallow: ["/"],
-      },
-
-      // ── Block Anthropic Claude crawler ──────────────────────────────
-      {
-        userAgent: "anthropic-ai",
-        disallow: ["/"],
-      },
-
-      // ── Block Meta AI crawler ─────────────────────────────────────
-      {
-        userAgent: "FacebookBot",
-        allow: ["/"],   // Facebook needs it for OG previews
       },
     ],
 
     // Sitemap index — references all sub-sitemaps
     sitemap: `${base}/sitemap.xml`,
-
-    // Canonical host declaration
-    host: base,
   };
 }

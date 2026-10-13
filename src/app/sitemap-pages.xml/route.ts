@@ -15,14 +15,20 @@ const pages = [
   { path: "/services",                       changeFreq: "monthly", priority: 0.9 },
   // /projects intentionally excluded — canonical entry is in sitemap-projects.xml
   // /blog intentionally excluded — canonical entry is in sitemap-blog.xml
-  // /contact intentionally excluded — it redirects to /#contact
+  { path: "/contact",                        changeFreq: "monthly", priority: 0.8 },
   { path: "/start-project",                  changeFreq: "monthly", priority: 0.8 },
   // Location pages
   { path: "/locations/delhi",                changeFreq: "monthly", priority: 0.9 },
+  { path: "/locations/patna",                changeFreq: "monthly", priority: 0.8 },
+  { path: "/locations/darbhanga",            changeFreq: "monthly", priority: 0.7 },
+  { path: "/locations/jhanjharpur",          changeFreq: "monthly", priority: 0.7 },
   // Legacy location pages (kept for existing rankings)
-  { path: "/software-company-bhopal",        changeFreq: "monthly", priority: 0.7 },
-  { path: "/software-company-india",         changeFreq: "monthly", priority: 0.7 },
-  { path: "/web-development-company-patna",  changeFreq: "monthly", priority: 0.6 },
+  { path: "/software-company-bhopal",        changeFreq: "monthly", priority: 0.6 },
+  { path: "/software-company-india",         changeFreq: "monthly", priority: 0.6 },
+  // Legacy Patna page — kept in sitemap; its canonical is /web-development-company-patna
+  // A 301 from next.config.ts routes it to /locations/patna
+  // Both are kept in sitemap so GSC sees the redirect signal
+  { path: "/web-development-company-patna",  changeFreq: "monthly", priority: 0.5 },
 ] as const;
 
 function buildXml(now: string): string {

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import MedonCaseStudyClient from "./MedonCaseStudyClient";
 
@@ -116,7 +117,52 @@ export const medonData = {
   ],
 };
 
+/* ── P2: Structured Data ──────────────────────────────────── */
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteConfig.url}/projects/medon-company#project`,
+  name: "Medon Company Website",
+  description:
+    "A service booking website built for Medon Company, an appliance repair and home services business based in Mahipalpur, New Delhi.",
+  url: "https://medoncompany.in",
+  creator: {
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+  },
+  inLanguage: "en-IN",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+    { "@type": "ListItem", position: 2, name: "Projects", item: `${siteConfig.url}/projects` },
+    { "@type": "ListItem", position: 3, name: "Medon Company", item: `${siteConfig.url}/projects/medon-company` },
+  ],
+};
+
 /* ── Page ─────────────────────────────────────────────────── */
 export default function MedonCaseStudyPage() {
-  return <MedonCaseStudyClient data={medonData} />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <MedonCaseStudyClient data={medonData} />
+      <section className="mx-auto max-w-5xl px-6 pb-16 pt-2" aria-label="Services used in this project">
+        <div className="rounded-2xl border border-[rgba(198,209,215,0.4)] bg-[rgba(255,255,255,0.6)] p-6">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "#06b6d4" }}>Services Used</p>
+          <h2 className="mb-4 text-base font-bold" style={{ color: "#1a1a1a" }}>Built with NF Nexa Tech&apos;s web development services</h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/services/web-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Web Development</Link>
+            <Link href="/services/ui-ux-design" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">UI/UX Design</Link>
+            <Link href="/locations/delhi" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">📍 Delhi Project</Link>
+            <Link href="/projects" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">← All Projects</Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

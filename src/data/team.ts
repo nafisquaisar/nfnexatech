@@ -45,7 +45,10 @@ export const TEAM: TeamMember[] = [
     status: "Active",
     email: "admin@nfnexatech.in",
     website: "https://nfnexatech.in",
-    joinedYear: "2022",
+    // Phase 3: Corrected from "2022" to "2023".
+    // Company was founded 25 October 2023; a joinedYear of 2022 was
+    // inconsistent with the founding date.
+    joinedYear: "2023",
     photo: "/verify/founder.jpeg",
     bio: "Nafis Quaisar founded NF Nexa Tech with a vision to make world-class software accessible to startups and enterprises across India. With expertise spanning full-stack web development, mobile apps and cloud architecture, he leads product strategy and engineering excellence at the company.",
     isLeadership: true,
@@ -68,7 +71,9 @@ export const TEAM: TeamMember[] = [
     status: "Active",
     email: "cofounder@nfnexatech.in",
     website: "https://nfnexatech.in",
-    joinedYear: "2022",
+    // Phase 3: Corrected from "2022" to "2023".
+    // Company founded 25 October 2023; a joinedYear of 2022 was inconsistent.
+    joinedYear: "2023",
     photo: "/verify/co-founder.png",
     bio: "Saheb Alam co-founded NF Nexa Tech and drives business strategy, client relationships and operational growth. His sharp commercial instincts and passion for technology-led transformation have been central to shaping the company's client-first culture.",
     isLeadership: true,

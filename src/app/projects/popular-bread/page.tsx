@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import PopularBreadClient from "./PopularBreadClient";
 
@@ -140,7 +141,53 @@ export const popularBreadData = {
   ],
 };
 
+/* ── P2: Structured Data ──────────────────────────────────── */
+const appSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": `${siteConfig.url}/projects/popular-bread#app`,
+  name: "Popular Bread",
+  description:
+    "A business management Android app for daily bread operations — tracks purchases, stock, sales, wastage, capital, and business performance.",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Android",
+  url: "https://play.google.com/store/apps/details?id=com.nf.popularbread",
+  creator: {
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+  },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+    { "@type": "ListItem", position: 2, name: "Projects", item: `${siteConfig.url}/projects` },
+    { "@type": "ListItem", position: 3, name: "Popular Bread", item: `${siteConfig.url}/projects/popular-bread` },
+  ],
+};
+
 /* ── Page ─────────────────────────────────────────────────── */
 export default function PopularBreadCaseStudyPage() {
-  return <PopularBreadClient data={popularBreadData} />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <PopularBreadClient data={popularBreadData} />
+      <section className="mx-auto max-w-5xl px-6 pb-16 pt-2" aria-label="Services used in this project">
+        <div className="rounded-2xl border border-[rgba(198,209,215,0.4)] bg-[rgba(255,255,255,0.6)] p-6">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "#f97316" }}>Services Used</p>
+          <h2 className="mb-4 text-base font-bold" style={{ color: "#1a1a1a" }}>Built with NF Nexa Tech&apos;s Android development services</h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/services/android-app-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Android App Development</Link>
+            <Link href="/services/backend-api-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Backend &amp; API Development</Link>
+            <Link href="/projects" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">← All Projects</Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import TrainYourTechClient from "./TrainYourTechClient";
 
@@ -126,7 +127,53 @@ export const tytData = {
   ],
 };
 
+/* ── P2: Structured Data ──────────────────────────────────── */
+const appSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": `${siteConfig.url}/projects/train-your-tech#app`,
+  name: "Train Your Tech",
+  description:
+    "A placement preparation web platform with courses, AI-assisted resume analysis, video/voice interview practice, online tests, doubt support, and a job portal.",
+  applicationCategory: "EducationApplication",
+  operatingSystem: "Web",
+  creator: {
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+  },
+  inLanguage: "en-IN",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+    { "@type": "ListItem", position: 2, name: "Projects", item: `${siteConfig.url}/projects` },
+    { "@type": "ListItem", position: 3, name: "Train Your Tech", item: `${siteConfig.url}/projects/train-your-tech` },
+  ],
+};
+
 /* ── Page ─────────────────────────────────────────────────── */
 export default function TrainYourTechCaseStudyPage() {
-  return <TrainYourTechClient data={tytData} />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <TrainYourTechClient data={tytData} />
+      <section className="mx-auto max-w-5xl px-6 pb-16 pt-2" aria-label="Services used in this project">
+        <div className="rounded-2xl border border-[rgba(198,209,215,0.4)] bg-[rgba(255,255,255,0.6)] p-6">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "#a855f7" }}>Services Used</p>
+          <h2 className="mb-4 text-base font-bold" style={{ color: "#1a1a1a" }}>Built with NF Nexa Tech&apos;s web platform development services</h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/services/web-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Web Development</Link>
+            <Link href="/services/saas-mvp-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">SaaS &amp; MVP Development</Link>
+            <Link href="/services/backend-api-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Backend &amp; API Development</Link>
+            <Link href="/projects" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">← All Projects</Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

@@ -1,8 +1,9 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import NestivaHospitalCaseStudyClient from "./NestivaHospitalCaseStudyClient";
 
-/* ── SEO Metadata ───────────────────────────────────────── */
+/* ── SEO Metadata ──────────────────────────────────────── */
 export const metadata: Metadata = {
   title: "Nestiva Hospital Website Case Study | NF Nexa Tech",
   description:
@@ -32,6 +33,34 @@ export const metadata: Metadata = {
       "See how NF Nexa Tech designed and developed the Nestiva Hospital website to make doctors, departments, appointments, emergency information, and hospital services easier to find.",
     images: [`${siteConfig.url}/images/projects/nestiva/nestivahome.png`],
   },
+};
+
+/* ── P2: Structured Data ───────────────────────────────────── */
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteConfig.url}/projects/nestiva-hospital#project`,
+  name: "Nestiva Hospital Website",
+  description:
+    "A multi-specialty hospital website built by NF Nexa Tech to help patients find doctors, departments, appointments, and emergency information.",
+  url: "https://nestivahospital.vercel.app",
+  creator: {
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+  },
+  keywords: "hospital website, healthcare website, Next.js, Tailwind CSS, React, UI/UX design",
+  inLanguage: "en-IN",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+    { "@type": "ListItem", position: 2, name: "Projects", item: `${siteConfig.url}/projects` },
+    { "@type": "ListItem", position: 3, name: "Nestiva Hospital", item: `${siteConfig.url}/projects/nestiva-hospital` },
+  ],
 };
 
 /* ── Static case-study data ──────────────────────────────── */
@@ -281,5 +310,27 @@ export const nestivaData = {
 
 /* ── Page (RSC shell) ────────────────────────────────────── */
 export default function NestivaHospitalCaseStudyPage() {
-  return <NestivaHospitalCaseStudyClient data={nestivaData} />;
+  return (
+    <>
+      {/* P2: Structured data — WebSite + BreadcrumbList */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
+      <NestivaHospitalCaseStudyClient data={nestivaData} />
+
+      {/* P2: Internal service links — project → service pages */}
+      <section className="mx-auto max-w-5xl px-6 pb-16 pt-2" aria-label="Services used in this project">
+        <div className="rounded-2xl border border-[rgba(198,209,215,0.4)] bg-[rgba(255,255,255,0.6)] p-6">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "#1FA0B1" }}>Services Used</p>
+          <h2 className="mb-4 text-base font-bold" style={{ color: "#1a1a1a" }}>Built with NF Nexa Tech&apos;s web design &amp; development services</h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/services/web-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Web Development</Link>
+            <Link href="/services/ui-ux-design" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">UI/UX Design</Link>
+            <Link href="/services/backend-api-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Backend &amp; API Development</Link>
+            <Link href="/projects" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">← All Projects</Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const image = ogImage({ title: post.title, category: post.category, type: "blog" });
 
   return {
-    title: post.title,
+    title: post.title,  // root template appends "| NF Nexa Tech"
     description: post.description,
     alternates: { canonical: postUrl },
     openGraph: {
@@ -44,6 +44,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.description,
       url: postUrl,
       type: "article",
+      siteName: siteConfig.name,
+      locale: siteConfig.locale,
       publishedTime: post.date,
       modifiedTime: post.updatedDate ?? post.date,
       authors: [post.author.name],
@@ -52,6 +54,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: "summary_large_image",
+      site: "@nfnexatech",
+      creator: "@nfnexatech",
       title: post.title,
       description: post.description,
       images: [image.url],
@@ -97,13 +101,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     inLanguage: "en-IN",
     author: {
       "@type": "Person",
+      // @id connects this author to the founder entity declared in JsonLd.tsx
+      // and About page schema, strengthening the E-E-A-T entity graph.
+      "@id": `${siteConfig.url}/#founder`,
       name: post.author.name,
       jobTitle: post.author.role,
       url: siteConfig.url,
       worksFor: {
-        "@type": "Organization",
-        name: siteConfig.name,
-        url: siteConfig.url,
+        "@id": `${siteConfig.url}/#organization`,
       },
     },
     publisher: {

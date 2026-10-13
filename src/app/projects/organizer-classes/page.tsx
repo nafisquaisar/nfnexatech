@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import OrganizerClassesClient from "./OrganizerClassesClient";
 
@@ -131,6 +132,52 @@ export const organizerClassesData = {
   ],
 };
 
+/* ── P3: Structured Data ───────────────────────────────────── */
+const appSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": `${siteConfig.url}/projects/organizer-classes#app`,
+  name: "Organizer Classes",
+  description:
+    "An Android-based online learning platform for exam preparation — includes courses, video classes, handwritten notes, online tests, previous year questions, doubt support, push notifications, and Razorpay course purchases.",
+  applicationCategory: "EducationApplication",
+  operatingSystem: "Android",
+  creator: {
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+  },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+    { "@type": "ListItem", position: 2, name: "Projects", item: `${siteConfig.url}/projects` },
+    { "@type": "ListItem", position: 3, name: "Organizer Classes", item: `${siteConfig.url}/projects/organizer-classes` },
+  ],
+};
+
 export default function OrganizerClassesCaseStudyPage() {
-  return <OrganizerClassesClient data={organizerClassesData} />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <OrganizerClassesClient data={organizerClassesData} />
+      <section className="mx-auto max-w-5xl px-6 pb-16 pt-2" aria-label="Services used in this project">
+        <div className="rounded-2xl border border-[rgba(198,209,215,0.4)] bg-[rgba(255,255,255,0.6)] p-6">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "#f97316" }}>Services Used</p>
+          <h2 className="mb-4 text-base font-bold" style={{ color: "#1a1a1a" }}>Built with NF Nexa Tech&apos;s Android &amp; backend development services</h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/services/android-app-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Android App Development</Link>
+            <Link href="/services/backend-api-development" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">Backend &amp; API Development</Link>
+            <Link href="/services/ui-ux-design" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">UI/UX Design</Link>
+            <Link href="/projects" className="rounded-lg border border-[rgba(198,209,215,0.5)] bg-white px-4 py-2 text-sm font-medium text-[#1a1a1a] transition hover:shadow-sm">← All Projects</Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

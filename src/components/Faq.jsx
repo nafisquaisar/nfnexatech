@@ -4,9 +4,21 @@ import { useState } from "react";
 import Link from "next/link";
 import { faqs } from "@/data/content";
 
+/**
+ * Phase 5 — Accessibility improvements:
+ *   • FAQ question is wrapped in an <h3> (screen-reader heading structure).
+ *   • Button has aria-expanded, aria-controls referencing the panel id.
+ *   • Answer panel has unique id, role="region", aria-labelledby.
+ *   • Chevron is aria-hidden.
+ *   • Keyboard interactions (Enter/Space) work via native <button>.
+ *   • Animation preserved (maxHeight transition).
+ */
+
 function FaqItem({ faq, index, open, toggle }) {
   const num = String(index + 1).padStart(2, "0");
   const isOpen = open === index;
+  const btnId = `faq-btn-${index}`;
+  const panelId = `faq-panel-${index}`;
 
   return (
     <div
@@ -16,48 +28,56 @@ function FaqItem({ faq, index, open, toggle }) {
         backgroundColor: "rgba(255,255,255,0.95)",
       }}
     >
-      <button
-        onClick={() => toggle(isOpen ? -1 : index)}
-        aria-expanded={isOpen}
-        id={`faq-q-${index}`}
-        className="flex w-full items-center gap-4 px-5 py-4 text-left"
-      >
-        {/* Number badge */}
-        <span
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[12px] font-bold"
-          style={{
-            backgroundColor: isOpen ? "rgba(31,160,177,0.15)" : "rgba(249,225,205,0.6)",
-            color: isOpen ? "#1FA0B1" : "#E8763A",
-          }}
+      {/* Phase 5: h3 provides heading hierarchy; button retains click/keyboard behaviour */}
+      <h3 className="m-0">
+        <button
+          id={btnId}
+          onClick={() => toggle(isOpen ? -1 : index)}
+          aria-expanded={isOpen}
+          aria-controls={panelId}
+          className="flex w-full items-center gap-4 px-5 py-4 text-left"
         >
-          {num}
-        </span>
+          {/* Number badge */}
+          <span
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[12px] font-bold"
+            style={{
+              backgroundColor: isOpen ? "rgba(31,160,177,0.15)" : "rgba(249,225,205,0.6)",
+              color: isOpen ? "#1FA0B1" : "#E8763A",
+            }}
+          >
+            {num}
+          </span>
 
-        {/* Question */}
-        <span className="flex-1 text-[13px] font-semibold" style={{ color: "#1a1a1a" }}>
-          {faq.question}
-        </span>
+          {/* Question text */}
+          <span className="flex-1 text-[13px] font-semibold" style={{ color: "#1a1a1a" }}>
+            {faq.question}
+          </span>
 
-        {/* Chevron */}
-        <svg
-          className="h-4 w-4 shrink-0 transition-transform duration-300"
-          style={{
-            color: isOpen ? "#1FA0B1" : "#9B8B8B",
-            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2.5}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          {/* Chevron — decorative, hidden from AT */}
+          <svg
+            aria-hidden="true"
+            className="h-4 w-4 shrink-0 transition-transform duration-300"
+            style={{
+              color: isOpen ? "#1FA0B1" : "#9B8B8B",
+              transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+            }}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </h3>
 
-      {/* Answer */}
+      {/* Answer panel — accessible region labelled by the button */}
       <div
+        id={panelId}
+        role="region"
+        aria-labelledby={btnId}
         className="overflow-hidden transition-all duration-300"
-        style={{ maxHeight: isOpen ? 300 : 0, opacity: isOpen ? 1 : 0 }}
+        style={{ maxHeight: isOpen ? 400 : 0, opacity: isOpen ? 1 : 0 }}
       >
         <p
           className="px-5 pb-5 pl-[68px] text-[12px] leading-relaxed"
@@ -71,11 +91,12 @@ function FaqItem({ faq, index, open, toggle }) {
 }
 
 export default function Faq() {
-  const [open, setOpen] = useState(0); // first one open by default
+  const [open, setOpen] = useState(0); // first item open by default
 
   return (
     <section
       id="faq"
+      aria-label="Frequently Asked Questions"
       className="relative overflow-hidden py-14"
       style={{ backgroundColor: "#FAF7F5" }}
     >
@@ -106,15 +127,16 @@ export default function Faq() {
         </div>
 
         {/* FAQ accordion */}
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-col gap-2.5" role="list">
           {faqs.map((faq, i) => (
-            <FaqItem
-              key={i}
-              faq={faq}
-              index={i}
-              open={open}
-              toggle={setOpen}
-            />
+            <div key={i} role="listitem">
+              <FaqItem
+                faq={faq}
+                index={i}
+                open={open}
+                toggle={setOpen}
+              />
+            </div>
           ))}
         </div>
 
@@ -128,7 +150,7 @@ export default function Faq() {
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
               style={{ backgroundColor: "rgba(181,229,235,0.4)" }}
             >
-              <svg className="h-5 w-5" fill="none" stroke="#1FA0B1" strokeWidth={1.8} viewBox="0 0 24 24">
+              <svg className="h-5 w-5" fill="none" stroke="#1FA0B1" strokeWidth={1.8} viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 0 1-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
@@ -138,11 +160,11 @@ export default function Faq() {
             </div>
           </div>
           <Link
-            href="#contact"
+            href="/start-project"
             className="inline-flex items-center gap-2 rounded-full border-2 px-6 py-2.5 text-[13px] font-bold transition-all hover:scale-[1.03]"
             style={{ borderColor: "#E8763A", color: "#E8763A", backgroundColor: "transparent" }}
           >
-            Contact Us →
+            Start a Project →
           </Link>
         </div>
 

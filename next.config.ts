@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // ── P1 SEO: 301 redirect — legacy Patna page → new canonical location page ──
+  // This consolidates link equity from the old flat URL into /locations/patna.
+  // The legacy page's own canonical tag still points to its own URL (pre-existing),
+  // but the 301 is the stronger signal Google uses to determine the canonical.
+  async redirects() {
+    return [
+      {
+        source: "/web-development-company-patna",
+        destination: "/locations/patna",
+        permanent: true, // 301 — passes full link equity
+      },
+    ];
+  },
+
   // Tree-shake large packages that support it
   experimental: {
     optimizePackageImports: ["@vercel/analytics"],
@@ -31,3 +45,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

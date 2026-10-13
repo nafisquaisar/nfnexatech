@@ -5,15 +5,18 @@ import { ogImage } from "@/lib/og-image";
 
 export async function generateMetadata(): Promise<Metadata> {
   const image = ogImage({
-    title: "Software Company in Bhopal",
+    title: "Software Development Services in Bhopal",
     category: "📍 Bhopal, MP",
     type: "page",
   });
 
   return {
-    title: "Software Company in Bhopal | NF Nexa Tech",
+    // Phase 10: Removed "leading software company" superlative from title.
+    title: "Software Development Services in Bhopal | NF Nexa Tech",
     description:
-      "NF Nexa Tech is a leading software company in Bhopal, Madhya Pradesh. We build web apps, Android apps, Flutter apps, and SaaS products for startups and businesses. Get a free consultation today.",
+      // Phase 9: Removed claim that NF Nexa Tech is based in Bhopal.
+      // Accurately describes Delhi-based company serving Bhopal businesses.
+      "NF Nexa Tech is a Delhi-based software development company serving businesses in Bhopal, Madhya Pradesh. We build web apps, Android apps, Flutter apps, and SaaS products. Get a free consultation today.",
     keywords: [
       "software company Bhopal",
       "software development company Bhopal",
@@ -30,18 +33,20 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: `${siteConfig.url}/software-company-bhopal`,
     },
     openGraph: {
-      title: "Best Software Company in Bhopal | NF Nexa Tech",
+      // Phase 10: Removed "Best Software Company" superlative from OG title.
+      title: "Software Development Services in Bhopal | NF Nexa Tech",
       description:
-        "Top-rated software development company in Bhopal. Web apps, mobile apps, and SaaS MVPs built to global standards at Indian prices.",
+        "Delhi-based software development company serving Bhopal businesses. Web apps, mobile apps, and SaaS MVPs built to quality standards.",
       url: `${siteConfig.url}/software-company-bhopal`,
       type: "website",
       images: [image],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Best Software Company in Bhopal | NF Nexa Tech",
+      // Phase 10: Removed "Best Software Company" superlative from Twitter title.
+      title: "Software Development Services in Bhopal | NF Nexa Tech",
       description:
-        "Top-rated software development company in Bhopal. Web apps, mobile apps, and SaaS MVPs built to global standards.",
+        "Delhi-based software development company serving Bhopal businesses. Web apps, mobile apps, and SaaS MVPs.",
       images: [image.url],
     },
   };
@@ -49,22 +54,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const localFaqs = [
   {
-    question: "Which is the best software company in Bhopal?",
+    question: "Does NF Nexa Tech serve clients in Bhopal?",
+    // Phase 9: Corrected — no longer claims to be "one of Bhopal's leading companies".
     answer:
-      "NF Nexa Tech is one of Bhopal's leading software companies, specialising in web development, Android/Flutter app development, and SaaS MVP development. We have delivered 15+ projects for clients across India and internationally.",
+      "Yes. NF Nexa Tech is a Delhi-based software development company serving businesses in Bhopal and across India. We specialise in web development, Android and Flutter app development, and SaaS MVP development. While our office is in Mahipalpur, New Delhi, we work with Bhopal-based clients remotely via WhatsApp, video calls, and Slack.",
   },
   {
-    question: "What software services does NF Nexa Tech offer in Bhopal?",
+    question: "What software services does NF Nexa Tech offer for Bhopal businesses?",
     answer:
       "We offer end-to-end software development: web applications (React, Next.js), Android apps (Java/Kotlin), Flutter cross-platform apps, UI/UX design, backend APIs (Node.js, Firebase), and SaaS MVP development — serving clients in Bhopal and across India from our New Delhi office.",
   },
   {
-    question: "How much does software development cost in Bhopal?",
+    question: "How much does software development cost for a Bhopal business?",
     answer:
       "Project costs vary by scope. A focused MVP typically starts from ₹1.5L–₹3L. A full-featured mobile app ranges from ₹3L–₹8L. A custom SaaS platform starts from ₹7L. We provide detailed, transparent quotes after a free discovery call.",
   },
   {
-    question: "Do you work with clients outside Bhopal?",
+    question: "Do you work with clients outside Delhi?",
     answer:
       "Yes — based in New Delhi, we work with clients across India (Bhopal, Mumbai, Bangalore, Pune, Patna) and internationally (USA, UK, UAE). All communication is remote-first via WhatsApp, Slack, and video calls.",
   },
@@ -78,25 +84,29 @@ const localFaqs = [
 const schema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  // Phase 15: Location-specific page uses sameAs to reference canonical LocalBusiness.
+  // This page represents the same physical business serving a different city.
+  "sameAs": `${siteConfig.url}/#localbusiness`,
   "@id": `${siteConfig.url}/software-company-bhopal#localbusiness`,
-  name: `${siteConfig.name} — Software Company in Bhopal`,
+  name: `${siteConfig.name} — Software Development Services for Bhopal`,
+  // Phase 9: Description no longer claims to be a Bhopal-based company.
   description:
-    "Leading software development company in Bhopal, MP. Web apps, Android apps, Flutter apps, and SaaS MVPs.",
+    "Delhi-based software development company serving businesses in Bhopal, MP. Web apps, Android apps, Flutter apps, and SaaS MVPs.",
   url: `${siteConfig.url}/software-company-bhopal`,
   telephone: siteConfig.contact.phone,
   email: siteConfig.contact.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
-    addressLocality: "New Delhi",
-    addressRegion: "Delhi",
-    postalCode: "110037",
-    addressCountry: "IN",
+    streetAddress: siteConfig.contact.streetAddress,
+    addressLocality: siteConfig.contact.city,
+    addressRegion: siteConfig.contact.state,
+    postalCode: siteConfig.contact.postalCode,
+    addressCountry: siteConfig.contact.countryCode,
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 28.5357,
-    longitude: 77.1199,
+    latitude: siteConfig.geo.lat,
+    longitude: siteConfig.geo.lng,
   },
   areaServed: { "@type": "City", name: "Bhopal" },
   priceRange: "₹₹",
@@ -109,11 +119,14 @@ export default function SoftwareCompanyBhopal() {
       state="Madhya Pradesh"
       country="India"
       countryCode="IN"
-      service="Software Company"
+      service="Software Development Services"
       slug="software-company-bhopal"
-      headline="#1 Software Development Company in Bhopal"
-      subheadline="Web apps, mobile apps, and SaaS products built to global standards — right here in Bhopal, Madhya Pradesh."
-      description="NF Nexa Tech is Bhopal's trusted software development company. We build production-grade web applications, Android apps, Flutter apps, and SaaS MVPs for startups, SMEs, and enterprises. Our tech team delivers international-quality software at competitive Indian pricing."
+      // Phase 9 & 10: Removed "#1 Software Development Company in Bhopal" headline
+      // and "NF Nexa Tech is Bhopal's trusted" description.
+      // Replaced with factual wording — Delhi-based company serving Bhopal.
+      headline="Software Development Services for Bhopal Businesses"
+      subheadline="NF Nexa Tech is a Delhi-based software company serving businesses in Bhopal, Madhya Pradesh. We build web apps, mobile apps, and SaaS products remotely."
+      description="NF Nexa Tech is a Delhi-based software development company serving businesses in Bhopal, Madhya Pradesh. We build web applications (React, Next.js), Android apps, Flutter cross-platform apps, and SaaS MVPs for startups, SMEs, and enterprises across India. Our team works remotely with Bhopal clients via WhatsApp, video calls, and regular check-ins."
       geo={{ lat: 23.2599, lng: 77.4126 }}
       localFaqs={localFaqs}
       schema={schema}

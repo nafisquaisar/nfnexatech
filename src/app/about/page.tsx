@@ -10,14 +10,16 @@ import AboutPageClient from "./AboutPageClient";
 ───────────────────────────────────────────────────────────────────────────── */
 
 export const metadata: Metadata = {
-  title: "About NF Nexa Tech | Premium Software Development Company India",
+  // The root layout template appends "| NF Nexa Tech" automatically.
+  // So this renders as: "About Us | Software Development Company in Delhi | NF Nexa Tech"
+  title: "About Us | Software Development Company in Delhi",
   description:
-    "Learn about NF Nexa Tech — a UDYAM-registered software development company from New Delhi building world-class web apps, mobile apps and digital products for startups and enterprises across India.",
+    "Learn about NF Nexa Tech — a UDYAM-registered software development company in Mahipalpur, New Delhi. We build websites, web apps, Android & Flutter apps, and SaaS products for businesses across India.",
   keywords: [
     "about NF Nexa Tech",
     "software development company New Delhi",
     "MSME software agency India",
-    "web development company India",
+    "web development company Delhi",
     "Flutter app development India",
     "Android app development company",
     "startup software development",
@@ -31,29 +33,31 @@ export const metadata: Metadata = {
     canonical: `${siteConfig.url}/about`,
   },
   openGraph: {
+    // OG tags do not use the template — include full brand explicitly.
     type: "website",
     url: `${siteConfig.url}/about`,
-    title: "About NF Nexa Tech | Premium Software Development Company India",
-    description:
-      "UDYAM-registered software development company from New Delhi. We build world-class web apps, mobile apps and digital products for startups and enterprises.",
     siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    title: "About NF Nexa Tech | Software Development Company in Delhi",
+    description:
+      "UDYAM-registered software development company from Mahipalpur, New Delhi. We build web apps, mobile apps, and SaaS products for startups and enterprises across India.",
     images: [
       {
         url: `${siteConfig.url}/api/og?title=About+NF+Nexa+Tech&type=page`,
         width: 1200,
         height: 630,
-        alt: "About NF Nexa Tech — Software Development Company India",
+        alt: "About NF Nexa Tech — Software Development Company in Delhi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About NF Nexa Tech | Premium Software Development Company India",
-    description:
-      "UDYAM-registered software studio from New Delhi building world-class apps and digital products.",
-    images: [`${siteConfig.url}/api/og?title=About+NF+Nexa+Tech&type=page`],
-    creator: "@nfnexatech",
     site: "@nfnexatech",
+    creator: "@nfnexatech",
+    title: "About NF Nexa Tech | Software Development Company in Delhi",
+    description:
+      "UDYAM-registered software studio from New Delhi building web apps, mobile apps, and digital products.",
+    images: [`${siteConfig.url}/api/og?title=About+NF+Nexa+Tech&type=page`],
   },
 };
 
@@ -64,31 +68,40 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  // @id must match the homepage JsonLd.tsx orgSchema() so Google merges them
+  // into a single knowledge graph entity instead of treating them as two separate orgs.
+  "@id": `${siteConfig.url}/#organization`,
   name: "NF Nexa Tech",
+  legalName: "NF Nexa Tech",
   url: siteConfig.url,
-  logo: `${siteConfig.url}/logo.png`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteConfig.url}/logo.png`,
+    width: 512,
+    height: 512,
+  },
   description:
     "NF Nexa Tech is a UDYAM-registered software development company from New Delhi, India, specialising in web applications, mobile apps, Flutter, UI/UX design and SaaS development.",
-  foundingDate: String(siteConfig.foundedYear),  // 2023 (founded 25 October 2023)
+  foundingDate: String(siteConfig.foundedYear),
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur",
-    addressLocality: "New Delhi",
-    addressRegion: "Delhi",
-    postalCode: "110037",
-    addressCountry: "IN",
+    streetAddress: siteConfig.contact.streetAddress,
+    addressLocality: siteConfig.contact.city,
+    addressRegion: siteConfig.contact.state,
+    postalCode: siteConfig.contact.postalCode,
+    addressCountry: siteConfig.contact.countryCode,
   },
   contactPoint: [
     {
       "@type": "ContactPoint",
-      telephone: "+91-9801999829",
+      telephone: siteConfig.contact.phone,
       contactType: "customer service",
-      email: "nfnexatech@gmail.com",
+      email: siteConfig.contact.email,
       availableLanguage: ["English", "Hindi"],
     },
     {
       "@type": "ContactPoint",
-      telephone: "+91-8109347584",
+      telephone: siteConfig.contact.phone2,
       contactType: "customer service",
       availableLanguage: ["English", "Hindi"],
     },
@@ -100,9 +113,12 @@ const organizationJsonLd = {
   ],
   founder: {
     "@type": "Person",
-    name: "Nafis Quaisar",
+    // @id ties this Person entity to the same founder referenced in JsonLd.tsx
+    "@id": `${siteConfig.url}/#founder`,
+    name: siteConfig.founder,
+    // Standardised to "Founder & CEO" across all pages — matches About page content
     jobTitle: "Founder & CEO",
-    worksFor: { "@type": "Organization", name: "NF Nexa Tech" },
+    worksFor: { "@id": `${siteConfig.url}/#organization` },
   },
 };
 
@@ -124,7 +140,7 @@ const faqJsonLd = {
       name: "Where is NF Nexa Tech located?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Our head office is at Flat 301, Janki Hari Niwas, Block B, Bengali Market, Mahipalpur, New Delhi – 110037. We serve clients across India and internationally.",
+        text: `Our head office is in ${siteConfig.contact.streetAddress}, ${siteConfig.contact.city}, ${siteConfig.contact.state} ${siteConfig.contact.postalCode}. We serve clients across India and internationally.`,
       },
     },
     {
@@ -187,9 +203,46 @@ export default function AboutPage() {
       />
 
       <Navbar />
+
+      {/*
+        ── AEO: Answer-First "Quick Facts" block ────────────────────────────
+        Server-rendered immediately after Navbar so it appears in the raw HTML
+        before the client component hydrates. Answer engines (SGE, Perplexity,
+        Bing AI) can extract entity facts directly without executing JavaScript.
+      */}
+      <section
+        aria-label="Quick facts about NF Nexa Tech"
+        className="sr-only"
+        style={{ position: "absolute", left: "-9999px" }}
+      >
+        {/* Hidden from visual UI but accessible to crawlers and screen readers */}
+        <h2>What is NF Nexa Tech?</h2>
+        <p>
+          NF Nexa Tech is a UDYAM-registered software development company based in Mahipalpur, New Delhi, India.
+          Founded in October 2023 by Nafis Quaisar and co-founded by Saheb Alam, the company builds websites,
+          web applications, Android apps, Flutter apps, SaaS products, and custom software for businesses in Delhi
+          and remotely across India, including Patna, Darbhanga, and Jhanjharpur in Bihar.
+        </p>
+        <dl>
+          <dt>Company Name</dt><dd>NF Nexa Tech</dd>
+          <dt>Founded</dt><dd>25 October 2023</dd>
+          <dt>Founder</dt><dd>Nafis Quaisar</dd>
+          <dt>Co-Founder</dt><dd>Saheb Alam</dd>
+          <dt>Physical Location</dt><dd>Mahipalpur, New Delhi, Delhi 110037, India</dd>
+          <dt>Primary Market</dt><dd>Delhi / New Delhi</dd>
+          <dt>Service Areas</dt><dd>Delhi NCR, Patna, Darbhanga, Jhanjharpur, and across India</dd>
+          <dt>Registration</dt><dd>UDYAM (MSME) — Government of India</dd>
+          <dt>Website</dt><dd>{siteConfig.url}</dd>
+          <dt>Email</dt><dd>{siteConfig.contact.email}</dd>
+          <dt>Phone</dt><dd>{siteConfig.contact.phone}</dd>
+          <dt>Services</dt><dd>Web Development, Android App Development, Flutter App Development, UI/UX Design, Backend &amp; API Development, SaaS &amp; MVP Development</dd>
+        </dl>
+      </section>
+
       <AboutPageClient />
       <Faq />
       <Footer />
     </>
   );
 }
+
