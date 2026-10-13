@@ -76,7 +76,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
       <div
         className={`relative overflow-hidden ${
           featured
-            ? "h-52 w-full md:h-auto md:w-2/5 md:flex-shrink-0"
+            ? "h-56 w-full md:min-h-[280px] md:h-full md:w-2/5 md:flex-shrink-0"
             : "h-48 w-full"
         }`}
       >
@@ -90,7 +90,8 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
                 ? "(max-width: 768px) 100vw, 40vw"
                 : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             }
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            priority={featured}
           />
         ) : (
           <ImagePlaceholder category={post.category} />

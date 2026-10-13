@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import OrganizerClassesClient from "./OrganizerClassesClient";
