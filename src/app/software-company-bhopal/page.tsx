@@ -6,47 +6,30 @@ import { ogImage } from "@/lib/og-image";
 export async function generateMetadata(): Promise<Metadata> {
   const image = ogImage({
     title: "Software Development Services in Bhopal",
-    category: "📍 Bhopal, MP",
+    category: "Bhopal, Madhya Pradesh",
     type: "page",
   });
 
   return {
-    // Phase 10: Removed "leading software company" superlative from title.
-    title: "Software Development Services in Bhopal | NF Nexa Tech",
+    title: "Software Development Services in Bhopal",
     description:
-      // Phase 9: Removed claim that NF Nexa Tech is based in Bhopal.
-      // Accurately describes Delhi-based company serving Bhopal businesses.
-      "NF Nexa Tech is a Delhi-based software development company serving businesses in Bhopal, Madhya Pradesh. We build web apps, Android apps, Flutter apps, and SaaS products. Get a free consultation today.",
-    keywords: [
-      "software company Bhopal",
-      "software development company Bhopal",
-      "app development Bhopal",
-      "web development Bhopal",
-      "IT company Bhopal",
-      "software agency Bhopal",
-      "mobile app development Bhopal",
-      "Flutter development Bhopal",
-      "React developer Bhopal",
-      "Next.js developer Bhopal",
-    ],
+      "NF Nexa Tech provides software development services to businesses in Bhopal, Madhya Pradesh. Based in Mahipalpur, New Delhi, we build websites, Android apps, Flutter apps, and custom software — delivered remotely.",
     alternates: {
       canonical: `${siteConfig.url}/software-company-bhopal`,
     },
     openGraph: {
-      // Phase 10: Removed "Best Software Company" superlative from OG title.
       title: "Software Development Services in Bhopal | NF Nexa Tech",
       description:
-        "Delhi-based software development company serving Bhopal businesses. Web apps, mobile apps, and SaaS MVPs built to quality standards.",
+        "Website development, Android apps, Flutter apps, and custom software for businesses in Bhopal, MP. Delhi-based team. Remote delivery.",
       url: `${siteConfig.url}/software-company-bhopal`,
       type: "website",
       images: [image],
     },
     twitter: {
       card: "summary_large_image",
-      // Phase 10: Removed "Best Software Company" superlative from Twitter title.
       title: "Software Development Services in Bhopal | NF Nexa Tech",
       description:
-        "Delhi-based software development company serving Bhopal businesses. Web apps, mobile apps, and SaaS MVPs.",
+        "Software development for businesses in Bhopal, MP. Delhi-based team, remote delivery.",
       images: [image.url],
     },
   };
@@ -54,62 +37,64 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const localFaqs = [
   {
-    question: "Does NF Nexa Tech serve clients in Bhopal?",
-    // Phase 9: Corrected — no longer claims to be "one of Bhopal's leading companies".
+    question: "Does NF Nexa Tech serve businesses in Bhopal?",
     answer:
-      "Yes. NF Nexa Tech is a Delhi-based software development company serving businesses in Bhopal and across India. We specialise in web development, Android and Flutter app development, and SaaS MVP development. While our office is in Mahipalpur, New Delhi, we work with Bhopal-based clients remotely via WhatsApp, video calls, and Slack.",
+      "Yes. NF Nexa Tech provides software development services remotely to businesses in Bhopal, Madhya Pradesh. Our office is in Mahipalpur, New Delhi. All project communication happens through WhatsApp, video calls, and written project documentation.",
   },
   {
-    question: "What software services does NF Nexa Tech offer for Bhopal businesses?",
+    question: "Is NF Nexa Tech physically located in Bhopal?",
     answer:
-      "We offer end-to-end software development: web applications (React, Next.js), Android apps (Java/Kotlin), Flutter cross-platform apps, UI/UX design, backend APIs (Node.js, Firebase), and SaaS MVP development — serving clients in Bhopal and across India from our New Delhi office.",
+      "No. Our office is in Mahipalpur, New Delhi. We do not have a physical presence in Bhopal. We serve Bhopal businesses fully remotely — the process is structured so location is not a barrier.",
   },
   {
-    question: "How much does software development cost for a Bhopal business?",
+    question: "What types of software does NF Nexa Tech build?",
     answer:
-      "Project costs vary by scope. A focused MVP typically starts from ₹1.5L–₹3L. A full-featured mobile app ranges from ₹3L–₹8L. A custom SaaS platform starts from ₹7L. We provide detailed, transparent quotes after a free discovery call.",
+      "We build business websites, web applications, Android apps (Kotlin), Flutter cross-platform apps (Android and iOS), and custom software such as management dashboards and internal tools. The right solution depends on your specific requirements, which we discuss before recommending an approach.",
   },
   {
-    question: "Do you work with clients outside Delhi?",
+    question: "Can we work together remotely from Bhopal?",
     answer:
-      "Yes — based in New Delhi, we work with clients across India (Bhopal, Mumbai, Bangalore, Pune, Patna) and internationally (USA, UK, UAE). All communication is remote-first via WhatsApp, Slack, and video calls.",
+      "Yes. All project communication, design reviews, and progress updates happen remotely. We share a written scope before starting, work in development stages, and provide updates throughout. You can review the work and give feedback at each stage.",
   },
   {
-    question: "How do I get started with NF Nexa Tech?",
+    question: "How can I request a project estimate?",
     answer:
-      "Book a free 30-minute discovery call, send a WhatsApp message, or fill out our contact form. We respond within 4 business hours and deliver a detailed proposal within 48 hours.",
+      "Send a WhatsApp message or fill in the project form on the Start Project page. Describe what you want to build and what problem it needs to solve. We will review your requirements and discuss the right approach before providing an estimate.",
+  },
+  {
+    question: "What should I prepare before discussing a project?",
+    answer:
+      "A basic idea of what the software should do, who will use it, and which problem it needs to solve. You do not need a technical specification — we help clarify requirements during the initial discussion. Reference examples or competitor links are useful to share.",
   },
 ];
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  // Phase 15: Location-specific page uses sameAs to reference canonical LocalBusiness.
-  // This page represents the same physical business serving a different city.
-  "sameAs": `${siteConfig.url}/#localbusiness`,
-  "@id": `${siteConfig.url}/software-company-bhopal#localbusiness`,
-  name: `${siteConfig.name} — Software Development Services for Bhopal`,
-  // Phase 9: Description no longer claims to be a Bhopal-based company.
+  "@type": "Service",
+  "@id": `${siteConfig.url}/software-company-bhopal#service`,
+  name: "Software Development Services in Bhopal",
   description:
-    "Delhi-based software development company serving businesses in Bhopal, MP. Web apps, Android apps, Flutter apps, and SaaS MVPs.",
+    "NF Nexa Tech provides software development services — web development, Android app development, Flutter app development, UI/UX design, backend API development, and SaaS MVP development — to businesses in Bhopal, Madhya Pradesh.",
   url: `${siteConfig.url}/software-company-bhopal`,
-  telephone: siteConfig.contact.phone,
-  email: siteConfig.contact.email,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: siteConfig.contact.streetAddress,
-    addressLocality: siteConfig.contact.city,
-    addressRegion: siteConfig.contact.state,
-    postalCode: siteConfig.contact.postalCode,
-    addressCountry: siteConfig.contact.countryCode,
+  provider: {
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+    url: siteConfig.url,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.contact.streetAddress,
+      addressLocality: siteConfig.contact.city,
+      addressRegion: siteConfig.contact.state,
+      postalCode: siteConfig.contact.postalCode,
+      addressCountry: siteConfig.contact.countryCode,
+    },
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: siteConfig.geo.lat,
-    longitude: siteConfig.geo.lng,
-  },
-  areaServed: { "@type": "City", name: "Bhopal" },
-  priceRange: "₹₹",
+  areaServed: [
+    { "@type": "City", name: "Bhopal" },
+    { "@type": "State", name: "Madhya Pradesh" },
+  ],
+  serviceType: "Software Development",
 };
 
 export default function SoftwareCompanyBhopal() {
@@ -121,12 +106,9 @@ export default function SoftwareCompanyBhopal() {
       countryCode="IN"
       service="Software Development Services"
       slug="software-company-bhopal"
-      // Phase 9 & 10: Removed "#1 Software Development Company in Bhopal" headline
-      // and "NF Nexa Tech is Bhopal's trusted" description.
-      // Replaced with factual wording — Delhi-based company serving Bhopal.
-      headline="Software Development Services for Bhopal Businesses"
-      subheadline="NF Nexa Tech is a Delhi-based software company serving businesses in Bhopal, Madhya Pradesh. We build web apps, mobile apps, and SaaS products remotely."
-      description="NF Nexa Tech is a Delhi-based software development company serving businesses in Bhopal, Madhya Pradesh. We build web applications (React, Next.js), Android apps, Flutter cross-platform apps, and SaaS MVPs for startups, SMEs, and enterprises across India. Our team works remotely with Bhopal clients via WhatsApp, video calls, and regular check-ins."
+      headline="Software Development Services for Businesses in Bhopal"
+      subheadline="NF Nexa Tech is based in Mahipalpur, New Delhi, and works remotely with businesses in Bhopal and across India. We develop websites, mobile applications, and custom software based on each project's requirements."
+      description="Whether you're planning a new business website, improving an existing application, or building a software product, we can discuss your goals and help you work out a practical development approach. All project communication happens through WhatsApp and video calls — no travel required at any stage."
       geo={{ lat: 23.2599, lng: 77.4126 }}
       localFaqs={localFaqs}
       schema={schema}

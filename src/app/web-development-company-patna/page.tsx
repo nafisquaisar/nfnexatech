@@ -28,14 +28,17 @@ export async function generateMetadata(): Promise<Metadata> {
       "startup tech company Patna",
     ],
     alternates: {
-      canonical: `${siteConfig.url}/web-development-company-patna`,
+      // Phase Batch1: Canonical updated to redirect destination.
+      // next.config.ts permanently redirects this URL → /locations/patna.
+      // Canonical must match the redirect destination to avoid mixed signals.
+      canonical: `${siteConfig.url}/locations/patna`,
     },
     openGraph: {
       // Phase 10: Removed "Best Web Development Company" superlative from OG title.
       title: "Web Development Services for Businesses in Patna | NF Nexa Tech",
       description:
         "Professional web development services for Patna businesses. React, Next.js, Android, Flutter — built to quality standards.",
-      url: `${siteConfig.url}/web-development-company-patna`,
+      url: `${siteConfig.url}/locations/patna`,
       type: "website",
       images: [image],
     },

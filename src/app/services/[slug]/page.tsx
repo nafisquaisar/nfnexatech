@@ -126,10 +126,11 @@ const SERVICE_THEME: Record<string, { color: string; colorRgb: string; icon: key
 /* ── Projects mapped per service ─────────────────────────── */
 const SERVICE_PROJECTS: Record<string, { slug: string; title: string; subtitle: string; image: string; color: string; tech: string[] }[]> = {
   "web-development": [
-    { slug: "nestiva-hospital",  title: "Nestiva Hospital",    subtitle: "Multi-Specialty Hospital Website",    image: "/images/projects/nestiva/home.png",         color: "#14b8a6", tech: ["Next.js", "React", "Tailwind CSS"] },
-    { slug: "medon-company",     title: "Medon Company",       subtitle: "Appliance Repair & Service Website",  image: "/images/projects/medon/home.png",           color: "#06b6d4", tech: ["Next.js", "Tailwind CSS", "Firebase"] },
-    { slug: "madza-company",     title: "Madza Company",       subtitle: "Home Services Platform",              image: "/images/projects/madzacompany/home.png",    color: "#06b6d4", tech: ["Next.js", "Tailwind CSS", "Firebase"] },
+    { slug: "invoicelelo",       title: "InvoiceLelo",         subtitle: "Invoice Generator for Indian Businesses", image: "/images/projects/invoicelelo/home.png",     color: "#f97316", tech: ["React", "Firebase", "Tailwind CSS"] },
+    { slug: "medon-company",     title: "Medon Company",       subtitle: "Appliance Repair & Service Website",  image: "/images/projects/medon/home.png",            color: "#06b6d4", tech: ["Next.js", "Tailwind CSS", "Firebase"] },
+    { slug: "madza-company",     title: "Madza Company",       subtitle: "Home Services Platform",              image: "/images/projects/madzacompany/home.png",     color: "#06b6d4", tech: ["Next.js", "Tailwind CSS", "Firebase"] },
     { slug: "train-your-tech",   title: "Train Your Tech",     subtitle: "Placement Preparation Platform",      image: "/images/projects/trainyourtech/landing.png", color: "#a855f7", tech: ["React", "Spring Boot", "MySQL"] },
+    { slug: "nestiva-hospital",  title: "Nestiva Hospital",    subtitle: "Multi-Specialty Hospital Website",    image: "/images/projects/nestiva/nestivahome.png",   color: "#14b8a6", tech: ["Next.js", "React", "Tailwind CSS"] },
   ],
   "android-app-development": [
     { slug: "popular-bread",     title: "Popular Bread",       subtitle: "Bread Business Management App",       image: "/images/projects/popular/popular_preview.png",       color: "#f97316", tech: ["Android", "Firebase", "Hive"] },
@@ -139,9 +140,11 @@ const SERVICE_PROJECTS: Record<string, { slug: string; title: string; subtitle: 
   ],
   "flutter-app-development": [
     { slug: "kharcha-plus",      title: "Kharcha Plus",        subtitle: "Expense & Utility Management",        image: "/images/projects/kharchaplus/kharchaplus_preview.png", color: "#0f9f9a", tech: ["Flutter", "Riverpod", "Isar"] },
+    { slug: "popular-bread",     title: "Popular Bread",       subtitle: "Bread Business Management App",       image: "/images/projects/popular/popular_preview.png",         color: "#f97316", tech: ["Flutter", "Firebase", "Hive"] },
+    { slug: "invoicelelo",       title: "InvoiceLelo",         subtitle: "Invoice Generator for Indian Businesses", image: "/images/projects/invoicelelo/home.png",            color: "#f97316", tech: ["Flutter", "Firebase"] },
   ],
   "ui-ux-design": [
-    { slug: "nestiva-hospital",  title: "Nestiva Hospital",    subtitle: "Healthcare Website Design",           image: "/images/projects/nestiva/home.png",         color: "#14b8a6", tech: ["Figma", "UI Design", "Tailwind CSS"] },
+    { slug: "nestiva-hospital",  title: "Nestiva Hospital",    subtitle: "Healthcare Website Design",           image: "/images/projects/nestiva/nestivahome.png", color: "#14b8a6", tech: ["Figma", "UI Design", "Tailwind CSS"] },
     { slug: "medon-company",     title: "Medon Company",       subtitle: "Service Website Design",              image: "/images/projects/medon/home.png",           color: "#06b6d4", tech: ["Figma", "UI Design"] },
     { slug: "madza-company",     title: "Madza Company",       subtitle: "Home Services Website Design",        image: "/images/projects/madzacompany/home.png",    color: "#06b6d4", tech: ["Figma", "UI Design"] },
   ],
@@ -151,7 +154,10 @@ const SERVICE_PROJECTS: Record<string, { slug: string; title: string; subtitle: 
     { slug: "organizer-classes", title: "Organizer Classes",   subtitle: "Razorpay + Course Backend",           image: "/images/projects/organizer/organizer_preview.png",    color: "#f97316", tech: ["Firebase", "Razorpay"] },
   ],
   "saas-mvp-development": [
-    { slug: "train-your-tech",   title: "Train Your Tech",     subtitle: "EdTech Platform MVP",                 image: "/images/projects/trainyourtech/landing.png", color: "#a855f7", tech: ["React", "Spring Boot", "MySQL"] },
+    { slug: "invoicelelo",       title: "InvoiceLelo",         subtitle: "Invoice Generator SaaS for Indian Businesses", image: "/images/projects/invoicelelo/home.png",              color: "#f97316", tech: ["React", "Firebase", "Tailwind CSS"] },
+    { slug: "train-your-tech",   title: "Train Your Tech",     subtitle: "EdTech Platform MVP",                 image: "/images/projects/trainyourtech/landing.png",          color: "#a855f7", tech: ["React", "Spring Boot", "MySQL"] },
+    { slug: "popular-bread",     title: "Popular Bread",       subtitle: "Bread Business Management App",       image: "/images/projects/popular/popular_preview.png",         color: "#f97316", tech: ["Flutter", "Firebase", "Hive"] },
+    { slug: "kharcha-plus",      title: "Kharcha Plus",        subtitle: "Expense & Utility Management App",    image: "/images/projects/kharchaplus/kharchaplus_preview.png", color: "#0f9f9a", tech: ["Flutter", "Riverpod", "Isar"] },
   ],
 };
 

@@ -7,10 +7,23 @@ const nextConfig: NextConfig = {
   // but the 301 is the stronger signal Google uses to determine the canonical.
   async redirects() {
     return [
+      // ── P1: Legacy Patna page → canonical location page ──────────────────
+      // Consolidates link equity from the old flat URL into /locations/patna.
       {
         source: "/web-development-company-patna",
         destination: "/locations/patna",
-        permanent: true, // 301 — passes full link equity
+        permanent: true,
+      },
+      // ── Batch3: Popular Bread inventory route → canonical case study ──────
+      // data.js uses slug 'popular-bread-inventory' which generates a live
+      // dynamic route at /projects/popular-bread-inventory. All UI components
+      // (ProjectsClient, Projects.jsx, service pages, blog, location pages)
+      // already link to /projects/popular-bread (the rich static case study).
+      // This redirect collapses the orphaned duplicate to the canonical URL.
+      {
+        source: "/projects/popular-bread-inventory",
+        destination: "/projects/popular-bread",
+        permanent: true,
       },
     ];
   },

@@ -2,9 +2,15 @@
  * Projects Sitemap — served at /sitemap-projects.xml
  *
  * Covers all project case studies:
- *   - Dynamic projects from data.js (served by /projects/[slug])
- *   - Static project pages (medon-company, train-your-tech)
+ *   - Static project pages (own directory under /projects/) → STATIC_PROJECTS
+ *   - Dynamic projects from data.js that do NOT have a static page
  * Includes image:image tags for hero/preview images.
+ *
+ * De-duplication strategy (P0 sitemap fix — 13 Oct 2026):
+ *   STATIC_PROJECTS is the authoritative source for projects that have their
+ *   own dedicated page.tsx. Dynamic routes from data.js are included only for
+ *   slugs that do NOT appear in STATIC_PROJECTS, and the redirected legacy
+ *   slug "popular-bread-inventory" is explicitly excluded.
  */
 
 import { projects } from "@/data/data";
@@ -12,10 +18,18 @@ import { siteConfig } from "@/config/site";
 
 const BASE = siteConfig.url;
 
-// Static project pages not in data.js — each has its own directory
-// P2: Added nestiva-hospital, popular-bread, madza-company, organizer-classes
-// (these were previously missing from the sitemap — GSC blind spot)
+/**
+ * Projects with their own dedicated static page under /projects/<slug>/page.tsx.
+ * Each slug here is the canonical route. Any matching slug in data.js is
+ * intentionally excluded from the dynamic URL block to prevent duplicates.
+ */
 const STATIC_PROJECTS = [
+  {
+    slug: "invoicelelo",
+    title: "InvoiceLelo",
+    heroImage: "/images/projects/invoicelelo/home.png",
+    subtitle: "Invoice Generator for Indian Businesses",
+  },
   {
     slug: "nestiva-hospital",
     title: "Nestiva Hospital",
@@ -26,7 +40,7 @@ const STATIC_PROJECTS = [
     slug: "medon-company",
     title: "Medon Company",
     heroImage: "/images/projects/medon/home.png",
-    subtitle: "Service Booking Platform for Delhi NCR",
+    subtitle: "Appliance Repair & Service Booking Website",
   },
   {
     slug: "madza-company",
@@ -50,13 +64,20 @@ const STATIC_PROJECTS = [
     slug: "train-your-tech",
     title: "Train Your Tech",
     heroImage: "/images/projects/trainyourtech/landing.png",
-    subtitle: "AI-Powered Placement Preparation Platform",
+    subtitle: "Placement Preparation Platform",
   },
 ];
 
+/** Slugs that redirect to a different canonical URL — must never appear in sitemap. */
+const REDIRECT_SLUGS = new Set(["popular-bread-inventory"]);
+
+/** Slugs covered by STATIC_PROJECTS — excluded from dynamic URL block. */
+const STATIC_SLUGS = new Set(STATIC_PROJECTS.map((p) => p.slug));
+
 function buildXml(now: string): string {
-  // Dynamic projects from data.js
+  // Dynamic projects from data.js — exclude those with static pages and redirects
   const dynamicUrls = projects
+    .filter((p) => !STATIC_SLUGS.has(p.slug) && !REDIRECT_SLUGS.has(p.slug))
     .map((p) => {
       const imageTag = p.heroImage
         ? `
@@ -77,14 +98,14 @@ function buildXml(now: string): string {
     })
     .join("");
 
-  // Static project pages
+  // Static project pages — authoritative list
   const staticUrls = STATIC_PROJECTS.map((p) => {
     const imageTag = p.heroImage
       ? `
     <image:image>
       <image:loc>${BASE}${p.heroImage}</image:loc>
-      <image:title>${p.title} — Case Study</image:title>
-      <image:caption>${p.subtitle}</image:caption>
+      <image:title>${p.title.replace(/&/g, "&amp;")} — Case Study</image:title>
+      <image:caption>${p.subtitle.replace(/&/g, "&amp;")}</image:caption>
     </image:image>`
       : "";
 
@@ -97,7 +118,7 @@ function buildXml(now: string): string {
   </url>`;
   }).join("");
 
-  // Projects index page — canonical here, removed from sitemap-pages.xml
+  // Projects index page
   const projectsIndex = `
   <url>
     <loc>${BASE}/projects</loc>

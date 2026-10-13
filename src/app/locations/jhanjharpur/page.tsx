@@ -6,6 +6,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingCtas from "@/components/FloatingCtas";
 import { StartProjectButton, WhatsAppCtaButton } from "@/components/LocalSeoCtas";
+import {
+  PinIcon,
+  WebDevIcon,
+  AndroidIcon,
+  FlutterIcon,
+  UiUxIcon,
+  BackendIcon,
+  SaasIcon,
+} from "@/components/LocationPageIcons";
 
 /* ── OG image ─────────────────────────────────────────────── */
 const ogImg = ogImage({
@@ -16,18 +25,16 @@ const ogImg = ogImage({
 
 /* ── SEO Metadata ─────────────────────────────────────────── */
 export const metadata: Metadata = {
-  // Root layout appends "| NF Nexa Tech"
-  // Final: "Software Development Services in Jhanjharpur | NF Nexa Tech"
   title: "Software Development Services in Jhanjharpur",
   description:
-    "NF Nexa Tech is a Delhi-based software development company providing website development, Android apps, Flutter apps, and custom business software to businesses in Jhanjharpur, Bihar. Remote-first. Free consultation.",
+    "NF Nexa Tech provides software development services to businesses in Jhanjharpur, Bihar. Based in Mahipalpur, New Delhi, we build websites, Android apps, Flutter apps, and custom software — delivered remotely.",
   alternates: {
     canonical: `${siteConfig.url}/locations/jhanjharpur`,
   },
   openGraph: {
     title: "Software Development Services in Jhanjharpur | NF Nexa Tech",
     description:
-      "Software development for businesses in Jhanjharpur, Bihar. Websites, Android apps, Flutter apps, and SaaS products — delivered remotely from New Delhi.",
+      "Website development, Android apps, Flutter apps, and custom software for businesses in Jhanjharpur, Bihar. Delhi-based team. Remote delivery.",
     url: `${siteConfig.url}/locations/jhanjharpur`,
     siteName: siteConfig.name,
     locale: siteConfig.locale,
@@ -40,7 +47,7 @@ export const metadata: Metadata = {
     creator: "@nfnexatech",
     title: "Software Development Services in Jhanjharpur | NF Nexa Tech",
     description:
-      "Software development for businesses in Jhanjharpur, Bihar. Remote-first, Delhi-based team.",
+      "Software development for businesses in Jhanjharpur, Bihar. Delhi-based team, remote delivery.",
     images: [ogImg.url],
   },
 };
@@ -91,61 +98,99 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Can businesses in Jhanjharpur hire NF Nexa Tech?",
+      name: "Does NF Nexa Tech serve businesses in Jhanjharpur?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. NF Nexa Tech works remotely with businesses in Jhanjharpur, Bihar. Our office is in Mahipalpur, New Delhi. We communicate via WhatsApp and video calls and have experience delivering projects for clients across Bihar.",
+        text: "Yes. NF Nexa Tech provides software development services remotely to businesses in Jhanjharpur and across Bihar. Our office is in Mahipalpur, New Delhi. All project work is handled through WhatsApp, video calls, and written documentation.",
       },
     },
     {
       "@type": "Question",
-      name: "Is NF Nexa Tech based in Jhanjharpur?",
+      name: "Is NF Nexa Tech physically located in Jhanjharpur?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. NF Nexa Tech is headquartered in Mahipalpur, New Delhi, India. We do not have a physical office in Jhanjharpur. All services are delivered remotely.",
+        text: "No. Our office is in Mahipalpur, New Delhi. We do not have a physical presence in Jhanjharpur. We serve Jhanjharpur businesses entirely remotely — the process is structured so location is not a barrier.",
       },
     },
     {
       "@type": "Question",
-      name: "What software can NF Nexa Tech build for a business in Jhanjharpur?",
+      name: "What types of websites and software can you build?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We can build business websites, web applications, Android apps, Flutter apps for both Android and iOS, SaaS products, inventory management systems, booking platforms, and custom business software. The right solution depends on what your specific business needs — we discuss this in a free discovery call.",
+        text: "We build business websites, web applications, Android apps, cross-platform Flutter apps, and custom software such as management systems and internal tools. The right solution depends on your business requirements, which we discuss before recommending anything.",
       },
     },
     {
       "@type": "Question",
-      name: "How does payment and contract work for a Jhanjharpur business?",
+      name: "Can we work together remotely from Jhanjharpur?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We work with a written agreement, fixed-price quotes, and milestone-based payments — typically 40% upfront, 30% at mid-project review, and 30% on delivery. Payment is via UPI, NEFT, or bank transfer. All standard Indian payment methods are accepted.",
+        text: "Yes. All project communication, design reviews and progress updates happen remotely. We share a written scope before starting, work in stages, and provide updates throughout. You can review and give feedback at each stage without any need to travel.",
       },
     },
     {
       "@type": "Question",
-      name: "What happens after the software is delivered?",
+      name: "How can I request a project estimate?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Every project includes 30 days of free post-launch support. During this period, we fix any bugs, make minor adjustments, and ensure everything is running smoothly. For ongoing maintenance, we offer monthly retainer plans.",
+        text: "Send a WhatsApp message or fill in the project form on the Start Project page. Describe what you want to build and the problem it needs to solve. We will review your requirements and discuss the approach before providing an estimate.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What should I prepare before discussing a project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "A basic idea of what you want to build, who will use it, and what problem it needs to solve is enough to start. You don't need a technical specification. Reference examples, competitor links, or any existing workflows you want to improve are helpful to share.",
       },
     },
   ],
 };
 
-/* ── Technology stack shown ───────────────────────────────── */
-const techStack = [
-  { name: "React & Next.js", desc: "Fast, SEO-friendly websites and web applications" },
-  { name: "Kotlin (Android)", desc: "Native Android apps published to Google Play Store" },
-  { name: "Flutter", desc: "Single codebase for Android and iOS apps" },
-  { name: "Node.js & Firebase", desc: "Backend APIs, real-time databases, authentication" },
-  { name: "Figma", desc: "Professional UI/UX design before development begins" },
-  { name: "PostgreSQL & MongoDB", desc: "Relational and document databases for complex data" },
+/* ── Services ─────────────────────────────────────────────── */
+const services = [
+  {
+    Icon: WebDevIcon,
+    title: "Website & Web App Development",
+    desc: "Business websites, service pages, e-commerce platforms, and web applications with user accounts and admin dashboards. Built with React and Next.js.",
+    link: "/services/web-development",
+  },
+  {
+    Icon: AndroidIcon,
+    title: "Android App Development",
+    desc: "Native Android applications for customer-facing features, inventory management, booking systems, and internal business workflows — built in Kotlin.",
+    link: "/services/android-app-development",
+  },
+  {
+    Icon: FlutterIcon,
+    title: "Flutter App Development",
+    desc: "Cross-platform apps for Android and iOS from a single codebase — a practical option when you need to reach users on both platforms.",
+    link: "/services/flutter-app-development",
+  },
+  {
+    Icon: UiUxIcon,
+    title: "UI/UX Design",
+    desc: "User flows, wireframes, and interface designs created in Figma — designed so people can use your product without friction, with developer handoff included.",
+    link: "/services/ui-ux-design",
+  },
+  {
+    Icon: BackendIcon,
+    title: "Backend & API Development",
+    desc: "Backend services, databases, authentication systems, payment integrations, and connections between platforms — built according to each project's specific requirements.",
+    link: "/services/backend-api-development",
+  },
+  {
+    Icon: SaasIcon,
+    title: "SaaS & MVP Development",
+    desc: "A working first version of a software product built around core features — structured to gather real user feedback and be extended over time.",
+    link: "/services/saas-mvp-development",
+  },
 ];
 
 /* ── Page ─────────────────────────────────────────────────── */
 export default function JhanjharpurPage() {
   return (
-    <div className="bg-slate-950 text-slate-100">
+    <div className="bg-white text-slate-900">
       {/* JSON-LD */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
@@ -154,54 +199,100 @@ export default function JhanjharpurPage() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_#155e75,_transparent_30%),radial-gradient(circle_at_bottom_right,_#7c3aed,_transparent_30%),linear-gradient(to_bottom,_#020617,_#0f172a)] pb-20 pt-36">
+      <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-slate-50 pb-20 pt-36">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:48px_48px]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,_#0d948814_1px,transparent_1px)] bg-[size:28px_28px]"
         />
+        <div aria-hidden className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-teal-300/10 blur-3xl" />
+
         <div className="relative mx-auto w-[92%] max-w-5xl">
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-slate-500">
-            <Link href="/" className="hover:text-slate-300 transition">Home</Link>
-            <span>›</span>
-            <Link href="/locations/delhi" className="hover:text-slate-300 transition">Locations</Link>
-            <span>›</span>
-            <span className="text-slate-400">Jhanjharpur</span>
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-slate-400">
+            <Link href="/" className="hover:text-teal-600 transition">Home</Link>
+            <span aria-hidden>›</span>
+            <Link href="/locations/delhi" className="hover:text-teal-600 transition">Locations</Link>
+            <span aria-hidden>›</span>
+            <span className="text-slate-500">Jhanjharpur</span>
           </nav>
 
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300">
-            📍 Serving Jhanjharpur, Bihar
-          </div>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Left: copy */}
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-1.5 text-xs font-semibold text-teal-700">
+                <PinIcon className="h-3.5 w-3.5" />
+                Serving Jhanjharpur, Bihar
+              </div>
 
-          <h1 className="mb-5 max-w-4xl text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl">
-            Software Development Services for Businesses in Jhanjharpur
-          </h1>
-          <p className="mb-3 max-w-2xl text-lg leading-relaxed text-slate-300">
-            NF Nexa Tech is based in Mahipalpur, New Delhi and serves businesses in Jhanjharpur remotely.
-          </p>
-          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-400">
-            Businesses in smaller Bihar cities like Jhanjharpur often struggle to find reliable software development partners who understand their actual needs — not just sell a template and disappear. We work differently. Every project starts with understanding your business before writing any code.
-          </p>
+              <h1
+                className="mb-5 text-4xl font-extrabold leading-tight sm:text-5xl"
+                style={{ background: "linear-gradient(to right,#1FA0B1,#E8763A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}
+              >
+                Software Development<br />
+                Services for Businesses<br />
+                in Jhanjharpur
+              </h1>
 
-          <div className="flex flex-wrap gap-4">
-            <StartProjectButton label="Start Your Project" />
-            <WhatsAppCtaButton city="Jhanjharpur" service="Software Development" />
+              <p className="mb-4 max-w-xl text-lg leading-relaxed text-slate-700">
+                NF Nexa Tech is based in Mahipalpur, New Delhi, and works remotely with businesses in Jhanjharpur and across Bihar. We build websites, mobile apps, and custom software to help businesses improve their online presence and manage everyday work more effectively.
+              </p>
+
+              <p className="mb-8 max-w-xl text-sm leading-7 text-slate-500">
+                Whether you want a website for your business, an app for a specific workflow, or a custom digital product, we&apos;ll first understand your requirements and discuss a practical approach.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <StartProjectButton label="Discuss Your Project" />
+                <WhatsAppCtaButton city="Jhanjharpur" service="Software Development" />
+              </div>
+            </div>
+
+            {/* Right: trust card */}
+            <div className="hidden lg:block">
+              <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-md">
+                <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-teal-600">At a glance</p>
+                <ul className="space-y-4">
+                  {[
+                    { label: "Office", value: "Mahipalpur, New Delhi — 110037" },
+                    { label: "Serves", value: "Jhanjharpur, Bihar and across India" },
+                    { label: "Phone", value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone}` },
+                    { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
+                    { label: "Hours", value: siteConfig.businessHours[0].displayLabel },
+                  ].map((item) => (
+                    <li key={item.label} className="flex items-start gap-3 text-sm">
+                      <span className="w-14 shrink-0 font-semibold text-slate-500">{item.label}</span>
+                      {item.href ? (
+                        <a href={item.href} className="text-teal-600 hover:underline">{item.value}</a>
+                      ) : (
+                        <span className="text-slate-700">{item.value}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-slate-100 pt-5">
+                  {siteConfig.stats.map((stat, i) => (
+                    <div key={stat.label} className="flex-1 rounded-xl bg-slate-50 px-3 py-2 text-center">
+                      <p className={`text-xl font-extrabold ${i % 2 === 0 ? "text-teal-600" : "text-orange-500"}`}>{stat.value}</p>
+                      <p className="mt-0.5 text-[10px] font-medium uppercase tracking-wider text-slate-400">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className="border-y border-white/8 bg-slate-900/60">
+      {/* ── STATS BAR — mobile only ── */}
+      <section className="border-y border-slate-100 bg-slate-50 lg:hidden">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <ul className="grid grid-cols-2 divide-x divide-white/8 md:grid-cols-4">
-            {siteConfig.stats.map((stat) => (
-              <li key={stat.label} className="flex flex-col items-center gap-1 px-4 py-6 text-center">
-                <span className="bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-3xl font-extrabold text-transparent">
+          <ul className="grid grid-cols-2 divide-x divide-slate-100">
+            {siteConfig.stats.map((stat, i) => (
+              <li key={stat.label} className="flex flex-col items-center gap-1 px-4 py-5 text-center">
+                <span className={`text-2xl font-extrabold ${i % 2 === 0 ? "text-teal-600" : "text-orange-500"}`}>
                   {stat.value}
                 </span>
-                <span className="text-xs font-medium uppercase tracking-widest text-slate-400">
-                  {stat.label}
-                </span>
+                <span className="text-xs font-medium uppercase tracking-widest text-slate-400">{stat.label}</span>
               </li>
             ))}
           </ul>
@@ -211,80 +302,62 @@ export default function JhanjharpurPage() {
       {/* ── ABOUT ── */}
       <section className="py-20">
         <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-6 text-2xl font-bold text-white">
-            Why businesses in Jhanjharpur need professional software — and what we build
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">About</p>
+          <h2 className="mb-6 text-2xl font-bold text-slate-900">
+            Software development for Jhanjharpur businesses — delivered remotely
           </h2>
-          <div className="space-y-4 text-sm leading-7 text-slate-400">
+          <div className="space-y-4 text-sm leading-7 text-slate-600">
             <p>
-              Jhanjharpur is a rapidly growing commercial area with businesses in wholesale, retail, education, agriculture supply, and services. As local commerce grows, businesses face the same challenge that businesses everywhere face: manual processes that don&apos;t scale.
+              Businesses in Jhanjharpur, like those across small and medium towns in Bihar, often need practical digital tools — a website that explains what they do and lets customers get in touch, an app that replaces a paper-based process, or a platform that manages customers, bookings, or inventory.
             </p>
             <p>
-              A business that tracks inventory in notebooks, takes orders over phone calls, and handles customer records in spreadsheets has a ceiling. Software removes that ceiling — not by being complex, but by automating the repetitive parts so the business can focus on growth.
+              NF Nexa Tech approaches every project by first understanding the business — what it does, how it works today, and what needs to improve. We suggest a technical solution only after that conversation, and we build only what will genuinely help.
             </p>
             <p>
-              NF Nexa Tech builds practical software for businesses at this stage. We don&apos;t over-engineer. We identify the single highest-impact problem and solve it first. Then we build from there.
+              We are based in Mahipalpur, New Delhi. All communication with clients in Jhanjharpur happens over WhatsApp and video calls. No travel is required at any stage of the project.
             </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-6 sm:grid-cols-3">
+            {[
+              { label: "Office", value: `${siteConfig.contact.streetAddress}, ${siteConfig.contact.city}, ${siteConfig.contact.postalCode}` },
+              { label: "Phone", value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone}` },
+              { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
+            ].map((item) => (
+              <div key={item.label}>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">{item.label}</p>
+                {item.href ? (
+                  <a href={item.href} className="text-sm font-medium text-teal-600 hover:underline">{item.value}</a>
+                ) : (
+                  <p className="text-sm text-slate-700">{item.value}</p>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
+      <section className="border-t border-slate-100 bg-slate-50 py-20">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <h2 className="mb-3 text-2xl font-bold text-white">Software Development Services for Jhanjharpur</h2>
-          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-400">
-            All services available remotely to businesses in Jhanjharpur and surrounding areas of Madhubani district, Bihar.
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Services</p>
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">Software Development Services in Jhanjharpur</h2>
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
+            All services are available remotely to businesses in Jhanjharpur and Bihar.
           </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                icon: "🌐",
-                title: "Business Website Development",
-                desc: "A clear, fast website that explains what your business does and makes it easy for customers to contact you. Built with React/Next.js — mobile-first and optimised for search engines.",
-                href: "/services/web-development",
-              },
-              {
-                icon: "📱",
-                title: "Android App Development",
-                desc: "Custom Android apps for managing inventory, taking orders, tracking deliveries, or any other business operation that currently requires manual effort.",
-                href: "/services/android-app-development",
-              },
-              {
-                icon: "🦋",
-                title: "Flutter App Development",
-                desc: "If you need to reach both Android and iOS users, Flutter lets us build once and deploy to both platforms — reducing cost without reducing quality.",
-                href: "/services/flutter-app-development",
-              },
-              {
-                icon: "🎨",
-                title: "UI/UX Design",
-                desc: "Interface design that makes software easy to use for real people — not just technically correct. We design in Figma and hand off production-ready specifications.",
-                href: "/services/ui-ux-design",
-              },
-              {
-                icon: "⚙️",
-                title: "Backend & API Development",
-                desc: "Backend systems, databases, payment integration (Razorpay), WhatsApp Business API integrations, and third-party service connections.",
-                href: "/services/backend-api-development",
-              },
-              {
-                icon: "🚀",
-                title: "SaaS & MVP Development",
-                desc: "If you have a product idea, we help you build the first version quickly and correctly — with authentication, billing, and the core features needed to start getting customers.",
-                href: "/services/saas-mvp-development",
-              },
-            ].map((s) => (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s, i) => (
               <Link
                 key={s.title}
-                href={s.href}
-                className="group flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/[0.02] p-6 transition hover:border-cyan-400/20 hover:bg-white/[0.04]"
+                href={s.link}
+                className="group flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-teal-300 hover:shadow-md"
               >
-                <span className="text-3xl">{s.icon}</span>
-                <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
-                  {s.title}
-                </h3>
-                <p className="flex-1 text-sm leading-6 text-slate-400">{s.desc}</p>
-                <span className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 transition group-hover:gap-2">
+                <span className={`flex h-10 w-10 items-center justify-center rounded-xl transition group-hover:scale-105 ${i % 2 === 0 ? "bg-teal-50 text-teal-600" : "bg-orange-50 text-orange-500"}`}>
+                  <s.Icon className="h-5 w-5" />
+                </span>
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{s.title}</h3>
+                <p className="flex-1 text-sm leading-6 text-slate-500">{s.desc}</p>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold text-teal-600 transition group-hover:gap-2">
                   Learn more
                   <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -296,20 +369,130 @@ export default function JhanjharpurPage() {
         </div>
       </section>
 
-      {/* ── TECH STACK ── */}
+      {/* ── USE CASES ── */}
       <section className="py-20">
         <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-6 text-2xl font-bold text-white">Technologies we use</h2>
-          <p className="mb-8 text-sm leading-7 text-slate-400">
-            We use modern, proven technologies with long-term support — not trendy frameworks that are obsolete in a year.
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Use Cases</p>
+          <h2 className="mb-6 text-2xl font-bold text-slate-900">What software can help with</h2>
+          <div className="space-y-4 text-sm leading-7 text-slate-600">
+            <p>
+              <strong className="text-slate-800">Coaching institutes and schools</strong> often need a platform where students or parents can find course information, check schedules, or pay fees — rather than managing everything through phone calls and paper records.
+            </p>
+            <p>
+              <strong className="text-slate-800">Retail and trading businesses</strong> may benefit from a simple inventory app to track stock and deliveries, or an online presence that lets customers browse products and place orders.
+            </p>
+            <p>
+              <strong className="text-slate-800">Clinics and healthcare providers</strong> typically need a credible website with clear information — doctor profiles, services offered, and a way for patients to book an appointment or get in touch.
+            </p>
+            <p>
+              <strong className="text-slate-800">Local service businesses</strong> — whether repair shops, logistics companies, or home service providers — can benefit from a simple website or landing page that explains what they do and makes it easy for customers to contact them.
+            </p>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {["Education & Coaching", "Healthcare & Clinics", "Retail & Trading", "Home Services", "Logistics", "Food & Beverage", "SaaS & Startups"].map((tag) => (
+              <span key={tag} className="rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-xs font-medium text-teal-700">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PORTFOLIO ── */}
+      <section className="border-t border-slate-100 bg-slate-50 py-20">
+        <div className="mx-auto w-[92%] max-w-5xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Portfolio</p>
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">Selected projects</h2>
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
+            Examples of work we have delivered. Full case studies are on the{" "}
+            <Link href="/projects" className="text-teal-600 hover:underline">projects page</Link>.
           </p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {techStack.map((t) => (
-              <div key={t.name} className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.02] px-4 py-3">
-                <div className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-cyan-400" />
-                <div>
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs leading-5 text-slate-400">{t.desc}</p>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                category: "Education",
+                title: "Organizer Classes",
+                desc: "A web application for a coaching institute to manage students, fee records, attendance, and communications — replacing spreadsheet-based workflows with one platform.",
+                tags: ["React", "Firebase", "Web App"],
+                href: "/projects/organizer-classes",
+              },
+              {
+                category: "Food & Beverage",
+                title: "Popular Bread",
+                desc: "An Android application for a bread manufacturing business to track daily production, stock levels, and distribution workflows.",
+                tags: ["Android", "Kotlin", "Firebase"],
+                href: "/projects/popular-bread",
+              },
+              {
+                category: "Healthcare",
+                title: "Nestiva Hospital",
+                desc: "A hospital website with doctor listings, department pages, and appointment CTAs — designed for patients navigating healthcare information online.",
+                tags: ["Next.js", "Healthcare", "Web Design"],
+                href: "/projects/nestiva-hospital",
+              },
+            ].map((proj) => (
+              <Link
+                key={proj.title}
+                href={proj.href}
+                className="group flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-teal-300 hover:shadow-md"
+              >
+                <span className="text-xs font-semibold uppercase tracking-wider text-orange-500">{proj.category}</span>
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{proj.title}</h3>
+                <p className="flex-1 text-sm leading-6 text-slate-500">{proj.desc}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {proj.tags.map((t) => (
+                    <span key={t} className="rounded-md bg-slate-100 px-2 py-0.5 text-xs text-slate-500">{t}</span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESS ── */}
+      <section className="py-20">
+        <div className="mx-auto w-[92%] max-w-3xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Our Process</p>
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">How we work with clients in Jhanjharpur</h2>
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
+            From the first message to delivery — here is what the process looks like.
+          </p>
+          <div className="space-y-6">
+            {[
+              {
+                step: "01",
+                title: "Share your requirements",
+                body: "Send a WhatsApp message or fill in the project form. Describe what you want to build and the problem it needs to solve. A plain description is enough — no technical document required.",
+              },
+              {
+                step: "02",
+                title: "Discuss the approach",
+                body: "We review your requirements and discuss the most suitable technical approach — a website, mobile app, web application, or something else. We clarify scope and ask questions before proposing anything.",
+              },
+              {
+                step: "03",
+                title: "Written scope and proposal",
+                body: "You receive a written document covering what will be built, what is excluded, the estimated timeline, and the cost. This is agreed and confirmed before development begins.",
+              },
+              {
+                step: "04",
+                title: "Design and development",
+                body: "We design the interfaces first and share them for review before writing code. Development happens in stages, with updates at each milestone. You review and give feedback throughout.",
+              },
+              {
+                step: "05",
+                title: "Testing and handover",
+                body: "We test across devices and handle deployment. Source code and documentation are handed over along with the finished product.",
+              },
+            ].map((item) => (
+              <div key={item.step} className="flex gap-5">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal-50 text-xs font-bold text-teal-600 ring-2 ring-teal-100">
+                  {item.step}
+                </div>
+                <div className="pt-1">
+                  <h3 className="mb-1.5 text-sm font-bold text-slate-800">{item.title}</h3>
+                  <p className="text-sm leading-6 text-slate-500">{item.body}</p>
                 </div>
               </div>
             ))}
@@ -317,66 +500,24 @@ export default function JhanjharpurPage() {
         </div>
       </section>
 
-      {/* ── REMOTE WORKFLOW ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
-        <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-6 text-2xl font-bold text-white">Starting a project from Jhanjharpur</h2>
-          <p className="mb-8 text-sm leading-7 text-slate-400">
-            Getting started requires nothing more than a WhatsApp message or a project form submission. The full process:
-          </p>
-          <ol className="space-y-6">
-            {[
-              {
-                step: "Contact us",
-                desc: "Send a WhatsApp message or fill the project form on this site. Describe what you want to build — even a rough description is enough to start the conversation.",
-              },
-              {
-                step: "Discovery call",
-                desc: "We schedule a free 30-minute call — phone or video, whichever you prefer. We ask questions, you ask questions. We understand your business before suggesting any solution.",
-              },
-              {
-                step: "Proposal",
-                desc: "We send a written document: what we&apos;ll build, what it will cost, and when you&apos;ll receive it. Fixed price — no surprises. You agree before we start.",
-              },
-              {
-                step: "Development with check-ins",
-                desc: "We build in stages and share progress after each stage. You can test, review, and give feedback. Nothing gets locked in without your approval.",
-              },
-              {
-                step: "Delivery",
-                desc: "We launch, hand over source code, and include 30 days of post-launch support. You own everything we build.",
-              },
-            ].map((item, i) => (
-              <li key={item.step} className="flex gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/10 text-xs font-bold text-cyan-300">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="mb-1 text-sm font-bold text-white">{item.step}</h3>
-                  <p className="text-sm leading-6 text-slate-400">{item.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       {/* ── FAQ ── */}
-      <section className="py-20">
-        <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-10 text-2xl font-bold text-white">
-            FAQs — Software Development in Jhanjharpur
-          </h2>
-          <div className="space-y-4">
+      <section className="border-t border-slate-100 bg-slate-50 py-16">
+        <div className="mx-auto w-[92%] max-w-5xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">FAQs</p>
+          <h2 className="mb-8 text-2xl font-bold text-slate-900">FAQs — Software Development in Jhanjharpur</h2>
+          <div className="grid gap-3 md:grid-cols-2">
             {faqSchema.mainEntity.map((faq, i) => (
               <details
                 key={i}
-                className="group rounded-xl border border-white/8 bg-white/[0.02] px-5 py-4 open:border-cyan-400/20"
+                className="group rounded-xl border border-slate-200 bg-white shadow-sm transition-all open:border-teal-300 open:bg-teal-50/40"
               >
-                <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200 group-open:text-cyan-300">
-                  {faq.name}
+                <summary className="flex cursor-pointer select-none items-center justify-between gap-3 px-5 py-3.5 text-sm font-semibold text-slate-800 group-open:text-teal-700">
+                  <span>{faq.name}</span>
+                  <svg className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
                 </summary>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{faq.acceptedAnswer.text}</p>
+                <p className="border-t border-slate-100 px-5 pb-4 pt-3 text-sm leading-6 text-slate-500">{faq.acceptedAnswer.text}</p>
               </details>
             ))}
           </div>
@@ -384,9 +525,10 @@ export default function JhanjharpurPage() {
       </section>
 
       {/* ── OTHER LOCATIONS ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-16">
+      <section className="py-14">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <h2 className="mb-4 text-lg font-bold text-white">We also serve businesses in</h2>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Locations</p>
+          <h2 className="mb-4 text-lg font-bold text-slate-900">We also serve businesses in</h2>
           <div className="flex flex-wrap gap-3">
             {[
               { label: "Delhi / New Delhi", href: "/locations/delhi" },
@@ -396,30 +538,11 @@ export default function JhanjharpurPage() {
               <Link
                 key={loc.href}
                 href={loc.href}
-                className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400/20 hover:text-cyan-300"
+                className="rounded-lg border border-teal-200 bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition hover:bg-teal-100"
               >
                 {loc.label}
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── BOTTOM CTA ── */}
-      <section className="py-20">
-        <div className="mx-auto w-[92%] max-w-3xl rounded-3xl border border-white/10 bg-white/[0.02] p-10 text-center">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-            Ready to start?
-          </p>
-          <h2 className="mb-4 text-3xl font-bold text-white">
-            Get a free quote for your Jhanjharpur business
-          </h2>
-          <p className="mx-auto mb-8 max-w-lg text-sm text-slate-400">
-            Message us on WhatsApp or submit the project form. We respond the same day and send a written proposal within 48 hours.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <StartProjectButton label="Start Your Project" />
-            <WhatsAppCtaButton city="Jhanjharpur" service="Software Development" />
           </div>
         </div>
       </section>

@@ -6,6 +6,15 @@ import { StartProjectButton, WhatsAppCtaButton } from "@/components/LocalSeoCtas
 import { siteConfig } from "@/config/site";
 import { testimonials } from "@/data/content";
 import { faqs } from "@/data/content";
+import {
+  PinIcon,
+  SpeedIcon,
+  GlobeIcon,
+  PricingIcon,
+  ShieldIcon,
+  TrendIcon,
+  HandshakeIcon,
+} from "@/components/LocationPageIcons";
 
 export interface LocalSeoPageProps {
   city: string;
@@ -43,7 +52,7 @@ export default function LocalSeoPage({
   const allFaqs = localFaqs ?? faqs.slice(0, 5);
 
   return (
-    <div className="bg-slate-950 text-slate-100">
+    <div className="bg-white text-slate-900">
       {/* Structured data */}
       {schema && (
         <script
@@ -55,30 +64,30 @@ export default function LocalSeoPage({
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_#155e75,_transparent_30%),radial-gradient(circle_at_bottom_right,_#7c3aed,_transparent_30%),linear-gradient(to_bottom,_#020617,_#0f172a)] pb-20 pt-36">
+      <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-orange-50 pb-20 pt-36">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:48px_48px]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,_#0d948820_1px,transparent_1px)] bg-[size:32px_32px]"
         />
         <div className="relative mx-auto w-[92%] max-w-5xl">
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-slate-500">
-            <Link href="/" className="hover:text-slate-300 transition">Home</Link>
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-slate-400">
+            <Link href="/" className="hover:text-teal-600 transition">Home</Link>
             <span>›</span>
             <span className="text-slate-400">{service} in {city}</span>
           </nav>
 
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300">
-            📍 {city}, {state}, {country}
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-1.5 text-xs font-semibold text-teal-700">
+            <PinIcon className="h-3.5 w-3.5" /> {city}, {state}, {country}
           </div>
 
-          <h1 className="mb-5 max-w-4xl text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl">
+          <h1 className="mb-5 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl" style={{ background: 'linear-gradient(to right,#1FA0B1,#E8763A)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
             {headline}
           </h1>
-          <p className="mb-3 max-w-2xl text-lg leading-relaxed text-slate-300">
+          <p className="mb-3 max-w-2xl text-lg leading-relaxed text-slate-600">
             {subheadline}
           </p>
-          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-400">
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
             {description}
           </p>
 
@@ -90,12 +99,12 @@ export default function LocalSeoPage({
       </section>
 
       {/* ── STATS ── */}
-      <section className="border-y border-white/8 bg-slate-900/60">
+      <section className="border-y border-slate-100 bg-slate-50">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <ul className="grid grid-cols-2 divide-x divide-white/8 md:grid-cols-4">
-            {siteConfig.stats.map((stat) => (
+          <ul className="grid grid-cols-2 divide-x divide-slate-100 md:grid-cols-4">
+            {siteConfig.stats.map((stat, i) => (
               <li key={stat.label} className="flex flex-col items-center gap-1 px-4 py-6 text-center">
-                <span className="bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-3xl font-extrabold text-transparent">
+                <span className={`text-3xl font-extrabold ${i % 2 === 0 ? "text-teal-600" : "text-orange-500"}`}>
                   {stat.value}
                 </span>
                 <span className="text-xs font-medium uppercase tracking-widest text-slate-400">
@@ -110,133 +119,133 @@ export default function LocalSeoPage({
       {/* ── WHY NF NEXA TECH ── */}
       <section className="py-20">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <div className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Why choose us
-          </div>
-          <h2 className="mb-12 text-center text-3xl font-bold text-white">
-            The best {service.toLowerCase()} in {city}
+          <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Why us</p>
+          <h2 className="mb-12 text-center text-2xl font-bold text-slate-900">
+            Why businesses work with NF Nexa Tech
           </h2>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                icon: "⚡",
-                title: "Fast Delivery",
-                desc: "MVPs in 6–10 weeks. Full products in 3–5 months. No endless timelines.",
+                Icon: SpeedIcon,
+                title: "Staged delivery",
+                desc: "Development happens in stages with progress updates at each milestone. Timeline is agreed in the written scope before work begins.",
               },
               {
-                icon: "🌐",
-                title: "Global Standards",
-                desc: "Built by an Indian team to international code quality, security, and performance standards.",
+                Icon: GlobeIcon,
+                title: "Solid technical foundation",
+                desc: "We follow established practices for code structure, security, and performance in every project we deliver.",
               },
               {
-                icon: "💰",
-                title: "Competitive Pricing",
-                desc: `Top-tier software development at ${city} pricing — fraction of Western agency costs.`,
+                Icon: PricingIcon,
+                title: "Transparent pricing",
+                desc: "Fixed-price quotes based on agreed scope. No hourly billing and no surprise invoices.",
               },
               {
-                icon: "🔒",
-                title: "Transparent Process",
-                desc: "Bi-weekly demos. Slack/WhatsApp access. No black boxes.",
+                Icon: ShieldIcon,
+                title: "Clear communication",
+                desc: "Regular updates via WhatsApp and video calls. You review the work at each stage and can give feedback throughout.",
               },
               {
-                icon: "📈",
-                title: "SEO-First Builds",
-                desc: "Every web project is built to rank — performance, schema, and Core Web Vitals from day one.",
+                Icon: TrendIcon,
+                title: "Performance-conscious builds",
+                desc: "Performance, semantic markup, and Core Web Vitals are considered from the start of every web project.",
               },
               {
-                icon: "🤝",
-                title: "Long-Term Partner",
-                desc: "30 days post-launch support included. We stick around after the project ends.",
+                Icon: HandshakeIcon,
+                title: "Post-launch support",
+                desc: "We provide support after delivery to address issues and adjustments. Terms are agreed as part of the project scope.",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-white/8 bg-white/[0.02] p-6 transition hover:border-cyan-400/20"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-teal-300 hover:shadow-md"
               >
-                <div className="mb-3 text-3xl">{item.icon}</div>
-                <h3 className="mb-2 text-base font-bold text-white">{item.title}</h3>
-                <p className="text-sm leading-6 text-slate-400">{item.desc}</p>
+                <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
+                  <item.Icon className="h-5 w-5" />
+                </span>
+                <h3 className="mb-2 text-base font-bold text-slate-800">{item.title}</h3>
+                <p className="text-sm leading-6 text-slate-500">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
+      {/* ── PORTFOLIO ── */}
+      <section className="border-t border-slate-100 bg-slate-50 py-20">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <h2 className="mb-10 text-center text-2xl font-bold text-white">
-            What our clients say
-          </h2>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Portfolio</p>
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">Selected projects</h2>
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
+            Examples of work we have delivered. Full case studies are on the{" "}
+            <Link href="/projects" className="text-teal-600 hover:underline">projects page</Link>.
+          </p>
           <div className="grid gap-5 md:grid-cols-3">
-            {testimonials.map((t) => (
-              <article
-                key={t.id}
-                className="rounded-2xl border border-white/8 bg-white/[0.02] p-6"
+            {[
+              {
+                category: "Education",
+                title: "Organizer Classes",
+                desc: "A web application for a coaching institute to manage students, fees, attendance, and communications — replacing spreadsheet-based workflows with one platform.",
+                tags: ["React", "Firebase", "Web App"],
+                href: "/projects/organizer-classes",
+              },
+              {
+                category: "Food & Beverage",
+                title: "Popular Bread",
+                desc: "An Android application for a bread manufacturing business to track daily production, stock levels, and distribution workflows.",
+                tags: ["Android", "Kotlin", "Firebase"],
+                href: "/projects/popular-bread",
+              },
+              {
+                category: "Healthcare",
+                title: "Nestiva Hospital",
+                desc: "A hospital website with doctor listings, department pages, and appointment CTAs — designed for patients navigating healthcare information.",
+                tags: ["Next.js", "Healthcare", "Web Design"],
+                href: "/projects/nestiva-hospital",
+              },
+            ].map((proj) => (
+              <Link
+                key={proj.title}
+                href={proj.href}
+                className="group flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-teal-300 hover:shadow-md"
               >
-                <div className="mb-3 flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <svg key={i} className="h-4 w-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                <span className="text-xs font-semibold uppercase tracking-wider text-orange-500">{proj.category}</span>
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{proj.title}</h3>
+                <p className="flex-1 text-sm leading-6 text-slate-500">{proj.desc}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {proj.tags.map((t) => (
+                    <span key={t} className="rounded-md bg-slate-100 px-2 py-0.5 text-xs text-slate-500">{t}</span>
                   ))}
                 </div>
-                <blockquote className="mb-4 text-sm leading-6 text-slate-300">
-                  &ldquo;{t.review}&rdquo;
-                </blockquote>
-                <footer className="text-xs text-slate-500">
-                  <strong className="text-slate-300">{t.name}</strong> · {t.title}, {t.company}
-                </footer>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── LOCAL FAQ ── */}
-      <section className="py-20">
-        <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-10 text-center text-2xl font-bold text-white">
+      <section className="py-16">
+        <div className="mx-auto w-[92%] max-w-5xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">FAQs</p>
+          <h2 className="mb-8 text-2xl font-bold text-slate-900">
             FAQs — {service} in {city}
           </h2>
-          <div className="space-y-4">
+          <div className="grid gap-3 md:grid-cols-2">
             {allFaqs.map((faq, i) => (
               <details
                 key={i}
-                className="group rounded-xl border border-white/8 bg-white/[0.02] px-5 py-4 open:border-cyan-400/20"
+                className="group rounded-xl border border-slate-200 bg-white shadow-sm transition-all open:border-teal-300 open:bg-teal-50/40"
               >
-                <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200 group-open:text-cyan-300">
-                  {faq.question}
+                <summary className="flex cursor-pointer select-none items-center justify-between gap-3 px-5 py-3.5 text-sm font-semibold text-slate-800 group-open:text-teal-700">
+                  <span>{faq.question}</span>
+                  <svg className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
                 </summary>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{faq.answer}</p>
+                <p className="border-t border-slate-100 px-5 pb-4 pt-3 text-sm leading-6 text-slate-500">{faq.answer}</p>
               </details>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── BOTTOM CTA ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
-        <div className="mx-auto w-[92%] max-w-3xl rounded-3xl border border-white/10 bg-white/[0.02] p-10 text-center">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-            Ready to start?
-          </p>
-          <h2 className="mb-4 text-3xl font-bold text-white">
-            Get a free quote for your project
-          </h2>
-          <p className="mx-auto mb-8 max-w-lg text-slate-400 text-sm">
-            We&apos;re the leading {service.toLowerCase()} in {city}. Contact us
-            today and get a no-obligation proposal within 48 hours.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <StartProjectButton label="Start Your Project" />
-            <Link
-              href="/contact"
-              className="rounded-xl border border-white/15 px-7 py-3 text-sm font-bold text-slate-300 transition hover:border-white/30"
-            >
-              Send Project Brief
-            </Link>
           </div>
         </div>
       </section>

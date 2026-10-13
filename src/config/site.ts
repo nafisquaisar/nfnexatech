@@ -122,10 +122,10 @@ export const siteConfig = {
    */
   businessHours: [
     {
-      daysOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as string[],
-      opens: "10:00",
-      closes: "19:00",
-      displayLabel: "Mon – Sat, 10:00 AM – 7:00 PM",
+      daysOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as string[],
+      opens: "00:00",
+      closes: "23:59",
+      displayLabel: "Available 24/7",
     },
   ],
 } as const;

@@ -23,19 +23,17 @@ function encodeXml(str: string): string {
 }
 
 function buildXml(): string {
-  // 1. Homepage — logo + OG image
+  // 1. Homepage — logo only (static asset, crawlable by Googlebot Image)
+  // OG images are declared via <meta property="og:image"> per-page;
+  // they do NOT need to be in the image sitemap and were causing dynamic
+  // /api/og URLs to appear as image:loc entries.
   const homepageImages = `
   <url>
     <loc>${BASE}/</loc>
     <image:image>
       <image:loc>${BASE}/logo.png</image:loc>
-      <image:title>${encodeXml(siteConfig.name)} Logo</image:title>
-      <image:caption>Official logo of ${encodeXml(siteConfig.name)} — Software Development Company</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>${BASE}/api/og?title=${encodeURIComponent(siteConfig.name + " — Software Development Company India")}&amp;type=page</image:loc>
-      <image:title>${encodeXml(siteConfig.name)} — Software Development Company India</image:title>
-      <image:caption>${encodeXml(siteConfig.description)}</image:caption>
+      <image:title>${siteConfig.name} Logo</image:title>
+      <image:caption>Official logo of ${siteConfig.name} — Software Development Company</image:caption>
     </image:image>
   </url>`;
 
@@ -68,19 +66,9 @@ function buildXml(): string {
     .filter(Boolean)
     .join("");
 
-  // 3. Service OG images
-  const serviceImages = siteConfig.services
-    .map(
-      (s) => `
-  <url>
-    <loc>${BASE}/services/${s.slug}</loc>
-    <image:image>
-      <image:loc>${BASE}/api/og?title=${encodeURIComponent(s.name)}&amp;type=service</image:loc>
-      <image:title>${encodeXml(s.name)} — ${encodeXml(siteConfig.name)}</image:title>
-    </image:image>
-  </url>`
-    )
-    .join("");
+  // 3. Service pages — OG images removed from image sitemap.
+  // Per-page <meta og:image> tags already declare these dynamically.
+  // /api/og endpoints are server-rendered and not suitable as image:loc entries.
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset
@@ -89,7 +77,7 @@ function buildXml(): string {
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
     http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-${homepageImages}${projectImages}${serviceImages}
+${homepageImages}${projectImages}
 </urlset>`;
 }
 

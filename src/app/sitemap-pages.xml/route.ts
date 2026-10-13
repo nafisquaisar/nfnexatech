@@ -22,13 +22,15 @@ const pages = [
   { path: "/locations/patna",                changeFreq: "monthly", priority: 0.8 },
   { path: "/locations/darbhanga",            changeFreq: "monthly", priority: 0.7 },
   { path: "/locations/jhanjharpur",          changeFreq: "monthly", priority: 0.7 },
-  // Legacy location pages (kept for existing rankings)
+  // Legacy flat URLs — preserved for any existing external backlinks;
+  // both redirect (301) to canonical location pages so are NOT listed here.
+  // /web-development-company-patna → /locations/patna (next.config.ts)
   { path: "/software-company-bhopal",        changeFreq: "monthly", priority: 0.6 },
   { path: "/software-company-india",         changeFreq: "monthly", priority: 0.6 },
-  // Legacy Patna page — kept in sitemap; its canonical is /web-development-company-patna
-  // A 301 from next.config.ts routes it to /locations/patna
-  // Both are kept in sitemap so GSC sees the redirect signal
-  { path: "/web-development-company-patna",  changeFreq: "monthly", priority: 0.5 },
+  // Legal / informational — indexable, live, self-referencing canonical.
+  { path: "/privacy-policy",                 changeFreq: "yearly",  priority: 0.3 },
+  { path: "/terms",                          changeFreq: "yearly",  priority: 0.3 },
+  { path: "/refund-policy",                  changeFreq: "yearly",  priority: 0.3 },
 ] as const;
 
 function buildXml(now: string): string {

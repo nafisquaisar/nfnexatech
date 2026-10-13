@@ -6,6 +6,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingCtas from "@/components/FloatingCtas";
 import { StartProjectButton, WhatsAppCtaButton } from "@/components/LocalSeoCtas";
+import {
+  PinIcon,
+  WebDevIcon,
+  AndroidIcon,
+  FlutterIcon,
+  UiUxIcon,
+  BackendIcon,
+  SaasIcon,
+} from "@/components/LocationPageIcons";
 
 /* ── OG image ─────────────────────────────────────────────── */
 const ogImg = ogImage({
@@ -16,18 +25,16 @@ const ogImg = ogImage({
 
 /* ── SEO Metadata ─────────────────────────────────────────── */
 export const metadata: Metadata = {
-  // Root layout template appends "| NF Nexa Tech"
-  // Final: "Software Development Company in Patna | NF Nexa Tech"
   title: "Software Development Company in Patna",
   description:
-    "NF Nexa Tech is a Delhi-based software development company serving businesses in Patna, Bihar. We build websites, Android apps, Flutter apps, SaaS products, and custom software. Remote-first. Free consultation.",
+    "NF Nexa Tech provides software development services to businesses in Patna, Bihar. Based in Mahipalpur, New Delhi, we build websites, Android apps, Flutter apps, and custom software — delivered remotely with regular communication.",
   alternates: {
     canonical: `${siteConfig.url}/locations/patna`,
   },
   openGraph: {
     title: "Software Development Company in Patna | NF Nexa Tech",
     description:
-      "Software development services for businesses in Patna. Web apps, mobile apps, and SaaS products built by a Delhi-based team.",
+      "Website development, Android apps, Flutter apps, and custom software for businesses in Patna, Bihar. Delhi-based team. Remote delivery.",
     url: `${siteConfig.url}/locations/patna`,
     siteName: siteConfig.name,
     locale: siteConfig.locale,
@@ -40,7 +47,7 @@ export const metadata: Metadata = {
     creator: "@nfnexatech",
     title: "Software Development Company in Patna | NF Nexa Tech",
     description:
-      "Software development services for businesses in Patna, Bihar. Remote-first, Delhi-based team.",
+      "Software development for businesses in Patna, Bihar. Delhi-based team, remote delivery.",
     images: [ogImg.url],
   },
 };
@@ -91,42 +98,58 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Is NF Nexa Tech based in Patna?",
+      name: "Does NF Nexa Tech provide software development services in Patna?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. NF Nexa Tech is headquartered in Mahipalpur, New Delhi. We provide software development services remotely to businesses in Patna and across Bihar.",
+        text: "Yes. NF Nexa Tech works with businesses in Patna and across Bihar. Our office is in Mahipalpur, New Delhi, and we serve Patna clients fully remotely — with project discussions, design reviews and progress updates handled online.",
       },
     },
     {
       "@type": "Question",
-      name: "Can a Patna business hire NF Nexa Tech for software development?",
+      name: "Is NF Nexa Tech physically located in Patna?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. We regularly work with clients in Patna and across Bihar. All project communication happens through WhatsApp, video calls, and regular progress updates — location is not a barrier to working together.",
+        text: "No. Our office is in Mahipalpur, New Delhi. We do not have a physical office in Patna, but we work with Patna businesses remotely. All project communication takes place over WhatsApp, video calls, and shared documentation.",
       },
     },
     {
       "@type": "Question",
-      name: "What software development services does NF Nexa Tech offer for Patna businesses?",
+      name: "What types of websites can you build for a Patna business?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We offer web development (React, Next.js), Android app development (Kotlin), Flutter cross-platform app development, UI/UX design, backend and API development (Node.js, Firebase), and SaaS MVP development for businesses in Patna.",
+        text: "We build business websites, service landing pages, e-commerce websites, web applications with admin dashboards, and customer portals. The right type depends on what your business needs — we discuss this during an initial call before recommending a solution.",
       },
     },
     {
       "@type": "Question",
-      name: "How does remote software development work for businesses in Patna?",
+      name: "Can you develop Android apps and custom business software?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We begin with a free discovery call to understand your project. We then prepare a written scope and proposal. Development happens in regular cycles with WhatsApp or video call updates at every milestone. You can review progress and provide feedback at each stage.",
+        text: "Yes. We develop native Android applications and cross-platform apps using Flutter. We also build custom software — such as inventory systems, management dashboards, and internal tools — depending on the project's requirements.",
       },
     },
     {
       "@type": "Question",
-      name: "How long does a software project take for a Patna business?",
+      name: "How does remote collaboration work for Patna clients?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A business website typically takes 2–4 weeks. A web application or mobile app with backend integration takes 6–12 weeks. A SaaS MVP typically takes 6–10 weeks. We agree on timelines before starting and share regular updates throughout the project.",
+        text: "We share a written scope before starting, work in development stages, and provide regular progress updates. You can review the work and give feedback at each stage. Communication happens primarily over WhatsApp and video call.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How can I request a project estimate?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Fill in the project form on the Start Project page or send us a WhatsApp message. Describe what you want to build and what problem it needs to solve. We'll review your requirements and discuss the right approach.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What should I prepare before starting a software project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "It helps to have a basic idea of what the software should do, who will use it, and what problem it solves. You don't need a technical specification — we help structure the requirements during the initial discussion. Any reference examples, competitor links, or existing workflows you can share are useful.",
       },
     },
   ],
@@ -135,39 +158,39 @@ const faqSchema = {
 /* ── Services data ────────────────────────────────────────── */
 const services = [
   {
-    icon: "🌐",
-    title: "Web Development",
-    desc: "Business websites, web applications, e-commerce platforms, and customer portals built with React and Next.js. Fast, mobile-friendly, and SEO-optimised.",
+    Icon: WebDevIcon,
+    title: "Website & Web App Development",
+    desc: "Business websites, service landing pages, e-commerce platforms, and web applications with user accounts and admin dashboards. Built with React and Next.js.",
     link: "/services/web-development",
   },
   {
-    icon: "📱",
+    Icon: AndroidIcon,
     title: "Android App Development",
-    desc: "Native Android apps built in Kotlin for businesses in Patna — inventory management, customer apps, booking systems, and more.",
+    desc: "Native Android applications for customer-facing features, internal business workflows, inventory management, and booking systems — built in Kotlin.",
     link: "/services/android-app-development",
   },
   {
-    icon: "🦋",
+    Icon: FlutterIcon,
     title: "Flutter App Development",
-    desc: "Cross-platform apps that run on both Android and iOS from one codebase. Ideal for startups wanting to reach both platforms without double the cost.",
+    desc: "Cross-platform mobile apps that run on both Android and iOS from a single codebase — a practical choice when you need to reach both platforms.",
     link: "/services/flutter-app-development",
   },
   {
-    icon: "🎨",
+    Icon: UiUxIcon,
     title: "UI/UX Design",
-    desc: "Interface design that makes sense to users. We design in Figma and deliver production-ready screens, component libraries, and developer handoff specs.",
+    desc: "User flows, wireframes and interface designs that help people understand and use a product without unnecessary complexity. Designed in Figma.",
     link: "/services/ui-ux-design",
   },
   {
-    icon: "⚙️",
+    Icon: BackendIcon,
     title: "Backend & API Development",
-    desc: "REST APIs, Firebase backends, database architecture, payment gateway integration (Razorpay, Stripe), and third-party service integrations.",
+    desc: "Backend services, databases, authentication systems, payment gateway integration, and connections between different platforms — according to project requirements.",
     link: "/services/backend-api-development",
   },
   {
-    icon: "🚀",
+    Icon: SaasIcon,
     title: "SaaS & MVP Development",
-    desc: "First versions of software products built fast and correctly. Authentication, billing, admin dashboard, and core features — ready to acquire paying customers.",
+    desc: "A working first version of a software product with the core features needed to test the idea and gather real feedback. Built to be extended rather than thrown away.",
     link: "/services/saas-mvp-development",
   },
 ];
@@ -175,7 +198,7 @@ const services = [
 /* ── Page ─────────────────────────────────────────────────── */
 export default function PatnaPage() {
   return (
-    <div className="bg-slate-950 text-slate-100">
+    <div className="bg-white text-slate-900">
       {/* JSON-LD */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
@@ -184,54 +207,97 @@ export default function PatnaPage() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_#155e75,_transparent_30%),radial-gradient(circle_at_bottom_right,_#7c3aed,_transparent_30%),linear-gradient(to_bottom,_#020617,_#0f172a)] pb-20 pt-36">
+      <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-slate-50 pb-20 pt-36">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:48px_48px]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,_#0d948814_1px,transparent_1px)] bg-[size:28px_28px]"
         />
+        <div aria-hidden className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-teal-300/10 blur-3xl" />
+
         <div className="relative mx-auto w-[92%] max-w-5xl">
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-slate-500">
-            <Link href="/" className="hover:text-slate-300 transition">Home</Link>
-            <span>›</span>
-            <Link href="/locations/delhi" className="hover:text-slate-300 transition">Locations</Link>
-            <span>›</span>
-            <span className="text-slate-400">Patna</span>
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-slate-400">
+            <Link href="/" className="hover:text-teal-600 transition">Home</Link>
+            <span aria-hidden>›</span>
+            <Link href="/locations/delhi" className="hover:text-teal-600 transition">Locations</Link>
+            <span aria-hidden>›</span>
+            <span className="text-slate-500">Patna</span>
           </nav>
 
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300">
-            📍 Serving Patna, Bihar
-          </div>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Left: copy */}
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-1.5 text-xs font-semibold text-teal-700">
+                <PinIcon className="h-3.5 w-3.5" />
+                Serving Patna, Bihar
+              </div>
 
-          <h1 className="mb-5 max-w-4xl text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl">
-            Software Development Services for Businesses in Patna
-          </h1>
-          <p className="mb-3 max-w-2xl text-lg leading-relaxed text-slate-300">
-            NF Nexa Tech is based in Mahipalpur, New Delhi and provides software development services remotely to businesses in Patna, Bihar.
-          </p>
-          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-400">
-            We build websites, Android apps, Flutter apps, SaaS products, and custom software for startups and businesses across Patna and Bihar. All work is delivered remotely with regular updates via WhatsApp and video calls.
-          </p>
+              <h1 className="mb-5 text-4xl font-extrabold leading-tight sm:text-5xl" style={{ background: 'linear-gradient(to right,#1FA0B1,#E8763A)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                Software Development<br />
+                Services for Businesses<br />
+                in Patna
+              </h1>
 
-          <div className="flex flex-wrap gap-4">
-            <StartProjectButton label="Start Your Project" />
-            <WhatsAppCtaButton city="Patna" service="Software Development" />
+              <p className="mb-4 max-w-xl text-lg leading-relaxed text-slate-700">
+                NF Nexa Tech helps businesses in Patna build websites, mobile apps, and custom software. Based in Mahipalpur, New Delhi, we work remotely with clients in Patna and across Bihar.
+              </p>
+
+              <p className="mb-8 max-w-xl text-sm leading-7 text-slate-500">
+                Whether you want to bring your business online, simplify day-to-day operations, or turn a product idea into a working application, we help you plan a solution around your actual requirements before development begins.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <StartProjectButton label="Discuss Your Project" />
+                <WhatsAppCtaButton city="Patna" service="Software Development" />
+              </div>
+            </div>
+
+            {/* Right: trust card */}
+            <div className="hidden lg:block">
+              <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-md">
+                <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-teal-600">At a glance</p>
+                <ul className="space-y-4">
+                  {[
+                    { label: "Office", value: "Mahipalpur, New Delhi — 110037" },
+                    { label: "Serves", value: "Patna, Bihar and across India" },
+                    { label: "Phone", value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone}` },
+                    { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
+                    { label: "Hours", value: siteConfig.businessHours[0].displayLabel },
+                  ].map((item) => (
+                    <li key={item.label} className="flex items-start gap-3 text-sm">
+                      <span className="w-14 shrink-0 font-semibold text-slate-500">{item.label}</span>
+                      {item.href ? (
+                        <a href={item.href} className="text-teal-600 hover:underline">{item.value}</a>
+                      ) : (
+                        <span className="text-slate-700">{item.value}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-slate-100 pt-5">
+                  {siteConfig.stats.map((stat, i) => (
+                    <div key={stat.label} className="flex-1 rounded-xl bg-slate-50 px-3 py-2 text-center">
+                      <p className={`text-xl font-extrabold ${i % 2 === 0 ? "text-teal-600" : "text-orange-500"}`}>{stat.value}</p>
+                      <p className="mt-0.5 text-[10px] font-medium uppercase tracking-wider text-slate-400">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className="border-y border-white/8 bg-slate-900/60">
+      {/* ── STATS BAR — mobile only ── */}
+      <section className="border-y border-slate-100 bg-slate-50 lg:hidden">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <ul className="grid grid-cols-2 divide-x divide-white/8 md:grid-cols-4">
-            {siteConfig.stats.map((stat) => (
-              <li key={stat.label} className="flex flex-col items-center gap-1 px-4 py-6 text-center">
-                <span className="bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-3xl font-extrabold text-transparent">
+          <ul className="grid grid-cols-2 divide-x divide-slate-100">
+            {siteConfig.stats.map((stat, i) => (
+              <li key={stat.label} className="flex flex-col items-center gap-1 px-4 py-5 text-center">
+                <span className={`text-2xl font-extrabold ${i % 2 === 0 ? "text-teal-600" : "text-orange-500"}`}>
                   {stat.value}
                 </span>
-                <span className="text-xs font-medium uppercase tracking-widest text-slate-400">
-                  {stat.label}
-                </span>
+                <span className="text-xs font-medium uppercase tracking-widest text-slate-400">{stat.label}</span>
               </li>
             ))}
           </ul>
@@ -241,43 +307,62 @@ export default function PatnaPage() {
       {/* ── ABOUT ── */}
       <section className="py-20">
         <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-6 text-2xl font-bold text-white">
-            Software development for Patna businesses — delivered remotely from New Delhi
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">About</p>
+          <h2 className="mb-6 text-2xl font-bold text-slate-900">
+            Software development for Patna businesses — delivered remotely
           </h2>
-          <div className="space-y-4 text-sm leading-7 text-slate-400">
+          <div className="space-y-4 text-sm leading-7 text-slate-600">
             <p>
-              NF Nexa Tech is a UDYAM-registered software development company based in Mahipalpur, New Delhi. We work with businesses in Patna, Bihar and across India — fully remotely, without any compromise in communication or quality.
+              Businesses in Patna have different technology requirements. A coaching institute may need a platform to manage student records, fees, and communications. A clinic may need a website that helps patients find the right doctor and book an appointment. A retail business may need an inventory app to track stock across multiple locations.
             </p>
             <p>
-              Patna has a growing startup ecosystem and a large number of education, healthcare, logistics, and service businesses that need digital tools. Whether you need a business website, a customer-facing app, or an internal management system, we build software that works for your specific business model.
+              The right solution depends on how your business works today and what you want to improve. NF Nexa Tech starts every project by understanding the actual requirements before suggesting a website, mobile app, or custom software solution.
             </p>
             <p>
-              We&apos;ve built apps for education platforms, inventory management systems for retail businesses, hospital websites, and SaaS products for startup founders. Every project starts with a proper discovery call where we understand what you actually need — then we build it.
+              We are based in Mahipalpur, New Delhi and serve clients in Patna fully remotely. Project communication happens over WhatsApp, video calls, and shared documents. We&apos;ve delivered projects for clients across Bihar and across India without any geographic barrier affecting the quality of communication or delivery.
             </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-6 sm:grid-cols-3">
+            {[
+              { label: "Office", value: `${siteConfig.contact.streetAddress}, ${siteConfig.contact.city}, ${siteConfig.contact.postalCode}` },
+              { label: "Phone", value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone}` },
+              { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
+            ].map((item) => (
+              <div key={item.label}>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">{item.label}</p>
+                {item.href ? (
+                  <a href={item.href} className="text-sm font-medium text-teal-600 hover:underline">{item.value}</a>
+                ) : (
+                  <p className="text-sm text-slate-700">{item.value}</p>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
+      <section className="border-t border-slate-100 bg-slate-50 py-20">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <h2 className="mb-3 text-2xl font-bold text-white">Software Development Services in Patna</h2>
-          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-400">
-            We provide the following services to businesses in Patna, Bihar — all delivered remotely.
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Services</p>
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">Software Development Services in Patna</h2>
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
+            We provide the following services to businesses in Patna and Bihar — all delivered remotely.
           </p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
+            {services.map((s, i) => (
               <Link
                 key={s.title}
                 href={s.link}
-                className="group flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/[0.02] p-6 transition hover:border-cyan-400/20 hover:bg-white/[0.04]"
+                className="group flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-teal-300 hover:shadow-md"
               >
-                <span className="text-3xl">{s.icon}</span>
-                <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
-                  {s.title}
-                </h3>
-                <p className="flex-1 text-sm leading-6 text-slate-400">{s.desc}</p>
-                <span className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 transition group-hover:gap-2">
+                <span className={`flex h-10 w-10 items-center justify-center rounded-xl transition group-hover:scale-105 ${i % 2 === 0 ? "bg-teal-50 text-teal-600" : "bg-orange-50 text-orange-500"}`}>
+                  <s.Icon className="h-5 w-5" />
+                </span>
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{s.title}</h3>
+                <p className="flex-1 text-sm leading-6 text-slate-500">{s.desc}</p>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold text-teal-600 transition group-hover:gap-2">
                   Learn more
                   <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -289,128 +374,183 @@ export default function PatnaPage() {
         </div>
       </section>
 
-      {/* ── HOW REMOTE WORKS ── */}
+      {/* ── WHO WE WORK WITH ── */}
       <section className="py-20">
         <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-6 text-2xl font-bold text-white">How remote development works</h2>
-          <ol className="space-y-5">
-            {[
-              {
-                step: "Discovery Call",
-                desc: "We schedule a free 30-minute video call to understand your project — what you need, who it&apos;s for, and what success looks like. This call has zero obligation.",
-              },
-              {
-                step: "Proposal",
-                desc: "Within 48 hours we send a written scope, timeline, and fixed-price quote. No hourly billing surprises.",
-              },
-              {
-                step: "Design & Development",
-                desc: "We work in short cycles with regular WhatsApp and video call updates. You can review progress and provide feedback at every milestone.",
-              },
-              {
-                step: "Delivery & Support",
-                desc: "We deploy to your domain, hand over all source code and documentation, and provide 30 days of post-launch support included in every project.",
-              },
-            ].map((item, i) => (
-              <li key={item.step} className="flex gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/10 text-xs font-bold text-cyan-300">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="mb-1 text-sm font-bold text-white">{item.step}</h3>
-                  <p className="text-sm leading-6 text-slate-400">{item.desc}</p>
-                </div>
-              </li>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Clients</p>
+          <h2 className="mb-6 text-2xl font-bold text-slate-900">Who we work with</h2>
+          <div className="space-y-4 text-sm leading-7 text-slate-600">
+            <p>
+              Most of our clients are small and medium businesses — coaching institutes, clinics, retail shops, service companies, and founders building software products. We&apos;ve also worked with NGOs and education organisations.
+            </p>
+            <p>
+              You don&apos;t need a large budget to start a conversation. The scope depends on what your business needs. A basic business website is a straightforward project. A custom management system with mobile and web components takes more time and planning. We&apos;ll discuss the right scope honestly before you commit.
+            </p>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {["Education & Coaching", "Healthcare & Clinics", "Retail & E-commerce", "Home Services", "Food & Beverage", "Logistics", "Finance", "EdTech & SaaS"].map((tag) => (
+              <span key={tag} className="rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-xs font-medium text-teal-700">
+                {tag}
+              </span>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      {/* ── WHY CHOOSE US ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
+      {/* ── HOW REMOTE WORKS ── */}
+      <section className="border-t border-slate-100 bg-slate-50 py-20">
         <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-6 text-2xl font-bold text-white">Why businesses in Patna work with NF Nexa Tech</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Our Process</p>
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">How remote development works</h2>
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
+            Here&apos;s what to expect from the first conversation to delivery.
+          </p>
+          <div className="space-y-6">
             {[
-              { title: "No geographic barrier", desc: "All communication happens through WhatsApp, video calls, and shared documents. We&apos;ve delivered projects for clients we&apos;ve never met in person." },
-              { title: "Fixed-price quotes", desc: "You get a written scope and a fixed price before we start. No surprise invoices. No hourly billing." },
-              { title: "Regular progress updates", desc: "You&apos;re never left wondering what&apos;s happening. We share updates at every milestone and respond quickly to messages." },
-              { title: "Production-ready code", desc: "Every project is thoroughly tested, documented, and deployed properly — not patched together and handed over." },
-              { title: "Post-launch support", desc: "30 days of included support after launch. If something breaks or needs adjustment, we fix it." },
-              { title: "UDYAM-registered business", desc: "NF Nexa Tech is an officially registered MSME under UDYAM, Government of India — a verified Indian business entity." },
+              {
+                step: "01",
+                title: "Share your requirements",
+                body: "Tell us what you want to build, which problem you want to solve, and who will use it. You can send a WhatsApp message or fill in the project form — no technical specification required.",
+              },
+              {
+                step: "02",
+                title: "Discuss the approach",
+                body: "We review your requirements, clarify important details, and discuss a suitable technical approach — whether that's a website, mobile app, web application, or something else.",
+              },
+              {
+                step: "03",
+                title: "Review the written scope",
+                body: "You receive a written document covering what will be built, what is excluded, the estimated timeline, and the price. You can ask questions and we adjust until the scope is accurate.",
+              },
+              {
+                step: "04",
+                title: "Design and development",
+                body: "We design first and share screens before writing code. Development happens in stages with regular updates. You can review and give feedback at each stage.",
+              },
+              {
+                step: "05",
+                title: "Testing and delivery",
+                body: "We test across devices, fix issues, and handle the deployment. Source code and documentation are handed over along with the working product.",
+              },
             ].map((item) => (
-              <div key={item.title} className="rounded-xl border border-white/8 bg-white/[0.02] p-5">
-                <h3 className="mb-2 text-sm font-bold text-white">{item.title}</h3>
-                <p className="text-sm leading-6 text-slate-400">{item.desc}</p>
+              <div key={item.step} className="flex gap-5">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal-50 text-xs font-bold text-teal-600 ring-2 ring-teal-100">
+                  {item.step}
+                </div>
+                <div className="pt-1">
+                  <h3 className="mb-1.5 text-sm font-bold text-slate-800">{item.title}</h3>
+                  <p className="text-sm leading-6 text-slate-500">{item.body}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── RELEVANT PROJECTS ── */}
+      {/* ── WHY CHOOSE US ── */}
       <section className="py-20">
         <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-3 text-2xl font-bold text-white">Projects we&apos;ve built</h2>
-          <p className="mb-8 text-sm leading-7 text-slate-400">
-            These examples illustrate the type of work we do for businesses similar to those in Patna.
-          </p>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Why us</p>
+          <h2 className="mb-8 text-2xl font-bold text-slate-900">Why businesses in Patna work with NF Nexa Tech</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
+                title: "Remote collaboration without compromise",
+                desc: "All communication happens through WhatsApp, video calls, and shared documents. Location has not been a barrier on any project we have delivered.",
+              },
+              {
+                title: "Written scope before we start",
+                desc: "You receive a written scope document covering what will be built, what is excluded, and the timeline — before development begins.",
+              },
+              {
+                title: "Regular progress updates",
+                desc: "We share updates at each development stage and respond to questions promptly. You know what is being built and when to expect it.",
+              },
+              {
+                title: "Solutions based on requirements",
+                desc: "We discuss your actual business requirements before recommending a technical approach. We don't upsell features that aren't needed.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-2 text-sm font-bold text-slate-800">{item.title}</h3>
+                <p className="text-sm leading-6 text-slate-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── PORTFOLIO ── */}
+      <section className="border-t border-slate-100 bg-slate-50 py-20">
+        <div className="mx-auto w-[92%] max-w-5xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Portfolio</p>
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">Selected projects</h2>
+          <p className="mb-10 max-w-2xl text-sm leading-7 text-slate-500">
+            Examples of the work we&apos;ve delivered. Full case studies are on the{" "}
+            <Link href="/projects" className="text-teal-600 hover:underline">projects page</Link>.
+          </p>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                category: "Education",
                 title: "Organizer Classes",
-                desc: "Education management platform for a coaching institute with 1,200+ students. Replaced all spreadsheet workflows with a web application — built with React and Firebase.",
-                tags: ["Education", "Web App", "Firebase"],
+                desc: "A web application built for a coaching institute to manage students, fees, attendance, and communications — replacing spreadsheet-based workflows with a single platform.",
+                tags: ["React", "Firebase", "Web App"],
                 href: "/projects/organizer-classes",
               },
               {
+                category: "Food & Beverage",
                 title: "Popular Bread",
-                desc: "Android inventory and delivery management app for a bread business. Reduced nightly stock-count from 90 minutes to 8 minutes. Wastage dropped by 68%.",
-                tags: ["Android", "Inventory", "Firebase"],
+                desc: "An Android inventory and delivery management application for a bread manufacturing business. Built to track daily production, stock, and deliveries.",
+                tags: ["Android", "Kotlin", "Firebase"],
                 href: "/projects/popular-bread",
+              },
+              {
+                category: "Healthcare",
+                title: "Nestiva Hospital",
+                desc: "A multi-specialty hospital website with department pages, doctor listings, appointment CTAs, and a layout designed for patients navigating healthcare services.",
+                tags: ["Next.js", "Healthcare", "Web Design"],
+                href: "/projects/nestiva-hospital",
               },
             ].map((proj) => (
               <Link
                 key={proj.title}
                 href={proj.href}
-                className="group flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/[0.02] p-6 transition hover:border-cyan-400/20"
+                className="group flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-teal-300 hover:shadow-md"
               >
-                <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
-                  {proj.title}
-                </h3>
-                <p className="flex-1 text-sm leading-6 text-slate-400">{proj.desc}</p>
+                <span className="text-xs font-semibold uppercase tracking-wider text-orange-500">{proj.category}</span>
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{proj.title}</h3>
+                <p className="flex-1 text-sm leading-6 text-slate-500">{proj.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {proj.tags.map((t) => (
-                    <span key={t} className="rounded-md bg-white/[0.05] px-2 py-0.5 text-xs text-slate-400">{t}</span>
+                    <span key={t} className="rounded-md bg-slate-100 px-2 py-0.5 text-xs text-slate-500">{t}</span>
                   ))}
                 </div>
               </Link>
             ))}
           </div>
-          <div className="mt-6 text-center">
-            <Link href="/projects" className="text-sm font-semibold text-cyan-400 hover:underline">
-              View full portfolio →
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* ── FAQ ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
-        <div className="mx-auto w-[92%] max-w-3xl">
-          <h2 className="mb-10 text-2xl font-bold text-white">
-            FAQs — Software Development in Patna
-          </h2>
-          <div className="space-y-4">
+      <section className="py-16">
+        <div className="mx-auto w-[92%] max-w-5xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">FAQs</p>
+          <h2 className="mb-8 text-2xl font-bold text-slate-900">FAQs — Software Development in Patna</h2>
+          <div className="grid gap-3 md:grid-cols-2">
             {faqSchema.mainEntity.map((faq, i) => (
               <details
                 key={i}
-                className="group rounded-xl border border-white/8 bg-white/[0.02] px-5 py-4 open:border-cyan-400/20"
+                className="group rounded-xl border border-slate-200 bg-white shadow-sm transition-all open:border-teal-300 open:bg-teal-50/40"
               >
-                <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200 group-open:text-cyan-300">
-                  {faq.name}
+                <summary className="flex cursor-pointer select-none items-center justify-between gap-3 px-5 py-3.5 text-sm font-semibold text-slate-800 group-open:text-teal-700">
+                  <span>{faq.name}</span>
+                  <svg className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180 group-open:text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
                 </summary>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{faq.acceptedAnswer.text}</p>
+                <p className="border-t border-slate-100 px-5 pb-4 pt-3 text-sm leading-6 text-slate-500">{faq.acceptedAnswer.text}</p>
               </details>
             ))}
           </div>
@@ -418,9 +558,10 @@ export default function PatnaPage() {
       </section>
 
       {/* ── OTHER LOCATIONS ── */}
-      <section className="py-16">
+      <section className="border-t border-slate-100 bg-slate-50 py-14">
         <div className="mx-auto w-[92%] max-w-5xl">
-          <h2 className="mb-4 text-lg font-bold text-white">We also serve businesses in</h2>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">Locations</p>
+          <h2 className="mb-4 text-lg font-bold text-slate-900">We also serve businesses in</h2>
           <div className="flex flex-wrap gap-3">
             {[
               { label: "Delhi / New Delhi", href: "/locations/delhi" },
@@ -430,30 +571,11 @@ export default function PatnaPage() {
               <Link
                 key={loc.href}
                 href={loc.href}
-                className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400/20 hover:text-cyan-300"
+                className="rounded-lg border border-teal-200 bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition hover:bg-teal-100"
               >
                 {loc.label}
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── BOTTOM CTA ── */}
-      <section className="border-t border-white/8 bg-slate-900/40 py-20">
-        <div className="mx-auto w-[92%] max-w-3xl rounded-3xl border border-white/10 bg-white/[0.02] p-10 text-center">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-            Ready to start?
-          </p>
-          <h2 className="mb-4 text-3xl font-bold text-white">
-            Get a free quote for your Patna business
-          </h2>
-          <p className="mx-auto mb-8 max-w-lg text-sm text-slate-400">
-            Send us a message with a rough description of what you want to build. We respond the same day and provide a detailed proposal within 48 hours — no obligation.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <StartProjectButton label="Start Your Project" />
-            <WhatsAppCtaButton city="Patna" service="Software Development" />
           </div>
         </div>
       </section>
